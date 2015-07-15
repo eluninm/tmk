@@ -69,5 +69,47 @@ namespace Telemedicine.Web.Controllers
             }
             return RedirectToAction("Index", "Redirect");
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult MainPage(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Registration()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Registration(RegistrationViewModel model, string returnUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            return RedirectToAction("Confirmation");
+            //            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            //            switch (result)
+            //            {
+            //                case SignInStatus.Success:
+            //                    return RedirectToLocal(returnUrl);
+            //                default:
+            //                    ModelState.AddModelError("", "Invalid login attempt.");
+            //                    return View(model);
+            //            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Confirmation()
+        {
+            return View();
+        }
     }
 }
