@@ -36,9 +36,9 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             _userEventsService = userEventsService;
         }
 
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var doctors = await _doctorService.GetAllAsync();
+            var doctors =   _doctorService.GetAll();
             var viewModel = (from doctor in doctors
                                  select
               new DoctorViewModel()

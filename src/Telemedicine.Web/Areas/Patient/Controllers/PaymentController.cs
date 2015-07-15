@@ -169,5 +169,38 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public ActionResult GetPaymentMethods()
+        {
+            IEnumerable<PaymentMethod> methods =   _paymentMethodService.GetAll();
+            Core.Models.Patient patient =   _patientService.GetByUserId(User.Identity.GetUserId());
+            var paymant =   _paymentService.GetByPatientId(patient?.Id ?? -1);
+
+            PaymentMethodViewModel viewModel = new PaymentMethodViewModel();
+            viewModel.CurrentStatusDisplayName = paymant?.PaymentMethod?.Name;
+            viewModel.AvailableMethods = from method in methods
+                select new PaymentMethodItemViewModel() {Id = method.Id, Name = method.Name};
+
+            return PartialView("_MethodReplenishment", viewModel);
+        }
+
+
+        public async Task<ActionResult> SetPaymentMethods(int id)
+        { 
+            PaymentMethod method = await _paymentMethodService.GetByIdAsync(id);
+            Core.Models.Patient patient = await _patientService.GetByUserIdAsync(User.Identity.GetUserId());
+            var paymant = await _paymentService.GetByPatientIdAsync(patient?.Id ?? -1);
+            paymant.PaymentMethod = method;
+            await _paymentService.UpdateAsync(paymant);
+
+
+            IEnumerable<PaymentMethod> methods = await _paymentMethodService.GetAllAsync();
+            PaymentMethodViewModel viewModel = new PaymentMethodViewModel();
+            viewModel.CurrentStatusDisplayName = paymant?.PaymentMethod?.Name;
+            viewModel.AvailableMethods = from pmethod in methods
+                                         select new PaymentMethodItemViewModel() { Id = pmethod.Id, Name = pmethod.Name };
+
+            return PartialView("_MethodReplenishment", viewModel);
+        }
     }
 }

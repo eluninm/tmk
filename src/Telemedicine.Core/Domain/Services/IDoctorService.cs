@@ -18,6 +18,7 @@ namespace Telemedicine.Core.Domain.Services
         Task<IEnumerable<DoctorStatus>> GetAvailableStatusesAsync();
 
         Task<IEnumerable<Doctor>> GetAllAsync();
+        IEnumerable<Doctor> GetAll();
 
         Task<IEnumerable<Specialization>>  GetSpecializationsAsync();
 

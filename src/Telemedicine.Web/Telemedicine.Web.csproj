@@ -337,6 +337,7 @@
     <Content Include="Areas\Patient\Views\History\Index.cshtml" />
     <Content Include="Areas\Doctor\Views\Consultation\_AddTimeSpanEventDialog.cshtml" />
     <Content Include="Content\style.less" />
+    <Content Include="Areas\Patient\Views\Payment\_MethodReplenishment.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
     <Content Include="Content\patient.less" />
@@ -440,6 +441,7 @@
     <Compile Include="Areas\Doctor\Models\AddEventViewModel.cs" />
     <Compile Include="Areas\Doctor\Models\AppointmentViewModel.cs" />
     <Compile Include="Areas\Doctor\Models\EventViewModel.cs" />
+    <Compile Include="Areas\Patient\Models\PaymentMethodViewModel.cs" />
     <Compile Include="Areas\Patient\Controllers\ConversationController.cs" />
     <Compile Include="Areas\Patient\Controllers\HistoryController.cs" />
     <Compile Include="Areas\Patient\Controllers\RecommendationsController.cs" />
@@ -470,7 +472,7 @@
     <Compile Include="Areas\Patient\Controllers\RecommendationController.cs" />
     <Compile Include="Areas\Patient\Controllers\PaymentController.cs" />
     <Compile Include="Areas\Patient\Models\CalendarEventViewModel.cs" />
-    <Compile Include="Areas\Patient\Models\PaymentMethodViewModel.cs" />
+    <Compile Include="Areas\Patient\Models\PaymentMethodItemViewModel.cs" />
     <Compile Include="Areas\Patient\Models\PaymentSettingsViewModel.cs" />
     <Compile Include="Areas\Doctor\Models\PaymentViewModel.cs" />
     <Compile Include="Areas\Patient\Models\TariffViewModel.cs" />

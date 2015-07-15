@@ -1,0 +1,21 @@
+﻿@model Telemedicine.Web.Areas.Patient.Models.PaymentMethodViewModel
+<div class="dropdown" id="methodInformer">
+    <div class="btn-group">
+        <button style="width: 100%; min-width: 150px;" type="button" class="btn tm-light-bg status-btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            @Model.CurrentStatusDisplayName<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            @foreach (var item in Model.AvailableMethods)
+            {
+                <li>
+                    @Ajax.ActionLink(item.Name, "SetPaymentMethods", "Payment", new { id = item.Id }, new AjaxOptions
+               {
+                   HttpMethod = "Post",
+                   InsertionMode = InsertionMode.Replace,
+                   UpdateTargetId = "methodInformer"
+               }, null)
+            </li>
+            }
+        </ul>
+    </div>
+</div>

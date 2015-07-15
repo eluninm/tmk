@@ -42,6 +42,14 @@ namespace Telemedicine.Core.Domain.Repositories
             return Set.FirstOrDefault(t => t.UserId.Equals(userId, StringComparison.OrdinalIgnoreCase));
         }
 
+        public IEnumerable<Doctor> GetAll()
+        {
+            return  Set
+                .Include(t => t.User)
+                .Include(t => t.Specialization).Include(p => p.DoctorStatus)
+                .ToList();
+        }
+
         public override Doctor GetById(int id)
         {
             return Set.Include(p => p.Specialization).FirstOrDefault(item => item.Id == id);

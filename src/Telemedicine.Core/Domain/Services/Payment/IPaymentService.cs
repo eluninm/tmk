@@ -15,5 +15,7 @@ namespace Telemedicine.Core.Domain.Services
         Task<Payment> UpdateAsync(Payment payment);
 
         Task<Payment> GetByPatientIdAsync(int id);
+
+        Payment GetByPatientId(int id);
     }
 }

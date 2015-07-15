@@ -39,5 +39,10 @@ namespace Telemedicine.Core.Domain.Services
             await _unitOfWorkl.SaveChangesAsync();
             return method;
         }
+
+        public IEnumerable<PaymentMethod> GetAll()
+        {
+            return _paymentMethodRepository.GetAll();
+        }
     }
 }

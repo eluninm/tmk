@@ -14,6 +14,7 @@ namespace Telemedicine.Core.Domain.Services
         Task<PaymentMethod> GetByIdAsync(int id);
 
         Task<PaymentMethod> UpdateAsync(PaymentMethod paymentMethod);
-         
+
+        IEnumerable<PaymentMethod> GetAll();
     }
 }

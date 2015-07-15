@@ -7,7 +7,10 @@ namespace Telemedicine.Web.Areas.Patient.Models
 {
     public class PaymentMethodViewModel
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public string CurrentStatusDisplayName { get; set; }
+
+        public IEnumerable<PaymentMethodItemViewModel> AvailableMethods { get; set; }
+
     }
 }
+     

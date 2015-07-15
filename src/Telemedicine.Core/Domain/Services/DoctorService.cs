@@ -128,6 +128,11 @@ namespace Telemedicine.Core.Domain.Services
             return _doctorRepository.GetAllAsync();
         }
 
+        public  IEnumerable<Doctor>  GetAll()
+        {
+            return _doctorRepository.GetAll();
+        }
+
         public Task<IEnumerable<Specialization>> GetSpecializationsAsync()
         {
             return _specializationRepository.GetAllAsync();

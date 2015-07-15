@@ -1,5 +1,7 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
+using Telemedicine.Core.Domain.Entities;
 using Telemedicine.Core.Domain.Models;
 using Telemedicine.Core.Models;
 
@@ -10,6 +12,7 @@ namespace Telemedicine.Core.Domain.Repositories
         Task<Doctor> GetByUserIdAsync(string userId);
 
         Doctor GetByUserId(string userId);
-        
+
+        IEnumerable<Doctor> GetAll();
     }
 }

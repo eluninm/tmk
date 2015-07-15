@@ -46,5 +46,10 @@ namespace Telemedicine.Core.Domain.Services
         {
             return await _paymentRepository.GetByPatientIdAsync(id);
         }
+
+        public Payment GetByPatientId(int id)
+        {
+            return _paymentRepository.GetByPatientId(id);
+        }
     }
 }
