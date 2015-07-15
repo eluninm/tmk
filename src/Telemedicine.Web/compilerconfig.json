@@ -27,6 +27,16 @@
     },
     "includeInProject": true,
     "sourceMap": false,
+    "options": { }
+  },
+    {
+    "outputFile": "css/login.css",
+    "inputFile": "Content/login.less",
+    "minify": {
+      "enabled": true
+    },
+    "includeInProject": true,
+    "sourceMap": false,
     "options": {}
   }
 ]

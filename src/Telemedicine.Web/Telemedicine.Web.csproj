@@ -208,6 +208,9 @@
     </Content>
     <Content Include="css\layout2.css" />
     <Content Include="css\login.css" />
+    <Content Include="css\login.min.css">
+      <DependentUpon>login.css</DependentUpon>
+    </Content>
     <Content Include="css\patient.css" />
     <Content Include="css\patient.min.css">
       <DependentUpon>patient.css</DependentUpon>
@@ -354,6 +357,7 @@
     <Content Include="Content\less\layout3.less" />
     <Content Include="Content\less\sidebar.less" />
     <Content Include="Content\less\scrollbar.less" />
+    <Content Include="Content\login.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
