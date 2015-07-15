@@ -1,10 +1,13 @@
 ﻿/* --- START Sidebar --- */
 /*hide for mobile*/
 .sidebar {
-    background-color:@color-background-sidebar;
+    background-color:@color-accent1-light;
     display: none;
     width: 220px;
     min-height: 480px;
+    #menu1{
+        background-color:@color-accent1-dark;
+    }
 }
 @media (min-width: 768px) {
   .sidebar {
@@ -37,13 +40,13 @@
 }
 .nav-sidebar > li > a:hover,
 .nav-sidebar > li > a:focus {
-    background-color: #32B6A3;
+    background-color: @color-accent1-dark;
 }
 
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
-  background-color: #32B6A3;
+  background-color: @color-accent1-dark;
 }
 
 .nav-profile {
@@ -89,7 +92,7 @@
     display: inline;
 }
 .nav-sidebar > .nav-divider {
-    background-color: #32B6A3;
+    background-color: @color-accent1-divider;
 }
 .sidebar-brand {
     bottom: 20px;

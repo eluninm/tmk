@@ -203,6 +203,9 @@
     <Content Include="css\common.css" />
     <Content Include="css\conversation.css" />
     <Content Include="css\doctor.css" />
+    <Content Include="css\doctor.min.css">
+      <DependentUpon>doctor.css</DependentUpon>
+    </Content>
     <Content Include="css\layout2.css" />
     <Content Include="css\login.css" />
     <Content Include="css\patient.css" />
@@ -348,7 +351,6 @@
     <Content Include="Content\less\patient\_variables.less" />
     <Content Include="Content\less\doctor\_variables.less" />
     <Content Include="Content\doctor.less" />
-    <Content Include="Content\less\main_menu.less" />
     <Content Include="Content\less\layout3.less" />
     <Content Include="Content\less\sidebar.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

@@ -3,28 +3,18 @@
 .red {
   color: red;
 }
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
-  display: block;
-  padding: 0 20px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  width: 220px;
-  min-height: 480px;
-}
 /* --- START Sidebar --- */
 
 /*hide for mobile*/
 
 .sidebar {
-  background-color: #1b67b2;
+  background-color: #3e67ae;
   display: none;
   width: 220px;
   min-height: 480px;
+}
+.sidebar #menu1 {
+  background-color: #385c9d;
 }
 @media (min-width: 768px) {
   .sidebar {
@@ -57,12 +47,12 @@
 }
 .nav-sidebar > li > a:hover,
 .nav-sidebar > li > a:focus {
-  background-color: #32b6a3;
+  background-color: #385c9d;
 }
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
-  background-color: #32b6a3;
+  background-color: #385c9d;
 }
 .nav-profile {
   margin-right: -20px;
@@ -106,7 +96,7 @@
   display: inline;
 }
 .nav-sidebar > .nav-divider {
-  background-color: #32b6a3;
+  background-color: #33538c;
 }
 .sidebar-brand {
   bottom: 20px;
@@ -118,6 +108,10 @@
 }
 /* --- END Sidebar --- */
 
+html,
+body {
+  height: 100%;
+}
 .main-container {
   height: 100%;
   background: yellow;
