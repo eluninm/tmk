@@ -3,3 +3,25 @@
 .red {
   color: red;
 }
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: block;
+  padding: 0 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 220px;
+  min-height: 480px;
+}
+.main-container {
+  height: 100%;
+  background: yellow;
+  overflow: auto;
+}
+.fullheight {
+  height: 100%;
+  overflow: auto;
+}

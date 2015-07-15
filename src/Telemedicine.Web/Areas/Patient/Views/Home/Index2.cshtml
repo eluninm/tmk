@@ -11,13 +11,21 @@
 <div class="row" style="background: cornflowerblue">
     Этот div class="row" => убирает паддинги
 </div>
+<div class="fullheight">
+    контент очень большой;
+</div>
 
 внутри снова можно делать колонки, они будут с паддингом
 
-<div class="row" style="position: relative">
-    <div class="col-md-6" style="background: red;">col1</div>
-    <div class="col-md-3" style="background: green">col2</div>
-    <div class="col-md-3" style="background: aquamarine">col2</div>
+<div class="row fullheight" style="position: relative">
+    <div class="col-md-6 fullheight" style="background: red;">
+        Полный размер
+        <div class="container-fluid row" style="height: 2000px;background: coral">
+            Без паддингов, зато большой
+        </div>
+    </div>
+    <div class="col-md-3 fullheight" style="background: green">Полный размер</div>
+    <div class="col-md-3 fullheight" style="background: aquamarine">Полный размер</div>
 </div>
 
 @section styles {

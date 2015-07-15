@@ -38,12 +38,8 @@
     </div>
 
     <div class="container-fluid main-container">
-        <div class="row">
-            <div class="col-md-12 main">
-                главный контейнер
-                @RenderBody()
-            </div>
-        </div>
+        главный контейнер
+        @RenderBody()
     </div>
     <script src="~/Scripts/jquery-2.1.4.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
@@ -63,47 +59,47 @@
     @RenderSection("scripts", false)
 
     <script>
-    var groupId;
-    var signalHub = $.connection.signalHub;
-    $(function() {
-        signalHub.client.onCall = function(callInfo) {
-            console.info('Incoming call from userId: ' + callInfo.CallerId);
-            $('#incomingCallDialog').modal({ remote: '@Url.Action("UserCallDialog", "Home", new {area = ""})' + '/' + callInfo.CallerId });
-            groupId = callInfo.GroupId;
-        };
+        var groupId;
+        var signalHub = $.connection.signalHub;
+        $(function () {
+            signalHub.client.onCall = function (callInfo) {
+                console.info('Incoming call from userId: ' + callInfo.CallerId);
+                $('#incomingCallDialog').modal({ remote: '@Url.Action("UserCallDialog", "Home", new {area = ""})' + '/' + callInfo.CallerId });
+                groupId = callInfo.GroupId;
+            };
 
-        signalHub.client.onCancelCall = function() {
-            console.info('Caller has cancelled call!');
-            $('#incomingCallDialog').modal('hide');
-            toastr.info('Пациент отменил запрос на консультацию');
-            groupId = null;
-        };
+            signalHub.client.onCancelCall = function () {
+                console.info('Caller has cancelled call!');
+                $('#incomingCallDialog').modal('hide');
+                toastr.info('Пациент отменил запрос на консультацию');
+                groupId = null;
+            };
 
-        $.connection.hub.start().done(function() {
-            console.info('Connected to signaling channel, connectionId = ' + $.connection.hub.id);
-        }).fail(function(error) {
-            console.error('Cannot connect to SignalR: ' + error);
+            $.connection.hub.start().done(function () {
+                console.info('Connected to signaling channel, connectionId = ' + $.connection.hub.id);
+            }).fail(function (error) {
+                console.error('Cannot connect to SignalR: ' + error);
+            });
         });
-    });
 
-    function declineCall() {
-        if (groupId) {
-            signalHub.server.declineCall(groupId).fail(function(error) {
-                console.error('Invocation of DeclineCall failed: ' + error);
-            });
-            groupId = null;
+        function declineCall() {
+            if (groupId) {
+                signalHub.server.declineCall(groupId).fail(function (error) {
+                    console.error('Invocation of DeclineCall failed: ' + error);
+                });
+                groupId = null;
+            }
         }
-    }
 
-    function acceptCall() {
-        if (groupId) {
-            signalHub.server.acceptCall(groupId).done(function(conversationId) {
-                window.location.href = '@Url.Action("Open", "Conversation", new {area = "Doctor"})/' + conversationId;
-            }).fail(function(error) {
-                console.error('Invocation of AcceptCall failed: ' + error);
-            });
+        function acceptCall() {
+            if (groupId) {
+                signalHub.server.acceptCall(groupId).done(function (conversationId) {
+                    window.location.href = '@Url.Action("Open", "Conversation", new {area = "Doctor"})/' + conversationId;
+                }).fail(function (error) {
+                    console.error('Invocation of AcceptCall failed: ' + error);
+                });
+            }
         }
-    }
     </script>
 
     <div class="modal fade" id="incomingCallDialog">
