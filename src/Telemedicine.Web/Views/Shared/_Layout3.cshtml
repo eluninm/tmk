@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset=" utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title> @ViewBag.Title </title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/lib/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/lib/fontawesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="~/lib/responsive-calendar/css/responsive-calendar.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/css/layout2.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/lib/bootstrap-calendar/css/bootstrap-datetimepicker.min.css">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.min.css">
+
+    @RenderSection("styles", false)
+</head>
+<body>
+    <div class="sidebar tm-light-bg">
+        <div class="nav-profile tm-deeper-bg">
+            @Html.Action("NavProfileBox", "Home", new { area = "" })
+        </div>
+        <ul class="nav nav-sidebar main-menu">
+            @Html.Partial("_MainMenuActionsPartial")
+        </ul>
+        <div class="sidebar-brand">
+            <span>Теле<br />медицина</span>
+        </div>
+    </div>
+
+    <div class="container-fluid main-container">
+        <div class="row">
+            <div class="col-md-12 main">
+                главный контейнер
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-2.1.4.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/moment/moment.min.js"></script>
+    <script src="~/lib/bootstrap-calendar/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/lib/bootstrap-calendar/locale/ru.js"></script>
+
+    <script src="/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/lang/ru.js"></script>
+    <script src="~/lib/responsive-calendar/js/responsive-calendar.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    @RenderSection("scripts", false)
+
+    <script>
+    var groupId;
+    var signalHub = $.connection.signalHub;
+    $(function() {
+        signalHub.client.onCall = function(callInfo) {
+            console.info('Incoming call from userId: ' + callInfo.CallerId);
+            $('#incomingCallDialog').modal({ remote: '@Url.Action("UserCallDialog", "Home", new {area = ""})' + '/' + callInfo.CallerId });
+            groupId = callInfo.GroupId;
+        };
+
+        signalHub.client.onCancelCall = function() {
+            console.info('Caller has cancelled call!');
+            $('#incomingCallDialog').modal('hide');
+            toastr.info('Пациент отменил запрос на консультацию');
+            groupId = null;
+        };
+
+        $.connection.hub.start().done(function() {
+            console.info('Connected to signaling channel, connectionId = ' + $.connection.hub.id);
+        }).fail(function(error) {
+            console.error('Cannot connect to SignalR: ' + error);
+        });
+    });
+
+    function declineCall() {
+        if (groupId) {
+            signalHub.server.declineCall(groupId).fail(function(error) {
+                console.error('Invocation of DeclineCall failed: ' + error);
+            });
+            groupId = null;
+        }
+    }
+
+    function acceptCall() {
+        if (groupId) {
+            signalHub.server.acceptCall(groupId).done(function(conversationId) {
+                window.location.href = '@Url.Action("Open", "Conversation", new {area = "Doctor"})/' + conversationId;
+            }).fail(function(error) {
+                console.error('Invocation of AcceptCall failed: ' + error);
+            });
+        }
+    }
+    </script>
+
+    <div class="modal fade" id="incomingCallDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

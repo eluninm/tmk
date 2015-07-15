@@ -332,6 +332,7 @@
     <Content Include="Areas\Patient\Views\History\Index.cshtml" />
     <Content Include="Areas\Doctor\Views\Consultation\_AddTimeSpanEventDialog.cshtml" />
     <Content Include="Content\style.less" />
+    <Content Include="Areas\Patient\Views\Home\Index.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
     <Content Include="Content\patient.less" />
@@ -390,6 +391,7 @@
     <Content Include="Views\Account\Confirmation.cshtml" />
     <Content Include="Views\Account\MainPage.cshtml" />
     <Content Include="Views\Account\Registration.cshtml" />
+    <Content Include="Views\Shared\_Layout3.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
