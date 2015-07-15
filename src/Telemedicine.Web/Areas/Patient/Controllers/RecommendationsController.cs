@@ -27,7 +27,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
         public ActionResult List2()
         { 
             List<RecommendationViewModel2> task = GetRecommendations();
-
+            task = task.OrderByDescending(item => item.Date).ToList();
             return PartialView(task);
         }
 

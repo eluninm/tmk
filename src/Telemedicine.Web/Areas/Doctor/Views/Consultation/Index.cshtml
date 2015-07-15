@@ -4,58 +4,61 @@
 }
 
 <br/>
-@Html.Action("GetStatus", "Status")
-
+<div>
+    @Html.Action("GetStatus", "Status")
+</div>
     <div >
         <br/>
-        <div class="dropdown">
-            <a class="btn btn-primary dropdown-toggle" id="selectMonth" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <span id="selectedMonth">Месяц</span> <span class="caret"></span></a>
+        <div>
+            <div class="dropdown">
+                <a class="btn btn-primary dropdown-toggle" id="selectMonth" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span id="selectedMonth">Месяц</span> <span class="caret"></span>
+                </a>
 
-            <ul class="dropdown-menu" role="menu" aria-labelledby="selectMonth">
-                <li>
-                    <a onclick="selectMonth(0);">Январь</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(1);">Февраль</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(2);">Март</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(3);">Апрель</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(4);">Май</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(5);">Июнь</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(6);">Июль</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(7);">Август</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(8);">Сентябрь</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(9);">Отктябрь</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(10);">Ноябрь</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(11);">Декабрь</a>
-                </li>
-            </ul>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="selectMonth">
+                    <li>
+                        <a onclick="selectMonth(0);">Январь</a>
+                    </li>
+                    <li>
+                        <a onclick="selectMonth(1);">Февраль</a>
+                    </li>
+                    <li>
+                        <a onclick="selectMonth(2);">Март</a>
+                    </li>
+                    <li>
+                        <a onclick="selectMonth(3);">Апрель</a>
+                    </li>
+                    <li>
+                        <a onclick="selectMonth(4);">Май</a>
+                    </li>
+                    <li>
+                        <a onclick="selectMonth(5);">Июнь</a>
+                    </li>
+                    <li>
+                        <a onclick="selectMonth(6);">Июль</a>
+                    </li>
+                    <li>
+                        <a onclick="selectMonth(7);">Август</a>
+                    </li>
+                    <li>
+                        <a onclick="selectMonth(8);">Сентябрь</a>
+                    </li>
+                    <li>
+                        <a onclick="selectMonth(9);">Отктябрь</a>
+                    </li>
+                    <li>
+                        <a onclick="selectMonth(10);">Ноябрь</a>
+                    </li>
+                    <li>
+                        <a onclick="selectMonth(11);">Декабрь</a>
+                    </li>
+                </ul>
 
-            <a class="btn btn-primary" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
-                 <span class="glyphicon glyphicon-plus"></span>
-            </a>
+                <a class="btn btn-primary" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
         </div>
-
     </div>
 
     <div id="calendar"></div>
@@ -114,8 +117,15 @@
                 });
             });
         });
-        
-        
+        var months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+               "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+
+        $("#selectedMonth").text(months[(new Date()).getMonth()]);
+
+        $("#selectedMonth").bind('DOMSubtreeModified', function () {
+            if($.inArray($("#selectedMonth").text(), months) ==-1)
+                $("#selectedMonth").text(months[(new Date()).getMonth()]);
+        });
         function onAddSuccess() {
             $("#addEventDialog").modal('hide');
             window.location.href = '@Url.Action("Index", "Consultation")';

@@ -72,6 +72,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
         public ActionResult List2(string id)
         {
             var recommendations = GetRecommendations(id);
+            recommendations = recommendations.OrderByDescending(item => item.Date).ToList();
             return PartialView(recommendations);
         }
 
