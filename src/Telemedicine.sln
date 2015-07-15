@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telemedicine.Core", "src\Telemedicine.Core\Telemedicine.Core.csproj", "{34C4F5EE-58AB-4C15-9210-98126F84F1D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telemedicine.Core", "Telemedicine.Core\Telemedicine.Core.csproj", "{34C4F5EE-58AB-4C15-9210-98126F84F1D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telemedicine.Web", "src\Telemedicine.Web\Telemedicine.Web.csproj", "{B2F4A2EA-5384-4D42-A0B6-884626EAE9B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telemedicine.Web", "Telemedicine.Web\Telemedicine.Web.csproj", "{B2F4A2EA-5384-4D42-A0B6-884626EAE9B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
