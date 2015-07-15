@@ -188,7 +188,16 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\OwlCarousel\AjaxLoader.gif" />
+    <Content Include="Content\OwlCarousel\grabbing.png" />
+    <Content Include="Content\OwlCarousel\owl.carousel.css" />
+    <Content Include="Content\OwlCarousel\owl.theme.css" />
+    <Content Include="Content\OwlCarousel\owl.transitions.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\style.min.css">
+      <DependentUpon>style.css</DependentUpon>
+    </Content>
     <Content Include="css\common.css" />
     <Content Include="css\conversation.css" />
     <Content Include="css\layout2.css" />
@@ -278,6 +287,8 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Scripts\owl.carousel.js" />
+    <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Views\Shared\Calendar.cshtml" />
     <Content Include="lib\responsive-calendar\css\less\responsive-calendar.less" />
     <Content Include="lib\responsive-calendar\js\coffee\responsive-calendar.coffee" />
@@ -319,6 +330,9 @@
     <Content Include="Areas\Patient\Views\Recommendations\List2.cshtml" />
     <Content Include="Areas\Patient\Views\History\Index.cshtml" />
     <Content Include="Areas\Doctor\Views\Consultation\_AddTimeSpanEventDialog.cshtml" />
+    <Content Include="Content\style.less" />
+    <None Include="compilerconfig.json" />
+    <Content Include="Content\less\carousel_doctor.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -367,6 +381,9 @@
     <Content Include="Views\Temp\Testm1.cshtml" />
     <Content Include="Views\Home\_UserCallDialog.cshtml" />
     <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\Account\Confirmation.cshtml" />
+    <Content Include="Views\Account\MainPage.cshtml" />
+    <Content Include="Views\Account\Registration.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -460,6 +477,7 @@
     <Compile Include="Model\DoctorsJsonSerialization.cs" />
     <Compile Include="Model\LoginViewModel.cs" />
     <Compile Include="Hubs\MessageHub.cs" />
+    <Compile Include="Model\RegistrationViewModel.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
