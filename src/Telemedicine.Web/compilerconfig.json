@@ -8,5 +8,25 @@
     "includeInProject": true,
     "sourceMap": false,
     "options": {}
+  },
+  {
+    "outputFile": "css/doctor.css",
+    "inputFile": "Content/doctor.less",
+    "minify": {
+      "enabled": true
+    },
+    "includeInProject": true,
+    "sourceMap": false,
+    "options": {}
+  },
+  {
+    "outputFile": "css/patient.css",
+    "inputFile": "Content/patient.less",
+    "minify": {
+      "enabled": true
+    },
+    "includeInProject": true,
+    "sourceMap": false,
+    "options": {}
   }
 ]
