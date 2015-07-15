@@ -200,8 +200,13 @@
     </Content>
     <Content Include="css\common.css" />
     <Content Include="css\conversation.css" />
+    <Content Include="css\doctor.css" />
     <Content Include="css\layout2.css" />
     <Content Include="css\login.css" />
+    <Content Include="css\patient.css" />
+    <Content Include="css\patient.min.css">
+      <DependentUpon>patient.css</DependentUpon>
+    </Content>
     <Content Include="css\site.css" />
     <Content Include="img\call.mp3" />
     <Content Include="img\no_avatar.png" />
