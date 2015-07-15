@@ -25,6 +25,9 @@
     overflow-x: hidden;
     overflow-y: auto;
   }
+  .sidebar .username {
+    font-weight: bolder;
+  }
   .nav-profile {
     height: 100px;
     background-color: #385c9d;
@@ -107,7 +110,6 @@
   font-size: 1.5em;
   color: white;
   line-height: 25px;
-  color: #385c9d;
 }
 /* --- END Sidebar --- */
 

@@ -28,6 +28,9 @@
     overflow-x: hidden;
     overflow-y: auto;
   }
+  .sidebar .username {
+    font-weight: bolder;
+  }
   .nav-profile {
     height: 100px;
     background-color: #385c9d;
@@ -110,7 +113,6 @@
   font-size: 1.5em;
   color: white;
   line-height: 25px;
-  color: #385c9d;
 }
 /* --- END Sidebar --- */
 
@@ -126,4 +128,117 @@ body {
 .fullheight {
   height: 100%;
   overflow: auto;
+}
+.chat-message {
+  position: relative;
+  min-height: 45px;
+  padding: 20px;
+  border-radius: 10px;
+}
+.chat-message .chat-image {
+  height: 50px;
+  max-height: 50px;
+  width: 50px;
+  max-width: 50px;
+  margin: 8px 0;
+  border: none;
+}
+.chat-message .chat-image.me {
+  float: right;
+}
+.chat-message .chat-image.target {
+  float: left;
+}
+.chat-message .chat-details {
+  margin-top: 15px;
+  margin-bottom: -15px;
+}
+.chat-message::before {
+  content: "\00a0";
+  display: block;
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  top: 20px;
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.me {
+  margin: 5px 70px 5px 0;
+  border: 2px #3e67ae solid;
+  background-color: white;
+}
+.me::before {
+  right: -7px;
+  border-right: 2px #3e67ae solid;
+  border-top: 2px #3e67ae solid;
+  background-color: white;
+}
+.target {
+  margin: 5px 0 5px 70px;
+  background: #e0e0e0;
+}
+.target::before {
+  left: -5px;
+  background-color: #e0e0e0;
+}
+.chat-enter-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 15px;
+  height: 50px;
+  padding: 0 15px;
+}
+.message-input-wrap {
+  position: relative;
+  top: 8px;
+  margin-right: 50px;
+  display: block;
+  height: 35px;
+}
+.chat-message-input {
+  height: 35px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border: none;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.chat-send-btn {
+  top: 8px;
+  height: 35px;
+  border-radius: 18px;
+  text-align: center;
+  display: block;
+  position: relative;
+  width: 35px;
+  float: right;
+}
+.chat-message-list {
+  position: absolute;
+  height: auto;
+  bottom: 0;
+  top: 0;
+  left: 15px;
+  right: 15px;
+  margin-top: 120px;
+  margin-bottom: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.scrollable {
+  overflow-y: scroll;
+}
+.recommendation-header {
+  padding: 24px 0;
+  height: 119px;
+  z-index: 1000;
+  margin: 0 auto;
 }
