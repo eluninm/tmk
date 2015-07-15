@@ -32,12 +32,10 @@
             @Html.Partial("_MainMenuActionsPartial")
         </ul>
         <div class="sidebar-brand">
-            <span>Теле<br />медицина</span>
+            <span>Телемедицина</span>
         </div>
     </div>
-
     <div class="container-fluid main-container">
-        главный контейнер
         @RenderBody()
     </div>
     <script src="~/Scripts/jquery-2.1.4.js"></script>
@@ -46,13 +44,11 @@
     <script src="~/lib/moment/moment.min.js"></script>
     <script src="~/lib/bootstrap-calendar/js/bootstrap-datetimepicker.min.js"></script>
     <script src="~/lib/bootstrap-calendar/locale/ru.js"></script>
-
     <script src="/Scripts/jquery.signalR-2.2.0.min.js"></script>
     <script src="/signalr/hubs"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/fullcalendar.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.3.2/lang/ru.js"></script>
     <script src="~/lib/responsive-calendar/js/responsive-calendar.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     @RenderSection("scripts", false)

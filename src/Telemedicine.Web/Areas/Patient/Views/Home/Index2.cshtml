@@ -2,36 +2,25 @@
     ViewBag.Title = "Index2";
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
-
-<div style="background: greenyellow">
-    Контент страницы, у желтого дива паддинги слева справа
-</div>
-
-
-<div class="row" style="background: cornflowerblue">
-    Этот div class="row" => убирает паддинги
-</div>
-<div class="fullheight">
-    контент очень большой;
-</div>
-
-внутри снова можно делать колонки, они будут с паддингом
+@**@
+@*<div style="background: greenyellow">*@
+@*    Контент страницы, у желтого дива паддинги слева справа*@
+@*</div>*@
+@**@
+@**@
+@*<div class="row" style="background: cornflowerblue">*@
+@*    Этот div class="row" => убирает паддинги*@
+@*</div>*@
+@*<div class="fullheight">*@
+@*    контент очень большой;*@
+@*</div>*@
+@**@
+@*внутри снова можно делать колонки, они будут с паддингом*@
 
 <div class="row fullheight" style="position: relative">
-    <div class="col-md-6 fullheight" style="background: red;">
-        Полный размер
-        <div class="container-fluid row" style="height: 2000px;background: coral">
-            Без паддингов, зато большой
-        </div>
+    <div class="col-md-6 fullheight">
+        История
     </div>
-    <div class="col-md-3 fullheight" style="background: green">Полный размер</div>
-    <div class="col-md-3 fullheight" style="background: aquamarine">Полный размер</div>
+    <div class="col-md-3 fullheight" style="background: green">Рекомендации</div>
+    <div class="col-md-3 fullheight" style="background: aquamarine">Консультации</div>
 </div>
-
-@section styles {
-    <style>
-        .main {
-            background: yellow;
-        }
-    </style>
-}

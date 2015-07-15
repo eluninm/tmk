@@ -14,7 +14,7 @@
   min-height: 480px;
 }
 .sidebar #menu1 {
-  background-color: #385c9d;
+  background-color: #e79924;
 }
 @media (min-width: 768px) {
   .sidebar {
@@ -30,6 +30,8 @@
   }
   .nav-profile {
     height: 100px;
+    background-color: #385c9d;
+    border-bottom: 1px solid #3e67ae;
   }
   .main-container {
     margin-left: 220px;
@@ -55,9 +57,7 @@
   background-color: #385c9d;
 }
 .nav-profile {
-  margin-right: -20px;
-  margin-bottom: 10px;
-  margin-left: -20px;
+  margin: 0 -20px;
   padding: 25px 0;
 }
 .nav-profile-box {
@@ -96,15 +96,21 @@
   display: inline;
 }
 .nav-sidebar > .nav-divider {
+  padding: 0;
+  margin: 0;
   background-color: #33538c;
+}
+.nav-sidebar > li {
+  line-height: 2em;
 }
 .sidebar-brand {
   bottom: 20px;
   position: fixed;
   font-weight: bolder;
-  font-size: 2em;
+  font-size: 1.5em;
   color: white;
   line-height: 25px;
+  color: #385c9d;
 }
 /* --- END Sidebar --- */
 
