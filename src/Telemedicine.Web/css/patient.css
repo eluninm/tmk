@@ -1,4 +1,14 @@
-﻿/*override variables here*/
+﻿.font-normal {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.font-regular {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.font-bold {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+}
+/*override variables here*/
 
 .red {
   color: red;
@@ -116,6 +126,20 @@
 }
 /* --- END Sidebar --- */
 
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0;
+  background: #385c9d;
+}
+::-webkit-scrollbar-track {
+  background: #e4e4e4;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #385c9d;
+}
 html,
 body {
   height: 100%;
