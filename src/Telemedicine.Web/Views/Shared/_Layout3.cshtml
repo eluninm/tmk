@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" type="text/css" media="screen" href="~/lib/responsive-calendar/css/responsive-calendar.css">
     <link rel="stylesheet" type="text/css" media="screen" href="~/css/layout2.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="~/css/patient.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="~/lib/bootstrap-calendar/css/bootstrap-datetimepicker.min.css">
 
     <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
@@ -24,8 +25,8 @@
     @RenderSection("styles", false)
 </head>
 <body>
-    <div class="sidebar tm-light-bg">
-        <div class="nav-profile tm-deeper-bg">
+    <div class="sidebar">
+        <div class="nav-profile">
             @Html.Action("NavProfileBox", "Home", new { area = "" })
         </div>
         <ul class="nav nav-sidebar main-menu">
