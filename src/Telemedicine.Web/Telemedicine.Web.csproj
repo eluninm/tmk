@@ -333,6 +333,11 @@
     <Content Include="Content\style.less" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
+    <Content Include="Content\patient.less" />
+    <Content Include="Content\less\_variables.less" />
+    <Content Include="Content\less\patient\_variables.less" />
+    <Content Include="Content\less\doctor\_variables.less" />
+    <Content Include="Content\doctor.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
