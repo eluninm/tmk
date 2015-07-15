@@ -49,6 +49,13 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult Index2()
+        {
+            return View();
+        }
+
+
         public ActionResult MyEvents()
         {
             return View();

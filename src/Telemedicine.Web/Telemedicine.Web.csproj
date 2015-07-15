@@ -338,6 +338,7 @@
     <Content Include="Areas\Doctor\Views\Consultation\_AddTimeSpanEventDialog.cshtml" />
     <Content Include="Content\style.less" />
     <Content Include="Areas\Patient\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Patient\Views\Home\Index2.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
     <Content Include="Content\patient.less" />

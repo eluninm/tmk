@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<div style="background: greenyellow">
+    Контент страницы, у желтого дива паддинги слева справа
+</div>
+
+
+<div class="row" style="background: cornflowerblue">
+    Этот div class="row" => убирает паддинги
+</div>
+
+внутри снова можно делать колонки, они будут с паддингом
+
+<div class="row" style="position: relative">
+    <div class="col-md-6" style="background: red;">col1</div>
+    <div class="col-md-3" style="background: green">col2</div>
+    <div class="col-md-3" style="background: aquamarine">col2</div>
+</div>
+
+@section styles {
+    <style>
+        .main {
+            background: yellow;
+        }
+    </style>
+}
