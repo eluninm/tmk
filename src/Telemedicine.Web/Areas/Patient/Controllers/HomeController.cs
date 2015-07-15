@@ -27,7 +27,6 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
         private readonly IPaymentService _paymentService;
         private readonly IUserEventsService _userEventsService;
 
-
         public HomeController(
             IPatientService patientService
             , SiteUserManager userManager
@@ -44,25 +43,18 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             _userEventsService = userEventsService;
         }
 
-        //public async Task<ActionResult> Index()
-        //{
-        //    var doctors = await _doctorService.GetAllAsync();
-        //    var patient = await _patientService.GetByUserIdAsync(User.Identity.GetUserId());
+        [AllowAnonymous]
+        public ActionResult Index()
+        {
+            return View();
+        }
 
-        //    SelectDoctorViewModel viewModel = new SelectDoctorViewModel();
-        //    viewModel.Doctors = new List<DoctorViewModel>();
+        [AllowAnonymous]
+        public ActionResult Index2()
+        {
+            return View();
+        }
 
-        //    viewModel.Doctors = (from doctor in doctors select
-        //                             new DoctorViewModel()
-        //                             {
-        //                                 FIO = doctor?.User?.DisplayName,
-        //                                 Id = doctor?.Id ?? -1,
-        //                                 Specialization = doctor?.Specialization?.DisplayName,
-        //                                 Status = doctor?.DoctorStatus?.DisplayName
-        //                             }).ToList();
-
-        //    return View(viewModel);
-        //}
 
         public ActionResult MyEvents()
         {
