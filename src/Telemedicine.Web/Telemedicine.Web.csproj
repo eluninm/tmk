@@ -350,6 +350,7 @@
     <Content Include="Content\doctor.less" />
     <Content Include="Content\less\main_menu.less" />
     <Content Include="Content\less\layout3.less" />
+    <Content Include="Content\less\sidebar.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
