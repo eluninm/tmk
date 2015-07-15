@@ -1,0 +1,61 @@
+﻿@model  Telemedicine.Web.Areas.Patient.Models.CalendarEventViewModel
+
+
+<div id="calendarModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Добавление события</h3>
+            </div>
+            <div class="modal-body">
+                <div id="alertModalMessageContainer" class="alert alert-warning fade in">
+                    <a href="#" class="close" data-dismiss="alert">×</a>
+                    <strong>Ошибка! </strong> <span id="alertModalMessageContent"></span>
+                </div>
+                @using (Ajax.BeginForm("AddCalendarEvent", "Calendar", FormMethod.Post,
+                new AjaxOptions() { OnSuccess = "OnAddCalendarEventSuccess", OnFailure = "OnAddCalendarEventFailure" },
+                new { @class = "form", @role = "form", @id = "ModalForm" })) //
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Date, new { htmlAttributes = new { @class = "control-label", @for = "startDatetimepicker1" } })
+                        <!--<label class="control-label " for="startDatetimepicker1">Дата</label>-->
+                        <div class='input-group date' id='startDatetimepicker1'>
+                            @Html.EditorFor(m => m.Date, new { htmlAttributes = new { @class = "form-control", @placeholder = "Дата", @id = "inputStartDatetimepicker" } })
+                            <!--<input type='text' class="form-control" placeholder="Начальная дата"/>-->
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Topic, new { htmlAttributes = new { @class = "control-label", @for = "Topic" } })
+                        <!--<label class="control-label" for="Topic">Тема</label>-->
+                        <div>
+                            @Html.EditorFor(m => m.Topic, new { htmlAttributes = new { @class = "form-control", @placeholder = "Введите тему", @id = "Topic" } })
+                            <!--<input type="text" class="form-control" id="Topic" placeholder="Введите тему">-->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Comments, new { htmlAttributes = new { @class = "control-label", @for = "Comments" } })
+                        <!--<label class="control-label" for="Comments">Комментарий</label>-->
+                        <div>
+                            @Html.TextAreaFor(m => m.Comments, new { @id = "Comments", @class = "form-control", @rows = 5, @style = "resize:none;" })
+                            <!--<textarea class="form-control" rows="5" id="Comments"></textarea>-->
+                        </div>
+                    </div>
+
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick=" AddDate(); ">Добавить</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

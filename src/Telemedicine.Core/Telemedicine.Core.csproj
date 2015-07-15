@@ -1,0 +1,458 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{34C4F5EE-58AB-4C15-9210-98126F84F1D6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Telemedicine.Core</RootNamespace>
+    <AssemblyName>Telemedicine.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\EntityFramework\EfRepositoryBase.cs" />
+    <Compile Include="Data\EntityFramework\EfSimpleUnitOfWork.cs" />
+    <Compile Include="Data\EntityFramework\SimpleDbContextProvider.cs" />
+    <Compile Include="Data\IDbContextProvider.cs" />
+    <Compile Include="Consts\DoctorStatusNames.cs" />
+    <Compile Include="Data\DataContext.cs" />
+    <Compile Include="Domain\Entities\Entity.cs" />
+    <Compile Include="Domain\Entities\IEntity.cs" />
+    <Compile Include="Domain\Repositories\Appointment\AppointmentEventRepository.cs" />
+    <Compile Include="Domain\Repositories\Appointment\IAppointmentEventRepository.cs" />
+    <Compile Include="Domain\Repositories\AttachmentContent\AttachmentContentRepository.cs" />
+    <Compile Include="Domain\Repositories\Attachment\AttachmentRepository.cs" />
+    <Compile Include="Domain\Repositories\TimeSpanEventRepository.cs" />
+    <Compile Include="Domain\Repositories\DoctorRepository.cs" />
+    <Compile Include="Domain\Repositories\DoctorStatusRepository.cs" />
+    <Compile Include="Domain\Repositories\AttachmentContent\IAttachmentContentRepository.cs" />
+    <Compile Include="Domain\Repositories\Attachment\IAttachmentRepository.cs" />
+    <Compile Include="Domain\Repositories\ITimeSpanEventRepository.cs" />
+    <Compile Include="Domain\Repositories\IPatientRepository.cs" />
+    <Compile Include="Domain\Repositories\IUserEventRepository.cs" />
+    <Compile Include="Domain\Repositories\PaymentHistory\IPaymentHistoryRepository.cs" />
+    <Compile Include="Domain\Repositories\PaymentHistory\PaymentHistoryRepository.cs" />
+    <Compile Include="Domain\Repositories\PaymentMethod\IPaymentMethodRepository.cs" />
+    <Compile Include="Domain\Repositories\PaymentMethod\PaymentMethodRepository.cs" />
+    <Compile Include="Domain\Repositories\Payment\IPaymentRepository.cs" />
+    <Compile Include="Domain\Repositories\Payment\PaymentRepository.cs" />
+    <Compile Include="Domain\Repositories\Recommendation\IRecommendationRepository.cs" />
+    <Compile Include="Domain\Repositories\IRepository.cs" />
+    <Compile Include="Domain\Repositories\PatientRepository.cs" />
+    <Compile Include="Domain\Repositories\Recommendation\RecommendationRepository.cs" />
+    <Compile Include="Domain\Repositories\SpecializationRepository.cs" />
+    <Compile Include="Domain\Repositories\Tariff\ITariffRepository.cs" />
+    <Compile Include="Domain\Repositories\Tariff\TariffRepository.cs" />
+    <Compile Include="Domain\Repositories\UserEventRepository.cs" />
+    <Compile Include="Domain\Services\Appointment\AppointmentEventService.cs" />
+    <Compile Include="Domain\Services\Appointment\IAppointmentEventService.cs" />
+    <Compile Include="Domain\Services\AttachmentContent\AttachmentContentService.cs" />
+    <Compile Include="Domain\Services\Attachment\AttachmentService.cs" />
+    <Compile Include="Domain\Services\TimeSpanEventService.cs" />
+    <Compile Include="Domain\Services\AttachmentContent\IAttachmentContentService.cs" />
+    <Compile Include="Domain\Services\Attachment\IAttachmentService.cs" />
+    <Compile Include="Domain\Services\ITimeSpanEventService.cs" />
+    <Compile Include="Domain\Services\IPatientService.cs" />
+    <Compile Include="Domain\Services\IUserEventsService.cs" />
+    <Compile Include="Domain\Services\PaymentHistory\IPaymentHistoryService.cs" />
+    <Compile Include="Domain\Services\PaymentHistory\PaymentHistoryService.cs" />
+    <Compile Include="Domain\Services\PaymentMethod\IPaymentMethodService.cs" />
+    <Compile Include="Domain\Services\PaymentMethod\PaymentMethodService.cs" />
+    <Compile Include="Domain\Services\Payment\IPaymentService.cs" />
+    <Compile Include="Domain\Services\Payment\PaymentService.cs" />
+    <Compile Include="Domain\Services\Recommendation\IRecommendationService.cs" />
+    <Compile Include="Domain\Services\ISpecializationService.cs" />
+    <Compile Include="Domain\Services\PatientService.cs" />
+    <Compile Include="Domain\Services\Recommendation\RecommendationService.cs" />
+    <Compile Include="Domain\Services\SpecializationService.cs" />
+    <Compile Include="Domain\Services\Tariff\ITariffService.cs" />
+    <Compile Include="Domain\Services\Tariff\TariffService.cs" />
+    <Compile Include="Domain\Services\UserEventsService.cs" />
+    <Compile Include="Domain\Uow\IUnitOfWork.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Identity\UserExtensions.cs" />
+    <Compile Include="Identity\SiteUserStore.cs" />
+    <Compile Include="Migrations\201506140659424_NextMigration.cs" />
+    <Compile Include="Migrations\201506140659424_NextMigration.Designer.cs">
+      <DependentUpon>201506140659424_NextMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506142230071_PatientCreate.cs" />
+    <Compile Include="Migrations\201506142230071_PatientCreate.Designer.cs">
+      <DependentUpon>201506142230071_PatientCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506151038402_SpecializationCollation.cs" />
+    <Compile Include="Migrations\201506151038402_SpecializationCollation.Designer.cs">
+      <DependentUpon>201506151038402_SpecializationCollation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506221806126_AddFieldsToPatient.cs" />
+    <Compile Include="Migrations\201506221806126_AddFieldsToPatient.Designer.cs">
+      <DependentUpon>201506221806126_AddFieldsToPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506231024325_CalendarEventsMigration.cs" />
+    <Compile Include="Migrations\201506231024325_CalendarEventsMigration.Designer.cs">
+      <DependentUpon>201506231024325_CalendarEventsMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506231058161_RecommendationsMigration.cs" />
+    <Compile Include="Migrations\201506231058161_RecommendationsMigration.Designer.cs">
+      <DependentUpon>201506231058161_RecommendationsMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506231139231_RecommendationAttachmentsMigration.cs" />
+    <Compile Include="Migrations\201506231139231_RecommendationAttachmentsMigration.Designer.cs">
+      <DependentUpon>201506231139231_RecommendationAttachmentsMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506261514026_ChangeFieldsTypeForPatient.cs" />
+    <Compile Include="Migrations\201506261514026_ChangeFieldsTypeForPatient.Designer.cs">
+      <DependentUpon>201506261514026_ChangeFieldsTypeForPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506281307466_PaymentMethodCreate.cs" />
+    <Compile Include="Migrations\201506281307466_PaymentMethodCreate.Designer.cs">
+      <DependentUpon>201506281307466_PaymentMethodCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506281722476_TariffCreate.cs" />
+    <Compile Include="Migrations\201506281722476_TariffCreate.Designer.cs">
+      <DependentUpon>201506281722476_TariffCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506291045081_AddFieldsForTariff.cs" />
+    <Compile Include="Migrations\201506291045081_AddFieldsForTariff.Designer.cs">
+      <DependentUpon>201506291045081_AddFieldsForTariff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506291151296_PaymentCreate.cs" />
+    <Compile Include="Migrations\201506291151296_PaymentCreate.Designer.cs">
+      <DependentUpon>201506291151296_PaymentCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506291405129_AddFieldsForDoctor.cs" />
+    <Compile Include="Migrations\201506291405129_AddFieldsForDoctor.Designer.cs">
+      <DependentUpon>201506291405129_AddFieldsForDoctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506301227308_PatientBalanceField.cs" />
+    <Compile Include="Migrations\201506301227308_PatientBalanceField.Designer.cs">
+      <DependentUpon>201506301227308_PatientBalanceField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507010827094_Dictor_LastLogin_PaymentInstruments.cs" />
+    <Compile Include="Migrations\201507010827094_Dictor_LastLogin_PaymentInstruments.Designer.cs">
+      <DependentUpon>201507010827094_Dictor_LastLogin_PaymentInstruments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507010929107_PatientSelectedDoctorIdField.cs" />
+    <Compile Include="Migrations\201507010929107_PatientSelectedDoctorIdField.Designer.cs">
+      <DependentUpon>201507010929107_PatientSelectedDoctorIdField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507011217389_TextChatEntitiesCreateMigration.cs" />
+    <Compile Include="Migrations\201507011217389_TextChatEntitiesCreateMigration.Designer.cs">
+      <DependentUpon>201507011217389_TextChatEntitiesCreateMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507020701236_CalendarEventOwnerUserId.cs" />
+    <Compile Include="Migrations\201507020701236_CalendarEventOwnerUserId.Designer.cs">
+      <DependentUpon>201507020701236_CalendarEventOwnerUserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507030549541_AddCalendarEvent.cs" />
+    <Compile Include="Migrations\201507030549541_AddCalendarEvent.Designer.cs">
+      <DependentUpon>201507030549541_AddCalendarEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507031249456_CalendarOwnerUser.cs" />
+    <Compile Include="Migrations\201507031249456_CalendarOwnerUser.Designer.cs">
+      <DependentUpon>201507031249456_CalendarOwnerUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507051304240_RecommendationAddIsMarkedAsDeletedField.cs" />
+    <Compile Include="Migrations\201507051304240_RecommendationAddIsMarkedAsDeletedField.Designer.cs">
+      <DependentUpon>201507051304240_RecommendationAddIsMarkedAsDeletedField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507061253078_AddTargetIdColumnToMessage.cs" />
+    <Compile Include="Migrations\201507061253078_AddTargetIdColumnToMessage.Designer.cs">
+      <DependentUpon>201507061253078_AddTargetIdColumnToMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507070935340_CreateAppointment.cs" />
+    <Compile Include="Migrations\201507070935340_CreateAppointment.Designer.cs">
+      <DependentUpon>201507070935340_CreateAppointment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507080935255_ConversationCreateMigration.cs" />
+    <Compile Include="Migrations\201507080935255_ConversationCreateMigration.Designer.cs">
+      <DependentUpon>201507080935255_ConversationCreateMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507081007239_CashFlowInPatient.cs" />
+    <Compile Include="Migrations\201507081007239_CashFlowInPatient.Designer.cs">
+      <DependentUpon>201507081007239_CashFlowInPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507081121054_CalendarEventAddEventTypeField.cs" />
+    <Compile Include="Migrations\201507081121054_CalendarEventAddEventTypeField.Designer.cs">
+      <DependentUpon>201507081121054_CalendarEventAddEventTypeField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507101408583_ChangeEvents.cs" />
+    <Compile Include="Migrations\201507101408583_ChangeEvents.Designer.cs">
+      <DependentUpon>201507101408583_ChangeEvents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507121852489_TimeSpanEventAddTitleField.cs" />
+    <Compile Include="Migrations\201507121852489_TimeSpanEventAddTitleField.Designer.cs">
+      <DependentUpon>201507121852489_TimeSpanEventAddTitleField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507130753110_TimeSpanEventAddGroupIdField.cs" />
+    <Compile Include="Migrations\201507130753110_TimeSpanEventAddGroupIdField.Designer.cs">
+      <DependentUpon>201507130753110_TimeSpanEventAddGroupIdField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507141157450_TimeSpanEventAddFields.cs" />
+    <Compile Include="Migrations\201507141157450_TimeSpanEventAddFields.Designer.cs">
+      <DependentUpon>201507141157450_TimeSpanEventAddFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AppointmentEvent.cs" />
+    <Compile Include="Models\Attachment.cs" />
+    <Compile Include="Models\AttachmentContent.cs" />
+    <Compile Include="Models\Conversation.cs" />
+    <Compile Include="Models\Doctor.cs" />
+    <Compile Include="Models\Enums\EndTypeRepeatInterval.cs" />
+    <Compile Include="Models\Enums\TypeRepeatingEvent.cs" />
+    <Compile Include="Models\TimeSpanEvent.cs" />
+    <Compile Include="Models\Enums\EventType.cs" />
+    <Compile Include="Models\Enums\PaymentType.cs" />
+    <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\PaymentHistory.cs" />
+    <Compile Include="Models\PaymentMethod.cs" />
+    <Compile Include="Models\Recommendation.cs" />
+    <Compile Include="Models\Enums\Sex.cs" />
+    <Compile Include="Models\Specialization.cs" />
+    <Compile Include="Domain\Repositories\IDoctorRepository.cs" />
+    <Compile Include="Domain\Repositories\ISpecializationRepository.cs" />
+    <Compile Include="Domain\Repositories\IDoctorStatusRepository.cs" />
+    <Compile Include="Identity\SiteSignInManager.cs" />
+    <Compile Include="Identity\SiteUser.cs" />
+    <Compile Include="Identity\SiteUserManager.cs" />
+    <Compile Include="Consts\UserRoleNames.cs" />
+    <Compile Include="Domain\Services\IConversationService.cs" />
+    <Compile Include="IUser.cs" />
+    <Compile Include="Migrations\201506040559149_InitialCreate.cs" />
+    <Compile Include="Migrations\201506040559149_InitialCreate.Designer.cs">
+      <DependentUpon>201506040559149_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506091245314_DoctorStatusMigration.cs" />
+    <Compile Include="Migrations\201506091245314_DoctorStatusMigration.Designer.cs">
+      <DependentUpon>201506091245314_DoctorStatusMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506121118150_SpecializationMigration.cs" />
+    <Compile Include="Migrations\201506121118150_SpecializationMigration.Designer.cs">
+      <DependentUpon>201506121118150_SpecializationMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\DoctorStatus.cs" />
+    <Compile Include="Models\ChatMessage.cs" />
+    <Compile Include="Models\Tariff.cs" />
+    <Compile Include="Models\UserChatRoom.cs" />
+    <Compile Include="Models\UserEvent.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Domain\Services\DoctorService.cs" />
+    <Compile Include="Domain\Services\IDoctorService.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201506040559149_InitialCreate.resx">
+      <DependentUpon>201506040559149_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506091245314_DoctorStatusMigration.resx">
+      <DependentUpon>201506091245314_DoctorStatusMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506121118150_SpecializationMigration.resx">
+      <DependentUpon>201506121118150_SpecializationMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506140659424_NextMigration.resx">
+      <DependentUpon>201506140659424_NextMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506142230071_PatientCreate.resx">
+      <DependentUpon>201506142230071_PatientCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506151038402_SpecializationCollation.resx">
+      <DependentUpon>201506151038402_SpecializationCollation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506221806126_AddFieldsToPatient.resx">
+      <DependentUpon>201506221806126_AddFieldsToPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506231024325_CalendarEventsMigration.resx">
+      <DependentUpon>201506231024325_CalendarEventsMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506231058161_RecommendationsMigration.resx">
+      <DependentUpon>201506231058161_RecommendationsMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506231139231_RecommendationAttachmentsMigration.resx">
+      <DependentUpon>201506231139231_RecommendationAttachmentsMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506261514026_ChangeFieldsTypeForPatient.resx">
+      <DependentUpon>201506261514026_ChangeFieldsTypeForPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506281307466_PaymentMethodCreate.resx">
+      <DependentUpon>201506281307466_PaymentMethodCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506281722476_TariffCreate.resx">
+      <DependentUpon>201506281722476_TariffCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506291045081_AddFieldsForTariff.resx">
+      <DependentUpon>201506291045081_AddFieldsForTariff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506291151296_PaymentCreate.resx">
+      <DependentUpon>201506291151296_PaymentCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506291405129_AddFieldsForDoctor.resx">
+      <DependentUpon>201506291405129_AddFieldsForDoctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506301227308_PatientBalanceField.resx">
+      <DependentUpon>201506301227308_PatientBalanceField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507010827094_Dictor_LastLogin_PaymentInstruments.resx">
+      <DependentUpon>201507010827094_Dictor_LastLogin_PaymentInstruments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507010929107_PatientSelectedDoctorIdField.resx">
+      <DependentUpon>201507010929107_PatientSelectedDoctorIdField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507011217389_TextChatEntitiesCreateMigration.resx">
+      <DependentUpon>201507011217389_TextChatEntitiesCreateMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507020701236_CalendarEventOwnerUserId.resx">
+      <DependentUpon>201507020701236_CalendarEventOwnerUserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507030549541_AddCalendarEvent.resx">
+      <DependentUpon>201507030549541_AddCalendarEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507031249456_CalendarOwnerUser.resx">
+      <DependentUpon>201507031249456_CalendarOwnerUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507051304240_RecommendationAddIsMarkedAsDeletedField.resx">
+      <DependentUpon>201507051304240_RecommendationAddIsMarkedAsDeletedField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507061253078_AddTargetIdColumnToMessage.resx">
+      <DependentUpon>201507061253078_AddTargetIdColumnToMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507070935340_CreateAppointment.resx">
+      <DependentUpon>201507070935340_CreateAppointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507080935255_ConversationCreateMigration.resx">
+      <DependentUpon>201507080935255_ConversationCreateMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507081007239_CashFlowInPatient.resx">
+      <DependentUpon>201507081007239_CashFlowInPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507081121054_CalendarEventAddEventTypeField.resx">
+      <DependentUpon>201507081121054_CalendarEventAddEventTypeField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507101408583_ChangeEvents.resx">
+      <DependentUpon>201507101408583_ChangeEvents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507121852489_TimeSpanEventAddTitleField.resx">
+      <DependentUpon>201507121852489_TimeSpanEventAddTitleField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507130753110_TimeSpanEventAddGroupIdField.resx">
+      <DependentUpon>201507130753110_TimeSpanEventAddGroupIdField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507141157450_TimeSpanEventAddFields.resx">
+      <DependentUpon>201507141157450_TimeSpanEventAddFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\Repositories\Messages\" />
+    <Folder Include="Enums\" />
+    <Folder Include="Messaging\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

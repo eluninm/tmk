@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Temp/IndexLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <video autoplay="autoplay" id="videoPeer"></video>
+        </div>
+        <div class="col-md-6">
+            <video autoplay="autoplay" id="videoLocal" muted></video>
+        </div>
+    </div>
+    <div class="row">
+        <button id="callBtn" class="btn btn-success" disabled="disabled">Позвонить</button>
+        <button id="hangBtn" class="btn btn-error" disabled="disabled">Прервать</button>
+    </div>
+</div>
+
+<div class="modal fade" id="incomingCallModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Входящий звонок</h4>
+            </div>
+            <div class="modal-body">
+                <audio id="callSound" preload="auto" src="~/img/call.mp3" loop></audio>
+                <div class="thumbnail">
+                    <img src="~/img/no_avatar.png" alt="">
+                </div>
+                <h4><span id="caller-dn"></span></h4>
+            </div>
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-call-dialog" data-dismiss="modal"><i class="fa fa-reply"></i></button>
+                    <button type="button" class="btn btn-success btn-call-dialog" onclick="closeIncomingCallDialog(true);"><i class="fa fa-phone"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/lib/adapter/js/adapter.js"></script>
+    <script src="~/Scripts/rtc/RtcConnectionManager.js"></script>
+    <script>
+        'use strict';
+
+        var _callBtn = document.getElementById('callBtn');
+        var _hangBtn = document.getElementById('hangBtn');
+        var _localVideoEl = document.getElementById('videoLocal');
+        var _remoteVideoEl = document.getElementById('videoPeer');
+
+        var constraints = { audio: true, video: true };
+        var configuration = {
+            iceServers: [
+                { urls: "stun:stun.services.mozilla.com" },
+                { urls: "stun:stun.l.google.com:19302" },
+                { urls: "stun:global.stun.twilio.com:3478?transport=udp" },
+                {
+                    urls: "turn:global.turn.twilio.com:3478?transport=udp",
+                    username: "ACa0409eba9f053d77fb897833f0d727ed",
+                    credential: "09616a654b2fe78e5ba0903d9a35e7d6"
+                }
+            ]
+        };
+
+        $(function () {
+            var chat = new RtcChat.VideoChat(configuration, $.connection);
+            chat.onConnectionReady = function () {
+                window.getUserMedia(constraints,
+                    function (stream) {
+                        chat.addStream(stream);
+                        _localVideoEl.src = URL.createObjectURL(stream);
+                    }, function (error) {
+                        alert("WebRTC initialization failed!" + error);
+                    });
+            };
+
+            chat.onStreamReceived = function(stream) {
+                _remoteVideoEl.src = URL.createObjectURL(stream);
+            };
+
+            _callBtn.onclick = function() {
+                chat.startConnection("test");
+                _callBtn.disabled = true;
+                _hangBtn.disabled = false;
+            }
+
+            _hangBtn.onclick = function() {
+                chat.stopConnection("test");
+                _callBtn.disabled = false;
+                _hangBtn.disabled = true;
+            }
+
+            $.connection.hub.start(function() {
+                _callBtn.disabled = false;
+
+                $.connection.signalingHub.onDescription = function() { alert('ext test'); };
+            });
+        });
+
+
+    </script>
+}

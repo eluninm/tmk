@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Telemedicine.Web.Areas.Patient.Models.MedicalHistoryViewModel>
+@{
+    ViewBag.Title = "Моя карта";
+}
+
+<h2 class="page-header">@ViewBag.Title</h2>
+
+<div class="row scrollable">
+    @foreach (var hi in Model)
+    {
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h5>@hi.Date.ToLongDateString()</h5>
+                    @if (hi.Type == "rec")
+                    {
+                        <h4>Рекомендация</h4>
+                    }
+                    else
+                    {
+                        <h4>Консультация</h4>
+                    }
+                    <p>
+                        @hi.Text
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

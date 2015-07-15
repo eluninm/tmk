@@ -1,0 +1,39 @@
+﻿@using Telemedicine.Core.Consts
+@using Telemedicine.Core.Domain.Consts
+@model Telemedicine.Web.Areas.Doctor.Models.DoctorStatusViewModel
+
+@{
+    string btnclass = "";
+    switch (Model.CurrentStatus.Name)
+    {
+        case DoctorStatusNames.Busy:
+            btnclass = "btn-danger tm-light-bg";
+            break;
+        case DoctorStatusNames.Available:
+            btnclass = "btn-success tm-light-bg";
+            break;
+        case DoctorStatusNames.Duty:
+            btnclass = "btn-success tm-light-bg";
+            break;
+        case DoctorStatusNames.VideoChat:
+            btnclass = "btn-info tm-light-bg";
+            break;
+    }
+}
+
+<div class="dropdown" id="statusInformer">
+    <div class="btn-group " style="width: 340px;">
+        <button style="width: 100%;" type="button" class="btn tm-light-bg status-btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            @Model.CurrentStatus.DisplayName.ToLower() <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            @foreach (var item in Model.AvailableStatuses)
+            {
+                <li>@Ajax.ActionLink(item.DisplayName, "ChangeStatus", "Status", new {id = item.Id}, new AjaxOptions
+                    {
+                        HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "statusInformer"
+                    }, null)</li>
+            }
+        </ul>
+    </div>
+</div>

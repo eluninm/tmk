@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Консультация с врачом";
+}
+
+<div class="row height100">
+    <div class="col-md-9 height100">
+        @Html.Partial("Profile")
+        <div class="profile-bottom-line"></div>
+
+        <div class="chat-message-list scrollable" id="chatMessageList">
+        </div>
+
+        <div class="chat-enter-box tm-noactive-bg" id="messageBox">
+            <button class="chat-send-btn btn btn-primary" id="sendMessageBtn"><i class="fa fa-comment"></i></button>
+            <div class="message-input-wrap">
+                <input class="chat-message-input" id="message-input" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 height100">
+        <div class="recommendation-header">
+            <h3> История болезни пациента</h3>
+        </div>
+        <div class="profile-bottom-line"></div>
+        <a class="btn btn-primary bottom" style="width: 100%; margin-top: 20px; margin-bottom: 20px" data-toggle="modal" data-target="#addRecommendationDialog" href="@Url.Action("AddRecommendationStartDialog", "Recommendations", new {id = ViewBag.TargetUserId})">Добавить рекомендацию</a>
+        <div class="height100 scrollable">
+            @Html.Action("List2", "Recommendations", new { id = @ViewBag.TargetUserId })
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addRecommendationDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <link rel="stylesheet" type="text/css" media="screen" href="~/css/conversation.css">
+}
+
+@section scripts{
+    <script>
+        var conversationId = '@ViewContext.RouteData.Values["id"]';
+        var messageHub = $.connection.messageHub;
+
+        function onaddRecommendationSuccess() {
+            $("#addRecommendationDialog").modal("hide");
+            window.location.href = '@Url.Action("Open", "Conversation")/'//ViewBag.ConversationId;
+        }
+        function sendMessage(messageText) {
+            messageHub.server.sendMessage(conversationId, messageText).done(function () {
+                console.info('Message sent to the server');
+            }).fail(function (error) {
+                console.error('Invocation of sendMessage failed: ' + error);
+            });
+        }
+
+        function addMessage(message) {
+            $('#chatMessageList').append('<div class="chat-message ' + message.Direction + '">' + message.Message + '</div>');
+            $(".chat-panel .panel-body").scrollTop($(".chat-panel .panel-body")[0].scrollHeight);
+        }
+
+        $(function () {
+            $('#message-input').keyup(function (e) {
+                if (e.which === 13) {
+                    sendMessage($('#message-input').val());
+                    $('#message-input').val('').focus();
+                }
+            });
+
+            $("#sendMessageBtn").prop("disabled", false);
+            $("#message-input").prop("disabled", false);
+
+            $('#sendMessageBtn').click(function () {
+                sendMessage($('#message-input').val());
+                $('#message-input').val('').focus();
+            });
+
+
+
+            //$.getJSON("/Chat/Index",
+            //    function (result) {
+            //        for (var i = 0; i < result.length; i++) {
+            //            addMessage(result[i]);
+            //        }
+            //    }
+            //);
+
+            messageHub.client.onMessage = function (message) {
+                addMessage(message);
+            };
+        });
+    </script>
+}

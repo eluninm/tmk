@@ -1,0 +1,304 @@
+﻿html, body {
+    height: 100%;
+    min-height: 100%;
+    overflow-y: hidden;
+}
+.height100 { 
+    min-height: 100%;
+    height: 100%;
+}
+
+/*Utility*/
+.vcenter {
+    display: table-cell;
+    vertical-align: middle;
+    float: none;
+}
+
+/* START Scrollbar styling */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.status-btn {
+    border-radius: 25px;
+    color: #ffffff;
+    font-size: 15px;
+}
+.status-btn:hover { 
+    color: #ffffff;
+}
+.status-btn:focus { 
+    color: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0;
+    background: #38CBB5;
+}
+::-webkit-scrollbar-track {
+    background: #E0E0E0;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #148A6C; 
+}
+/* END Scrollbar styling */
+
+/* --- START Colors --- */
+.tm-light-bg { 
+    background-color: #38CBB5;
+}
+.tm-deeper-bg {
+    background-color: #32B6A3;
+}
+.tm-dark-bg {
+    background-color: #148A6C;
+}
+.tm-noactive-bg {
+    background-color: #E0E0E0;
+}
+.tm-text-accent1 {
+    color: #38CBB5;
+}
+.tm-text-accent2 {
+    color: #F06453;
+}
+.tm-text-dark {
+    color: #393939;
+}
+.tm-text-light {
+    color: #fff;
+}
+.tm-text-messages {
+    color: #B2B2B2;
+}
+/* --- END Colors --- */
+
+/* --- START Sidebar --- */
+/*hide for mobile*/
+.sidebar {
+    display: none;
+    width: 220px;
+    min-height: 480px;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 0 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .nav-profile {
+      height: 100px;
+  }
+  .main-container {
+    margin-left: 220px;
+  }
+}
+.nav-sidebar {
+  margin-right: -20px;
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+    padding-right: 20px;
+    padding-left: 10px;
+    color: #fff;
+}
+.nav-sidebar > li > a:hover,
+.nav-sidebar > li > a:focus {
+    background-color: #32B6A3;
+}
+
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  background-color: #32B6A3;
+}
+
+.nav-profile {
+  margin-right: -20px;
+  margin-bottom: 10px;
+  margin-left: -20px;
+  padding: 25px 0;
+}
+.nav-profile-box {
+    height: 50px;
+    border: 0;
+    padding-left: 10px;
+}
+.nav-profile-box > span {
+    font-size: 0.85em;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    color: #fff;
+    width: 80px;
+    padding-left: 10px;
+}
+.nav-profile > img {
+    margin: auto;
+}
+
+.nav-profile-box > .icon-go-forward {
+    margin-top: 14px;
+}
+.sidebar-menu-icon {
+    margin-right: 20px;
+}
+.icon-go-forward {
+    color: #fff;
+    height: 22px;
+    width: 35px;
+    line-height: 20px;
+    text-align: center;
+    padding-left: 10px;
+    border-top-left-radius: 11px;
+    border-bottom-left-radius: 11px;
+    border: 0;
+    display: inline;
+}
+.nav-sidebar > .nav-divider {
+    background-color: #32B6A3;
+}
+.sidebar-brand {
+    bottom: 20px;
+    position: fixed;
+    font-weight: bolder;
+    font-size: 2em;
+    color: #fff;
+    line-height: 25px;
+}
+/* --- END Sidebar --- */
+
+/* Target profile area */
+
+.target-profile {
+    padding: 24px 0;
+    height: 119px;
+    z-index: 1000;
+    margin: 0 auto;
+    border-right: 6px #E0E0E0 solid;
+}
+.profile-bottom-line {
+    content: "\00a0";
+    height: 1px;
+    background: #E0E0E0
+}
+.target-avatar {
+    height: 70px;
+}
+.div-table {
+    display: table;
+    height: 70px;
+}
+.div-table > div {
+    display: table-cell;
+}
+.profile-name {
+    font-size: 18px;
+    padding: 0 10px;
+    vertical-align: middle;
+}
+.consulting-time {
+    height: 70px;
+    border-right: 3px #b2b2b2 dotted;
+    border-left: 3px #b2b2b2 dotted;
+}
+
+.consulting-time-wrap {
+    width: 40px;
+    margin: auto;
+}
+
+.consulting-time-value {
+    font-size: 2.5em;
+    vertical-align: middle;
+    text-align: right;
+    padding-right: 7px;
+}
+
+.consulting-time-text {
+    font-size: 0.9em;
+    vertical-align: middle;
+    text-align: left;
+    padding-left: 7px;
+}
+
+.chat-btn-box {
+    height: 70px;
+}
+.call-btn-group {
+    position: relative;
+    top: 15px;
+    height: 40px;
+    text-align: center;
+}
+.call-btn {
+    margin: 0 5px;
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+}
+
+/* END Target Profile area*/
+
+.patient-history-head {
+    padding: 24px 0;
+    height: 120px;
+    border-bottom: 1px solid #B2B2B2;
+}
+
+/* Panels */
+
+.list-doctor-panel {
+    padding: 0 10px;
+    min-width: 640px;
+    border: 1px #E0E0E0 solid;
+    border-radius: 6px;
+}
+.list-doctor-panel-1 {
+    width: 80px;
+}
+.list-doctor-panel-3 {
+    width: 240px;
+}
+.list-doctor-panel-4 {
+    width: 240px;
+}
+
+.doctor-panel-btn-group {
+    top: 10px;
+}
+
+.list-inline-responsive {
+    padding-left: 0;
+    margin: 0;
+    list-style: none;
+    display: table;
+    width: 100%;
+}
+
+.list-inline-responsive li {
+  display: table-cell;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.page-head {
+    position: fixed;
+    left: 220px;
+    right: 0;
+    top: 0;
+    padding: 10px;
+    background: red;
+    height: 80px;
+}
+.page-title {
+    
+}

@@ -1,0 +1,55 @@
+﻿body {
+    padding-top: 90px;
+}
+
+.chat-panel .panel-body {
+    overflow-y: scroll;
+    height: 554px;
+}
+
+#discussionList {
+    list-style-type: none;
+        padding: 0px;
+    margin: 0px;
+}
+
+/* Badge */
+.badge-warning-important {
+  background-color: #f89406 !important;
+}
+.badge-warning-important:hover {
+  background-color: #c67605;
+}
+
+/* row-eq-height */
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.panel-fixed-height {
+    height: 330px;
+}
+
+/* navbar color */
+.navbar-blue {
+    background-color: rgb(0, 115, 211);
+    border-color: rgb(0, 115, 211);
+}
+.navbar-blue .navbar-nav > li > a {
+    color: #fff;
+}
+.navbar-blue .navbar-nav > li > a:hover,
+.navbar-blue .navbar-nav > li > a:focus {
+    background-color: rgb(100, 185, 255);
+}
+
+.btn-call-dialog {
+    width: 120px;
+}
+
+#incomingCallModal .modal-footer {
+    text-align: center;
+}

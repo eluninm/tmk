@@ -1,0 +1,22 @@
+﻿@model Telemedicine.Web.Areas.Doctor.Models.PaymentViewModel
+@{
+    ViewBag.Title = "";
+    Layout = "~/Areas/Doctor/Views/Shared/_Layout2.cshtml";
+}
+<div class="container">
+    <br />
+    @using (Html.BeginForm("Payment", "Payment", FormMethod.Post, new {@role = "form", @class = "form-horizontal"}))
+    {
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(m => m.SelectedMethodId, new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.SelectedMethodId, Model.PaymentMethodListItems, new {@class = "form-control"})
+                </div>
+            </div>
+        </div>
+        <br/>
+        <input type="submit" class="btn btn-success" value="Сохранить"/>
+        @Html.ActionLink("Назад", "Index", "Home", null, new {@class = "btn btn-default"})
+    }
+</div>

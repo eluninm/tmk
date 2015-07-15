@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Areas/Administrator/Views/Shared/_PreShared.cshtml";
+}
+
+@section brand{
+    Администратор
+}
+
+@section navigation{
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+        }
+    }
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="">@User.Identity.Name</a></li>
+        <li><a href="@Url.Action("Index", "Patient")">Пациенты</a></li>
+        <li><a href="@Url.Action("Index", "Doctor" )">Врачи</a></li>
+        <li><a href="@Url.Action("References", "Home")">Справочники</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Выход</a></li>
+    </ul>
+}
+
+@section body{
+    @RenderBody()
+}

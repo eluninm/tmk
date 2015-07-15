@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Telemedicine.Web.Areas.Administrator.Models.SpecializationViewModel>
+@{
+    ViewBag.Title = "Справочники: Специализация";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Справочники: Специализация</h2>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="bg-primary">
+            <tr>
+                <th>Ид</th>
+                <th>Код</th>
+                <th>Название</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => p.Id)</td>
+                    <td>@Html.DisplayFor(m => p.Code)</td>
+                    <td>@Html.DisplayFor(m => p.DisplayName)</td>
+
+                    <td class="tb-btn-col">
+                        <div class="btn-group">
+                            <a href="@Url.Action("Edit", new {id = p.Id})" class="btn btn-success" title="Редактирование">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary btn-lg">
+        Создать специализацию <span class="glyphicon glyphicon-plus"></span>
+    </a>
+</p>

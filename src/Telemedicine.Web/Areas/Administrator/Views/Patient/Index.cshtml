@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Telemedicine.Web.Areas.Administrator.Models.PatientViewModel>
+
+@{
+    ViewBag.Title = "Зарегистрированные пациенты";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Зарегистрированные пациенты</h2>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="bg-primary">
+            <tr>
+                <th>Ид</th>
+                <th>E-mail</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Отчество</th>
+                <th>Возраст</th>
+                <th>Пол</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => p.Id)</td>
+                    <td>@Html.DisplayFor(m => p.Email)</td>
+                    <td>@Html.DisplayFor(m => p.FirstName)</td>
+                    <td>@Html.DisplayFor(m => p.LastName)</td>
+                    <td>@Html.DisplayFor(m => p.MiddleName)</td>
+                    <td>@Html.DisplayFor(m => p.Age)</td>
+                    <td>@Html.DisplayFor(m => p.Sex)</td>
+
+                    <td class="tb-btn-col">
+                        <div class="btn-group">
+                            <a href="@Url.Action("Edit", new {id = p.Id})" class="btn btn-success" title="Редактирование">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary btn-lg">
+        Создать нового <span class="glyphicon glyphicon-plus"></span>
+    </a>
+</p>
+
+<script type="text/javascript">
+    
+</script>

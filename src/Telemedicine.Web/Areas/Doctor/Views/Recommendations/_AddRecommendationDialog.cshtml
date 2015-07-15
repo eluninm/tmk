@@ -1,0 +1,25 @@
+﻿@model Telemedicine.Web.Areas.Doctor.Models.RecommendationViewModel
+
+@using (Ajax.BeginForm("AddRecommendation", "Recommendations", new { @class = "form", @role = "form", @id = "addRecommendationDialogForm" },
+                                                            new AjaxOptions() { HttpMethod = "Post", OnSuccess = "onaddRecommendationSuccess" }, FormMethod.Post))
+{
+    <div class="modal-header">
+        <h3>Добавить рекомендацию</h3>
+    </div> <div class="modal-body">
+
+         @Html.HiddenFor(m=>m.PatientUserId)
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.RecommendationText, new { htmlAttributes = new { @class = "control-label", @for = "recommendationText" } })
+            <div>
+                @Html.TextAreaFor(m => m.RecommendationText, new {  @class = "form-control", rows = 5, style = "resize:none;", @id = "recommendationText"  })
+            </div>
+        </div> 
+
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Добавить</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+    </div>
+}
+

@@ -1,0 +1,98 @@
+﻿.chat-message {
+    position: relative;
+    min-height: 45px;
+    padding: 20px;
+    border-radius: 10px;
+}
+.chat-message::before {
+    content: "\00a0";
+    display: block;
+    height: 10px;
+    width:  10px;
+    position: absolute;
+    top: 20px;
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.me {
+    margin: 5px 70px 5px 0;
+    border: 2px #32B6A3 solid;    
+}
+.me::before {
+    right: -7px;   
+    border-right: 2px #32B6A3 solid;   
+    border-top: 2px #32B6A3 solid;
+    background-color: white; 
+}
+.target {
+    margin: 5px 0 5px 70px;
+    background: #E0E0E0;
+}
+.target::before {
+    left: -5px;
+    background-color: #E0E0E0;
+}
+
+.chat-enter-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 15px;
+    height: 50px;
+    padding: 0 15px;
+}
+
+.message-input-wrap {
+    position: relative;
+    top: 8px;
+    margin-right: 50px;
+    display: block;
+    height: 35px;
+}
+
+.chat-message-input {
+    height: 35px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: none;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.chat-send-btn {
+    top: 8px;
+    height: 35px;
+    border-radius: 18px;
+    text-align: center;
+    display: block;
+    position: relative;
+    width: 35px;
+    float: right;
+}
+.chat-message-list {
+    position: absolute;
+    height: auto;
+    bottom:0;
+    top:0;
+    left:15px;
+    right:15px;
+    margin-top:120px;
+    margin-bottom: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.scrollable {
+    overflow-y: scroll;
+}
+.recommendation-header {
+    padding: 24px 0;
+    height: 119px;
+    z-index: 1000;
+    margin: 0 auto;
+}

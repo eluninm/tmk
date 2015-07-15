@@ -1,0 +1,44 @@
+﻿@model Telemedicine.Web.Areas.Doctor.Models.RecommendationViewModel
+<div class="col-md-6 col-sm-6">
+    <div id="recommendationContainer" class="panel panel-default panel-fixed-height">
+
+    </div>
+
+</div>
+
+
+
+    <div id="ForListRecommendation">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Рекоммендации
+            </h3>
+        </div>
+        <div class="panel-body" style="padding: 0px; overflow-y: scroll; height: 290px;">
+            <table id="recommendationListTable" class="table table-striped table-bordered" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Дата создания</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody id="recommendationTableContent"></tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div id="detailRecommendation">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Рекоммендации
+            </h3>
+            <span class="btn-group pull-right">
+                <a class="btn btn-default btn-sm" onclick="ShowRecommendationListView();">Назад</a>
+            </span>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body" style="padding: 0px; height: 260px;">
+            <textarea id="detailRecommendationTextArea" style="width: 100%; height: 100%; resize:none;"></textarea>
+        </div>
+    </div>

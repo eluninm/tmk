@@ -1,0 +1,576 @@
+﻿@using System.Globalization
+@{
+    ViewBag.Title = "";
+}
+<div class="row">
+
+    <div class="modal fade" id="SignupDialog" tabindex="-1" role="dialog" aria-labelledby="SignupDialogLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Записаться на прием к врачу</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <select class="form-control" id="selectDoctor" required></select>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-8">
+
+                            <div class="input-group date">
+                                <input type="text" class="form-control" placeholder="Начальная дата" id="datetimepicker" required />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary" onclick="setDoctor()">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-xs-4 col-md-4">
+        <h4>
+            Ваш баланс: <span id="balanceSpan">@ViewBag.Balance</span> руб.<br />
+            Сегодня: @DateTime.Now.ToString("D", new CultureInfo("ru-RU")), @DateTime.Now.ToString("dddd", new CultureInfo("ru-RU"))
+
+            @if (ViewBag.FirstLogin)
+            {
+                <div>Первый вход. Показать страницу выбора</div>
+            }
+
+            <h1>Ваши события</h1>
+            <div id="eventsDiv">
+
+            </div>
+        </h4>
+    </div>
+    <div class="col-xs-4 col-md-4 col-md-offset-4 col-sm-offset-4 text-right">
+        <a href="#">Справка</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-sm-8">
+        <div class="row row-eq-height">
+            <div class="col-md-6 col-sm-6">
+                <div class="panel panel-default panel-fixed-height">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            Календарь
+                            <div class="dropdown pull-right">
+                                <span class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Июнь <span class="caret"></span>
+                                </span>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li>
+                                        <a href="#">Январь</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Февраль</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Март</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Апрель</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Май</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Июнь</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Июль</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Август</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Сентябрь</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Октябрь</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Ноябрь</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Декабрь</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+            </div>
+
+            @Html.Partial("Recommendation")
+        </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4">
+        <div class="panel panel-default chat-panel"  style="height: 700px">
+            <div class="panel-heading">
+                Чат
+                <button class="btn btn-sm btn-primary pull-right" disabled="disabled" id="makeCallBtn4">Звонок</button>
+            </div>
+            <div class="panel-body">
+                <ul id="discussionList" style="height: 520px; overflow-y: auto">
+                    @*<li>
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            <iframe class="embed-responsive-item" src="//www.youtube.com/embed/vCadcBR95oU?rel=0" allowfullscreen=""></iframe>
+                        </div>
+                                    </li>*@
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <div class="input-group">
+                    <textarea id="message" class="form-control" rows="3"></textarea>
+                    <span class="input-group-addon"><a href="#" id="sendmessage" class="pull-right"><i class="fa fa-location-arrow fa-2x"></i></a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="videChatModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Звонок</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <video autoplay="autoplay" id="videoPeer"></video>
+                            </div>
+                            <div class="col-md-6">
+                                <video autoplay="autoplay" id="videoLocal" muted></video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="hangBtn">Положить трубку</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-sm-6">
+        <div class="panel panel-default panel-fixed-height">
+            <div class="panel-heading">
+                <h3 class="panel-title">События <span class="badge pull-right badge-warning-important" id="eventCounter"><i class="fa fa-bell-o"></i> 2</span></h3>
+            </div>
+            <div class="panel-body" style="padding: 0px; overflow-y: scroll; height: 290px;">
+                <table id="event-panel-table" class="table table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1 col-sm-1">Дата создания</th>
+                            <th class="col-md-2 col-sm-2">Тема</th>
+                        </tr>
+                    </thead>
+                    <tbody id="eventTableContent"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    
+       
+    @Html.Partial("CalendarModalWindow")
+    @section scripts {
+
+        <!--Скрипты видеочата-->
+        <script src="~/lib/adapter/js/adapter.js"></script>
+        <script src="~/Scripts/rtc/RtcConnectionManager.js"></script>
+        <script>
+            'use strict';
+            var constraints = { audio: true, video: true };
+            var configuration = {
+                iceServers: [
+                    { urls: "stun:stun.services.mozilla.com" },
+                    { urls: "stun:stun.l.google.com:19302" },
+                    { urls: "stun:global.stun.twilio.com:3478?transport=udp" },
+                    {
+                        urls: "turn:global.turn.twilio.com:3478?transport=udp",
+                        username: "ACa0409eba9f053d77fb897833f0d727ed",
+                        credential: "09616a654b2fe78e5ba0903d9a35e7d6"
+                    }
+                ]
+            };
+
+            var callBtn = document.getElementById('makeCallBtn4');
+            var hangBtn = document.getElementById('hangBtn');
+            var localVideoEl = document.getElementById('videoLocal');
+            var remoteVideoEl = document.getElementById('videoPeer');
+            var localStream;
+
+            $(function () {
+                var chat = new RtcChat.VideoChat(configuration, $.connection);
+                chat.onConnectionReady = function () {
+                    window.getUserMedia(constraints, function (stream) {
+                        localStream = stream;
+                        chat.addStream(stream);
+                        localVideoEl.src = URL.createObjectURL(stream);
+                    }, function (error) {
+                        alert("WebRTC initialization failed!" + error);
+                    });
+                };
+
+                chat.onStreamReceived = function (stream) {
+                    remoteVideoEl.src = URL.createObjectURL(stream);
+                };
+
+                callBtn.onclick = function () {
+                    chat.startConnection("test");
+                    callBtn.disabled = true;
+                    hangBtn.disabled = false;
+                    $('#videChatModal').modal();
+                }
+
+                function stopCall() {
+                    chat.stopConnection("test");
+                    callBtn.disabled = false;
+                    hangBtn.disabled = true;
+                    localStream = null;
+                }
+
+                var clients = 0;
+
+                $.connection.signalingHub.client.onConnected = function () {
+                    clients += 1;
+                    if (clients === 1) {
+                        callBtn.disabled = false;
+                    }
+                };
+                $.connection.signalingHub.client.onDisconnected = function () {
+                    clients -= 1;
+                    if (clients < 0) {
+                        clients = 0;
+                    }
+                    if (clients === 0) {
+                        callBtn.disabled = true;
+                    }
+                };
+
+                $.connection.signalingHub.client.peerHang = function () {
+                    stopCall();
+                }
+
+
+                hangBtn.onclick = function () {
+                    $.connection.signalingHub.server.endPeerCall("");
+                }
+
+                $.connection.hub.start(function () {
+
+                });
+            });
+        </script>
+        <!--КОНЕЦ. Скрипты видеочата-->
+
+
+
+
+        <script type="text/javascript">
+
+
+            function addMessage(message) {
+                var encodedName = $('<div />').text(message.UserDisplayName).html();
+                var encodedMsg = $('<div />').text(message.Message).html();
+                $('#discussionList').append('<li class="bg-info"><div class="well well-sm">'
+                    + '<i style="font-size:x-small">' + encodedName + ' (22.06.15)</i><br/>' + encodedMsg + '</div></li>');
+                $("#discussionList").scrollTop($("#discussionList")[0].scrollHeight);
+            };
+
+
+            function setDoctor() {
+
+                var doctorId = $("#selectDoctor").val();
+                var date = $('#datetimepicker').val();
+                $.ajax({
+                    type: "POST",
+                    url: '/patient/home/setdoctor',
+                    data: { siteUserId: doctorId, date: date },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data == "ok") {
+                            $("#SignupDialog").modal('hide');
+                            // Обновление баланса
+                            $.getJSON("/patient/home/getbalance", null, function (data) {
+                                $("#balanceSpan").text(data);
+                            });
+                        } else {
+                            alert("");
+                        }
+                    }
+                });
+            }
+
+
+
+
+            $(function () {
+
+                makeDatePicker();
+                getDoctors();
+                getEvents();
+
+                var messageHub = $.connection.messageHub;
+
+                messageHub.client.onMessage = function (message) {
+                    addMessage(message);
+                };
+
+                $.connection.hub.start().done(function () {
+                    $('#message').keyup(function (e) {
+                        if (e.which === 13) {
+                            messageHub.server.sendMessage($('#message').val());
+                            $('#message').val('').focus();
+                        }
+                    });
+
+                    $('#sendmessage').click(function () {
+                        messageHub.server.sendMessage($('#message').val());
+                        $('#message').val('').focus();
+                    });
+
+                    $.getJSON("/Chat/Index",
+                        function (result) {
+                            for (var i = 0; i < result.length; i++) {
+                                addMessage(result[i]);
+                            }
+                        }
+                    );
+                });
+
+            });
+            function makeDatePicker() {
+                $('#datetimepicker').datetimepicker({
+                    format: 'yyyy-mm-dd hh:ii',
+                    language: 'ru'
+                });
+            }
+
+            function getDoctors() {
+
+                $.getJSON("/patient/home/getdoctors", null, function (people) {
+                    $.each(people, function (i) {
+                        $("#selectDoctor").append("<option value=" + this.SiteUserId + ">" + this.User.FirstName + "</option>");
+                    });
+                });
+
+            }
+
+            function getEvents() {
+
+                $.getJSON("/patient/home/getevents", null, function (people) {
+                    $.each(people, function (i) {
+                        $("#eventsDiv").append("<span>" + this.Comments + "</span> <br />");
+                    });
+                });
+
+            }
+
+
+
+
+        </script>
+
+        <!--НАЧАЛО. Скрипты календаря-->
+        <script>
+
+            $(function () {
+                $('.responsive-calendar').responsiveCalendar({
+                    translateMonths: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                    onDayClick: function (events) {
+                        $("#alertModalMessageContainer").hide();
+                        var day = $(event.target).attr('data-day');
+                        var month = $(event.target).attr('data-month');
+                        var year = $(event.target).attr('data-year');
+                        $('#Topic').val('');
+                        $('#Comments').val('');
+                        $('#calendarModal').modal('show');
+
+
+                        var d = new Date(year, parseInt(month) - 1, day);
+
+                        var output = ((d.getDate()) < 10 ? '0' : '') + (d.getDate()) + '-' +
+                            ((d.getMonth() + 1) < 10 ? '0' : '') + (d.getMonth() + 1) + '-' +
+                            d.getFullYear();
+
+                        $('#inputStartDatetimepicker').datetimepicker({
+                            format: 'dd-mm-yyyy hh:ii',
+                            language: 'ru',
+                            todayBtn: true
+                        });
+
+                        /* $('#inputStartDatetimepicker').datetimepicker({
+                             format: 'DD.MM.YYYY, H:mm:ss',
+                             locale: 'ru'
+                         });*/
+                        $('#inputStartDatetimepicker').val(output + " 15:00");
+                    }
+                });
+
+                UpdateCalendar();
+                UpdateEventList()
+            });
+
+            function OnAddCalendarEventFailure(result) {
+                $("#alertModalMessageContainer").show();
+                $("#alertModalMessageContent").text(result.responseText);
+                $('#calendarModal').modal('show');
+            };
+
+
+            function AddDate() {
+                console.log("addDate");
+                $('#ModalForm').submit();
+            };
+
+
+            function OnAddCalendarEventSuccess(result) {
+                console.log("OnAddCalendarEventSuccess");
+                $('#calendarModal').modal('hide');
+                UpdateCalendar();
+                UpdateEventList();
+            };
+
+            //Обновление списка событий
+            function UpdateEventList() {
+                $("#eventTableContent").text("");
+                $.ajax({
+                    url: '/Patient/Calendar/GetCalendarEvents',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $.each(data, function (i, item) {
+                            $("#eventTableContent").append("<tr><td>" + new Date(item.Date).toLocaleDateString() + "</td><td>" + item.Topic + "</td></tr>");
+                        });
+                        $("#eventCounter").html("<i class=\"fa fa-bell-o\"></i>" + data.length);
+                    }
+                });
+            };
+
+            function MakeTwoCharacters(digit) {
+                if ((digit + "").length < 2 && (digit + "").length > 0) {
+                    return "0" + digit;
+                } else return (digit + "");
+            }
+
+
+            function UpdateCalendar() {
+                $.ajax({
+                    url: '/Patient/Calendar/GetCalendarEvents',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        var dictionary = {};
+                        $.each(data, function (i, item) {
+                            var date = new Date(item.Date);
+                            var key = date.getFullYear() + "-" + MakeTwoCharacters(date.getMonth() + 1) + "-" + MakeTwoCharacters(date.getDate());
+                            if (key in dictionary) {
+                                dictionary[key].number++;
+                            } else {
+                                dictionary[key] = { "number": 1, "badgeClass": "badge-warning", "class": "bg-success" }
+                            }
+                        });
+
+                        $('.responsive-calendar').responsiveCalendar('clearAll');
+                        $('.responsive-calendar').responsiveCalendar('edit', dictionary);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
+
+                });
+            }
+        </script>
+        <!--КОНЕЦ. Скрипты календаря-->
+        <!--НАЧАЛО. Скрипты рекомендаций-->
+        <script>
+            var RecommendationListData = {};
+            $(function () {
+                initRecommendation();
+            });
+
+
+            function initRecommendation() {
+                $("#ForListRecommendation").hide();
+                $("#detailRecommendation").hide();
+
+                var forListRecommendation = $("#ForListRecommendation").html();
+                $("#recommendationContainer").html(forListRecommendation);
+                UpdateRecommendationList();
+            };
+
+
+            function ShowRecommendationDetailView() {
+                var detailRecommendation = $("#detailRecommendation").html();
+                $("#recommendationContainer").html(detailRecommendation);
+
+            };
+
+
+            function ShowRecommendationListView() {
+                var forAddRecommendation = $("#ForListRecommendation").html();
+                $("#recommendationContainer").html(forAddRecommendation);
+                UpdateRecommendationList();
+            };
+
+            function UpdateRecommendationList() {
+                $.ajax({
+                    url: '/Patient/Recommendation/GetRecommendations',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        RecommendationListData = {};
+                        $("#recommendationTableContent").html("");
+                        $.each(data, function (i, item) {
+                            RecommendationListData[item.Id] = item.RecommendationText;
+                            var recommendationText = item.RecommendationText + "";
+                            if (recommendationText.length >= 20) {
+                                recommendationText = recommendationText.substring(0, 20) + "...";
+                            }
+                            $("#recommendationTableContent").append("<tr  onclick=\"onRecommendationTableRowClicked(" + item.Id + ")\" id=\"recommendationTableRow\"  recommendationId=\"" +
+                                item.Id + "\"> <td stype=\"width:10%;" + "\">" + new Date(item.CreateDate).toLocaleDateString() + "</td> <td style=\"word-wrap: break-word;min-width: 160px;max-width: 160px;\">"
+                                + recommendationText + "</td> </tr>");
+                        });
+
+
+                    }
+                });
+            };
+
+
+            function onRecommendationTableRowClicked(recomendationId) {
+                $("#detailRecommendationTextArea").text(RecommendationListData[recomendationId] + "");
+                ShowRecommendationDetailView();
+            };
+
+        </script>
+        <!--КОНЕЦ. Скрипты рекомендаций-->
+    }

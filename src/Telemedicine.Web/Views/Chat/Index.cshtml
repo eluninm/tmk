@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_TestLayout.cshtml";
+}
+
+@section scripts
+{
+    <script src="/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="/signalr/hubs"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            var chat = $.connection.textMessageHub;
+
+            chat.client.groupMessage = function (message) {
+                var encodedName = $('<div />').text(message.FromName).html();
+                var encodedMsg = $('<div />').text(message.Message).html();
+
+                $('#discussion').append('<li><strong>' + encodedName
+                    + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
+            };
+
+            $('#displayname').val(prompt('Enter your name:', ''));
+            $('#message').focus();
+
+            $.connection.hub.start().done(function() {
+                $('#sendmessage').click(function() {
+                    chat.server.sendGroupMessage($('#message').val());
+                    $('#message').val('').focus();
+                });
+            });
+        });
+    </script>
+}
+
+<h2>Чат</h2>
+
+<input type="text" id="message" />
+<input type="button" id="sendmessage" value="Send" />
+<input type="hidden" id="displayname" />
+<ul id="discussion"></ul>

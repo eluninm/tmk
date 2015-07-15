@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Doctor/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <video autoplay="autoplay" id="videoPeer"></video>
+        </div>
+        <div class="col-md-6">
+            <video autoplay="autoplay" id="videoLocal" muted></video>
+        </div>
+    </div>
+    <div class="row">
+        <button id="startBtn" class="btn btn-info">Start</button>
+        <button id="callBtn" class="btn btn-success" disabled="disabled">Call</button>
+        <button id="hangBtn" class="btn btn-error" disabled="disabled">Hang</button>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/lib/adapter/js/adapter.js"></script>
+    <script>
+        'use strict';
+
+        var _localStream;
+        var _localPeerConnection;
+        var _remotePeerConnection;
+
+        var _localVideoEl = document.getElementById('videoLocal');
+        var _remoteVideoEl = document.getElementById('videoPeer');
+
+        var _startBtn = document.getElementById('startBtn');
+        var _callBtn = document.getElementById('callBtn');
+        var _hangBtn = document.getElementById('hangBtn');
+
+        _startBtn.onclick = start;
+        _callBtn.onclick = call;
+        _hangBtn.onclick = hangup;
+
+        var constraints = {
+            audio: false,
+            video: true
+        };
+
+        function start() {
+            trace('Requesting local stream');
+            _startBtn.disabled = true;
+            getUserMedia(constraints, getMediaComplete, getMediaError);
+        }
+
+        function getMediaComplete(stream) {
+            _localVideoEl.src = URL.createObjectURL(stream);
+            _localStream = stream;
+            _callBtn.disabled = false;
+        }
+
+        function getMediaError(error) {
+            trace('navigator.getUserMedia error: ', error);
+            alert("WebRTC initialization failed!");
+        }
+
+        function call() {
+            _callBtn.disabled = true;
+            _hangBtn.disabled = false;
+
+            trace('Starting call');
+
+            if (_localStream.getVideoTracks().length > 0) {
+                trace('Using video device: ' + _localStream.getVideoTracks()[0].label);
+            }
+            if (_localStream.getAudioTracks().length > 0) {
+                trace('Using audio device: ' + _localStream.getAudioTracks()[0].label);
+            }
+
+            var servers = null;
+
+            _localPeerConnection = new RTCPeerConnection(servers);
+            trace('Created local peer connection object localPeerConnection');
+            _localPeerConnection.onicecandidate = gotLocalIceCandidate;
+
+            _remotePeerConnection = new RTCPeerConnection(servers);
+            trace('Created remote peer connection object remotePeerConnection');
+            _remotePeerConnection.onicecandidate = gotRemoteIceCandidate;
+            _remotePeerConnection.onaddstream = gotRemoteStream;
+
+            _localPeerConnection.addStream(_localStream);
+            trace('Added localStream to localPeerConnection');
+            _localPeerConnection.createOffer(gotLocalDescription);
+        }
+
+        function gotLocalIceCandidate(event) {
+            if (event.candidate) {
+                event.target.addIceCandidate(new RTCIceCandidate(event.candidate));
+                trace('Local ICE candidate: \n' + event.candidate.candidate);
+            }
+        }
+
+        function gotRemoteIceCandidate(event) {
+            if (event.candidate) {
+                _localPeerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
+                trace('Remote ICE candidate: \n ' + event.candidate.candidate);
+            }
+        }
+
+        function gotRemoteStream(event) {
+            _remoteVideoEl.src = URL.createObjectURL(event.stream);
+            trace('Received remote stream');
+        }
+
+        function gotLocalDescription(description) {
+            _localPeerConnection.setLocalDescription(description);
+            trace('Offer from localPeerConnection: \n' + description.sdp);
+            _remotePeerConnection.setRemoteDescription(description);
+            _remotePeerConnection.createAnswer(gotRemoteDescription);
+        }
+
+        function gotRemoteDescription(description) {
+            _remotePeerConnection.setLocalDescription(description);
+            trace('Answer from remotePeerConnection: \n' + description.sdp);
+            _localPeerConnection.setRemoteDescription(description);
+        }
+
+
+        function hangup() {
+            trace('Ending call');
+            _localPeerConnection.close();
+            _remotePeerConnection.close();
+            _localPeerConnection = null;
+            _remotePeerConnection = null;
+            _hangBtn.disabled = true;
+            _callBtn.disabled = false;
+        }
+    </script>
+}

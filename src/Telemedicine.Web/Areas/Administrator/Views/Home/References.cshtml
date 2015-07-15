@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "References";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Справочники</h2>
+
+<ul>
+    <li>@Html.ActionLink("Специализации", "Index", "Specialization")</li>
+    <li>@Html.ActionLink("Способы оплаты", "Index", "PaymentMethods")</li>
+    <li>@Html.ActionLink("Тарифы", "Index", "Tariff")</li>
+</ul>

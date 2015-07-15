@@ -1,0 +1,29 @@
+﻿@model  Telemedicine.Web.Areas.Administrator.Models.PaymentMethodViewModel
+@{
+    ViewBag.Title = "Метод оплаты: создание";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}   
+
+<h2>Метод оплаты: создание</h2>
+
+@using (Html.BeginForm("Create", "PaymentMethods", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(false)
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <a href="@Url.Action("Index")" class="btn btn-default">Отмена</a>
+        <input type="submit" value="Сохранить" class="btn btn-primary" />
+    </div>
+}

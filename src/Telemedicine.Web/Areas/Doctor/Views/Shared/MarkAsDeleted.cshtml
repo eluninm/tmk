@@ -1,0 +1,7 @@
+﻿@model Telemedicine.Web.Areas.Doctor.Models.MarkAsDeletedViewModel
+
+
+@using (Ajax.BeginForm("MarkAsDeleted","Recommendations",new AjaxOptions() {OnSuccess = "OnMarkAsDeletedSuccess", OnFailure = "OnMarkAsDeletedFailure" }, new { @hidden ="true", @id = "markAsDeletedForm" }))
+{
+    @Html.EditorFor(m => m, new { @id = "recommendationIdForDeleting" })
+}

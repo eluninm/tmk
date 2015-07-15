@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Telemedicine.Web.Areas.Administrator.Models.TariffViewModel>
+@{
+    ViewBag.Title = "Справочники: Тарифы";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Справочники: Тарифы</h2>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="bg-primary">
+            <tr>
+                <th>Название</th> 
+                <th>Стоймость</th> 
+                <th>Количество сообщений</th> 
+                <th>Количество минут</th> 
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => p.Name)</td>
+                    <td>@Html.DisplayFor(m => p.Cost)</td>
+                    <td>@Html.DisplayFor(m => p.Messages)</td>
+                    <td>@Html.DisplayFor(m => p.Minutes)</td>
+
+                    <td class="tb-btn-col">
+                        <div class="btn-group">
+                            <a href="@Url.Action("Edit", new {id = p.Id})" class="btn btn-success" title="Редактирование">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary btn-lg">
+        Создать тариф <span class="glyphicon glyphicon-plus"></span>
+    </a>
+</p>

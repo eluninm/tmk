@@ -1,0 +1,61 @@
+﻿@model Telemedicine.Web.Areas.Patient.Models.AppointmentViewModel
+    
+@using (Ajax.BeginForm("AddAppointment", "Consultation", new { @class = "form", @role = "form", @id = "appointmentModalDialogForm" },
+                                                new AjaxOptions() { HttpMethod = "Post", OnSuccess = "onAddSuccess" }, FormMethod.Post))
+{
+            <div class="modal-header">
+                <h3>Запись к врачу</h3>
+            </div> <div class="modal-body">
+   
+        @Html.HiddenFor(m => m.Id)
+        <div class="form-group">
+            @Html.LabelFor(m => m.FIO, new { htmlAttributes = new { @class = "control-label", @for = "fio" } })
+            <div>
+                @Html.DisplayFor(m => m.FIO, new { htmlAttributes = new { @class = "form-control",  @id = "fio" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Specialization, new { htmlAttributes = new { @class = "control-label", @for = "specialization" } })
+            <div>
+                @Html.DisplayFor(m => m.Specialization, new { htmlAttributes = new { @class = "form-control",  @id = "specialization" } })
+            </div>
+        </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Status, new { htmlAttributes = new { @class = "control-label", @for = "status" } })
+                        <div>
+                            @Html.DisplayFor(m => m.Status, new { htmlAttributes = new { @class = "form-control",  @id = "status" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Date, new { htmlAttributes = new { @class = "control-label", @for = "appointmentDate" } })
+                        <div class='input-group date' id='appointmentDate'>
+                            @Html.EditorFor(m => m.Date, new { htmlAttributes = new { @class = "form-control", @placeholder = "Дата", @id = "inputStartDatetimepicker" } })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            @Html.ValidationMessageFor(m => m.Date)
+                        </div>
+                    </div>
+
+    
+                      
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-success">Записаться на консультацию</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+</div>}
+    <script>
+        $(function () {
+            $('#inputStartDatetimepicker').datetimepicker({ 
+                locale: 'ru' 
+            });
+        });
+
+        function onAddSuccess() {
+            $('#appointmentModalDialog').modal('hide');
+            toastr.success('Вы записались к врачу: @Model.FIO на @Model.Date');
+        }
+    </script>
