@@ -113,6 +113,20 @@
 }
 /* --- END Sidebar --- */
 
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0;
+  background: #385c9d;
+}
+::-webkit-scrollbar-track {
+  background: #e5e5e5;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #385c9d;
+}
 html,
 body {
   height: 100%;

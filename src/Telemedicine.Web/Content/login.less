@@ -1,7 +1,6 @@
 ﻿@import "less/scrollbar.less";
 
-/*@color-placeholder: #b2b2b2;*/
-@color-placeholder: red;
+@color-placeholder: #b2b2b2;
 @color-label: #7f7f7f;
 
 body {
@@ -10,6 +9,10 @@ body {
 }
 
 .form-signin {
+    position: absolute;
+    top: 25%;
+    left: 38%;
+    width: 330px;
     max-width: 330px;
     padding: 15px;
     margin: 0 auto;
@@ -17,6 +20,9 @@ body {
     .form-signin-heading {
         text-align: center;
         margin-bottom: 32px;
+        span{
+            font-size: 20px;
+        }
     }
     .checkbox {
         font-weight: normal;
@@ -47,13 +53,16 @@ body {
         font-size: 14px;
     }
     button[type="submit"]{
-        border-radius: 30px;
-        margin-bottom: 20px;
+        border-radius: @button-border-radius;
         background: @color-accent1-light;
+        height: @button-height;
+        margin-bottom: 20px;
+        font-size: 10px;
+        text-transform: uppercase;
     }
 }
 
-::-webkit-input-placeholder {color: @color-placeholder}
-::-moz-placeholder          {color: @color-placeholder}
-:-moz-placeholder           {color: @color-placeholder}
-:-ms-input-placeholder      {color: @color-placeholder}
+::-webkit-input-placeholder {color: @color-placeholder !important}
+::-moz-placeholder          {color: @color-placeholder !important}
+:-moz-placeholder           {color: @color-placeholder !important}
+:-ms-input-placeholder      {color: @color-placeholder !important}

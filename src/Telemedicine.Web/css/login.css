@@ -12,12 +12,15 @@
 ::-webkit-scrollbar-thumb:window-inactive {
   background: #385c9d;
 }
-/*@color-placeholder: #b2b2b2;*/
 body {
   padding-top: 40px;
   padding-bottom: 40px;
 }
 .form-signin {
+  position: absolute;
+  top: 25%;
+  left: 38%;
+  width: 330px;
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
@@ -25,6 +28,9 @@ body {
 .form-signin .form-signin-heading {
   text-align: center;
   margin-bottom: 32px;
+}
+.form-signin .form-signin-heading span {
+  font-size: 20px;
 }
 .form-signin .checkbox {
   font-weight: normal;
@@ -53,19 +59,22 @@ body {
   font-size: 14px;
 }
 .form-signin button[type="submit"] {
-  border-radius: 30px;
-  margin-bottom: 20px;
+  border-radius: 19px;
   background: #3e67ae;
+  height: 37px;
+  margin-bottom: 20px;
+  font-size: 10px;
+  text-transform: uppercase;
 }
 ::-webkit-input-placeholder {
-  color: red;
+  color: #b2b2b2 !important;
 }
 ::-moz-placeholder {
-  color: red;
+  color: #b2b2b2 !important;
 }
 :-moz-placeholder {
-  color: red;
+  color: #b2b2b2 !important;
 }
 :-ms-input-placeholder {
-  color: red;
+  color: #b2b2b2 !important;
 }
