@@ -2,24 +2,33 @@
     ViewBag.Title = "Index2";
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
-@**@
-@*<div style="background: greenyellow">*@
-@*    Контент страницы, у желтого дива паддинги слева справа*@
-@*</div>*@
-@**@
-@**@
-@*<div class="row" style="background: cornflowerblue">*@
-@*    Этот div class="row" => убирает паддинги*@
-@*</div>*@
-@*<div class="fullheight">*@
-@*    контент очень большой;*@
-@*</div>*@
-@**@
-@*внутри снова можно делать колонки, они будут с паддингом*@
-
 <div class="row fullheight" style="position: relative">
     <div class="col-md-6 fullheight">
         История
+        <div>
+
+            <div class='chat-message'>
+                <img class='chat-image target img-circle' src='http://www.michaelmammoliti.com/_projects/chat/_media/img/user1.jpg' />
+                <div class='chat-message target'>
+                    <p>Sushi tonight?</p>
+                    <div class='chat-details small'>
+                        My Address 16:09:2016
+                    </div>
+                </div>
+            </div>
+            <div class='chat-message'>
+                <img class='chat-image me img-circle' src='http://www.michaelmammoliti.com/_projects/chat/_media/img/user1.jpg' />
+                <div class='chat-message me'>
+                    <p>Sushi tonight?</p>
+                    <div class='chat-details small'>
+                        My Address 16:09:2016
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
     </div>
     <div class="col-md-3 fullheight" style="background: green">Рекомендации</div>
     <div class="col-md-3 fullheight" style="background: aquamarine">Консультации</div>
