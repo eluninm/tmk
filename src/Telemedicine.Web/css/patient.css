@@ -218,6 +218,10 @@ body {
   overflow-y: hidden;
   padding: 40px 15px 0;
   border: none;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  font-size: 20px;
+  color: black;
 }
 .sub-container > .page-header::after {
   width: 100%;
@@ -344,9 +348,19 @@ body {
 .chat-message .chat-image.target {
   float: left;
 }
+.chat-message.me,
+.chat-message.target {
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  color: black;
+}
 .chat-message .chat-details {
   margin-top: 15px;
   margin-bottom: -15px;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  font-size: 10px;
+  color: #727272;
 }
 .chat-message::before {
   content: "\00a0";
@@ -445,25 +459,30 @@ body {
 .recomendation-message-container .recomendation-message .timestamp {
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bolder;
+  font-size: 14px;
+  color: #8c8c8c;
   margin: 15px 0;
 }
 .recomendation-message-container .recomendation-message .author {
   margin: 15px 0;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  font-size: 12px;
 }
 .recomendation-message-container .recomendation-message .author .title {
   color: #e79924;
-  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: bolder;
 }
 .recomendation-message-container .recomendation-message .author .speciality {
-  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #8c8c8c;
 }
 .recomendation-message-container .recomendation-message .message {
   margin: 15px 0;
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  color: black;
 }
 .recomendation-message-container .recomendation-message .details {
-  font-size: 0.85em;
+  font-size: 10px;
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bolder;
 }
@@ -484,6 +503,8 @@ body {
 .consultation-message-container .consultation-message .timestamp {
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bolder;
+  font-size: 14px;
+  color: #8c8c8c;
   margin: 15px 0;
 }
 .consultation-message-container .consultation-message .author {
@@ -491,13 +512,20 @@ body {
 }
 .consultation-message-container .consultation-message .author .title {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
 }
 .consultation-message-container .consultation-message .author .speciality {
-  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  font-size: 12px;
   color: #e79924;
 }
 .consultation-message-container .consultation-message.active {
-  background: #e4e4e4;
+  background: #f0f0f0;
+}
+.consultation-message-container .consultation-message.active .author .title {
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
 }
 .consultation-message-container :last-child {
   border: none;

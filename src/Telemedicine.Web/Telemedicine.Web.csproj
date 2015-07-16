@@ -416,6 +416,7 @@
     <Content Include="css\fonts\rouble_1.otf" />
     <Content Include="Content\less\grid.less" />
     <Content Include="Content\less\balance.less" />
+    <Content Include="Content\less\conversation.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

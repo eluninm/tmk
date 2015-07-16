@@ -2,40 +2,45 @@
     .recomendation-message {
         padding: 20px;
         border-bottom: 1px solid @color-background1;
-        font-size:1.2em;
+        font-size: 1.2em;
 
         .timestamp {
             .font-bold;
+            font-size: 14px;
+            color: @color-text1;
             margin: 15px 0;
         }
 
         .author {
             margin: 15px 0;
-
+            .font-bold;
+            font-size:12px;
             .title {
                 color: @color-accent3;
-                .font-bold;
             }
 
             .speciality {
-                .font-regular;
+                color: @color-text1;
             }
         }
 
         .message {
             margin: 15px 0;
             .font-regular;
+            font-size:12px;
+            color:@color-text;
         }
 
         .details {
-            font-size: .85em;
+            font-size: 10px;
             .font-bold;
 
             a {
-                color: black;
-                border-bottom:.15em dotted black;
-                &:hover{
-                    text-decoration:none;
+                color: @color-text;
+                border-bottom: .15em dotted black;
+
+                &:hover {
+                    text-decoration: none;
                 }
             }
         }

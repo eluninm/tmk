@@ -5,6 +5,8 @@
 
         .timestamp {
             .font-bold;
+            font-size: 14px;
+            color: @color-text1;
             margin: 15px 0;
         }
 
@@ -13,16 +15,21 @@
 
             .title {
                 .font-regular;
+                font-size:14px;
             }
 
             .speciality {
-                .font-regular;
+                .font-bold;
+                font-size:12px;
                 color: @color-accent3;
             }
         }
 
         &.active {
-            background: @color-background1;
+            background: @color-accent2-consultation;
+            .author .title{
+                .font-bold;
+            }
         }
     }
 
@@ -39,6 +46,7 @@
         display: block;
         border-top: 1px solid @color-background1;
     }
+
     .consultation-message.active + .consultation-message::before,
     .consultation-message:first-child::before {
         border-top: none;
