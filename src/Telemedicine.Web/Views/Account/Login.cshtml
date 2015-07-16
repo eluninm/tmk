@@ -26,20 +26,20 @@
 
 <body>
 <div class="container">
-    <div class="well">
+    @*<div class="well">
         Используйте следующие реквизиты пользователей для демо входа.
         <ul>
             <li>Администратор: administrator1@telemedicine.ru, Qwerty1234</li>
             <li>Пациент: patient1@telemedicine.ru, Qwerty1234</li>
             <li>Доктор: doctor1@telemedicine.ru, Qwerty1234</li>                        
         </ul>
-    </div>
+    </div>*@
 
     @using (Html.BeginForm("Login", "Account", new {ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-signin", id = "login-form", role = "form"}))
     {
         @Html.AntiForgeryToken()
         <div class="form-signin-heading">
-            <h3>Вход в систему</h3>
+            <span>Вход в систему</span>
         </div>
         <input type="email" id="inputEmail" name="Email" class="form-control" placeholder="Email-адрес" required autofocus>
         <input type="password" id="inputPassword" name="Password" class="form-control" placeholder="Пароль" required>
