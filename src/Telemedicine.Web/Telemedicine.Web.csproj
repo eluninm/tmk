@@ -228,8 +228,32 @@
       <DependentUpon>patient.css</DependentUpon>
     </Content>
     <Content Include="css\site.css" />
+    <Content Include="img\add_button.png" />
+    <Content Include="img\arrow_big_down.png" />
+    <Content Include="img\arrow_big_up.png" />
+    <Content Include="img\arrow_left.png" />
+    <Content Include="img\arrow_more_icon.png" />
+    <Content Include="img\arrow_right.png" />
+    <Content Include="img\calendar_icon.png" />
+    <Content Include="img\calendar_icon_calendar.png" />
+    <Content Include="img\calendar_icon_menu.png" />
     <Content Include="img\call.mp3" />
+    <Content Include="img\card_icon_menu.png" />
+    <Content Include="img\chat.png" />
+    <Content Include="img\check.png" />
+    <Content Include="img\clock_blue.png" />
+    <Content Include="img\clock_icon_calendar.png" />
+    <Content Include="img\doctor_icon_menu.png" />
+    <Content Include="img\exit_menu.png" />
+    <Content Include="img\home_icon_menu.png" />
+    <Content Include="img\info.png" />
+    <Content Include="img\Logo.png" />
     <Content Include="img\no_avatar.png" />
+    <Content Include="img\no_chat.png" />
+    <Content Include="img\video.png" />
+    <Content Include="img\video_green.png" />
+    <Content Include="img\voice.png" />
+    <Content Include="img\voice_green.png" />
     <Content Include="lib\adapter\js\adapter.js" />
     <Content Include="lib\bootstrap-calendar\css\bootstrap-datetimepicker.min.css" />
     <Content Include="lib\bootstrap-calendar\js\bootstrap-datetimepicker.min.js" />
