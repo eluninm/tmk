@@ -1,0 +1,49 @@
+﻿.list-doctor-panel {
+    .doctor-panel-btn-group {
+        .btn {
+            height: 2.5em;
+            border-radius: 1.5em;
+            text-transform: uppercase;
+            .font-regular;
+
+            &.start-chat-btn {
+                background: @color-accent3;
+
+                &:hover {
+                    box-shadow: rgba(0,0,0,.1) 2.5em 2.5em inset;
+                }
+            }
+        }
+    }
+
+    .doctor-status {
+        color: @color-accent4;
+        .font-bold;
+        line-height: 2.5em;
+        text-transform:uppercase;
+    }
+
+    .speciality {
+        font-size: small;
+        .font-bold;
+        color: @color-accent3;
+    }
+
+    .status-icon {
+        height: 2.5em;
+        width: 2.5em;
+        border: 2px solid @color-accent4;
+        color: @color-accent4;
+        border-radius: 1.5em;
+        text-align: center;
+        line-height: 2.2em;
+        &:hover{
+            text-decoration:none;
+        }
+        &.disabled{
+            border-color: @color-background1;
+            color: @color-background1;
+        }
+    }
+    
+}

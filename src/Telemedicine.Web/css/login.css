@@ -1,11 +1,27 @@
-﻿.font-normal {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+﻿@font-face {
+  font-family: GothaProReg;
+  src: url('/css/fonts/GothaProReg.otf');
+}
+@font-face {
+  font-family: GothaProItalic;
+  src: url('/css/fonts/GothaProIta.otf');
+}
+@font-face {
+  font-family: GothaProMedium;
+  src: url('/css/fonts/GothaProMed.otf');
+}
+@font-face {
+  font-family: GothaProBold;
+  src: url('/css/fonts/GothaProBol.otf');
+}
+.font-normal {
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .font-regular {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .font-bold {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bolder;
 }
 ::-webkit-scrollbar {

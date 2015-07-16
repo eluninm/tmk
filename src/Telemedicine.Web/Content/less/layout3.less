@@ -2,11 +2,12 @@
 @import "scrollbar.less";
 
 html,
-body{
-    height:100%;
+body {
+    height: 100%;
 }
 
 .main-container {
+    .font-regular;
     height: 100%;
     overflow: auto;
 }
@@ -16,25 +17,63 @@ body{
     overflow: auto;
 }
 
-.sub-container{
-    display:flex;
-    flex-direction:column;
-    > .page-header{
-        margin-top:0;
-        margin-bottom:0;
-        overflow-y:scroll;
-        padding:40px 15px 0;
-        border:none;
-        &::after{
-            width:100%;
-            margin-top:20px;
-            border-bottom:1px solid @color-background1;
+.sub-container {
+    display: flex;
+    flex-direction: column;
+
+    > .page-header {
+        margin-top: 0;
+        margin-bottom: 0;
+        overflow-y: hidden;
+        padding: 40px 15px 0;
+        border: none;
+
+        &::after {
+            width: 100%;
+            margin-top: 20px;
+            border-bottom: 1px solid @color-background1;
         }
     }
-    > div{
-        height:100%;
-        flex:1;
-        overflow-x:auto;
-        overflow-y:scroll;
+
+    > div {
+        height: 100%;
+        flex: 1;
+        overflow-x: auto;
+        overflow-y: scroll;
+    }
+}
+
+.grid-filter {
+    &.dropdown {
+        .dropdown-toggle {
+            background:@color-background;
+            height: 2.5em;
+            border-radius: 1.5em;
+            width:100%;
+            text-align:left;
+            .caret{
+                position:absolute;
+                right:1em;
+                top:1.2em;
+            }
+        }
+    }
+
+    &.input-group {
+        
+        > input-group-addon {
+            height: 2.5em;
+        }
+
+        > :first-child {
+            border-radius: 1.5em 0 0 1.5em;
+        }
+
+        > :last-child {
+            border-radius: 0 1.5em 1.5em 0;
+        }
+        > .form-control{
+            height:100%;
+        }
     }
 }
