@@ -150,3 +150,25 @@ body {
   height: 100%;
   overflow: auto;
 }
+.sub-container {
+  display: flex;
+  flex-direction: column;
+}
+.sub-container > .page-header {
+  margin-top: 0;
+  margin-bottom: 0;
+  overflow-y: scroll;
+  padding: 40px 15px 0;
+  border: none;
+}
+.sub-container > .page-header::after {
+  width: 100%;
+  margin-top: 20px;
+  border-bottom: 1px solid #727272;
+}
+.sub-container > div {
+  height: 100%;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: scroll;
+}

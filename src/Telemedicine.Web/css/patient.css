@@ -153,6 +153,28 @@ body {
   height: 100%;
   overflow: auto;
 }
+.sub-container {
+  display: flex;
+  flex-direction: column;
+}
+.sub-container > .page-header {
+  margin-top: 0;
+  margin-bottom: 0;
+  overflow-y: scroll;
+  padding: 40px 15px 0;
+  border: none;
+}
+.sub-container > .page-header::after {
+  width: 100%;
+  margin-top: 20px;
+  border-bottom: 1px solid #727272;
+}
+.sub-container > div {
+  height: 100%;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: scroll;
+}
 .chat-message {
   position: relative;
   min-height: 45px;
@@ -265,4 +287,45 @@ body {
   height: 119px;
   z-index: 1000;
   margin: 0 auto;
+}
+.recomendation-message-container .recomendation-message {
+  padding: 20px;
+  border-bottom: #8c8c8c;
+  font-size: 1.2em;
+}
+.recomendation-message-container .recomendation-message .timestamp {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  font-size: 1.1em;
+  margin: 15px 0;
+}
+.recomendation-message-container .recomendation-message .author {
+  margin: 15px 0;
+}
+.recomendation-message-container .recomendation-message .author .title {
+  color: #e79924;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+}
+.recomendation-message-container .recomendation-message .author .speciality {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.recomendation-message-container .recomendation-message .message {
+  margin: 15px 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.recomendation-message-container .recomendation-message .details {
+  font-size: 0.85em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+}
+.recomendation-message-container .recomendation-message .details a {
+  color: black;
+  border-bottom: 0.15em dotted black;
+}
+.recomendation-message-container .recomendation-message .details a:hover {
+  text-decoration: none;
+}
+.recomendation-message-container .recomendation-message:last-child {
+  border: none;
 }

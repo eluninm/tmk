@@ -1,0 +1,48 @@
+﻿.recomendation-message-container {
+    .recomendation-message {
+        padding: 20px;
+        border-bottom: @color-text1;
+        font-size:1.2em;
+
+        .timestamp {
+            .font-bold;
+            font-size:1.1em;
+            margin: 15px 0;
+        }
+
+        .author {
+            margin: 15px 0;
+
+            .title {
+                color: @color-accent3;
+                .font-bold;
+            }
+
+            .speciality {
+                .font-regular;
+            }
+        }
+
+        .message {
+            margin: 15px 0;
+            .font-regular;
+        }
+
+        .details {
+            font-size: .85em;
+            .font-bold;
+
+            a {
+                color: black;
+                border-bottom:.15em dotted black;
+                &:hover{
+                    text-decoration:none;
+                }
+            }
+        }
+    }
+
+    .recomendation-message:last-child {
+        border: none;
+    }
+}
