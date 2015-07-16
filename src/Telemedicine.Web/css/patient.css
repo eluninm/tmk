@@ -529,3 +529,17 @@ body {
   border-color: #e4e4e4;
   color: #e4e4e4;
 }
+.balance-info {
+  text-transform: uppercase;
+  border-bottom: 1px #e4e4e4 solid;
+  font-size: 35px;
+}
+.balance-info .text {
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.balance-info .summa {
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.balance-info .rouble {
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
