@@ -2,7 +2,7 @@
     ViewBag.Title = "Index2";
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
-<div class="row fullheight" style="position: relative">
+<div class="row fullheight" style="position: relative" ng-controller="HistoryController as viewModel" data-id="1">
     <div class="col-md-6 fullheight sub-container">
         <h1 class="page-header row">История</h1>
         <div class="content row">
@@ -106,7 +106,7 @@
         <div class="content row">
             <div class="container-fluid recomendation-message-container">
                 <div class="recomendation-message">
-                    <div class="timestamp">@Html.Raw(DateTime.Now)</div>
+                    <div class="timestamp">21.07.2015</div>
                     <div class="author">
                         <div class="title">Бобров Бобер Зайкович</div>
                         <div class="speciality">Терапевт</div>
@@ -469,18 +469,18 @@
                         <a href="#">Подробнее</a> >
                     </div>
                 </div>
-            <div class="recomendation-message">
-                    <div class="timestamp">@Html.Raw(DateTime.Now)</div>
+                <div class="recomendation-message" ng-repeat="item in viewModel.recommendations">
+                    <div class="timestamp">{{item.Created | date:'dd.MM.yyyy'}}</div>
                     <div class="author">
-                        <div class="title">Бобров Бобер Зайкович</div>
-                        <div class="speciality">Терапевт</div>
-            </div>
+                        <div class="title">{{item.DoctorTitle}}</div>
+                        <div class="speciality">{{item.DoctorSpecialization}}</div>
+                    </div>
                     <div class="message">
-                        @Html.Encode("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum".Substring(0,200))
-        </div>
+                        {{item.RecommendationText}}
+                    </div>
                     <div class="details">
                         <a href="#">Подробнее</a> >
-    </div>
+                    </div>
                 </div>
             </div>
         </div>
