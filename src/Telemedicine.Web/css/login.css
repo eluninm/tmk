@@ -1,4 +1,14 @@
-﻿::-webkit-scrollbar {
+﻿.font-normal {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.font-regular {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.font-bold {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+}
+::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
