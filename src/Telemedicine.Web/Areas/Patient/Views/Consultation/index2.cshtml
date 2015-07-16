@@ -3,9 +3,9 @@
     ViewBag.Title = "Консультация";
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
-<div class="fullheight sub-container row">
-    <h1 class="page-header">Врачи</h1>
-    <div class="container-fluid unscrollable" style="display: flex;">
+<div class="fullheight sub-container row container-fluid">
+    <h1 class="page-header row">Врачи</h1>
+    <div class="container-fluid unscrollable row" style="display: flex;">
         <div class="grid">
             <div class="page-header">
                 <div class="row">
@@ -32,6 +32,301 @@
                 </div>
             </div>
             <div class="grid-content">
+                @foreach (var doctor in Model)
+                {
+                    <div class="panel list-doctor-panel">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
+                            </div>
+                            <div class="col-md-4">
+                                <h4 style="line-height: normal">
+                                    @doctor.FIO
+                                    <div class="speciality">@doctor.Specialization</div>
+                                </h4>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="doctor-status row" data-id="@doctor.Id">
+                                    <div class="col-md-6">
+                                        <div class="status-text">
+                                            @doctor.Status
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 row">
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-comment status-icon"></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-volume-up status-icon"></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-facetime-video status-icon"></a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <p>
+                                    <div class="pull-right doctor-panel-btn-group rounded">
+                                        <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="@Url.Action("Appointment", new {id = doctor.Id})" title="Записаться">
+                                            Записаться
+                                        </a>
+                                        @if (doctor.CanStartChat)
+                                        {
+                                            <a class="btn btn-success start-chat-btn rounded" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
+                                                Консультация
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-success start-chat-btn disabled rounded" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
+                                                Консультация
+                                            </a>
+                                        }
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @foreach (var doctor in Model)
+                {
+                    <div class="panel list-doctor-panel">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
+                            </div>
+                            <div class="col-md-4">
+                                <h4 style="line-height: normal">
+                                    @doctor.FIO
+                                    <div class="speciality">@doctor.Specialization</div>
+                                </h4>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="doctor-status row" data-id="@doctor.Id">
+                                    <div class="col-md-6">
+                                        <div class="status-text">
+                                            @doctor.Status
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 row">
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-comment status-icon"></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-volume-up status-icon"></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-facetime-video status-icon"></a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <p>
+                                    <div class="pull-right doctor-panel-btn-group rounded">
+                                        <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="@Url.Action("Appointment", new {id = doctor.Id})" title="Записаться">
+                                            Записаться
+                                        </a>
+                                        @if (doctor.CanStartChat)
+                                        {
+                                            <a class="btn btn-success start-chat-btn rounded" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
+                                                Консультация
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-success start-chat-btn disabled rounded" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
+                                                Консультация
+                                            </a>
+                                        }
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @foreach (var doctor in Model)
+                {
+                    <div class="panel list-doctor-panel">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
+                            </div>
+                            <div class="col-md-4">
+                                <h4 style="line-height: normal">
+                                    @doctor.FIO
+                                    <div class="speciality">@doctor.Specialization</div>
+                                </h4>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="doctor-status row" data-id="@doctor.Id">
+                                    <div class="col-md-6">
+                                        <div class="status-text">
+                                            @doctor.Status
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 row">
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-comment status-icon"></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-volume-up status-icon disabled"></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-facetime-video status-icon"></a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <p>
+                                    <div class="pull-right doctor-panel-btn-group rounded">
+                                        <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="@Url.Action("Appointment", new {id = doctor.Id})" title="Записаться">
+                                            Записаться
+                                        </a>
+                                        @if (doctor.CanStartChat)
+                                        {
+                                            <a class="btn btn-success start-chat-btn rounded" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
+                                                Консультация
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-success start-chat-btn disabled rounded" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
+                                                Консультация
+                                            </a>
+                                        }
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @foreach (var doctor in Model)
+                {
+                    <div class="panel list-doctor-panel">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
+                            </div>
+                            <div class="col-md-4">
+                                <h4 style="line-height: normal">
+                                    @doctor.FIO
+                                    <div class="speciality">@doctor.Specialization</div>
+                                </h4>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="doctor-status row" data-id="@doctor.Id">
+                                    <div class="col-md-6">
+                                        <div class="status-text">
+                                            @doctor.Status
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 row">
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-comment status-icon"></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-volume-up status-icon"></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-facetime-video status-icon"></a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <p>
+                                    <div class="pull-right doctor-panel-btn-group rounded">
+                                        <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="@Url.Action("Appointment", new {id = doctor.Id})" title="Записаться">
+                                            Записаться
+                                        </a>
+                                        @if (doctor.CanStartChat)
+                                        {
+                                            <a class="btn btn-success start-chat-btn rounded" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
+                                                Консультация
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-success start-chat-btn disabled rounded" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
+                                                Консультация
+                                            </a>
+                                        }
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @foreach (var doctor in Model)
+                {
+                    <div class="panel list-doctor-panel">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
+                            </div>
+                            <div class="col-md-4">
+                                <h4 style="line-height: normal">
+                                    @doctor.FIO
+                                    <div class="speciality">@doctor.Specialization</div>
+                                </h4>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="doctor-status row" data-id="@doctor.Id">
+                                    <div class="col-md-6">
+                                        <div class="status-text">
+                                            @doctor.Status
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 row">
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-comment status-icon"></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-volume-up status-icon"></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-facetime-video status-icon"></a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <p>
+                                    <div class="pull-right doctor-panel-btn-group rounded">
+                                        <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="@Url.Action("Appointment", new {id = doctor.Id})" title="Записаться">
+                                            Записаться
+                                        </a>
+                                        @if (doctor.CanStartChat)
+                                        {
+                                            <a class="btn btn-success start-chat-btn rounded" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
+                                                Консультация
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-success start-chat-btn disabled rounded" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
+                                                Консультация
+                                            </a>
+                                        }
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
                 @foreach (var doctor in Model)
                 {
                     <div class="panel list-doctor-panel">

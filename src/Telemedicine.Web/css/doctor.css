@@ -227,6 +227,8 @@ body {
   color: black;
 }
 .sub-container > .page-header::after {
+  content: '';
+  display: block;
   width: 100%;
   margin-top: 20px;
   border-bottom: 1px solid #e4e4e4;
