@@ -1,0 +1,47 @@
+﻿.consultation-message-container {
+    .consultation-message {
+        padding: 0 20px 20px;
+        font-size: 1.2em;
+
+        .timestamp {
+            .font-bold;
+            font-size: 1.1em;
+            margin: 15px 0;
+        }
+
+        .author {
+            margin: 15px 0;
+
+            .title {
+                .font-regular;
+            }
+
+            .speciality {
+                .font-regular;
+                color: @color-accent3;
+            }
+        }
+
+        &.active {
+            background: @color-background1;
+        }
+    }
+
+
+
+    :last-child {
+        border: none;
+    }
+
+    .consultation-message::before {
+        width: 100%;
+        font-size: 0;
+        content: '';
+        display: block;
+        border-top: 1px solid @color-background1;
+    }
+    .consultation-message.active + .consultation-message::before,
+    .consultation-message:first-child::before {
+        border-top: none;
+    }
+}
