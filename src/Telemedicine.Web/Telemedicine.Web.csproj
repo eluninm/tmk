@@ -72,6 +72,14 @@
       <HintPath>..\packages\Autofac.WebApi2.Owin.3.2.0\lib\net45\Autofac.Integration.WebApi.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -154,6 +162,10 @@
     </Reference>
     <Reference Include="System.Web.Http">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -300,6 +312,7 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\owl.carousel.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Views\Shared\Calendar.cshtml" />
@@ -429,6 +442,10 @@
     <Content Include="Scripts\jquery-2.1.4.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\ApiMapperConfiguration.cs" />
+    <Compile Include="Api\Controllers\PatientController.cs" />
+    <Compile Include="Api\Controllers\RecommendationController.cs" />
+    <Compile Include="Api\Dto\RecommendationDto.cs" />
     <Compile Include="AppBuilderExtensions.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -523,18 +540,32 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\rtc\RtcConnectionManager.ts" />
-    <TypeScriptCompile Include="Scripts\rtc\dts\jquery.d.ts" />
-    <TypeScriptCompile Include="Scripts\rtc\dts\MediaStream.d.ts" />
-    <TypeScriptCompile Include="Scripts\rtc\dts\RTCPeerConnection.d.ts" />
-    <TypeScriptCompile Include="Scripts\rtc\dts\signalr.d.ts" />
-    <TypeScriptCompile Include="Scripts\rtc\SignalR.ts" />
+    <TypeScriptCompile Include="Scripts\ts\dts\angular.d.ts" />
+    <TypeScriptCompile Include="Scripts\ts\dts\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\app.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\common\ApiServiceBase.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\common\ItemRouteParams.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\common\UrlResolverService.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Services\PatientApiService.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Services\RecommendationApiService.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\RecommendationListController.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\Recommendation.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\ViewModels\RecommendationViewModel.ts" />
+    <TypeScriptCompile Include="Scripts\ts\rtc\RtcConnectionManager.ts" />
+    <TypeScriptCompile Include="Scripts\ts\dts\MediaStream.d.ts" />
+    <TypeScriptCompile Include="Scripts\ts\dts\RTCPeerConnection.d.ts" />
+    <TypeScriptCompile Include="Scripts\ts\dts\signalr.d.ts" />
+    <TypeScriptCompile Include="Scripts\ts\rtc\SignalR.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptOutFile>ngapp.js</TypeScriptOutFile>
+    <TypeScriptOutDir>C:\Users\vyacheslav\Source\Repos\tmk\src\Telemedicine.Web\Scripts</TypeScriptOutDir>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
@@ -556,4 +587,5 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
 </Project>

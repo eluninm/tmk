@@ -16,7 +16,7 @@ namespace Telemedicine.Web
 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.Configure(RouteTable.Routes);
-            WebApiConfig.Configure(GlobalConfiguration.Configuration);
+            GlobalConfiguration.Configure(t => t.MapHttpAttributeRoutes());
             AuthConfig.Configure(app);
 
             app.MapSignalR();
