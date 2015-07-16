@@ -1,21 +1,11 @@
-﻿@model Telemedicine.Web.Areas.Patient.Models.PaymentSettingsViewModel
+﻿@using Telemedicine.Core.Models.Enums
+@model Telemedicine.Web.Areas.Patient.Models.PaymentSettingsViewModel
 @{
     ViewBag.Title = "Баланс";
-    Layout = "~/Views/Shared/_Layout3.cshtml";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<div class="row fullheight" style="position: relative">
-    <div class="col-md-6 fullheight sub-container" style="background: red">
-        <h3 class="page-header row">@ViewBag.Title</h3>
-
-        <span>Баланс</span><span>12 567</span><span>Р</span>
-    </div>
-    <div class="col-md-6 fullheight sub-container" style="background: aqua">
-        <h3 class="page-header row">&nbsp;</h3>
-    </div>
-</div>
-
-    @*<div class="panel panel-default">
+    <div class="panel panel-default">
         <div class="panel-heading">Баланс и пополнение</div>
         <div class="panel-body">
             <p> <strong>Баланс: @ViewBag.Balance руб.</strong></p>
@@ -64,4 +54,4 @@
                 }
             </tbody>
         </table>
-    </div>*@
+    </div>

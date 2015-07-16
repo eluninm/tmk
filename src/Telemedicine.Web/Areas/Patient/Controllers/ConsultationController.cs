@@ -50,23 +50,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
                   CanStartChat = doctor.DoctorStatus.Name != DoctorStatusNames.Busy
               }).ToList();
 
-            return View(viewModel);
-        }
-        public ActionResult Index2()
-        {
-            var doctors =   _doctorService.GetAll();
-            var viewModel = (from doctor in doctors
-                                 select
-              new DoctorViewModel()
-              {
-                  FIO = doctor.User.DisplayName,
-                  Id = doctor.Id,
-                  Specialization = doctor.Specialization.DisplayName,
-                  Status = doctor.DoctorStatus.DisplayName,
-                  CanStartChat = doctor.DoctorStatus.Name != DoctorStatusNames.Busy
-              }).ToList();
-
-            return View(viewModel);
+            return View("Index2", viewModel);
         }
 
         public async Task<ActionResult> StartDialog(int id)

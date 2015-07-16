@@ -69,6 +69,11 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             return View(viewModel);
         }
 
+        public ActionResult Index2()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<ActionResult> Index(PaymentSettingsViewModel viewModel)
         {
