@@ -189,4 +189,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
-/src/Telemedicine.Web/css/patient.min.css
+*.mdf
+src/Telemedicine.Web/App_Data/aspnet-WebApplication1-20150601101709_log.ldf
