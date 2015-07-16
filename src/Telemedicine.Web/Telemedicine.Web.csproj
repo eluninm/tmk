@@ -333,6 +333,7 @@
     <Content Include="lib\responsive-calendar\js\jquery.js" />
     <Content Include="lib\responsive-calendar\js\responsive-calendar.js" />
     <Content Include="lib\responsive-calendar\js\responsive-calendar.min.js" />
+    <Content Include="ngapp.js" />
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
