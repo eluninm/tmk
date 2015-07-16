@@ -191,3 +191,4 @@ _Pvt_Extensions/
 ModelManifest.xml
 *.mdf
 src/Telemedicine.Web/App_Data/aspnet-WebApplication1-20150601101709_log.ldf
+/src/Telemedicine.Web/ngapp.js.map
