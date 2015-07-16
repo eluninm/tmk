@@ -260,6 +260,14 @@ body {
   text-transform: uppercase;
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.input-round.pagination > li:first-child > a,
+.input-round.pagination > li:last-child > a,
+.input-round.pagination a {
+  height: 2.5em;
+  width: 2.5em;
+  border-radius: 1.5em;
+  margin: 0.2em;
+}
 .linkimage {
   content: '';
   height: 2em;
