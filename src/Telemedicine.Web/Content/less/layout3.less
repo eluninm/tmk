@@ -1,5 +1,6 @@
 ﻿@import "sidebar.less";
 @import "scrollbar.less";
+@import "grid.less";
 
 html,
 body {
@@ -40,6 +41,9 @@ body {
         flex: 1;
         overflow-x: auto;
         overflow-y: scroll;
+        &.unscrollable{
+            overflow-y: auto;
+        }
     }
 }
 
