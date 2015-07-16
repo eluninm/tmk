@@ -8,13 +8,6 @@ namespace Telemedicine.Web
         {
             // Web Api attribute routes.
             config.MapHttpAttributeRoutes();
-
-            // Web Api default routes.
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
         }
     }
 }

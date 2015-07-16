@@ -4,6 +4,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -14,6 +15,7 @@ using Telemedicine.Core.Domain.Repositories;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Core.Domain.Uow;
 using Telemedicine.Core.Identity;
+using Telemedicine.Web.Api;
 using Telemedicine.Web.Hubs;
 
 namespace Telemedicine.Web
@@ -27,13 +29,13 @@ namespace Telemedicine.Web
             var container = CreateContainer();
             Container = container;
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-            
 
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();
             app.UseAutofacWebApi(GlobalConfiguration.Configuration);
-           // GlobalHost.DependencyResolver = new Autofac.Integration.SignalR.AutofacDependencyResolver(container);
 
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            ApiMapperConfiguration.Configure();
             return app;
         }
 
@@ -44,10 +46,17 @@ namespace Telemedicine.Web
             RegisterInfrastructure(builder);
             RegisterFrameworks(builder);
             RegisterTypes(builder);
+            RegisterWebApi(builder, GlobalConfiguration.Configuration);
 
             builder.RegisterType<SignalHub>().ExternallyOwned();
 
             return builder.Build();
+        }
+
+        private static void RegisterWebApi(ContainerBuilder builder, HttpConfiguration config)
+        {
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterWebApiFilterProvider(config);
         }
 
         private static void RegisterInfrastructure(ContainerBuilder builder)
