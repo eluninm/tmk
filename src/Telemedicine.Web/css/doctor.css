@@ -166,6 +166,21 @@
 ::-webkit-scrollbar-thumb:window-inactive {
   background: #385c9d;
 }
+.grid {
+  display: flex;
+  flex-direction: column;
+}
+.grid .grid-pager {
+  line-height: 2.5em;
+}
+.grid .grid-pager .pagination {
+  margin: 0 auto;
+}
+.grid .grid-content {
+  flex: 1;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 html,
 body {
   height: 100%;
@@ -200,6 +215,9 @@ body {
   flex: 1;
   overflow-x: auto;
   overflow-y: scroll;
+}
+.sub-container > div.unscrollable {
+  overflow-y: auto;
 }
 .grid-filter.dropdown .dropdown-toggle {
   background: white;

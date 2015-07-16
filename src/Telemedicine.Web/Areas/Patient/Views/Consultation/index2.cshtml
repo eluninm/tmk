@@ -3,115 +3,159 @@
     ViewBag.Title = "Консультация";
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
-
-<h2 class="page-header">Врачи</h2>
-
-<div class="page-header">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="dropdown grid-filter">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Dropdown
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li><a href="#">Separated link</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="input-group grid-filter">
-                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                <span class="input-group-addon"><span class=" glyphicon glyphicon-search"></span></span>
-            </div>
-        </div>
-    </div>
-</div>
-
-@foreach (var doctor in Model)
-{
-    <div class="panel list-doctor-panel">
-        <div class="row">
-            <div class="col-md-1">
-                <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60"/>
-            </div>
-            <div class="col-md-4">
-                <h4 style="line-height: normal">@doctor.FIO <div class="speciality">@doctor.Specialization</div></h4>
-            </div>
-            <div class="col-md-3">
-                <div class="doctor-status row" data-id="@doctor.Id">
-                    <div class="col-md-6">
-                        <div class="status-text">
-                            @doctor.Status
+<div class="fullheight sub-container row">
+    <h1 class="page-header">Врачи</h1>
+    <div class="container-fluid unscrollable">
+        <div class="grid">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="dropdown grid-filter">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Dropdown
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="col-md-6 row">
-                        <div class="col-md-4">
-                            <a href="#" class="glyphicon glyphicon-comment status-icon"></a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="#" class="glyphicon glyphicon-volume-up status-icon"></a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="#" class="glyphicon glyphicon-facetime-video status-icon"></a>
+                    <div class="col-md-3">
+                        <div class="input-group grid-filter">
+                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-addon"><span class=" glyphicon glyphicon-search"></span></span>
                         </div>
                     </div>
-                    
-
                 </div>
             </div>
-            <div class="col-md-4">
-                <p>
-                    <div class="pull-right doctor-panel-btn-group">
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#appointmentModalDialog" href="@Url.Action("Appointment", new {id = doctor.Id})" title="Записаться">
-                            Записаться
-                        </a>
-                        @if (doctor.CanStartChat)
-                        {
-                            <a class="btn btn-success start-chat-btn" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
-                                Консультация
-                            </a>
-                        }
-                        else
-                        {
-                            <a class="btn btn-success start-chat-btn disabled" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
-                                Консультация
-                            </a>
-                        }
+            <div class="grid-content">
+                @foreach (var doctor in Model)
+                {
+                    <div class="panel list-doctor-panel">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
+                            </div>
+                            <div class="col-md-4">
+                                <h4 style="line-height: normal">
+                                    @doctor.FIO
+                                    <div class="speciality">@doctor.Specialization</div>
+                                </h4>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="doctor-status row" data-id="@doctor.Id">
+                                    <div class="col-md-6">
+                                        <div class="status-text">
+                                            @doctor.Status
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 row">
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-comment status-icon"></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-volume-up status-icon"></a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#" class="glyphicon glyphicon-facetime-video status-icon"></a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <p>
+                                    <div class="pull-right doctor-panel-btn-group">
+                                        <a class="btn btn-primary" data-toggle="modal" data-target="#appointmentModalDialog" href="@Url.Action("Appointment", new {id = doctor.Id})" title="Записаться">
+                                            Записаться
+                                        </a>
+                                        @if (doctor.CanStartChat)
+                                        {
+                                            <a class="btn btn-success start-chat-btn" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
+                                                Консультация
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-success start-chat-btn disabled" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
+                                                Консультация
+                                            </a>
+                                        }
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </p>
+                }
+            </div>
+            <div class="grid-pager row">
+                <div class="col-md-5">Всего записей - 1000</div>
+                <div class="col-md-4">
+                    <nav>
+                        <ul class="pagination">
+                            <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-3 row">
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                            Показывать:
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="dropdown grid-filter">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                10 записей
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">20 записей</a></li>
+                                <li><a href="#">50 записей</a></li>
+                                <li><a href="#">100 записей</a></li>
+                                <li><a href="#">Все записи</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-}
+    <div class="modal fade" id="appointmentModalDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="waitDoctorAnswerDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
 
-<div class="modal fade" id="appointmentModalDialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="waitDoctorAnswerDialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="doctorDeclineCall">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Уведомление</h4>
-            </div>
-            <div class="modal-body">
-                <p>К сожалению доктор отклонил ваш запрос на консультацию, вы можете записаться к доктору на прием или связаться с дежурным доктором.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+    <div class="modal fade" id="doctorDeclineCall">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Уведомление</h4>
+                </div>
+                <div class="modal-body">
+                    <p>К сожалению доктор отклонил ваш запрос на консультацию, вы можете записаться к доктору на прием или связаться с дежурным доктором.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                </div>
             </div>
         </div>
     </div>
