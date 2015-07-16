@@ -10,7 +10,7 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-md-3">
-                        <div class="dropdown grid-filter">
+                        <div class="dropdown input-round">
                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 Dropdown
                                 <span class="caret"></span>
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="input-group grid-filter">
+                        <div class="input-group input-round">
                             <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
                             <span class="input-group-addon"><span class=" glyphicon glyphicon-search"></span></span>
                         </div>
@@ -69,19 +69,19 @@
                             </div>
                             <div class="col-md-4">
                                 <p>
-                                    <div class="pull-right doctor-panel-btn-group">
-                                        <a class="btn btn-primary" data-toggle="modal" data-target="#appointmentModalDialog" href="@Url.Action("Appointment", new {id = doctor.Id})" title="Записаться">
+                                    <div class="pull-right doctor-panel-btn-group input-round">
+                                        <a class="btn btn-primary input-round" data-toggle="modal" data-target="#appointmentModalDialog" href="@Url.Action("Appointment", new {id = doctor.Id})" title="Записаться">
                                             Записаться
                                         </a>
                                         @if (doctor.CanStartChat)
                                         {
-                                            <a class="btn btn-success start-chat-btn" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
+                                            <a class="btn btn-success start-chat-btn input-round" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
                                                 Консультация
                                             </a>
                                         }
                                         else
                                         {
-                                            <a class="btn btn-success start-chat-btn disabled" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
+                                            <a class="btn btn-success start-chat-btn disabled input-round" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
                                                 Консультация
                                             </a>
                                         }
@@ -114,7 +114,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="dropdown grid-filter">
+                        <div class="dropdown input-round">
                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 10 записей
                                 <span class="caret"></span>

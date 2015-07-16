@@ -1,4 +1,8 @@
 ﻿@font-face {
+  font-family: 'rouble_1';
+  src: url('../css/fonts/rouble_1.otf') format('opentype');
+}
+@font-face {
   font-family: GothaProReg;
   src: url('/css/fonts/GothaProReg.otf');
 }
@@ -14,6 +18,10 @@
   font-family: GothaProBold;
   src: url('/css/fonts/GothaProBol.otf');
 }
+@font-face {
+  font-family: 'ALS Rubl';
+  src: url('/css/fonts/rouble_1.otf');
+}
 .font-normal {
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -23,6 +31,9 @@
 .font-bold {
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bolder;
+}
+.font-rouble {
+  font-family: 'ALS Rubl';
 }
 ::-webkit-scrollbar {
   width: 7px;

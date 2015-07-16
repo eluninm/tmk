@@ -41,30 +41,32 @@ body {
         flex: 1;
         overflow-x: auto;
         overflow-y: scroll;
-        &.unscrollable{
+
+        &.unscrollable {
             overflow-y: auto;
         }
     }
 }
 
-.grid-filter {
+.input-round {
     &.dropdown {
         .dropdown-toggle {
-            background:@color-background;
+            background: @color-background;
             height: 2.5em;
             border-radius: 1.5em;
-            width:100%;
-            text-align:left;
-            .caret{
-                position:absolute;
-                right:1em;
-                top:1.2em;
+            width: 100%;
+            text-align: left;
+
+            .caret {
+                position: absolute;
+                right: 1em;
+                top: 1.2em;
             }
         }
     }
 
     &.input-group {
-        
+
         > input-group-addon {
             height: 2.5em;
         }
@@ -76,36 +78,50 @@ body {
         > :last-child {
             border-radius: 0 1.5em 1.5em 0;
         }
-        > .form-control{
-            height:100%;
+
+        > .form-control {
+            height: 100%;
         }
     }
+
+    &.btn {
+        height: 2.5em;
+        border-radius: 1.5em;
+        text-transform: uppercase;
+        .font-regular;
+    }
 }
-.linkimage{
-    content:'';
-    height:2em;
-    width:2em;
-    margin-right:10px;
-    background-size:100%;
-    float:left;
+
+.linkimage {
+    content: '';
+    height: 2em;
+    width: 2em;
+    margin-right: 10px;
+    background-size: 100%;
+    float: left;
 }
-.homelink::before{
+
+.homelink::before {
     .linkimage;
-    background-image:url('/img/home_icon_menu.png');
+    background-image: url('/img/home_icon_menu.png');
 }
-.doctorslink::before{
+
+.doctorslink::before {
     .linkimage;
-    background-image:url('/img/doctor_icon_menu.png');
+    background-image: url('/img/doctor_icon_menu.png');
 }
-.historylink::before{
+
+.historylink::before {
     .linkimage;
-    background-image:url('/img/calendar_icon_menu.png');
+    background-image: url('/img/calendar_icon_menu.png');
 }
-.paymentlink::before{
+
+.paymentlink::before {
     .linkimage;
-    background-image:url('/img/card_icon_menu.png');
+    background-image: url('/img/card_icon_menu.png');
 }
-.myeventslink::before{
+
+.myeventslink::before {
     .linkimage;
-    background-image:url('/img/calendar_icon_menu.png');
+    background-image: url('/img/calendar_icon_menu.png');
 }

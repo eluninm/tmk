@@ -1,17 +1,10 @@
 ﻿.list-doctor-panel {
     .doctor-panel-btn-group {
-        .btn {
-            height: 2.5em;
-            border-radius: 1.5em;
-            text-transform: uppercase;
-            .font-regular;
+        .btn .start-chat-btn {
+            background: @color-accent3;
 
-            &.start-chat-btn {
-                background: @color-accent3;
-
-                &:hover {
-                    box-shadow: rgba(0,0,0,.1) 2.5em 2.5em inset;
-                }
+            &:hover {
+                box-shadow: rgba(0,0,0,.1) 2.5em 2.5em inset;
             }
         }
     }
@@ -20,7 +13,7 @@
         color: @color-accent4;
         .font-bold;
         line-height: 2.5em;
-        text-transform:uppercase;
+        text-transform: uppercase;
     }
 
     .speciality {
@@ -37,13 +30,14 @@
         border-radius: 1.5em;
         text-align: center;
         line-height: 2.2em;
-        &:hover{
-            text-decoration:none;
+
+        &:hover {
+            text-decoration: none;
         }
-        &.disabled{
+
+        &.disabled {
             border-color: @color-background1;
             color: @color-background1;
         }
     }
-    
 }
