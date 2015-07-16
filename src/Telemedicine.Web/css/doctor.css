@@ -37,7 +37,15 @@
   min-height: 480px;
 }
 .sidebar #menu1 {
-  background-color: #e79924;
+  /*background-color: @color-accent3;*/
+  color: transparent;
+  background-image: url('/img/exit_menu.png');
+  height: 2em;
+  width: 2.5em;
+  margin-top: 10px;
+  float: right;
+  background-position: 100%;
+  background-repeat: no-repeat;
 }
 @media (min-width: 768px) {
   .sidebar {
@@ -134,8 +142,13 @@
   position: fixed;
   font-weight: bolder;
   font-size: 1.5em;
-  color: white;
+  color: transparent;
   line-height: 25px;
+  background-image: url('/img/Logo.png');
+  width: 172px;
+  height: 73px;
+  background-repeat: no-repeat;
+  padding: 0;
 }
 /* --- END Sidebar --- */
 
@@ -211,4 +224,56 @@ body {
 }
 .grid-filter.input-group > .form-control {
   height: 100%;
+}
+.linkimage {
+  content: '';
+  height: 2em;
+  width: 2em;
+  margin-right: 10px;
+  background-size: 100%;
+  float: left;
+}
+.homelink::before {
+  content: '';
+  height: 2em;
+  width: 2em;
+  margin-right: 10px;
+  background-size: 100%;
+  float: left;
+  background-image: url('/img/home_icon_menu.png');
+}
+.doctorslink::before {
+  content: '';
+  height: 2em;
+  width: 2em;
+  margin-right: 10px;
+  background-size: 100%;
+  float: left;
+  background-image: url('/img/doctor_icon_menu.png');
+}
+.historylink::before {
+  content: '';
+  height: 2em;
+  width: 2em;
+  margin-right: 10px;
+  background-size: 100%;
+  float: left;
+  background-image: url('/img/calendar_icon_menu.png');
+}
+.paymentlink::before {
+  content: '';
+  height: 2em;
+  width: 2em;
+  margin-right: 10px;
+  background-size: 100%;
+  float: left;
+  background-image: url('/img/card_icon_menu.png');
+}
+.myeventslink::before {
+  content: '';
+  height: 2em;
+  width: 2em;
+  margin-right: 10px;
+  background-size: 100%;
+  float: left;
 }

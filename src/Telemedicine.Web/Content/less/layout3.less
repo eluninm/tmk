@@ -77,3 +77,30 @@ body {
         }
     }
 }
+.linkimage{
+    content:'';
+    height:2em;
+    width:2em;
+    margin-right:10px;
+    background-size:100%;
+    float:left;
+}
+.homelink::before{
+    .linkimage;
+    background-image:url('/img/home_icon_menu.png');
+}
+.doctorslink::before{
+    .linkimage;
+    background-image:url('/img/doctor_icon_menu.png');
+}
+.historylink::before{
+    .linkimage;
+    background-image:url('/img/calendar_icon_menu.png');
+}
+.paymentlink::before{
+    .linkimage;
+    background-image:url('/img/card_icon_menu.png');
+}
+.myeventslink::before{
+    .linkimage;
+}
