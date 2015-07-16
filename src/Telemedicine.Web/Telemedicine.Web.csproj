@@ -373,6 +373,7 @@
     <Content Include="Content\login.less" />
     <Content Include="Content\less\recomendations.less" />
     <Content Include="Content\less\consultations.less" />
+    <None Include="package.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -550,8 +551,9 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\UrlResolverService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\PatientApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\RecommendationApiService.ts" />
-    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\RecommendationListController.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\HistoryController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\Recommendation.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Services\TestService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\ViewModels\RecommendationViewModel.ts" />
     <TypeScriptCompile Include="Scripts\ts\rtc\RtcConnectionManager.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\MediaStream.d.ts" />

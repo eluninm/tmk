@@ -22,7 +22,11 @@ namespace Telemedicine.Core.Domain.Repositories
 
         public async Task<IEnumerable<Recommendation>> GetPatientRecommendations(int patientId)
         {
-            return await Set.Where(t => t.PatientId == patientId).ToListAsync();
+            return await Set.Where(t => t.PatientId == patientId)
+                .Include(t => t.Doctor)
+                .Include(t => t.Doctor.Specialization)
+                .Include(t => t.Doctor.User)
+                .ToListAsync();
         }
     }
 }

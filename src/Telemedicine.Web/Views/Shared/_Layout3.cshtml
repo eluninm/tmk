@@ -23,7 +23,7 @@
 
     @RenderSection("styles", false)
 </head>
-<body>
+<body ng-app="Telemedicine" data-url-base="@Url.Content("~/")">
     <div class="sidebar">
         <div class="nav-profile">
             @Html.Action("NavProfileBox", "Home", new { area = "" })
@@ -51,7 +51,7 @@
     <script src="~/lib/responsive-calendar/js/responsive-calendar.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/ngapp.js"></script>
 
     @RenderSection("scripts", false)
 

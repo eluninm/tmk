@@ -1,14 +1,5 @@
 var Telemedicine;
 (function (Telemedicine) {
-    angular.module("Telemedicine").config(moduleConfiguration).controller("recommendationListController", Telemedicine.RecommendationListController).service("recommendationApiService", Telemedicine.RecommendationApiService);
-    function moduleConfiguration($logProvider) {
-        // TODO: Enable debug logging based on server config
-        // TODO: Capture all logged errors and send back to server
-        $logProvider.debugEnabled(true);
-    }
-})(Telemedicine || (Telemedicine = {}));
-var Telemedicine;
-(function (Telemedicine) {
     var ApiServiceBase = (function () {
         function ApiServiceBase(baseUrl, urlResolverService, $http) {
             this.baseUrl = baseUrl;
@@ -26,15 +17,6 @@ var Telemedicine;
         return ApiServiceBase;
     })();
     Telemedicine.ApiServiceBase = ApiServiceBase;
-})(Telemedicine || (Telemedicine = {}));
-var Telemedicine;
-(function (Telemedicine) {
-    var ItemRouteParams = (function () {
-        function ItemRouteParams() {
-        }
-        return ItemRouteParams;
-    })();
-    Telemedicine.ItemRouteParams = ItemRouteParams;
 })(Telemedicine || (Telemedicine = {}));
 var Telemedicine;
 (function (Telemedicine) {
@@ -68,6 +50,28 @@ var Telemedicine;
     })();
     Telemedicine.UrlResolverService = UrlResolverService;
 })(Telemedicine || (Telemedicine = {}));
+///<reference path="../common/ApiServiceBase.ts"/>
+///<reference path="../common/UrlResolverService.ts"/>
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var Telemedicine;
+(function (Telemedicine) {
+    var RecommendationApiService = (function (_super) {
+        __extends(RecommendationApiService, _super);
+        function RecommendationApiService($http, urlResolverService) {
+            _super.call(this, "~/api/v1/recommendations", urlResolverService, $http);
+        }
+        RecommendationApiService.$inject = ["$http", "urlResolverService"];
+        return RecommendationApiService;
+    })(Telemedicine.ApiServiceBase);
+    Telemedicine.RecommendationApiService = RecommendationApiService;
+})(Telemedicine || (Telemedicine = {}));
+///<reference path="../common/ApiServiceBase.ts"/>
+///<reference path="../common/UrlResolverService.ts"/>
 var Telemedicine;
 (function (Telemedicine) {
     var PatientApiService = (function () {
@@ -84,33 +88,56 @@ var Telemedicine;
     })();
     Telemedicine.PatientApiService = PatientApiService;
 })(Telemedicine || (Telemedicine = {}));
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
+///<reference path="../Services/RecommendationApiService.ts"/>
+///<reference path="../Services/PatientApiService.ts"/>
 var Telemedicine;
 (function (Telemedicine) {
-    var RecommendationApiService = (function (_super) {
-        __extends(RecommendationApiService, _super);
-        function RecommendationApiService($http, urlResolverService) {
-            _super.call(this, "~/api/v1/recommendations", urlResolverService, $http);
+    var HistoryController = (function () {
+        function HistoryController(patientApiService, $element) {
+            this.patientApiService = patientApiService;
+            this.$element = $element;
+            var patientId = $element.attr("data-id");
+            this.loadRecommendations(patientId);
         }
-        return RecommendationApiService;
-    })(Telemedicine.ApiServiceBase);
-    Telemedicine.RecommendationApiService = RecommendationApiService;
+        HistoryController.prototype.loadRecommendations = function (patientId) {
+            var _this = this;
+            this.patientApiService.patientRecommendations(patientId).then(function (result) {
+                _this.recommendations = result;
+            });
+        };
+        HistoryController.$inject = ["patientApiService", "$element"];
+        return HistoryController;
+    })();
+    Telemedicine.HistoryController = HistoryController;
 })(Telemedicine || (Telemedicine = {}));
 var Telemedicine;
 (function (Telemedicine) {
-    var RecommendationListController = (function () {
-        function RecommendationListController(recommendationApiService, $routeParams) {
-            this.recommendationApiService = recommendationApiService;
-            this.$routeParams = $routeParams;
+    var TestService = (function () {
+        function TestService() {
         }
-        return RecommendationListController;
+        return TestService;
     })();
-    Telemedicine.RecommendationListController = RecommendationListController;
+    Telemedicine.TestService = TestService;
+})(Telemedicine || (Telemedicine = {}));
+///<reference path="Controllers/HistoryController.ts" />
+///<reference path="Services/TestService.ts" />
+var Telemedicine;
+(function (Telemedicine) {
+    function moduleConfiguration($logProvider) {
+        // TODO: Enable debug logging based on server config
+        // TODO: Capture all logged errors and send back to server
+        $logProvider.debugEnabled(true);
+    }
+    angular.module("Telemedicine", []).config(moduleConfiguration).controller("HistoryController", Telemedicine.HistoryController).service("recommendationApiService", Telemedicine.RecommendationApiService).service("urlResolverService", Telemedicine.UrlResolverService).service("patientApiService", Telemedicine.PatientApiService).service("testService", Telemedicine.TestService);
+})(Telemedicine || (Telemedicine = {}));
+var Telemedicine;
+(function (Telemedicine) {
+    var ItemRouteParams = (function () {
+        function ItemRouteParams() {
+        }
+        return ItemRouteParams;
+    })();
+    Telemedicine.ItemRouteParams = ItemRouteParams;
 })(Telemedicine || (Telemedicine = {}));
 var RtcChat;
 (function (RtcChat) {
