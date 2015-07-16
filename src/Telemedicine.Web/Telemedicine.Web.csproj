@@ -347,6 +347,7 @@
     <Content Include="Areas\Patient\Views\Payment\_MethodReplenishment.cshtml" />
     <Content Include="Areas\Patient\Views\Home\Index.cshtml" />
     <Content Include="Areas\Patient\Views\Home\Index2.cshtml" />
+    <Content Include="Areas\Patient\Views\Consultation\index2.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
     <Content Include="Content\patient.less" />
@@ -360,6 +361,7 @@
     <Content Include="Content\login.less" />
     <Content Include="Content\less\recomendations.less" />
     <Content Include="Content\less\consultations.less" />
+    <Content Include="Content\less\doctorlist.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -156,7 +156,7 @@ body {
 .sub-container > .page-header {
   margin-top: 0;
   margin-bottom: 0;
-  overflow-y: scroll;
+  overflow-y: hidden;
   padding: 40px 15px 0;
   border: none;
 }
@@ -170,4 +170,28 @@ body {
   flex: 1;
   overflow-x: auto;
   overflow-y: scroll;
+}
+.grid-filter.dropdown .dropdown-toggle {
+  background: white;
+  height: 2.5em;
+  border-radius: 1.5em;
+  width: 100%;
+  text-align: left;
+}
+.grid-filter.dropdown .dropdown-toggle .caret {
+  position: absolute;
+  right: 1em;
+  top: 1.2em;
+}
+.grid-filter.input-group > input-group-addon {
+  height: 2.5em;
+}
+.grid-filter.input-group > :first-child {
+  border-radius: 1.5em 0 0 1.5em;
+}
+.grid-filter.input-group > :last-child {
+  border-radius: 0 1.5em 1.5em 0;
+}
+.grid-filter.input-group > .form-control {
+  height: 100%;
 }
