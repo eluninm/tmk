@@ -1,26 +1,82 @@
-﻿.grid{
-    display:flex;
-    flex-direction:column;
-    flex:1;
+﻿@import "_variables.less";
 
-    .grid-pager{
-        line-height:2.5em;
+.grid {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height:100%;
+
+    .grid-pager {
+        line-height: 2.5em;
         .font-medium;
-        font-size:14px;
-        .pagination{
-            margin:0 auto;
+        font-size: 14px;
+
+        .pagination {
+            margin: 0 auto;
         }
-        
     }
-    .grid-content{
-        flex:1;
-        overflow-y:scroll;
-        overflow-x:hidden;
-        > table > tbody >tr{
-            border-bottom:1px solid @color-background1;
-            >td{
-                padding-top:15px;
-                padding-bottom:15px;
+
+    .grid-header {
+        .grid-header-columns {
+            position: relative;
+            background: @color-background-table-header;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px @color-text3 solid;
+            display: table;
+            width: 100%;
+            padding-left: 30px;
+            padding-right: 40px;
+
+            .grid-col {
+                text-transform: uppercase;
+                vertical-align: middle;
+                font-size: 12px;
+                .font-bold;
+                height: 50px;
+            }
+        }
+    }
+
+    .grid-body {
+        position: relative;
+        display: table;
+        width: 100%;
+        padding: 30px;
+    }
+
+    .grid-col {
+        display: table-cell;
+        color: @color-text;
+
+        &-10 {
+            width: 10%;
+        }
+
+        &-25 {
+            width: 25%;
+        }
+
+        &-33 {
+            width: 33%;
+        }
+
+        &-50 {
+            width: 50%;
+        }
+    }
+
+    .grid-content {
+        flex: 1;
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        > table > tbody > tr {
+            border-bottom: 1px solid @color-background1;
+
+            > td {
+                padding-top: 15px;
+                padding-bottom: 15px;
             }
         }
     }

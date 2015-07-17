@@ -191,12 +191,9 @@ _Pvt_Extensions/
 ModelManifest.xml
 *.mdf
 *.ldf
-src/Telemedicine.Web/App_Data/aspnet-WebApplication1-20150601101709_log.ldf
-src/Telemedicine.Web/App_Data/aspnet-WebApplication1-20150601101709_log.mdf
-src/Telemedicine.Web/Scripts/ts/*.js
-src/Telemedicine.Web/Scripts/ts/*.js.map
-src/Telemedicine.Web/Scripts/ts/**/*.js
-src/Telemedicine.Web/Scripts/ts/**/*.js.map
-src/Telemedicine.Web/ngapp.js.map
-src/.vs/config/*
+src/**/Scripts/ts/**/*.js
+src/**/Scripts/ts/**/*.js.map
+src/**/Scripts/**/*.map
+src/.vs/config/*.*
 
+src/Telemedicine.Core/Telemedicine.Core.csproj.DotSettings

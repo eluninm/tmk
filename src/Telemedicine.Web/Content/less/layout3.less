@@ -90,10 +90,11 @@ body {
     }
 
     &.btn {
-        height: 2.5em;
-        border-radius: 1.5em;
+        height: 35px;
+        border-radius: 2em;
         text-transform: uppercase;
         .font-regular;
+        font-size: 10px;
     }
     &.pagination{
         > li:first-child > a,
@@ -144,4 +145,10 @@ body {
 .myeventslink::before {
     .linkimage;
     background-image: url('/img/calendar_icon_menu.png');
+}
+
+.dropdown-scrollable{
+    height: auto;
+    max-height: 300px;
+    overflow-x: hidden;
 }

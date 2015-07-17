@@ -66,7 +66,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
                         Selected = (viewModel.SelectedTariffId == tariff.Id)
                     };
             viewModel.PaymentHistoryViewModel = await GetPaymentHistory();
-            return View(viewModel);
+            return View("Index2", viewModel);
         }
 
         public ActionResult Index2()
