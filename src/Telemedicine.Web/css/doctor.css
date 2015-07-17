@@ -196,7 +196,7 @@
 .grid .grid-pager .pagination {
   margin: 0 auto;
 }
-.grid .grid-header {
+.grid .grid-header .grid-header-columns {
   position: relative;
   background: #f7f7f7;
   padding-top: 10px;
@@ -207,7 +207,7 @@
   padding-left: 30px;
   padding-right: 40px;
 }
-.grid .grid-header .grid-col {
+.grid .grid-header .grid-header-columns .grid-col {
   text-transform: uppercase;
   vertical-align: middle;
   font-size: 12px;
