@@ -38,6 +38,9 @@
 .font-rouble {
   font-family: 'ALS Rubl';
 }
+.font12px {
+  font-size: 12px;
+}
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;

@@ -6,16 +6,14 @@
 
 <div class="row fullheight" style="position: relative">
     <div class="col-md-6 fullheight sub-container">
-        <div class="container-fluid unscrollable">
-            <h3 class="page-header row">@ViewBag.Title</h3>
-
-            <p class="balance-info">
-                <span>Баланс</span><span style="color: #3e67ae">12 567</span><span>Р</span>
+        <h3 class="page-header row">@ViewBag.Title</h3>
+        <div class="unscrollable row container-fluid">
+            <p class="balance-info page-header">
+                <span>Баланс</span> <span style="color: #3e67ae" class="summa">12 567 Р</span><span></span>
             </p>
-
             <div class="balance-refill">
-                <div class="dropdown grid-filter">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <div class="dropdown rounded" style="width:100%">
+                    <button class="btn btn-default dropdown-toggle left" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 100%">
                         Средство платежа
                         <span class="caret"></span>
                     </button>
@@ -27,80 +25,76 @@
                     </ul>
                 </div>
             </div>
-            <div class="input-group grid-filter">
-                <input type="text" class="form-control" placeholder="Сумма платежа">
-                <span class="input-group-addon"><span class=" glyphicon glyphicon-search"></span></span>
+            <br />
+            <div class="row">
+                <div class="col-md-9">
+                    <input type="text" class="form-control rounded" placeholder="Сумма платежа">
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-primary rounded" style="width: 100%">Пополнить</button>
+                </div>
             </div>
-            <button class="btn btn-primary btn-round">Пополнить</button>
         </div>
     </div>
     <div class="col-md-6 fullheight sub-container">
         <h3 class="page-header row">&nbsp;</h3>
-
-        <div class="grid">
-            <div class="page-header">
-                <div class="row">
-                    <div class="col-md-4">
-                        Дата платежа
-                    </div>
-                    <div class="col-md-4">
-                        Тип платежа
-                    </div>
-                    <div class="col-md-4">
-                        Сумма платежа
-                    </div>
+        <div class="container-fluid row" style="display: flex;">
+            <div class="grid unscrollable">
+                <div class="page-header font-bold">
+                    <table style="width: 100%;">
+                        <colgroup>
+                            <col style="width: 33%; text-align: center"></col>
+                            <col style="width: 33%; text-align: center"></col>
+                            <col style="width: 33%; text-align: center"></col>
+                        </colgroup>
+                        <tr>
+                            <td>Дата платежа</td>
+                            <td>Тип платежа</td>
+                            <td>Сумма платежа</td>
+                        </tr>
+                    </table>
                 </div>
-            </div>
-            <div class="grid-content">
-                    <div class="panel list-doctor-panel">
-                        <div class="row">
-                            <div class="col-md-4">
-                                 Дата платежа
-                            </div>
-                            <div class="col-md-4">
-                                Тип платежа
-                            </div>
-                            <div class="col-md-4">
-                                Сумма платежа
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <div class="grid-pager row">
-                <div class="col-md-5">Всего записей - 1000</div>
-                <div class="col-md-4">
-                    <nav>
-                        <ul class="pagination">
-                            <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                        </ul>
-                    </nav>
+                <div class="grid-content">
+                    <table style="width: 100%;">
+                        <colgroup>
+                            <col style="width: 33%;text-align: center"></col>
+                            <col style="width: 33%;text-align: center"></col>
+                            <col style="width: 33%;text-align: center"></col>
+                        </colgroup>
+                        <tr>
+                            <td>
+                                <div class="payment-calendar">
+                                    <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                                </div>
+                                <div class="payment-calendar">
+                                    <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                                </div>
+                            </td>
+                            <td>
+                                <div class="font-bold payment-type">Пополнение</div>
+                            </td>
+                            <td>
+                                <div class="font-medium font12px">12 547 P</div>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="col-md-3 row">
+                <div class="grid-pager row">
+                    <div class="col-md-6">Всего записей - 1000</div>
                     <div class="col-md-6">
-                        <div class="pull-right">
-                            Показывать:
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="dropdown grid-filter">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                10 записей
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">20 записей</a></li>
-                                <li><a href="#">50 записей</a></li>
-                                <li><a href="#">100 записей</a></li>
-                                <li><a href="#">Все записи</a></li>
+                        <nav>
+                            <ul class="pagination rounded">
+                                <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
                             </ul>
-                        </div>
+                        </nav>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -38,6 +38,9 @@
 .font-rouble {
   font-family: 'ALS Rubl';
 }
+.font12px {
+  font-size: 12px;
+}
 /*override variables here*/
 
 /* --- START Sidebar --- */
@@ -198,6 +201,13 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
+.grid .grid-content > table > tbody > tr {
+  border-bottom: 1px solid #e4e4e4;
+}
+.grid .grid-content > table > tbody > tr > td {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 html,
 body {
   height: 100%;
@@ -279,6 +289,11 @@ body {
   width: 2.5em;
   border-radius: 1.5em;
   margin: 0.2em;
+}
+.rounded.form-control {
+  height: 2.5em;
+  border-radius: 1.5em;
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .linkimage {
   content: '';
