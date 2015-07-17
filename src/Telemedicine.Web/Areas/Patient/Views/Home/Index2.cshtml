@@ -13,7 +13,7 @@
                 </p>
             </div>
             <div class="chat-message" ng-repeat="message in viewModel.consultationMessages">
-                <img class="chat-image img-circle" ng-class="message.Direction" ng-src="{{message.AvatarUrl}}" />
+                <img class="chat-image img-circle" ng-class="message.Direction" ng-src="{{message.AvatarUrl}}"/>
                 <div class="chat-message" ng-class="message.Direction">
                     <p>{{message.Message}}</p>
                     <div class="chat-details small">
@@ -37,7 +37,10 @@
                         {{recommendation.RecommendationText}}
                     </div>
                     <div class="details">
-                        <a href="#">Подробнее</a> >
+                        <a id="recommendationDetailId" data-id="{{recommendation.Id}}" data-toggle="modal" data-target="#recommendationDetailDialog"
+                            href="@Url.Action("GetRecommendationDetail")/{{recommendation.Id}}" title="Подробнее">
+                            Подробнее
+                        </a> 
                     </div>
                 </div>
             </div>
@@ -61,3 +64,46 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="recommendationDetailDialog">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modal-content">
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+
+    $(function () {
+        $("#recommendationDetailId").click(function () {
+            
+            console.log("click");
+        });
+    });
+
+    function clearModal(id)
+    {
+        $('#modal-content').click(function () {
+            var url = '@Url.Action("GetRecommendationDetail","Home")';
+            $.ajax({
+                url: 'Home/action/',
+                type: 'GET',
+                cache: false,
+                data: { id: $(this).data("item-id") },
+                success: function (result) {
+                    $('#partialView_div').html(result);
+                }
+            });
+            return false;
+        });
+    };
+
+
+</script>
+}
+@section styles{
+    <link rel="stylesheet" type="text/css" media="screen" href="~/css/patient.css">
+}
