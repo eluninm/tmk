@@ -280,6 +280,11 @@ body {
   border-radius: 1.5em;
   margin: 0.2em;
 }
+.rounded.form-control {
+  height: 2.5em;
+  border-radius: 1.5em;
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 .linkimage {
   content: '';
   height: 2em;
