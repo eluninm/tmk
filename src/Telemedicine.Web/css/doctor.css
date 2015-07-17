@@ -196,6 +196,39 @@
 .grid .grid-pager .pagination {
   margin: 0 auto;
 }
+.grid .grid-header {
+  position: relative;
+  background: #e5e5e5;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px #cccccc solid;
+  display: table;
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 40px;
+}
+.grid .grid-body {
+  position: relative;
+  display: table;
+  width: 100%;
+  padding: 30px;
+}
+.grid .grid-col {
+  display: table-cell;
+  color: black;
+}
+.grid .grid-col-10 {
+  width: 10%;
+}
+.grid .grid-col-25 {
+  width: 25%;
+}
+.grid .grid-col-33 {
+  width: 33%;
+}
+.grid .grid-col-50 {
+  width: 50%;
+}
 .grid .grid-content {
   flex: 1;
   overflow-y: scroll;
@@ -277,10 +310,11 @@ body {
   height: 100%;
 }
 .rounded.btn {
-  height: 2.5em;
-  border-radius: 1.5em;
+  height: 35px;
+  border-radius: 2em;
   text-transform: uppercase;
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 10px;
 }
 .rounded.pagination > li:first-child > a,
 .rounded.pagination > li:last-child > a,
