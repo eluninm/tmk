@@ -1,8 +1,10 @@
-﻿@model IEnumerable<Telemedicine.Web.Areas.Patient.Models.DoctorViewModel>
+﻿@using Telemedicine.Core.Models
+@model IEnumerable<Telemedicine.Web.Areas.Patient.Models.DoctorViewModel>
 @{
     ViewBag.Title = "Консультация";
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
+
 <div class="fullheight sub-container row container-fluid">
     <h1 class="page-header row">Врачи</h1>
     <div class="container-fluid unscrollable row" style="display: flex;">
@@ -16,10 +18,10 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Окулист</a></li>
-                                <li><a href="#">Вертебролог</a></li>
-                                <li><a href="#">Хирург</a></li>
-                                <li><a href="#">Патологоанатом</a></li>
+                                @foreach (Specialization spec in ViewBag.Specializations)
+                                {
+                                    <li><a href="#">@spec.DisplayName</a></li>
+                                }
                             </ul>
                         </div>
                     </div>

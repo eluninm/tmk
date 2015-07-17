@@ -1,4 +1,6 @@
-﻿.chat-message {
+﻿@import "_variables.less";
+
+.chat-message {
     position: relative;
     min-height: 45px;
     padding: 20px;
@@ -34,6 +36,21 @@
         .font-bold;
         font-size: 10px;
         color: @color-text2;
+    }
+}
+
+.chat-nocontent{
+    position: relative;
+    display: block;
+    width: 300px;
+    margin: auto;
+    top: 30%;
+    text-align: center;
+
+    p{
+        margin-top: 45px;
+        color: @color-text1;
+        .font-regular;
     }
 }
 
