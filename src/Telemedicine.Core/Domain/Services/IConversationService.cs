@@ -55,8 +55,13 @@ namespace Telemedicine.Core.Domain.Services
             var creator = await _dbContext.Set<SiteUser>().FirstOrDefaultAsync(t => t.Id == creatorId);
             var members = await _dbContext.Set<SiteUser>().Where(t => memberIds.Contains(t.Id)).ToListAsync();
 
+            var patient = await _patientService.GetByUserIdAsync(creatorId);
+            var doctor = await _doctorService.GetByUserIdAsync(memberIds[0]);
+
             var conversation = new Conversation
             {
+                Doctor = doctor,
+                Patient = patient,
                 Created = DateTime.Now,
                 Creator = creator,
                 Members = members,
@@ -68,7 +73,7 @@ namespace Telemedicine.Core.Domain.Services
             _dbContext.Set<Conversation>().Add(conversation);
             _dbContext.SaveChanges();
 
-            var patient = await _patientService.GetByUserIdAsync(creatorId);
+
 
             await _paymentService.CreateAsync(new PaymentHistory
             {
@@ -125,6 +130,7 @@ namespace Telemedicine.Core.Domain.Services
         {
             var messages = await _dbContext.Set<ChatMessage>()
                 .Include(t => t.Creator)
+                .Where(t => t.ConversationId == conversationId)
                 .ToListAsync();
             return messages;
         }

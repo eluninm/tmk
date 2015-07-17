@@ -385,6 +385,19 @@ body {
   font-size: 10px;
   color: #727272;
 }
+.chat-nocontent {
+  position: relative;
+  display: block;
+  width: 300px;
+  margin: auto;
+  top: 30%;
+  text-align: center;
+}
+.chat-nocontent p {
+  margin-top: 45px;
+  color: #8c8c8c;
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 .chat-message::before {
   content: "\00a0";
   display: block;

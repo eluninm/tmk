@@ -30,6 +30,7 @@ namespace Telemedicine.Web.Api.Controllers
             foreach (var d in dtos)
             {
                 d.Direction = currentUserId == d.CreatorId ? "me" : "target";
+                d.AvatarUrl = "/img/no_avatar.png";
             }
 
             return Ok(dtos);

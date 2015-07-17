@@ -6,8 +6,14 @@
     <div class="col-md-6 fullheight sub-container">
         <h1 class="page-header row">История</h1>
         <div class="content row">
+            <div class="chat-nocontent" ng-hide="viewModel.selectedConsultationId">
+                <img src="/img/no_chat.png"/>
+                <p>
+                    Выберите консультацию <br/> для просмотра истории общения
+                </p>
+            </div>
             <div class="chat-message" ng-repeat="message in viewModel.consultationMessages">
-                <img class="chat-image img-circle" ng-class="message.Direction" ng-src="message.AvatarUrl" />
+                <img class="chat-image img-circle" ng-class="message.Direction" ng-src="{{message.AvatarUrl}}" />
                 <div class="chat-message" ng-class="message.Direction">
                     <p>{{message.Message}}</p>
                     <div class="chat-details small">
@@ -15,8 +21,8 @@
                     </div>
                 </div>
             </div>
-                    </div>
-                </div>
+        </div>
+    </div>
     <div class="col-md-3 fullheight sub-container">
         <h1 class="page-header row">Рекомендации</h1>
         <div class="content row">
@@ -34,9 +40,9 @@
                         <a href="#">Подробнее</a> >
                     </div>
                 </div>
-                    </div>
-                    </div>
-                    </div>
+            </div>
+        </div>
+    </div>
     <div class="col-md-3 fullheight sub-container">
         <h1 class="page-header row">Консультации</h1>
         <div class="content row">

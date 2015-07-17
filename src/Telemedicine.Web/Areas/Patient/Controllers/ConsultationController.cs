@@ -21,22 +21,26 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
         private readonly IPatientService _patientService;
         private readonly ITimeSpanEventService _timeSpanEventService;
         private readonly IUserEventsService _userEventsService;
+        private readonly ISpecializationService _specializationService;
+
 
         public ConsultationController(
             IAppointmentEventService appointmentEventService, 
             IDoctorService doctorService, 
             IPatientService patientService, 
             ITimeSpanEventService timeSpanEventService, 
-            IUserEventsService userEventsService)
+            IUserEventsService userEventsService,
+            ISpecializationService specializationService)
         {
             _appointmentEventService = appointmentEventService;
             _doctorService = doctorService;
             _patientService = patientService;
             _timeSpanEventService = timeSpanEventService;
             _userEventsService = userEventsService;
+            _specializationService = specializationService;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var doctors =   _doctorService.GetAll();
             var viewModel = (from doctor in doctors
@@ -49,6 +53,8 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
                   Status = doctor.DoctorStatus.DisplayName,
                   CanStartChat = doctor.DoctorStatus.Name != DoctorStatusNames.Busy
               }).ToList();
+
+            ViewBag.Specializations = await _specializationService.GetSpecializationsAsync();
 
             return View("Index2", viewModel);
         }
@@ -71,9 +77,9 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             AppointmentViewModel viewModel = new AppointmentViewModel();
             var doctor = await _doctorService.GetByIdAsync(id);
             viewModel.Date = DateTime.Today;
-            viewModel.FIO = doctor?.User?.DisplayName;
-            viewModel.Specialization = doctor?.Specialization?.DisplayName;
-            viewModel.Status = doctor?.DoctorStatus?.DisplayName;
+            viewModel.FIO = doctor.User.DisplayName;
+            viewModel.Specialization = doctor.Specialization.DisplayName;
+            viewModel.Status = doctor.DoctorStatus.DisplayName;
             viewModel.Id = id;
             return PartialView("_AppointmentDoctorDialog", viewModel);
         }
@@ -90,7 +96,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
                     Patient = await _patientService.GetByUserIdAsync(User.Identity.GetUserId()),
                     DateCreation = DateTime.Now
                 };
-                await _appointmentEventService.CreateAsync(appointmentEvent); 
+                await _appointmentEventService.CreateAsync(appointmentEvent);
             }
 
             return PartialView("_AppointmentDoctorDialog", viewModel);
