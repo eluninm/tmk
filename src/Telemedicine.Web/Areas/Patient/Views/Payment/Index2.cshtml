@@ -12,8 +12,8 @@
                 <span>Баланс</span> <span style="color: #3e67ae" class="summa">12 567 Р</span><span></span>
             </p>
             <div class="balance-refill">
-                <div class="dropdown grid-filter" style="width:100%">
-                    <button class="btn btn-default dropdown-toggle rounded" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 100%">
+                <div class="dropdown rounded" style="width:100%">
+                    <button class="btn btn-default dropdown-toggle left" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 100%">
                         Средство платежа
                         <span class="caret"></span>
                     </button>
@@ -63,18 +63,18 @@
                         </colgroup>
                         <tr>
                             <td>
-                                <div>
-                                    <div class="glyphicon glyphicon-calendar pull-left"></div>@DateTime.Now.ToShortDateString()
+                                <div class="payment-calendar">
+                                    <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
                                 </div>
-                                <div>
-                                    <div class="glyphicon glyphicon-time pull-left"></div>@DateTime.Now.ToShortTimeString()
+                                <div class="payment-calendar">
+                                    <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
                                 </div>
                             </td>
                             <td>
-                                <div>Пополнение</div>
+                                <div class="font-bold payment-type">Пополнение</div>
                             </td>
                             <td>
-                                <div>12 547 P</div>
+                                <div class="font-medium font12px">12 547 P</div>
                             </td>
                         </tr>
                     </table>
@@ -83,7 +83,7 @@
                     <div class="col-md-6">Всего записей - 1000</div>
                     <div class="col-md-6">
                         <nav>
-                            <ul class="pagination">
+                            <ul class="pagination rounded">
                                 <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
                                 <li><a href="#">1</a></li>
                                 <li><a href="#">2</a></li>
