@@ -565,6 +565,7 @@
     <Compile Include="Controllers\RedirectController.cs" />
     <Compile Include="Controllers\TempController.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />
+    <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Hubs\ConnectionMapping.cs" />
     <Compile Include="Hubs\SignalHub.cs" />
