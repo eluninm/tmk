@@ -198,7 +198,7 @@
 }
 .grid .grid-header {
   position: relative;
-  background: #e5e5e5;
+  background: #f7f7f7;
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px #cccccc solid;
@@ -206,6 +206,13 @@
   width: 100%;
   padding-left: 30px;
   padding-right: 40px;
+}
+.grid .grid-header .grid-col {
+  text-transform: uppercase;
+  vertical-align: middle;
+  font-size: 12px;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
 }
 .grid .grid-body {
   position: relative;
