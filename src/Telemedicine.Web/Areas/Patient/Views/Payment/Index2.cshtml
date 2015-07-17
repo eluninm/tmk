@@ -7,7 +7,7 @@
 <div class="row fullheight" style="position: relative">
     <div class="col-md-6 fullheight sub-container">
         <h3 class="page-header row">@ViewBag.Title</h3>
-        <div class="unscrollable">
+        <div class="unscrollable row container-fluid">
             <p class="balance-info page-header">
                 <span>Баланс</span> <span style="color: #3e67ae" class="summa">12 567 Р</span><span></span>
             </p>
@@ -25,7 +25,7 @@
                     </ul>
                 </div>
             </div>
-            <br/>
+            <br />
             <div class="row">
                 <div class="col-md-9">
                     <input type="text" class="form-control rounded" placeholder="Сумма платежа">
@@ -40,23 +40,44 @@
         <h3 class="page-header row">&nbsp;</h3>
         <div class="container-fluid row" style="display: flex;">
             <div class="grid unscrollable">
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col-md-4">
-                            Дата платежа
-                        </div>
-                        <div class="col-md-4">
-                            Тип платежа
-                        </div>
-                        <div class="col-md-4">
-                            Сумма платежа
-                        </div>
-                    </div>
+                <div class="page-header font-bold">
+                    <table style="width: 100%;">
+                        <colgroup>
+                            <col style="width: 33%; text-align: center"></col>
+                            <col style="width: 33%; text-align: center"></col>
+                            <col style="width: 33%; text-align: center"></col>
+                        </colgroup>
+                        <tr>
+                            <td>Дата платежа</td>
+                            <td>Тип платежа</td>
+                            <td>Сумма платежа</td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="grid-content">
-                    <div class="grid-row row">
-                        <div class="col-md-4"></div>
-                    </div>
+                    <table style="width: 100%;">
+                        <colgroup>
+                            <col style="width: 33%;text-align: center"></col>
+                            <col style="width: 33%;text-align: center"></col>
+                            <col style="width: 33%;text-align: center"></col>
+                        </colgroup>
+                        <tr>
+                            <td>
+                                <div>
+                                    <div class="glyphicon glyphicon-calendar pull-left"></div>@DateTime.Now.ToShortDateString()
+                                </div>
+                                <div>
+                                    <div class="glyphicon glyphicon-time pull-left"></div>@DateTime.Now.ToShortTimeString()
+                                </div>
+                            </td>
+                            <td>
+                                <div>Пополнение</div>
+                            </td>
+                            <td>
+                                <div>12 547 P</div>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="grid-pager row">
                     <div class="col-md-6">Всего записей - 1000</div>
