@@ -94,7 +94,8 @@ body {
         border-radius: 2em;
         text-transform: uppercase;
         .font-regular;
-        font-size: 10px;
+        font-size: 11px;
+        padding: 12px 35px 25px 35px;
     }
     &.pagination{
         > li:first-child > a,
@@ -151,4 +152,46 @@ body {
     height: auto;
     max-height: 300px;
     overflow-x: hidden;
+}
+
+.modal-dialog {
+    width: 700px;
+}
+
+.modal-sm {
+    width: 400px;
+}
+
+
+.modal-content {
+    border-radius: 12px;
+
+    .modal-header{
+        border: none;
+    }
+
+    .modal-title{
+        .font-normal;
+        color: black;
+        margin-left: 15px;
+        margin-top: 8px;
+    }
+
+    .modal-body{
+        margin: 0 30px;
+
+        p{
+            .font-normal;
+            font-size: 11px;
+            line-height: 20px;
+        }
+    }
+
+    .modal-footer{
+        border: none;
+        background-color: @color-background-table-header;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        padding: 25px;
+    }
 }
