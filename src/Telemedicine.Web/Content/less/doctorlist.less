@@ -1,6 +1,8 @@
 ﻿.list-doctor-panel {
+    padding: 10px;
+    border-bottom:1px solid @color-background1;
     .doctor-panel-btn-group {
-        .btn .start-chat-btn {
+        .btn.start-chat-btn {
             background: @color-accent3;
 
             &:hover {
@@ -8,10 +10,12 @@
             }
         }
     }
-    h4{
+
+    h4 {
         .font-regular;
-        font-size:14px;
+        font-size: 14px;
     }
+
     .doctor-status {
         color: @color-accent4;
         .font-bold;
@@ -43,5 +47,17 @@
             border-color: @color-background1;
             color: @color-background1;
         }
+    }
+
+    .info-icon {
+        background-image:url('/img/info.svg');
+        height:2.5em;
+        width:2.5em;
+        display:inline-block;
+        background-size:100% 100%;
+        background-repeat:no-repeat;
+        /*font-style:italic;
+        color: @color-background1;
+        border-color: @color-background1;*/
     }
 }
