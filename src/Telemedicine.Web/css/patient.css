@@ -625,10 +625,14 @@ body {
 .consultation-message-container .consultation-message:first-child::before {
   border-top: none;
 }
-.list-doctor-panel .doctor-panel-btn-group .btn .start-chat-btn {
+.list-doctor-panel {
+  padding: 10px;
+  border-bottom: 1px solid #e4e4e4;
+}
+.list-doctor-panel .doctor-panel-btn-group .btn.start-chat-btn {
   background: #e79924;
 }
-.list-doctor-panel .doctor-panel-btn-group .btn .start-chat-btn:hover {
+.list-doctor-panel .doctor-panel-btn-group .btn.start-chat-btn:hover {
   box-shadow: rgba(0, 0, 0, 0.1) 2.5em 2.5em inset;
 }
 .list-doctor-panel h4 {
@@ -664,6 +668,18 @@ body {
 .list-doctor-panel .status-icon.disabled {
   border-color: #e4e4e4;
   color: #e4e4e4;
+}
+.list-doctor-panel .info-icon {
+  background-image: url('/img/info.svg');
+  height: 2.5em;
+  width: 2.5em;
+  display: inline-block;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  /*font-style:italic;
+        color: @color-background1;
+        border-color: @color-background1;*/
+
 }
 .balance-info {
   text-transform: uppercase;
