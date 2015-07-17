@@ -387,6 +387,7 @@
     <Content Include="Areas\Patient\Views\Home\Index2.cshtml" />
     <Content Include="Areas\Patient\Views\Consultation\index2.cshtml" />
     <Content Include="Areas\Patient\Views\Payment\Index2.cshtml" />
+    <Content Include="Areas\Patient\Views\Home\MyEvents.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
     <Content Include="Content\patient.less" />
@@ -417,6 +418,7 @@
     <Content Include="Content\less\grid.less" />
     <Content Include="Content\less\balance.less" />
     <Content Include="Content\less\conversation.less" />
+    <Content Include="Content\less\myevents.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

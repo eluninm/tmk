@@ -200,3 +200,4 @@ src/Telemedicine.Web/Scripts/ts/**/*.js.map
 src/Telemedicine.Web/ngapp.js.map
 src/.vs/config/*
 
+src/Telemedicine.Core/Telemedicine.Core.csproj.DotSettings
