@@ -412,6 +412,8 @@
     <Content Include="Areas\Patient\Views\Consultation\index2.cshtml" />
     <Content Include="Areas\Patient\Views\Payment\Index2.cshtml" />
     <Content Include="Areas\Patient\Views\Home\MyEvents.cshtml" />
+    <Content Include="Areas\Patient\Views\Home\_RecommendationDetailDialog.cshtml" />
+    <Content Include="Areas\Patient\Views\Shared\DisplayTemplates\ShortDateTime.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
     <Content Include="Content\patient.less" />
@@ -443,6 +445,7 @@
     <Content Include="Content\less\balance.less" />
     <Content Include="Content\less\conversation.less" />
     <Content Include="Content\less\myevents.less" />
+    <Content Include="Content\less\recommendationDetailDialog.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -555,6 +558,7 @@
     <Compile Include="Areas\Patient\Models\MedicalHistoryViewModel.cs" />
     <Compile Include="Areas\Patient\Models\PatientConversationViewModel.cs" />
     <Compile Include="Areas\Patient\Models\PaymentHistoryViewModel.cs" />
+    <Compile Include="Areas\Patient\Models\RecommendationDetailViewModel.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Areas\Doctor\Controllers\HomeController.cs" />
     <Compile Include="Areas\Doctor\Controllers\PaymentController.cs" />

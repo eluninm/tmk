@@ -12,8 +12,10 @@ using Telemedicine.Web.Areas.Patient.Models;
 using System.Web.Script.Serialization;
 using Telemedicine.Core.Domain.Consts;
 using System.Data.Entity.Validation;
+using System.Runtime.Remoting.Contexts;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Telemedicine.Core.Models;
 
 namespace Telemedicine.Web.Areas.Patient.Controllers
 {
@@ -26,6 +28,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
         private readonly ITimeSpanEventService _timeSpanEventService;
         private readonly IPaymentService _paymentService;
         private readonly IUserEventsService _userEventsService;
+        private readonly IRecommendationService _recommendationService;
 
         public HomeController(
             IPatientService patientService
@@ -33,7 +36,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             , IDoctorService doctorService
             , ITimeSpanEventService timeSpanEventService
             , IPaymentService paymentService
-            , IUserEventsService userEventsService)
+            , IUserEventsService userEventsService, IRecommendationService recommendationService)
         {
             _patientService = patientService;
             _userManager = userManager;
@@ -41,6 +44,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             _timeSpanEventService = timeSpanEventService;
             _paymentService = paymentService;
             _userEventsService = userEventsService;
+            _recommendationService = recommendationService;
         }
 
         [AllowAnonymous]
@@ -50,8 +54,15 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Index2()
+        public async Task<ActionResult> Index2()
         {
+            var patient = await _patientService.GetByUserIdAsync(HttpContext.User.Identity.GetUserId());
+            if (patient == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.PatientId = patient.Id;
+
             return View();
         }
 
@@ -66,14 +77,8 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var patient = await _patientService.GetByUserIdAsync(user.Id);
 
-          /*  if (patient.SelectedDoctorId == 0)
-            {
-                return RedirectToAction("SelectDoctor");
-            }*/
-
             ViewBag.Balance = patient.Balance;
-
-
+            
             ViewBag.PaymentInstrumentEmpty = user.PaymentInstrument;
             ViewBag.FirstLogin = user.LastLoginDate == null;
 
@@ -96,46 +101,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
         {
             var patientSiteUser = await _userManager.FindByNameAsync(User.Identity.Name);
             var patient = await _patientService.GetByUserIdAsync(patientSiteUser.Id);
-            var doctorSiteUser = await _userManager.FindByIdAsync(siteUserId);
 
-           /* try
-            {
-                var newUserEvent = new Core.Models.UserEvent
-                {
-                    SiteUser = doctorSiteUser,
-                    EventId = "EventId " + Guid.NewGuid().ToString()
-                };
-
-                var newCalendarEvent = await _timeSpanEventService.CreateAsync(new Core.Models.TimeSpanEvent
-                {
-                    BeginDate = DateTime.Parse(date),
-                    EndDate = DateTime.Parse(date),
-                    //OwnerUserId = siteUserId,                
-                    OwnerUser = patientSiteUser,
-                    Comments =
-                        "Событие от пациента " +
-                        string.Format("{0} {1}", patientSiteUser.LastName, patientSiteUser.FirstName),
-                    UserEvent = newUserEvent
-                });
-
-                newUserEvent.CalendarEvent = newCalendarEvent;
-                await _userEventsService.UpdateAsync(newUserEvent);
-            }
-            catch (DbEntityValidationException e)
-            {
-                var errorMessage = string.Empty;
-                foreach (var eve in e.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        errorMessage = string.Format("PropertyName {0} ErrorMessage {1}", ve.PropertyName,
-                            ve.ErrorMessage);
-                    }
-                }
-                return Json(errorMessage, JsonRequestBehavior.DenyGet);
-            }
-            */
-            // Вычет денежных средств из баланса
             patient.Balance -= 500;
             await _patientService.UpdateAsync(patient);
 
@@ -156,6 +122,22 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             var patient = await _patientService.GetByUserIdAsync(user.Id);
 
             return Json(patient.Balance, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public async Task<ActionResult> GetRecommendationDetail(int id)
+        {
+            Recommendation recommendation = await _recommendationService.GetByIdAsync(id);
+            Core.Models.Doctor doctor = await _doctorService.GetByIdAsync(recommendation.DoctorId);
+            RecommendationDetailViewModel viewModel = new RecommendationDetailViewModel()
+            {
+                Content = recommendation?.RecommendationText,
+                Date = recommendation?.CreateDate ?? new DateTime(),
+                DoctorFIO = doctor?.User?.DisplayName,
+                SpecializationDisplayName = doctor?.Specialization?.DisplayName
+            };
+
+            return PartialView("_RecommendationDetailDialog", viewModel);
         }
     }
 }
