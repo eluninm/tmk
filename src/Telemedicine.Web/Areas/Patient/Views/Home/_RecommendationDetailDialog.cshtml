@@ -1,9 +1,4 @@
 ﻿@model Telemedicine.Web.Areas.Patient.Models.RecommendationDetailViewModel
-@{
-}
-@using (Ajax.BeginForm("AddAppointment", "Consultation", new {@class = "form", @role = "form"},
-    new AjaxOptions() {HttpMethod = "Post"}, FormMethod.Post))
-{
     <div class="modal-header modal-header-rd">
         <div class="recomendation-message-rd">
             <span class="timestamp-rd">
@@ -27,4 +22,3 @@
     <div class="modal-footer modal-footer-rd">
         <a   class="btn btn-round-rd" data-dismiss="modal">Закрыть</a>
     </div>
-}
