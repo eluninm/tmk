@@ -44,7 +44,6 @@ module Telemedicine {
         }
 
         public openRecommendationDetails(recommendationId: string) {
-
             this.$modal.open({
                 templateUrl: "/Content/tmpls/dialogs/recommendationDetails.html",
                 controller: "RecommendationDialog as viewModel",
