@@ -1,40 +1,51 @@
 ﻿@{
     ViewBag.Title = "Консультация пациента";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
 }
 
-<div class="row height100">
-    <div class="col-md-9 height100">
-        @Html.Partial("Profile")
-        <div class="profile-bottom-line"></div>
-
-        <div class="chat-message-list scrollable" id="chatMessageList">
-        </div>
-
-        <div class="chat-enter-box tm-noactive-bg" id="messageBox">
-            <button class="chat-send-btn btn btn-primary" id="sendMessageBtn"><i class="fa fa-comment"></i></button>
-            <div class="message-input-wrap">
-                <input class="chat-message-input" id="message-input" />
+<div class="row fullheight" style="position: relative" ng-controller="HistoryController as viewModel" data-id="1">
+    <div class="col-md-9 fullheight sub-container">
+        <h1 class="page-header row">История</h1>
+        <div class="content row unscrollable" style="display: flex; flex-direction: column">
+            <div class="chat-nocontent" ng-hide="viewModel.selectedConsultationId" style="display: none;">
+                <img src="/img/no_chat.png" />
+                <p>
+                    Выберите консультацию <br /> для просмотра истории общения
+                </p>
             </div>
+            <div style="flex: 1; overflow-y: auto;">
+                @for (var i = 0; i < 20; i++)
+                {
+                    <div class="chat-message">
+                        <img class="chat-image img-circle @(i%2 == 0 ? "target" : "me")" src="/img/no_avatar.png" />
+                        <div class="chat-message  @(i%2 == 0 ? "target" : "me")">
+                            <p>test</p>
+                            <div class="chat-details small">
+                                @DateTime.Now.ToShortDateString() @DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="chat-enter-box tm-noactive-bg" id="messageBox">
+                <button class="chat-send-btn btn btn-primary" id="sendMessageBtn"><i class="fa fa-comment"></i></button>
+                <div class="message-input-wrap">
+                    <input class="chat-message-input" id="message-input" />
+                </div>
+            </div>
+
         </div>
     </div>
-
-    <div class="col-md-3 height100">
-        <div class="recommendation-header">
-            <h3> История болезни пациента</h3>
-        </div>
-        <div class="profile-bottom-line"></div>
-        <div class="height100 scrollable">
+    <div class="col-md-3 fullheight sub-container">
+        <h1 class="page-header row">История болезни</h1>
+        <div class="content row">
             @Html.Action("List2", "Recommendations", new { id = @ViewBag.TargetUserId })
         </div>
     </div>
 </div>
 
-@section styles{
-    <link rel="stylesheet" type="text/css" media="screen" href="~/css/conversation.css">
-}
-
 @section scripts{
-<script>
+    <script>
         var conversationId = '@ViewContext.RouteData.Values["id"]';
         var messageHub = $.connection.messageHub;
 
@@ -56,21 +67,21 @@
             //var mbRight = $('#recommendationColumn').width() + 40;
             //$('#messageBox').show();
             //$('#messageBox').css({left: mbLeft, right: mbRight});
-            
-                $('#message-input').keyup(function (e) {
-                    if (e.which === 13) {
-                        sendMessage($('#message-input').val());
-                        $('#message-input').val('').focus();
-                    }
-                });
 
-                $("#sendMessageBtn").prop("disabled", false);
-                $("#message-input").prop("disabled", false);
-
-                $('#sendMessageBtn').click(function () {
+            $('#message-input').keyup(function (e) {
+                if (e.which === 13) {
                     sendMessage($('#message-input').val());
                     $('#message-input').val('').focus();
-                });
+                }
+            });
+
+            $("#sendMessageBtn").prop("disabled", false);
+            $("#message-input").prop("disabled", false);
+
+            $('#sendMessageBtn').click(function () {
+                sendMessage($('#message-input').val());
+                $('#message-input').val('').focus();
+            });
 
             //$.getJSON("/Chat/Index",
             //    function (result) {
@@ -84,5 +95,5 @@
                 addMessage(message);
             };
         });
-</script>
+    </script>
 }
