@@ -4,10 +4,11 @@
 
 module Telemedicine {
     export class HistoryController {
-        static $inject = ["patientApiService", "consultationApiService", "$element"];
+        static $inject = ["patientApiService", "consultationApiService", "$element", "$modal"];
         constructor(private patientApiService: PatientApiService,
                     private consultationApiService: ConsultationApiService,
-                    private $element: ng.IAugmentedJQuery) {
+                    private $element: ng.IAugmentedJQuery,
+                    private $modal: ng.ui.bootstrap.IModalService) {
             var patientId = $element.attr("data-id");
             this.loadRecommendations(patientId);
             this.loadConsultations(patientId);
@@ -40,6 +41,17 @@ module Telemedicine {
         public consultationSelect(consultationId: string) {
             this.selectedConsultationId = consultationId;
             this.loadConsultationMessages(this.selectedConsultationId);
+        }
+
+        public openRecommendationDetails(recommendationId: string) {
+
+            this.$modal.open({
+                templateUrl: "/Content/tmpls/dialogs/recommendationDetails.html",
+                controller: "RecommendationDialog as viewModel",
+                resolve: {
+                    item: () => item
+                }
+            });
         }
     }
 }

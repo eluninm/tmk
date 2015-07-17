@@ -212,6 +212,7 @@
     <Content Include="Content\style.min.css">
       <DependentUpon>style.css</DependentUpon>
     </Content>
+    <Content Include="Content\tmpls\dialogs\recommendationDetails.html" />
     <Content Include="css\common.css" />
     <Content Include="css\conversation.css" />
     <Content Include="css\doctor.css" />
@@ -361,6 +362,7 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Scripts\angular-ui-bootstrap.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\owl.carousel.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
@@ -620,11 +622,13 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\ts\dts\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\app.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ApiServiceBase.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ItemRouteParams.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\common\ModalControllerBase.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\UrlResolverService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultationMessage.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultation.ts" />

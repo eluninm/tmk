@@ -8,7 +8,7 @@ module Telemedicine {
         $logProvider.debugEnabled(true);
     }
 
-    angular.module("Telemedicine", []).config(moduleConfiguration)
+    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration)
         .controller("HistoryController", HistoryController)
         .service("recommendationApiService", RecommendationApiService)
         .service("urlResolverService", UrlResolverService)
