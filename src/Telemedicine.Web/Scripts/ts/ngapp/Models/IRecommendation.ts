@@ -1,6 +1,6 @@
 ﻿module Telemedicine {
-    export interface Recommendation {
-        RecommendationId: number;
+    export interface IRecommendation {
+        Id: number;
         Created: Date;
         DoctorTitle: string;
         DoctorSpecialization: string;

@@ -8,7 +8,7 @@ namespace Telemedicine.Web.Api.Dto
 {
     public class RecommendationDto
     {
-        public int RecommendationId { get; set; }
+        public int Id { get; set; }
 
         public DateTime Created { get; set; }
 

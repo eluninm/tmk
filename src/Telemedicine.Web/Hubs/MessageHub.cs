@@ -10,23 +10,13 @@ using Microsoft.AspNet.SignalR;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Core.Identity;
 using Telemedicine.Core.Models;
+using Telemedicine.Web.Api.Dto;
 
 namespace Telemedicine.Web.Hubs
 {
-    public class TextChatMessage
-    {
-        public string UserDisplayName { get; set; }
-
-        public string UserName { get; set; }
-
-        public string Message { get; set; }
-
-        public string Direction { get; set; }
-    }
-
     public interface IMessageClient
     {
-        Task OnMessage(TextChatMessage message);
+        Task OnMessage(ConsultationMessageDto messageDto);
     }
 
     [Microsoft.AspNet.SignalR.Authorize]
@@ -44,7 +34,7 @@ namespace Telemedicine.Web.Hubs
 
                 string userId = Context.User.Identity.GetUserId();
                 var message = await conversationService.SendMessage(conversationId, userId, messageText);
-                var textChatMessage = new TextChatMessage
+                var textChatMessage = new ConsultationMessageDto
                 {
                     Message = message.Message,
                     UserDisplayName = message.Creator.DisplayName,

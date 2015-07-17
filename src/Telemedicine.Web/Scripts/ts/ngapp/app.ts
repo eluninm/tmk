@@ -13,6 +13,7 @@ module Telemedicine {
         .service("recommendationApiService", RecommendationApiService)
         .service("urlResolverService", UrlResolverService)
         .service("patientApiService", PatientApiService)
+        .service("consultationApiService", ConsultationApiService)
         .service("testService", TestService)
     ;
 }

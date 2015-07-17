@@ -3,7 +3,8 @@
 
 module Telemedicine {
     export interface IPatientApiService {
-        patientRecommendations(patientId: string): ng.IPromise<Array<Recommendation>>;
+        patientRecommendations(patientId: string): ng.IPromise<Array<IRecommendation>>;
+        patientConsultations(patientId: string): ng.IPromise<Array<IConsultation>>;
     }
 
     export class PatientApiService implements IPatientApiService {
@@ -13,9 +14,14 @@ module Telemedicine {
                     private urlResolverService: UrlResolverService) {
         }
 
-        public patientRecommendations(patientId: string): ng.IPromise<Recommendation[]> {
+        public patientRecommendations(patientId: string): ng.IPromise<IRecommendation[]> {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + patientId + "/recommendations");
-            return this.$http.get(url).then(result => result.data); 
+            return this.$http.get(url).then(result => result.data);
+        }
+
+        public patientConsultations(patientId: string): ng.IPromise<IConsultation[]> {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + patientId + "/consultations");
+            return this.$http.get(url).then(result => result.data);
         }
     }
 }

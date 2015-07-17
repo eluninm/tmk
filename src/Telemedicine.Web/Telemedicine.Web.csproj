@@ -489,8 +489,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\ApiMapperConfiguration.cs" />
+    <Compile Include="Api\Controllers\ConversationController.cs" />
     <Compile Include="Api\Controllers\PatientController.cs" />
     <Compile Include="Api\Controllers\RecommendationController.cs" />
+    <Compile Include="Api\Dto\ConsultationDto.cs" />
+    <Compile Include="Api\Dto\ConsultationMessageDto.cs" />
     <Compile Include="Api\Dto\RecommendationDto.cs" />
     <Compile Include="AppBuilderExtensions.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
@@ -592,10 +595,13 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ApiServiceBase.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ItemRouteParams.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\UrlResolverService.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultationMessage.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultation.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Services\ConsultationApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\PatientApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\RecommendationApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\HistoryController.ts" />
-    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\Recommendation.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IRecommendation.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\TestService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\ViewModels\RecommendationViewModel.ts" />
     <TypeScriptCompile Include="Scripts\ts\rtc\RtcConnectionManager.ts" />

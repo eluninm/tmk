@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Telemedicine.Core.Domain.Services;
+using Telemedicine.Web.Api.Dto;
 using Telemedicine.Web.Areas.Patient.Models;
 using Telemedicine.Web.Hubs;
 
@@ -42,11 +43,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             var doctor = await _doctorService.GetByUserIdAsync(targetUser.Id);
             ViewBag.Specialization = doctor.Specialization.DisplayName;
 
-            var conversationViewModel = conversation.Messages.Select(t => new TextChatMessage
-            {
-                
-            });
-
+            var conversationViewModel = conversation.Messages.Select(t => new ConsultationMessageDto());
             return View(conversationViewModel);
         }
     }

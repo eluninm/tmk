@@ -24,6 +24,8 @@ namespace Telemedicine.Core.Domain.Services
         Task<ChatMessage> SendMessage(string conversationId, string senderId, string message);
 
         Task<IEnumerable<Conversation>> GetUserConversations(string userId);
+
+        Task<IEnumerable<ChatMessage>> GetConversationMessages(string conversationId);
     }
 
     public class ConversationService: IConversationService
@@ -108,12 +110,23 @@ namespace Telemedicine.Core.Domain.Services
 
         public async Task<IEnumerable<Conversation>> GetUserConversations(string userId)
         {
-            var user = await _dbContext.Set<SiteUser>().FirstOrDefaultAsync(t => t.Id == userId);
-            var result = from c in _dbContext.Set<Conversation>().Include(t => t.Members)
+            var consultations = from c in _dbContext.Set<Conversation>()
                 from m in c.Members
                 where m.Id == userId
                 select c;
-            return result;
+            return await consultations
+                .Include(t => t.Doctor)
+                .Include(t => t.Doctor.User)
+                .Include(t => t.Doctor.Specialization)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ChatMessage>> GetConversationMessages(string conversationId)
+        {
+            var messages = await _dbContext.Set<ChatMessage>()
+                .Include(t => t.Creator)
+                .ToListAsync();
+            return messages;
         }
     }
 }
