@@ -1,4 +1,6 @@
-﻿.grid{
+﻿@import "_variables.less";
+
+.grid{
     display:flex;
     flex-direction:column;
     flex:1;
@@ -12,6 +14,35 @@
         }
         
     }
+
+    .grid-header{
+        position: relative;
+        background: @color-accent2-divider;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px @color-text3 solid;
+        display: table;
+        width: 100%;
+        padding-left: 30px;
+        padding-right: 40px;
+    }
+
+    .grid-body{
+        position:relative;
+        display: table;
+        width: 100%;
+        padding:30px;
+    }
+
+    .grid-col{
+        display: table-cell;
+        color: @color-text;
+        &-10{ width: 10%; }
+        &-25{ width: 25%; }
+        &-33{ width: 33%; }
+        &-50{ width: 50%; }
+     }
+
     .grid-content{
         flex:1;
         overflow-y:scroll;
