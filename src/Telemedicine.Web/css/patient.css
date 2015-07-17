@@ -662,25 +662,25 @@ body {
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bolder;
 }
-.grid-content .row {
+.grid-content .myevent {
   padding-left: 30px;
   padding-bottom: 23px;
   padding-top: 20px;
   border-bottom: 1px solid #eeeeee;
 }
-.grid-content .row .payment-calendar {
+.grid-content .myevent .payment-calendar {
   margin-top: 10px;
 }
-.grid-content .row .btn {
+.grid-content .myevent .btn {
   margin-top: 10px;
   font-size: 12px;
   padding: 10px 45px 28px 45px;
   border-radius: 25px;
 }
-.grid-content .row .action {
+.grid-content .myevent .action {
   color: #395c9c;
   text-decoration: underline;
 }
-.grid-content .row .speciality {
+.grid-content .myevent .speciality {
   margin-top: 6px;
 }
