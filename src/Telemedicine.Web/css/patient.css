@@ -199,6 +199,47 @@
 .grid .grid-pager .pagination {
   margin: 0 auto;
 }
+.grid .grid-header {
+  position: relative;
+  background: #f7f7f7;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px #cccccc solid;
+  display: table;
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 40px;
+}
+.grid .grid-header .grid-col {
+  text-transform: uppercase;
+  vertical-align: middle;
+  font-size: 12px;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  height: 50px;
+}
+.grid .grid-body {
+  position: relative;
+  display: table;
+  width: 100%;
+  padding: 30px;
+}
+.grid .grid-col {
+  display: table-cell;
+  color: black;
+}
+.grid .grid-col-10 {
+  width: 10%;
+}
+.grid .grid-col-25 {
+  width: 25%;
+}
+.grid .grid-col-33 {
+  width: 33%;
+}
+.grid .grid-col-50 {
+  width: 50%;
+}
 .grid .grid-content {
   flex: 1;
   overflow-y: scroll;
@@ -280,10 +321,11 @@ body {
   height: 100%;
 }
 .rounded.btn {
-  height: 2.5em;
-  border-radius: 1.5em;
+  height: 35px;
+  border-radius: 2em;
   text-transform: uppercase;
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 10px;
 }
 .rounded.pagination > li:first-child > a,
 .rounded.pagination > li:last-child > a,
@@ -621,15 +663,25 @@ body {
   text-transform: uppercase;
   border-bottom: 1px #e4e4e4 solid;
   font-size: 35px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
 }
 .balance-info .text {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-left: 33px;
 }
 .balance-info .summa {
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .balance-info .rouble {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.balance-refill {
+  margin-left: 33px;
+}
+.balance-refill .form-line {
+  margin-bottom: 15px;
 }
 .btn-round2 {
   height: 2.5em;
@@ -640,6 +692,7 @@ body {
 .payment-calendar {
   font-size: 12px;
   display: block;
+  margin-bottom: 10px;
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .payment-calendar .glyphicon {
@@ -650,6 +703,10 @@ body {
 .payment-type {
   font-size: 12px;
   color: #8c8c8c;
+}
+.grid-body {
+  border-bottom: 1px #e4e4e4 solid;
+  padding-bottom: 20px;
 }
 .grid .page-header {
   margin: 0px;

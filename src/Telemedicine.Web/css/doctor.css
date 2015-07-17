@@ -213,6 +213,7 @@
   font-size: 12px;
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bolder;
+  height: 50px;
 }
 .grid .grid-body {
   position: relative;
