@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Главная";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+<div class="row fullheight" style="position: relative" ng-controller="HistoryController as viewModel" data-id="@ViewBag.PatientId">
+    <div class="col-md-6 fullheight sub-container">
+        <h1 class="page-header row">История</h1>
+        <div class="content row">
+            <div class="chat-nocontent" ng-hide="viewModel.selectedConsultationId">
+                <img src="/img/no_chat.png" />
+                <p>
+                    Выберите консультацию <br /> для просмотра истории общения
+                </p>
+            </div>
+            <div class="chat-message" ng-repeat="message in viewModel.consultationMessages">
+                <img class="chat-image img-circle" ng-class="message.Direction" ng-src="{{message.AvatarUrl}}" />
+                <div class="chat-message" ng-class="message.Direction">
+                    <p>{{message.Message}}</p>
+                    <div class="chat-details small">
+                        {{message.Created | date:'dd.MM.yyyy в HH:mm'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 fullheight sub-container">
+        <h1 class="page-header row">Рекомендации</h1>
+        <div class="content row">
+            <div class="container-fluid recomendation-message-container">
+                <div class="recomendation-message" ng-repeat="recommendation in viewModel.recommendations">
+                    <div class="timestamp">{{recommendation.Created | date:'dd.MM.yyyy'}}</div>
+                    <div class="author">
+                        <div class="title">{{recommendation.DoctorTitle}}</div>
+                        <div class="speciality">{{recommendation.DoctorSpecialization}}</div>
+                    </div>
+                    <div class="message recommendation-text">
+                        {{recommendation.RecommendationText}}
+                    </div>
+                    <div class="details">
+                        <a title="Подробнее" href="#" ng-click="viewModel.openRecommendationDetails(recommendation)">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 fullheight sub-container">
+        <h1 class="page-header row">Консультации</h1>
+        <div class="content row">
+            <div class="consultation-message-container">
+                <div class="consultation-message"
+                     ng-repeat="consultation in viewModel.consultations"
+                     ng-click="viewModel.consultationSelect(consultation.Id)"
+                     ng-class="{active : consultation.Id === viewModel.selectedConsultationId}">
+                    <div class="timestamp">{{consultation.Created | date:'dd.MM.yyyy'}}</div>
+                    <div class="author">
+                        <div class="title">{{consultation.DoctorTitle}}</div>
+                        <div class="speciality">{{consultation.DoctorSpecialization}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 ﻿@using Telemedicine.Core.Models.Enums 
 @model Telemedicine.Web.Areas.Doctor.Models.AddEventViewModel
-@using (Ajax.BeginForm("AddTimeSpanEvent", "Consultation", new { @class = "form", @role = "form", @id = "addEventDialogForm" },
+@using (Ajax.BeginForm("AddTimeSpanEvent", "Home", new { @class = "form", @role = "form", @id = "addEventDialogForm" },
                                                             new AjaxOptions() { HttpMethod = "Post", OnSuccess = "onAddSuccess" }, FormMethod.Post))
 {
     <div class="modal-header">

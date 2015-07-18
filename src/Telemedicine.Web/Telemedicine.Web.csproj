@@ -419,6 +419,7 @@
     <Content Include="Areas\Patient\Views\Shared\DisplayTemplates\ShortDateTime.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\MyEvents.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\Balance.cshtml" />
+    <Content Include="Areas\Doctor\Views\Home\Index2.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
     <Content Include="Content\patient.less" />
@@ -663,7 +664,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>9563</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
