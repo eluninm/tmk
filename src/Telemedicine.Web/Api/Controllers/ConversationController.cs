@@ -19,6 +19,12 @@ namespace Telemedicine.Web.Api.Controllers
             _conversationService = conversationService;
         }
 
+        //[HttpPost]
+        //public async Task<IHttpActionResult> BeginConsultation(int doctorId)
+        //{
+        //    _conversationService.BeginConversation2(doctorId);
+        //}
+            
         [HttpGet]
         [Route("{conversationId}/messages")]
         public async Task<IHttpActionResult> GetConsultationMessages(string conversationId)
