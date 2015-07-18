@@ -1,4 +1,6 @@
-﻿.consultation-message-container {
+﻿@import "_variables.less";
+
+.consultation-message-container {
     .consultation-message {
         padding: 0 20px 20px;
         font-size: 1.2em;
@@ -52,3 +54,128 @@
         border-top: none;
     }
 }
+
+.doctordeclinecall{
+    .speciality{
+        font-size: 10px;
+        .font-normal;
+        font-weight: bolder;
+        color: #e79924;
+        text-align: center;
+        width: 200px;
+        margin: 0 auto;
+        margin-bottom: 12px;
+    }
+
+    .text{
+        font-size: 14px;
+        .font-normal;
+        font-weight: bolder;
+        text-align: center;
+        margin: 0 auto;
+        width: 250px;
+        margin-bottom: 32px;
+    }
+}
+
+.infomodaldialog
+{
+    .row1{
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+
+            .subtitle{
+                margin-left: 75px;
+                margin-top: 4px;
+
+                h4 {
+                  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                  font-size: 14px;
+                }
+
+                .speciality {
+                  font-size: 12px;
+                  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                  font-weight: bolder;
+                  color: #e79924;
+                }
+            }
+        }
+
+    .modal-footer{
+        .btn.start-chat-btn {
+            background: #e79924;
+        }
+
+        .doctor-status {
+            color: @color-accent4;
+            .font-bold;
+            font-size: 12px;
+            line-height: 2.5em;
+            text-transform: uppercase;
+        }
+
+        .status-icon {
+            height: 2.5em;
+            width: 2.5em;
+            border: 2px solid @color-accent4;
+            color: @color-accent4;
+            border-radius: 1.5em;
+            text-align: center;
+            line-height: 2.2em;
+
+            &:hover {
+                text-decoration: none;
+            }
+
+            &.disabled {
+                border-color: @color-background1;
+                color: @color-background1;
+            }
+        }
+    }
+}
+
+.appointmentmodaldialog
+{
+    .row1{
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+
+        .subtitle{
+            margin-left: 75px;
+            margin-top: 4px;
+
+            h4 {
+                font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 14px;
+            }
+
+            .speciality {
+                font-size: 12px;
+                font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: bolder;
+                color: #e79924;
+            }
+        }
+     }
+
+    .modal-footer{
+        .btn.start-chat-btn {
+            background: #e79924;
+        }
+
+        .status-text {
+            color: @color-text1;
+            .font-bold;
+            font-size: 12px;
+            line-height: 2.5em;
+            text-transform: uppercase;
+            margin-left: 25px;
+        }
+    }
+}
+
+

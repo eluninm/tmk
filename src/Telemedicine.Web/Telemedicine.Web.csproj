@@ -212,6 +212,7 @@
     <Content Include="Content\style.min.css">
       <DependentUpon>style.css</DependentUpon>
     </Content>
+    <Content Include="Content\tmpls\dialogs\recommendationDetails.html" />
     <Content Include="css\common.css" />
     <Content Include="css\conversation.css" />
     <Content Include="css\doctor.css" />
@@ -240,6 +241,7 @@
     <Content Include="img\arrow_more_icon.svg" />
     <Content Include="img\arrow_right.png" />
     <Content Include="img\arrow_right.svg" />
+    <Content Include="img\attached_chat.png" />
     <Content Include="img\calendar_icon.png" />
     <Content Include="img\calendar_icon.svg" />
     <Content Include="img\calendar_icon_calendar.png" />
@@ -251,6 +253,8 @@
     <Content Include="img\card_icon_menu.svg" />
     <Content Include="img\chat.png" />
     <Content Include="img\chat.svg" />
+    <Content Include="img\Chat_chat.png" />
+    <Content Include="img\Chat_chat.svg" />
     <Content Include="img\check.png" />
     <Content Include="img\check.svg" />
     <Content Include="img\clock_blue.png" />
@@ -270,8 +274,14 @@
     <Content Include="img\no_avatar.png" />
     <Content Include="img\no_chat.png" />
     <Content Include="img\no_chat.svg" />
+    <Content Include="img\pacient_my_records.png" />
+    <Content Include="img\pacient_my_records.svg" />
+    <Content Include="img\phone_chat.png" />
+    <Content Include="img\phone_chat.svg" />
     <Content Include="img\video.png" />
     <Content Include="img\video.svg" />
+    <Content Include="img\video_chat.png" />
+    <Content Include="img\video_chat.svg" />
     <Content Include="img\video_green.png" />
     <Content Include="img\video_green.svg" />
     <Content Include="img\voice.png" />
@@ -361,6 +371,7 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Scripts\angular-ui-bootstrap.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\owl.carousel.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
@@ -620,11 +631,13 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\ts\dts\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\app.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ApiServiceBase.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ItemRouteParams.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\common\ModalControllerBase.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\UrlResolverService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultationMessage.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultation.ts" />

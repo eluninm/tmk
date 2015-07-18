@@ -323,7 +323,8 @@ body {
   border-radius: 2em;
   text-transform: uppercase;
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 10px;
+  font-size: 11px;
+  padding: 12px 35px 25px 35px;
 }
 .rounded.pagination > li:first-child > a,
 .rounded.pagination > li:last-child > a,
@@ -395,4 +396,44 @@ body {
   height: auto;
   max-height: 300px;
   overflow-x: hidden;
+}
+.modal-dialog {
+  width: 700px;
+}
+.modal-sm {
+  width: 400px;
+}
+.modal-content {
+  border-radius: 12px;
+}
+.modal-content .modal-header {
+  border: none;
+}
+.modal-content .modal-title {
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  margin-left: 15px;
+  margin-top: 8px;
+}
+.modal-content .modal-body {
+  margin: 0 30px;
+}
+.modal-content .modal-body p {
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 11px;
+  line-height: 20px;
+}
+.modal-content .modal-footer {
+  border: none;
+  background-color: #f7f7f7;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  padding: 25px;
+}
+.recommendation-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
 }

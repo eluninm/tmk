@@ -66,14 +66,21 @@ namespace Telemedicine.Web.Hubs
 
         public async Task<string> AcceptCall(string groupId)
         {
-            string userId = Context.User.Identity.GetUserId();
-            var peerUser = _connections.GetUserIds().FirstOrDefault(t => t != Context.User.Identity.GetUserId());
+            try
+            {
+                string userId = Context.User.Identity.GetUserId();
+                var peerUser = _connections.GetUserIds().FirstOrDefault(t => t != Context.User.Identity.GetUserId());
 
-            var conversationService = DependencyResolver.Current.GetService<IConversationService>();
-            var conversation = await conversationService.BeginConversation(peerUser, userId);
+                var conversationService = DependencyResolver.Current.GetService<IConversationService>();
+                var conversation = await conversationService.BeginConversation(peerUser, userId);
 
-            Clients.OthersInGroup(groupId).OnAcceptCall(conversation.Id);
-            return conversation.Id;
+                Clients.OthersInGroup(groupId).OnAcceptCall(conversation.Id);
+                return conversation.Id;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public void DeclineCall(string groupId)

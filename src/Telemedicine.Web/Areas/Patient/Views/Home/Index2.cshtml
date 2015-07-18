@@ -2,7 +2,7 @@
     ViewBag.Title = "Index2";
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
-<div class="row fullheight" style="position: relative" ng-controller="HistoryController as viewModel" data-id="1">
+<div class="row fullheight" style="position: relative" ng-controller="HistoryController as viewModel" data-id="@ViewBag.PatientId">
     <div class="col-md-6 fullheight sub-container">
         <h1 class="page-header row">История</h1>
         <div class="content row">
@@ -33,7 +33,7 @@
                         <div class="title">{{recommendation.DoctorTitle}}</div>
                         <div class="speciality">{{recommendation.DoctorSpecialization}}</div>
                     </div>
-                    <div class="message">
+                    <div class="message recommendation-text">
                         {{recommendation.RecommendationText}}
                     </div>
                     <div class="details">
@@ -79,7 +79,6 @@
 
     $(function () {
         $("#recommendationDetailId").click(function () {
-            
             console.log("click");
         });
     });
@@ -100,10 +99,5 @@
             return false;
         });
     };
-
-
 </script>
-}
-@section styles{
-    <link rel="stylesheet" type="text/css" media="screen" href="~/css/patient.css">
 }
