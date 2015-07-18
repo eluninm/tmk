@@ -324,6 +324,10 @@ body {
 .sub-container > div.unscrollable {
   overflow-y: auto;
 }
+.btn.start-chat-btn {
+  background: #e79924;
+  border-color: #e79924;
+}
 .rounded.dropdown .dropdown-toggle {
   background: white;
   height: 2.5em;
@@ -491,4 +495,58 @@ body {
 }
 .fc-event .fc-bg {
   opacity: 0 !important;
+}
+.grid .page-header {
+  margin: 0px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  background-color: #f7f7f7;
+}
+.grid .page-header b {
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+}
+.grid .row-rd {
+  padding: 30px;
+}
+.grid-content .myevent {
+  padding-left: 30px;
+  padding-bottom: 23px;
+  padding-top: 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+.grid-content .myevent .payment-calendar {
+  margin-top: 10px;
+}
+.grid-content .myevent .btn {
+  margin-top: 10px;
+}
+.grid-content .myevent .action {
+  color: #395c9c;
+  text-decoration: underline;
+  line-height: 60px;
+  text-transform: uppercase;
+  margin-left: 9px;
+}
+.grid-content .myevent .speciality {
+  margin-top: 6px;
+  color: #e79924;
+}
+.grid-content .myevent .payment-calendar {
+  margin-left: 25px;
+}
+.grid-content .myevent .img {
+  margin-left: 20px;
+}
+.grid-content .myevent .cancel-icon {
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  outline: none;
+  background-position: center;
+  background-image: url('/img/pacient_my_records.svg');
 }

@@ -26,6 +26,8 @@ namespace Telemedicine.Core.Domain.Services
         Task<IEnumerable<Conversation>> GetUserConversations(string userId);
 
         Task<IEnumerable<ChatMessage>> GetConversationMessages(string conversationId);
+
+        Task<Conversation> BeginConversation2(int patientId, int doctorId);
     }
 
     public class ConversationService: IConversationService
@@ -133,6 +135,35 @@ namespace Telemedicine.Core.Domain.Services
                 .Where(t => t.ConversationId == conversationId)
                 .ToListAsync();
             return messages;
+        }
+
+        public async Task<Conversation> BeginConversation2(int patientId, int doctorId)
+        {
+            var patient = await _patientService.GetByIdAsync(patientId);
+            var doctor = await _doctorService.GetByIdAsync(doctorId);
+
+            var conversation = new Conversation
+            {
+                Doctor = doctor,
+                Patient = patient,
+                Created = DateTime.Now,
+                Creator = patient.User,
+                Id = Guid.NewGuid().ToString()
+            };
+
+            _dbContext.Set<Conversation>().Add(conversation);
+            await _dbContext.SaveChangesAsync();
+
+            //await _paymentService.CreateAsync(new PaymentHistory
+            //{
+            //    ConversationId = conversation.Id,
+            //    Date = conversation.Created,
+            //    Patient = patient,
+            //    PaymentType = PaymentType.Consultation,
+            //    Value = -500
+            //});
+
+            return conversation;
         }
     }
 }

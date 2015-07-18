@@ -7,7 +7,7 @@ module Telemedicine {
     }
 
     export class ConsultationApiService implements IConsultationApiService {
-        private baseUrl = "/api/v1/consultations";
+        private baseUrl = "/api/v1/consultation";
 
         constructor(private $http: ng.IHttpService,
                     private urlResolverService: UrlResolverService) {

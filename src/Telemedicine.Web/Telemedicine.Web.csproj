@@ -630,15 +630,16 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ModalControllerBase.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\UrlResolverService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\ConsultationController.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorListController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\SimpleModalControllers.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultationMessage.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultation.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctor.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\ConsultationApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\PatientApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\RecommendationApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\HistoryController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IRecommendation.ts" />
-    <TypeScriptCompile Include="Scripts\ts\ngapp\Services\TestService.ts" />
     <TypeScriptCompile Include="Scripts\ts\rtc\RtcConnectionManager.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\MediaStream.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\RTCPeerConnection.d.ts" />
