@@ -11,17 +11,17 @@
             <p class="balance-info page-header">
                 <span class="text">Баланс</span> <span style="color: #3e67ae" class="summa">12 567 Р</span><span></span>
             </p>
+            <p class="debit-text">Снять со счета</p>
             <div class="balance-refill">
                 <div class="dropdown rounded form-line" style="width: 100%">
                     <button class="btn btn-default dropdown-toggle left" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 100%">
-                        Средство платежа
+                        Счет для снятия
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Средство платежа</a></li>
-                        <li><a href="#">Средство платежа</a></li>
-                        <li><a href="#">Средство платежа</a></li>
-                        <li><a href="#">Средство платежа</a></li>
+                        <li><a href="#">Яндекс.Деньги</a></li>
+                        <li><a href="#">Qiwi.Кошелек</a></li>
+                        <li><a href="#">Paypal</a></li>
                     </ul>
                 </div>
                 <div class="row form-line">
@@ -29,7 +29,7 @@
                         <input type="text" class="form-control rounded" placeholder="Сумма платежа">
                     </div>
                     <div class="col-md-5">
-                        <button class="btn btn-primary rounded" style="width: 100%">Пополнить</button>
+                        <button class="btn btn-primary rounded" style="width: 100%">Снять</button>
                     </div>
                 </div>
             </div>
@@ -41,9 +41,9 @@
             <div class="grid unscrollable payments-grid">
                 <div class="grid-header">
                     <div class="grid-header-columns">
-                        <div class="grid-col grid-col-33">Дата платежа</div>
-                        <div class="grid-col grid-col-33">Тип платежа</div>
-                        <div class="grid-col grid-col-33">Сумма платежа</div>
+                        <div class="grid-col grid-col-33">Дата</div>
+                        <div class="grid-col grid-col-33">Сумма</div>
+                        <div class="grid-col grid-col-33">Описание</div>
                     </div>
                 </div>
                 <div class="grid-content">
@@ -57,26 +57,10 @@
                             </div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-bold payment-type">Пополнение</div>
+                            <div class="font-medium font12px">547 P</div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-medium font12px">12 547 P</div>
-                        </div>
-                    </div>
-                    <div class="grid-body">
-                        <div class="grid-col grid-col-33">
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                        <div class="grid-col grid-col-33">
-                            <div class="font-bold payment-type">Пополнение</div>
-                        </div>
-                        <div class="grid-col grid-col-33">
-                            <div class="font-medium font12px">12 547 P</div>
+                            <div class="font-bold payment-type">Снятие средств</div>
                         </div>
                     </div>
                     <div class="grid-body">
@@ -89,10 +73,10 @@
                             </div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-bold payment-type">Пополнение</div>
+                            <div class="font-medium font12px">12 547 P</div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-medium font12px">12 547 P</div>
+                            <div class="font-bold payment-type">Поступление за консультацию Иванова И.И.</div>
                         </div>
                     </div>
                     <div class="grid-body">
@@ -105,26 +89,10 @@
                             </div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-bold payment-type">Пополнение</div>
+                            <div class="font-medium font12px">547 P</div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-medium font12px">12 547 P</div>
-                        </div>
-                    </div>
-                    <div class="grid-body">
-                        <div class="grid-col grid-col-33">
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                        <div class="grid-col grid-col-33">
-                            <div class="font-bold payment-type">Пополнение</div>
-                        </div>
-                        <div class="grid-col grid-col-33">
-                            <div class="font-medium font12px">12 547 P</div>
+                            <div class="font-bold payment-type">Снятие средств</div>
                         </div>
                     </div>
                     <div class="grid-body">
@@ -137,10 +105,10 @@
                             </div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-bold payment-type">Пополнение</div>
+                            <div class="font-medium font12px">12 547 P</div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-medium font12px">12 547 P</div>
+                            <div class="font-bold payment-type">Поступление за консультацию Иванова И.И.</div>
                         </div>
                     </div>
                     <div class="grid-body">
@@ -153,26 +121,10 @@
                             </div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-bold payment-type">Пополнение</div>
+                            <div class="font-medium font12px">547 P</div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-medium font12px">12 547 P</div>
-                        </div>
-                    </div>
-                    <div class="grid-body">
-                        <div class="grid-col grid-col-33">
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                        <div class="grid-col grid-col-33">
-                            <div class="font-bold payment-type">Пополнение</div>
-                        </div>
-                        <div class="grid-col grid-col-33">
-                            <div class="font-medium font12px">12 547 P</div>
+                            <div class="font-bold payment-type">Снятие средств</div>
                         </div>
                     </div>
                     <div class="grid-body">
@@ -185,10 +137,10 @@
                             </div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-bold payment-type">Пополнение</div>
+                            <div class="font-medium font12px">12 547 P</div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-medium font12px">12 547 P</div>
+                            <div class="font-bold payment-type">Поступление за консультацию Иванова И.И.</div>
                         </div>
                     </div>
                     <div class="grid-body">
@@ -201,26 +153,10 @@
                             </div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-bold payment-type">Пополнение</div>
+                            <div class="font-medium font12px">547 P</div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-medium font12px">12 547 P</div>
-                        </div>
-                    </div>
-                    <div class="grid-body">
-                        <div class="grid-col grid-col-33">
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                        <div class="grid-col grid-col-33">
-                            <div class="font-bold payment-type">Пополнение</div>
-                        </div>
-                        <div class="grid-col grid-col-33">
-                            <div class="font-medium font12px">12 547 P</div>
+                            <div class="font-bold payment-type">Снятие средств</div>
                         </div>
                     </div>
                     <div class="grid-body">
@@ -233,24 +169,85 @@
                             </div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-bold payment-type">Пополнение</div>
+                            <div class="font-medium font12px">12 547 P</div>
+                        </div>
+                        <div class="grid-col grid-col-33">
+                            <div class="font-bold payment-type">Поступление за консультацию Иванова И.И.</div>
+                        </div>
+                    </div>
+                    <div class="grid-body">
+                        <div class="grid-col grid-col-33">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="grid-col grid-col-33">
+                            <div class="font-medium font12px">547 P</div>
+                        </div>
+                        <div class="grid-col grid-col-33">
+                            <div class="font-bold payment-type">Снятие средств</div>
+                        </div>
+                    </div>
+                    <div class="grid-body">
+                        <div class="grid-col grid-col-33">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
                         </div>
                         <div class="grid-col grid-col-33">
                             <div class="font-medium font12px">12 547 P</div>
+                        </div>
+                        <div class="grid-col grid-col-33">
+                            <div class="font-bold payment-type">Поступление за консультацию Иванова И.И.</div>
+                        </div>
+                    </div>
+                    <div class="grid-body">
+                        <div class="grid-col grid-col-33">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="grid-col grid-col-33">
+                            <div class="font-medium font12px">547 P</div>
+                        </div>
+                        <div class="grid-col grid-col-33">
+                            <div class="font-bold payment-type">Снятие средств</div>
+                        </div>
+                    </div>
+                    <div class="grid-body">
+                        <div class="grid-col grid-col-33">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="grid-col grid-col-33">
+                            <div class="font-medium font12px">12 547 P</div>
+                        </div>
+                        <div class="grid-col grid-col-33">
+                            <div class="font-bold payment-type">Поступление за консультацию Иванова И.И.</div>
                         </div>
                     </div>
                 </div>
                 <div class="grid-pager row">
-                    <div class="col-md-6">Всего записей - 1000</div>
+                    <div class="col-md-6">Всего записей: 12</div>
                     <div class="col-md-6">
                         <nav>
                             <ul class="pagination rounded">
                                 <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                <li><a href="#">1</a></li>
+                                <li class="active"><a href="#">1</a></li>
                                 <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
                                 <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
                             </ul>
                         </nav>
