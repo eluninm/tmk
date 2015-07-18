@@ -551,6 +551,7 @@
     <Compile Include="Areas\Doctor\Controllers\HomeController.cs" />
     <Compile Include="Areas\Doctor\Controllers\ConversationController.cs" />
     <Compile Include="Areas\Doctor\Controllers\EventsController.cs" />
+    <Compile Include="Areas\Doctor\Controllers\RecommendationController.cs" />
     <Compile Include="Areas\Doctor\Controllers\_HomeController.cs" />
     <Compile Include="Areas\Doctor\Models\AddEventViewModel.cs" />
     <Compile Include="Areas\Doctor\Models\AppointmentViewModel.cs" />
@@ -615,6 +616,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Doctor\Views\Recommendation\" />
     <Folder Include="Views\Calendar\" />
   </ItemGroup>
   <ItemGroup>
