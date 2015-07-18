@@ -36,24 +36,25 @@
             <div class="grid-content">
                 <table style="width: 100%">
                     <colgroup>
-                        <col style="width:80px"/>
-                        <col/>
-                        <col style="width:160px"/>
-                        <col style="width:80px"/>
+                        <col style="width:80px" />
+                        <col />
+                        <col style="width:160px" />
+                        <col style="width:80px" />
                     </colgroup>
                     @foreach (var doctor in Model)
                     {
                         <tr class="list-doctor-panel">
                             <td>
                                 <a href="#" data-toggle="modal" data-target="#infomodaldialog">
-                                    <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60"/>
+                                    <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
                                 </a>
                             </td>
-                            <td>
-                                <h4 style="line-height: normal" class="">
-                                    @doctor.FIO
-                                    <div class="speciality">@doctor.Specialization</div>
-                                </h4>
+                            <td class="text-nowrap">
+                                <span style="line-height: normal; float: left;margin-right: 15px">
+                                    @doctor.FIO<br/>
+                                    <span class="speciality">Гинеколог</span>
+                                </span>
+                                <a href="#" class="info-icon small glyphicon"  data-toggle="modal" data-target="#infomodaldialog"></a>
                             </td>
                             <td>
                                 <div class="doctor-status container-fluid text-nowrap" data-id="@doctor.Id">
@@ -61,9 +62,9 @@
                                         @doctor.Status
                                     </div>
                                     <span class="text-nowrap">
-                                        <span class="glyphicon glyphicon-comment status-icon"></span>
-                                        <span class="glyphicon glyphicon-volume-up status-icon"></span>
-                                        <span class="glyphicon glyphicon-facetime-video status-icon"></span>
+                                        <span class="glyphicon status-icon message-icon"></span>
+                                        <span class="glyphicon status-icon voice-icon"></span>
+                                        <span class="glyphicon status-icon video-icon"></span>
                                     </span>
                                 </div>
                             </td>
