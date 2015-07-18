@@ -810,11 +810,14 @@ body {
   padding: 10px;
   border-bottom: 1px solid #e4e4e4;
 }
+.list-doctor-panel .doctor-panel-btn-group {
+  margin: 0 15px;
+}
 .list-doctor-panel .doctor-panel-btn-group .btn.start-chat-btn {
   background: #e79924;
 }
 .list-doctor-panel .doctor-panel-btn-group .btn.start-chat-btn:hover {
-  box-shadow: rgba(0, 0, 0, 0.1) 2.5em 2.5em inset;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 100px inset;
 }
 .list-doctor-panel h4 {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
