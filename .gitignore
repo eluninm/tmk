@@ -197,3 +197,4 @@ src/**/Scripts/**/*.map
 src/.vs/config/*.*
 
 src/Telemedicine.Core/Telemedicine.Core.csproj.DotSettings
+/src/Telemedicine.Web/ngapp.js.map
