@@ -1,30 +1,45 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.SignalR;
+using Telemedicine.Core.Domain.Consts;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Core.Extensions;
 using Telemedicine.Web.Api.Dto;
 
 namespace Telemedicine.Web.Api.Controllers
 {
-    [RoutePrefix("api/v1/consultations")]
+    [System.Web.Http.Authorize(Roles = UserRoleNames.Patient + "," + UserRoleNames.Doctor)]
+    [RoutePrefix("api/v1/consultation")]
     public class ConsultationController : ApiController
     {
         private readonly IConversationService _conversationService;
+        private readonly IPatientService _patientService;
 
-        public ConsultationController(IConversationService conversationService)
+        public ConsultationController(IConversationService conversationService, IPatientService patientService)
         {
             _conversationService = conversationService;
+            _patientService = patientService;
         }
 
-        //[HttpPost]
-        //public async Task<IHttpActionResult> BeginConsultation(int doctorId)
-        //{
-        //    _conversationService.BeginConversation2(doctorId);
-        //}
-            
+        [HttpPost]
+        [System.Web.Http.Authorize(Roles = UserRoleNames.Patient)]
+        [Route("begin/doctor/{doctorId}")]
+        public async Task<IHttpActionResult> BeginConsultation(int doctorId)
+        {
+            var patient = await _patientService.GetByUserIdAsync(HttpContext.Current.User.Identity.GetUserId());
+            if (patient == null)
+            {
+                return NotFound();
+            }
+
+            var consultation = await _conversationService.BeginConversation2(patient.Id, doctorId);
+            return Ok(Mapper.Map<ConsultationDto>(consultation));
+        }
+
         [HttpGet]
         [Route("{conversationId}/messages")]
         public async Task<IHttpActionResult> GetConsultationMessages(string conversationId)

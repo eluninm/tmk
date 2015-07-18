@@ -1,4 +1,6 @@
 ﻿///<reference path="Controllers/HistoryController.ts" />
+///<reference path="Controllers/ConsultationController.ts" />
+///<reference path="Controllers/DoctorListController.ts" />
 ///<reference path="Controllers/SimpleModalControllers.ts" />
 
 module Telemedicine {
@@ -11,6 +13,7 @@ module Telemedicine {
     angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration)
         .controller("HistoryController", HistoryController)
         .controller("ConsultationController", ConsultationController)
+        .controller("DoctorListController", DoctorListController)
         .controller("RecommendationDetailsController", RecommendationDetailsController)
         .service("recommendationService", RecommendationApiService)
         .service("urlResolverService", UrlResolverService)

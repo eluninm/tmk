@@ -7,7 +7,7 @@ using Telemedicine.Web.Api.Dto;
 
 namespace Telemedicine.Web.Api.Controllers
 {
-    [RoutePrefix("api/v1/recommendations")]
+    [RoutePrefix("api/v1/recommendation")]
     public class RecommendationController : ApiController
     {
         private readonly IRecommendationService _recommendationService;
