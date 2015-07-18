@@ -1,479 +1,130 @@
-﻿@{
-    ViewBag.Title = "";
-    Layout = "~/Views/Shared/_Layout2.cshtml";
+﻿@model IEnumerable<Telemedicine.Web.Areas.Doctor.Models.AppointmentViewModel>
+@{
+    ViewBag.Title = "Главная";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
 }
 
-<div class="row target-profile-row height100">
-    <div class="col-md-9 height100" id="mainPanel" style="border-right: 1px gray dotted">
-        @Html.Partial("Profile")
-        @Html.Partial("Chat")
+<br/>
+@Html.Action("GetStatus", "Status")
+
+    <div >
+        <br/>
+        <div class="dropdown">
+            <a class="btn btn-primary dropdown-toggle" id="selectMonth" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <span id="selectedMonth">Месяц</span> <span class="caret"></span></a>
+
+            <ul class="dropdown-menu" role="menu" aria-labelledby="selectMonth">
+                <li>
+                    <a onclick="selectMonth(0);">Январь</a>
+                </li>
+                <li>
+                    <a onclick="selectMonth(1);">Февраль</a>
+                </li>
+                <li>
+                    <a onclick="selectMonth(2);">Март</a>
+                </li>
+                <li>
+                    <a onclick="selectMonth(3);">Апрель</a>
+                </li>
+                <li>
+                    <a onclick="selectMonth(4);">Май</a>
+                </li>
+                <li>
+                    <a onclick="selectMonth(5);">Июнь</a>
+                </li>
+                <li>
+                    <a onclick="selectMonth(6);">Июль</a>
+                </li>
+                <li>
+                    <a onclick="selectMonth(7);">Август</a>
+                </li>
+                <li>
+                    <a onclick="selectMonth(8);">Сентябрь</a>
+                </li>
+                <li>
+                    <a onclick="selectMonth(9);">Отктябрь</a>
+                </li>
+                <li>
+                    <a onclick="selectMonth(10);">Ноябрь</a>
+                </li>
+                <li>
+                    <a onclick="selectMonth(11);">Декабрь</a>
+                </li>
+            </ul>
+
+            <a class="btn btn-primary" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
+                 <span class="glyphicon glyphicon-plus"></span>
+            </a>
+        </div>
+
     </div>
-    <div class="col-md-3 height100">
-        @Html.Action("List2", "Recommendations")
+
+    <div id="calendar"></div>
+
+    <div>
+        <h4>Записанные пациенты</h4>
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th>Дата события</th>
+                <th>ФИО Пациента</th>
+                <th>Тип события</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var appointment in Model)
+            {
+                <tr>
+                    <td>@appointment.Date</td>
+                    <td>@appointment.PatientFio</td>
+                    <td>Запись к врачу</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <br/>
+    </div>
+
+
+
+<div class="modal fade" id="addEventDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+        </div>
     </div>
 </div>
 
-    <div class="modal fade" id="SignupDialog" tabindex="-1" role="dialog" aria-labelledby="SignupDialogLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Записаться на прием к врачу</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <select class="form-control" id="SpecNames" onchange="GetDoctorList(this.value);">
-                                <option value="-1" selected="selected">Выберите специальность</option>
-                              
-                            </select>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <select  id="DoctorList" class="form-control">
-                                <option value="-1">Выберите доктора</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <br />
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <div class='input-group date' id='startDatetimepicker1'>
-                                <input type='text' required="required" class="form-control" placeholder="Начальная дата" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                    <button type="button" class="btn btn-primary" onclick="SaveChangeDoctor();">Сохранить</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="incomingCallModal">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Входящий звонок</h4>
-                </div>
-                <div class="modal-body">
-                    <audio id="callSound" preload="auto" src="~/img/call.mp3" loop></audio>
-                    <div class="thumbnail">
-                        <img src="~/img/no_avatar.png" alt="">
-                    </div>
-                    <h4><span id="caller-dn"></span></h4>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger btn-call-dialog" data-dismiss="modal"><i class="fa fa-reply"></i></button>
-                    <button type="button" class="btn btn-success btn-call-dialog" onclick="closeIncomingCallDialog(true);"><i class="fa fa-phone"></i></button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="videChatModal">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Звонок</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <video autoplay="autoplay" id="videoPeer"></video>
-                            </div>
-                            <div class="col-md-6">
-                                <video autoplay="autoplay" id="videoLocal" muted></video>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="hangBtn">Положить трубку</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-@section scripts {
-    <!--Скрипты видеочата-->
-<script src="~/lib/adapter/js/adapter.js"></script>
-<script src="~/Scripts/rtc/RtcConnectionManager.js"></script>
-    <script>
-        'use strict';
-        var constraints = { audio: true, video: true };
-        var configuration = {
-            iceServers: [
-                { urls: "stun:stun.services.mozilla.com" },
-                { urls: "stun:stun.l.google.com:19302" },
-                { urls: "stun:global.stun.twilio.com:3478?transport=udp" },
-                {
-                    urls: "turn:global.turn.twilio.com:3478?transport=udp",
-                    username: "ACa0409eba9f053d77fb897833f0d727ed",
-                    credential: "09616a654b2fe78e5ba0903d9a35e7d6"
-                }
-            ]
-        };
-
-        var callBtn = document.getElementById('makeCallBtn4');
-        var hangBtn = document.getElementById('hangBtn');
-        var localVideoEl = document.getElementById('videoLocal');
-        var remoteVideoEl = document.getElementById('videoPeer');
-        var localStream;
-
+@section scripts
+{
+    <script type="text/javascript">
         $(function() {
-            var chat = new RtcChat.VideoChat(configuration, $.connection);
-            chat.onConnectionReady = function () {
-                window.getUserMedia(constraints, function (stream) {
-                    localStream = stream;
-                    chat.addStream(stream);
-                    localVideoEl.src = URL.createObjectURL(stream);
-                }, function (error) {
-                    alert("WebRTC initialization failed!" + error);
+            $(".dropdown-menu li a").click(function() {
+                $("#selectedMonth").text($(this).text());
+
+            });
+
+            $.getJSON('@Url.Action("GetEvents", "Events")', "json", function(data) {
+                $('#calendar').fullCalendar({
+                    lang: 'ru',
+                    events: data,
+                    defaultView: "agendaWeek", 
+                    minTime: '07:00',
+                    maxTime: '21:00',
+                    height: 300
                 });
-            };
-
-            chat.onStreamReceived = function(stream) {
-                remoteVideoEl.src = URL.createObjectURL(stream);
-            };
-
-            callBtn.onclick = function() {
-                chat.startConnection("test");
-                callBtn.disabled = true;
-                hangBtn.disabled = false;
-                $('#videChatModal').modal();
-            }
-
-            function stopCall() {
-                chat.stopConnection("test");
-                callBtn.disabled = false;
-                hangBtn.disabled = true;
-                localStream = null;
-            }
-
-            var clients = 0;
-
-            $.connection.signalingHub.client.onConnected = function () {
-                clients += 1;
-                if (clients === 1) {
-                    callBtn.disabled = false;
-                }
-            };
-            $.connection.signalingHub.client.onDisconnected = function () {
-                clients -= 1;
-                if (clients < 0){clients = 0;}
-                if (clients === 0) {
-                    callBtn.disabled = true;
-                }
-            };
-
-            $.connection.signalingHub.client.peerHang = function () {
-                stopCall();
-            }
-
-
-            hangBtn.onclick = function() {
-                $.connection.signalingHub.server.endPeerCall("");
-            }
-
-            $.connection.hub.start(function() {
-                
             });
         });
-    </script>
-    <!--КОНЕЦ. Скрипты видеочата-->
-
-   
-
-     <script type="text/javascript">
-
-        /* <!-- Начало. Скрипт записи пациента на другого доктора--> */
-        function SaveChangeDoctor() {
-            var _DoctorId = $("#DoctorList option:selected").attr("siteuserid");
-            var _startDatetime = $("#startDatetimepicker1").find("input").val();
-            var _patientId = 'patientID';
-
-            if ($('#SpecNames').val() == -1) {
-                alert('Выберите специальность');
-                return;
-            }
-
-            if ($('#DoctorList').val() == -1)
-            {
-                alert('Выберите доктора');
-                return;
-            }
-
-            if (!_startDatetime) {
-                alert('Выберите дату');
-                return;
-            }
- 
-       
-            $.ajax({
-                type: "post",
-                url: '@Url.Action("SaveEventPatient", "Home")',
-                dataType: 'json',
-                data: {DoctorId: _DoctorId, StartDatetime: _startDatetime, PatientId:_patientId },
-                traditional: true,
-                success: function (data) {
-
-                    var type = jQuery.type(data);
-                    switch (type) {
-                        case 'number':
-                            {
-                                if (data == 0) {
-                                    alert('Пациент не выбран!');
-                                };
-                                if (data == 1) {
-                                    $('#SignupDialog').modal('hide');
-                                    alert('Сохранение прошло успешно!');
-
-                                };
-                            } break;
-                           
-                        case 'string':
-                            {
-                                alert(data);
-                            } break;
-                    };
-                  
-                }
-            });
-        };
-
-
-         function GetSpecializationList(_SpecID) {
-
-            $('option', '#SpecNames').remove();
-             $.ajax({
-                 type: "post",
-                 url: '@Url.Action("GetSpecializationList", "Home")',
-                 dataType: 'json',
-                 data: { SpecID: _SpecID },
-                 traditional: true,
-                 success: function (data) {
-                     $('#SpecNames').append('<option value="-1">Выберите специальность</option>');
-                     $.each(data, function (i, item) {
-                         $('#SpecNames')
-                         .append($("<option></option>")
-                         .attr("value", this.Id)
-                         .text(this.DisplayName));
-                     });
-
-                    
-                 }
-             });
-         };
-
-
-        function GetDoctorList(_SpecID) {
-
-            $('option', '#DoctorList').remove();
-            $.ajax({
-                type: "post",
-                url: '@Url.Action("GetDoctorList", "Home")',
-                dataType: 'json',
-                data: { SpecID: _SpecID },
-                traditional: true,
-                success: function (data) {
-                    $('#DoctorList').append('<option value="-1">Выберите доктора</option>');
-                    $.each(data, function (i, item) {
-                     $('#DoctorList')
-                     .append($("<option></option>")
-                     .attr("id", this.Id)
-                        .attr("SiteUserId", this.SiteUserId)
-                     .text(this.DisplayName));
-                    });
-                }
-            });
-        };
-
-         /* <!-- Конец. Скрипт записи пациента на другого доктора--> */
-          
-
-        function addMessage(message) {
-            $('#chatMessageList').append('<div class="well"> <b>' + message.UserDisplayName + '</b>: ' + message.Message + '</div>');
-            $("#chatMessageList").scrollTop($("#chatMessageList")[0].scrollHeight);
+        
+        
+        function onAddSuccess() {
+            $("#addEventDialog").modal('hide');
+            window.location.href = '@Url.Action("Index", "Consultation")';
+        }
+        function selectMonth(monthNumber) {
+            var date = new Date();
+            $('#calendar').fullCalendar('gotoDate', new Date(date.getFullYear(),monthNumber,1));
         }
 
-        $(function() {
-            var messageHub = $.connection.messageHub;
-
-            $.connection.hub.start().done(function() {
-                $('#message-input').keyup(function (e) {
-                    if (e.which === 13) {
-                        messageHub.server.sendMessage($('#message-input').val());
-                        $('#message-input').val('').focus();
-                    }
-                });
-
-                $('#sendMessageBtn').click(function () {
-                    messageHub.server.sendMessage($('#message-input').val());
-                    $('#message-input').val('').focus();
-                });
-            });
-
-            $.getJSON("/Chat/Index",
-                function(result) {
-                    for (var i = 0; i < result.length; i++) {
-                        addMessage(result[i]);
-                    }
-                }
-            );
-
-            messageHub.client.onMessage = function(message) {
-                addMessage(message);
-            };
-
-            
-        });
-          
-        
-
-
     </script>
-
-
-<!--НАЧАЛО. Скрипты рекомендаций-->
-<script>
-    var RecommendationListData = {};
-    var lastRecommendationClickedId = -1;
-    var lastRecommendationRowClickedColor;
-    var DELETED_RECOMMENDATION_COLOR = "#7A5659";
-        $(function() {
-            initRecommendation();
-        });
-
-        function initRecommendation() {
-            $("#ForListRecommendation").hide();
-            $("#ForAddRecommendation").hide();
-            $("#detailRecommendation").hide();
-
-            var forListRecommendation = $("#ForListRecommendation").html();
-            $("#recommendationContainer").html(forListRecommendation);
-            UpdateRecommendationList();
-        };
-
-
-        function OnShowRecommendationAddView() {
-            var forAddRecommendation = $("#ForAddRecommendation").html();
-            $("#recommendationContainer").html(forAddRecommendation);
-            $("#ForListRecommendation").hide();
-            $("#ForAddRecommendation").hide();
-
-        };
-
-
-        function ShowRecommendationDetailView() {
-            var detailRecommendation = $("#detailRecommendation").html();
-            $("#recommendationContainer").html(detailRecommendation);
-            $("#ForListRecommendation").hide();
-            $("#ForAddRecommendation").hide();
-            $("#detailRecommendation").hide();
-
-        };
-
-        function ShowRecommendationListView() {
-            var forAddRecommendation = $("#ForListRecommendation").html();
-            $("#recommendationContainer").html(forAddRecommendation);
-            $("#ForListRecommendation").hide();
-            $("#ForAddRecommendation").hide();
-            UpdateRecommendationList();
-        };
-
-        function OnAddRecommendationSuccess(result) {
-            UpdateRecommendationList();
-            ShowRecommendationListView();
-        };
-
-
-        function UpdateRecommendationList() {
-            $.ajax({
-                url: '/Doctor/Recommendations/GetRecommendations',
-                type: 'POST',
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-
-                    RecommendationListData = {};
-                    $("#recommendationTableContent").html("");
-                    $.each(data, function (i, item) {
-                        RecommendationListData[item.Id] = item.RecommendationText;
-                        var recommendationText = item.RecommendationText + "";
-                        if (recommendationText.length >= 20) {
-                            recommendationText = recommendationText.substring(0, 20) + "...";
-                        }
-                        var backgroundColor = (item.IsMarkedAsDeleted) ? DELETED_RECOMMENDATION_COLOR : "inherit";
-                        $("#recommendationTableContent").append("<tr ondblclick=\"onRecommendationTableRowDBClicked(" + item.Id + ");\" onclick=\"onRecommendationTableRowClicked(" + item.Id + ")\" id=\"recommendationTableRow\"  recommendationId=\"" +
-                            item.Id + "\" style=\"backgroundColor:" + backgroundColor + ";\"> <td stype=\"width:10%;" + "\">" + new Date(item.CreateDate).toLocaleDateString() + "</td> <td style=\"word-wrap: break-word;min-width: 160px;max-width: 160px;\">"
-                            + recommendationText + "</td> </tr>");
-                        $("tr[recommendationId=" + item.Id + "]")[0].style.backgroundColor = backgroundColor;
-                    });
-
-
-                }
-            });
-        };
-
-        function onRecommendationTableRowClicked(recomendationId) {
-            var trRowlastRecommendationClickedId = $("tr[recommendationId=\"" + lastRecommendationClickedId + "\"]");
-            if (trRowlastRecommendationClickedId[0] != undefined && trRowlastRecommendationClickedId[0].style.backgroundColor !== DELETED_RECOMMENDATION_COLOR) {
-                trRowlastRecommendationClickedId[0].style.backgroundColor = lastRecommendationRowClickedColor;
-            }
-            lastRecommendationClickedId = recomendationId;
-            lastRecommendationRowClickedColor = $("tr[recommendationId=\"" + recomendationId + "\"]")[0].style.backgroundColor;
-            $("tr[recommendationId=\"" + recomendationId + "\"]")[0].style.backgroundColor = "#DFF0D8";
-        };
-
-
-        function onRecommendationTableRowDBClicked(recomendationId) {
-            $("#detailRecommendationTextArea").text(RecommendationListData[recomendationId] + "");
-            ShowRecommendationDetailView();
-        };
-
-        function OnCreateRecommendation(result) {
-            $("#addRecommendationform").submit();
-        };
-
-        function onDeleteRecommendation() {
-            var jSONData = JSON.stringify({ recommendaionId: lastRecommendationClickedId });
-            $.ajax({
-                url: '/Doctor/Recommendations/MarkAsDeleted',
-                type: 'POST',
-                dataType: 'json',
-                data: jSONData,
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    UpdateRecommendationList();
-                },
-                error:function(jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR.responseText);
-                }
-            });
-            lastRecommendationClickedId = -1;
-        };
-
-        function OnAddRecommendationFailure(result) {
-            console.error(result.responseText);
-        };
-
-
-
-</script>
-<!--КОНЕЦ. Скрипты рекомендаций-->
 }

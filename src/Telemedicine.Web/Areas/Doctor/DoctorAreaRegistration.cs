@@ -17,7 +17,7 @@ namespace Telemedicine.Web.Areas.Doctor
             context.MapRoute(
                 "Doctor_default",
                 "Doctor/{controller}/{action}/{id}",
-                new { controller = "Consultation", action = "Index", id = UrlParameter.Optional },
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 new[] { "Telemedicine.Web.Areas.Doctor.Controllers" }
             );
         }
