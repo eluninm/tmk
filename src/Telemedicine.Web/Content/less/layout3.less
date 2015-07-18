@@ -29,12 +29,22 @@ body {
         padding: 20px 15px 0;
         border: none;
         .font-bold;
-        font-size:20px;
-        color:@color-text;
+        font-size: 20px;
+        color: @color-text;
+
+        &.small-bottom-padding {
+            &::after {
+                content: '';
+                display: block;
+                width: 100%;
+                margin-top: 10px;
+                border-bottom: 1px solid @color-background1;
+            }
+        }
 
         &::after {
-            content:'';
-            display:block;
+            content: '';
+            display: block;
             width: 100%;
             margin-top: 40px;
             border-bottom: 1px solid @color-background1;
@@ -101,23 +111,24 @@ body {
         color: white;
     }
 
-    &.btn-default{
+    &.btn-default {
         background: @color-btn-default-background;
         background-color: @color-btn-default-background;
     }
 
-    &.pagination{
+    &.pagination {
         > li:first-child > a,
         > li:last-child > a,
         a {
-            height:2.5em;
-            width:2.5em;
+            height: 2.5em;
+            width: 2.5em;
             border-radius: 1.5em;
-            margin:0.2em;
+            margin: 0.2em;
         }
     }
-    &.form-control{
-         height: 2.5em;
+
+    &.form-control {
+        height: 2.5em;
         border-radius: 1.5em;
         .font-regular;
     }
@@ -157,7 +168,7 @@ body {
     background-image: url('/img/calendar_icon_menu.png');
 }
 
-.dropdown-scrollable{
+.dropdown-scrollable {
     height: auto;
     max-height: 300px;
     overflow-x: hidden;
@@ -175,27 +186,27 @@ body {
 .modal-content {
     border-radius: 12px;
 
-    .modal-header{
+    .modal-header {
         border: none;
     }
 
-    .modal-title{
+    .modal-title {
         .font-normal;
         color: black;
         margin-left: 15px;
         margin-top: 8px;
     }
 
-    .modal-body{
+    .modal-body {
         margin: 0 30px;
 
-        p{
+        p {
             .font-normal;
             font-size: 11px;
             line-height: 20px;
         }
 
-        .sub-title{
+        .sub-title {
             .font-normal;
             font-size: 12px;
             line-height: 20px;
@@ -203,23 +214,21 @@ body {
         }
     }
 
-    .modal-footer{
+    .modal-footer {
         border: none;
         background-color: @color-background-table-header;
         border-bottom-left-radius: 12px;
         border-bottom-right-radius: 12px;
         padding: 25px;
 
-        .btn-round-rd{
+        .btn-round-rd {
             margin: 0;
         }
     }
-
-    
 }
 
 .recommendation-text {
-    overflow : hidden;
+    overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 6;

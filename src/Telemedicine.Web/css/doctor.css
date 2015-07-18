@@ -298,6 +298,13 @@ body {
   font-size: 20px;
   color: black;
 }
+.sub-container > .page-header.small-bottom-padding::after {
+  content: '';
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  border-bottom: 1px solid #e4e4e4;
+}
 .sub-container > .page-header::after {
   content: '';
   display: block;
