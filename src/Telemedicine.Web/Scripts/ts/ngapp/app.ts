@@ -1,5 +1,5 @@
 ﻿///<reference path="Controllers/HistoryController.ts" />
-///<reference path="Services/TestService.ts" />
+///<reference path="Controllers/SimpleModalControllers.ts" />
 
 module Telemedicine {
     function moduleConfiguration($logProvider: ng.ILogProvider) {
@@ -10,10 +10,11 @@ module Telemedicine {
 
     angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration)
         .controller("HistoryController", HistoryController)
-        .service("recommendationApiService", RecommendationApiService)
+        .controller("ConsultationController", ConsultationController)
+        .controller("RecommendationDetailsController", RecommendationDetailsController)
+        .service("recommendationService", RecommendationApiService)
         .service("urlResolverService", UrlResolverService)
         .service("patientApiService", PatientApiService)
         .service("consultationApiService", ConsultationApiService)
-        .service("testService", TestService)
     ;
 }

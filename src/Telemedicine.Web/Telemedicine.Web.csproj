@@ -419,11 +419,9 @@
     <Content Include="Content\style.less" />
     <Content Include="Areas\Patient\Views\Payment\_MethodReplenishment.cshtml" />
     <Content Include="Areas\Patient\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Patient\Views\Home\Index2.cshtml" />
     <Content Include="Areas\Patient\Views\Consultation\index2.cshtml" />
     <Content Include="Areas\Patient\Views\Payment\Index2.cshtml" />
     <Content Include="Areas\Patient\Views\Home\MyEvents.cshtml" />
-    <Content Include="Areas\Patient\Views\Home\_RecommendationDetailDialog.cshtml" />
     <Content Include="Areas\Patient\Views\Shared\DisplayTemplates\ShortDateTime.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
@@ -468,7 +466,6 @@
     <Content Include="Areas\Doctor\Views\web.config" />
     <Content Include="Areas\Patient\Views\web.config" />
     <Content Include="Areas\Doctor\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Patient\Views\Home\Index_.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="lib\fontawesome\fonts\fontawesome-webfont.eot" />
     <Content Include="lib\fontawesome\fonts\fontawesome-webfont.ttf" />
@@ -637,6 +634,8 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ItemRouteParams.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ModalControllerBase.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\UrlResolverService.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\ConsultationController.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\SimpleModalControllers.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultationMessage.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultation.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\ConsultationApiService.ts" />
@@ -645,7 +644,6 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\HistoryController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IRecommendation.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\TestService.ts" />
-    <TypeScriptCompile Include="Scripts\ts\ngapp\ViewModels\RecommendationViewModel.ts" />
     <TypeScriptCompile Include="Scripts\ts\rtc\RtcConnectionManager.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\MediaStream.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\RTCPeerConnection.d.ts" />

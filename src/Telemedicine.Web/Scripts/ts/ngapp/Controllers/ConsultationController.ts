@@ -3,34 +3,24 @@
 ///<reference path="../Services/ConsultationApiService.ts"/>
 
 module Telemedicine {
-    export class HistoryController {
-        static $inject = ["patientApiService", "consultationApiService", "recommendationService", "$element", "$modal"];
-
+    export class ConsultationController {
+        static $inject = ["patientApiService", "consultationApiService", "$element", "$modal"];
         constructor(private patientApiService: PatientApiService,
             private consultationApiService: ConsultationApiService,
-            private recommendationService: RecommendationApiService,
             private $element: ng.IAugmentedJQuery,
             private $modal: ng.ui.bootstrap.IModalService) {
-            var patientId = $element.attr("data-id");
+            var patientId = $element.attr("data-patient-id");
+            var consultationId = $element.attr("data-consultation-id");
             this.loadRecommendations(patientId);
-            this.loadConsultations(patientId);
         }
 
         public recommendations: Array<IRecommendation>;
         public consultationMessages: Array<IConsultationMessage>;
         public consultations: Array<IConsultation>;
 
-        public selectedConsultationId: string;
-
         public loadRecommendations(patientId: string) {
             this.patientApiService.patientRecommendations(patientId).then(result => {
                 this.recommendations = result;
-            });
-        }
-
-        public loadConsultations(patientId: string) {
-            this.patientApiService.patientConsultations(patientId).then(result => {
-                this.consultations = result;
             });
         }
 
@@ -40,17 +30,12 @@ module Telemedicine {
             });
         }
 
-        public consultationSelect(consultationId: string) {
-            this.selectedConsultationId = consultationId;
-            this.loadConsultationMessages(this.selectedConsultationId);
-        }
-
-        public openRecommendationDetails(recommendation: IRecommendation) {
+        public openRecommendationDetails(recommendationId: string) {
             this.$modal.open({
                 templateUrl: "/Content/tmpls/dialogs/recommendationDetails.html",
-                controller: "RecommendationDetailsController as viewModel",
+                controller: "RecommendationDialog as viewModel",
                 resolve: {
-                    item: () => recommendation
+                    item: () => item
                 }
             });
         }
