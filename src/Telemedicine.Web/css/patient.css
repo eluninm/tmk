@@ -909,7 +909,12 @@ body {
 .balance-info .rouble {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.debit-text {
+  font-size: 20px;
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 .balance-refill {
+  margin-top: 30px;
   margin-left: 33px;
 }
 .balance-refill .form-line {
