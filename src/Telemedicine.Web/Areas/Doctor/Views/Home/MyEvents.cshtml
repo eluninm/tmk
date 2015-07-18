@@ -1,0 +1,502 @@
+﻿@{
+    ViewBag.Title = "Мои записи";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<div class="fullheight sub-container row container-fluid">
+    <h1 class="page-header row">Мои записи</h1>
+    <div class="container-fluid unscrollable row" style="display: flex;flex-direction: column">
+        <div class="grid">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-1">
+                        <b>Дата</b>
+                    </div>
+                    <div class="col-md-9">
+                        <b>Описание</b>
+                    </div>
+                    <div class="col-md-1">
+                        <b>Статус</b>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-content">
+                <div class="list-doctor-panel">
+                    <div class="row myevent">
+                        <div class="col-md-1">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 style="line-height: normal">
+                                Овчинникова Елена Олеговна
+                                <div class="speciality">
+                                    Психолог
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="doctor-panel-btn-group rounded">
+                                <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
+                                    Начать
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row myevent">
+                        <div class="col-md-1">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 style="line-height: normal">
+                                Ежов Игорь Николаевич
+                                <div class="speciality">
+                                    Отоларинголог
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="doctor-panel-btn-group rounded">
+                                <a class="action" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
+                                    ПОСМОТРЕТЬ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row myevent">
+                        <div class="col-md-1">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 style="line-height: normal">
+                                Овчинникова Елена Олеговна
+                                <div class="speciality">
+                                    Психолог
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="doctor-panel-btn-group rounded">
+                                <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
+                                    Начать
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row myevent">
+                        <div class="col-md-1">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 style="line-height: normal">
+                                Ежов Игорь Николаевич
+                                <div class="speciality">
+                                    Отоларинголог
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="doctor-panel-btn-group rounded">
+                                <a class="action" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
+                                    ПОСМОТРЕТЬ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row myevent">
+                        <div class="col-md-1">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 style="line-height: normal">
+                                Овчинникова Елена Олеговна
+                                <div class="speciality">
+                                    Психолог
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="doctor-panel-btn-group rounded">
+                                <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
+                                    Начать
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row myevent">
+                        <div class="col-md-1">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 style="line-height: normal">
+                                Ежов Игорь Николаевич
+                                <div class="speciality">
+                                    Отоларинголог
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="doctor-panel-btn-group rounded">
+                                <a class="action" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
+                                    ПОСМОТРЕТЬ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row myevent">
+                        <div class="col-md-1">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 style="line-height: normal">
+                                Овчинникова Елена Олеговна
+                                <div class="speciality">
+                                    Психолог
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="doctor-panel-btn-group rounded">
+                                <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
+                                    Начать
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row myevent">
+                        <div class="col-md-1">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 style="line-height: normal">
+                                Ежов Игорь Николаевич
+                                <div class="speciality">
+                                    Отоларинголог
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="doctor-panel-btn-group rounded">
+                                <a class="action" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
+                                    ПОСМОТРЕТЬ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row myevent">
+                        <div class="col-md-1">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 style="line-height: normal">
+                                Овчинникова Елена Олеговна
+                                <div class="speciality">
+                                    Психолог
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="doctor-panel-btn-group rounded">
+                                <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
+                                    Начать
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row myevent">
+                        <div class="col-md-1">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 style="line-height: normal">
+                                Ежов Игорь Николаевич
+                                <div class="speciality">
+                                    Отоларинголог
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="doctor-panel-btn-group rounded">
+                                <a class="action" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
+                                    ПОСМОТРЕТЬ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row myevent">
+                        <div class="col-md-1">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 style="line-height: normal">
+                                Овчинникова Елена Олеговна
+                                <div class="speciality">
+                                    Психолог
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="doctor-panel-btn-group rounded">
+                                <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
+                                    Начать
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row myevent">
+                        <div class="col-md-1">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 style="line-height: normal">
+                                Ежов Игорь Николаевич
+                                <div class="speciality">
+                                    Отоларинголог
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="doctor-panel-btn-group rounded">
+                                <a class="action" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
+                                    ПОСМОТРЕТЬ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-pager row">
+                <div class="col-md-5">Всего записей: 1 000</div>
+                <div class="col-md-4">
+                    <nav>
+                        <ul class="pagination rounded">
+                            <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-3 row">
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                            Показывать:
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="dropdown rounded dropup">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                10 записей
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">20 записей</a></li>
+                                <li><a href="#">50 записей</a></li>
+                                <li><a href="#">100 записей</a></li>
+                                <li><a href="#">Все записи</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="appointmentModalDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="waitDoctorAnswerDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="doctorDeclineCall">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Уведомление</h4>
+                </div>
+                <div class="modal-body">
+                    <p>К сожалению доктор отклонил ваш запрос на консультацию, вы можете записаться к доктору на прием или связаться с дежурным доктором.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    <!--НАЧАЛО. Скрипты календаря-->
+    <script>
+        var lastRecommendationClickedId = -1;
+        var lastRecommendationRowClickedColor = "#ffffff";
+
+        $(function() {
+            $('.responsive-calendar').responsiveCalendar({
+                translateMonths: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                onDayClick: function(events) {
+                    $("#alertModalMessageContainer").hide();
+                    var day = $(event.target).attr('data-day');
+                    var month = $(event.target).attr('data-month');
+                    var year = $(event.target).attr('data-year');
+                    $('#Topic').val('');
+                    $('#Comments').val('');
+                    $('#calendarModal').modal('show');
+
+
+                    var d = new Date(year, parseInt(month) - 1, day);
+
+                    var output = ((d.getDate()) < 10 ? '0' : '') + (d.getDate()) + '.' +
+                        ((d.getMonth() + 1) < 10 ? '0' : '') + (d.getMonth() + 1) + '.' +
+                        d.getFullYear();
+
+                    $('#startCalendarDatetimepicker').datetimepicker({
+                        format: 'DD.MM.YYYY, H:mm:ss',
+                        locale: 'ru',
+                        showTodayButton: true
+                    });
+
+
+                    $('#inputStartDatetimepicker').val(output + ", 15:00:00");
+                }
+            });
+
+            UpdateEventList();
+            UpdateCalendar();
+        });
+
+        function OnAddCalendarEventSuccess(result) {
+            console.log("OnAddCalendarEventSuccess");
+            $('#calendarModal').modal('hide');
+            UpdateCalendar();
+            UpdateEventList();
+        };
+
+        function MakeTwoCharacters(digit) {
+            if ((digit + "").length < 2 && (digit + "").length > 0) {
+                return "0" + digit;
+            } else return (digit + "");
+        }
+
+        //Обновление списка событий
+        function UpdateEventList() {
+            $("#eventTableContent").text("");
+            $.ajax({
+                url: '@Url.Action("GetCalendarEvents", "Calendar", new {area=""})',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $.each(data, function (i, item) {
+                        var date = (new Date(item.Date));
+                        $("#eventTableContent").append("<tr><td>" + date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + " " +
+                            (date.getHours() > 9 ? date.getHours() : ("0" + date.getHours())) + ":" + (date.getMinutes() > 9 ? date.getMinutes() : ("0" + date.getMinutes())) +
+                            "</td><td>Записан к доктору: " + item.DoctorFIO + "</td></tr>");
+                    });
+                    $("#eventCounter").html("<i class=\"fa fa-bell-o\"></i>" + data.length);
+                }
+            });
+        };
+
+
+        function UpdateCalendar() {
+            $.ajax({
+                url: '@Url.Action("GetCalendarEvents", "Calendar", new {area=""})',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function(data) {
+                    var dictionary = {};
+                    $.each(data, function(i, item) {
+                        var date = new Date(item.Date); //new Date(new Date(parseInt(item.BeginDate.substr(6))));
+                        var key = date.getFullYear() + "-" + MakeTwoCharacters(date.getMonth() + 1) + "-" + MakeTwoCharacters(date.getDate());
+                        if (key in dictionary) {
+                            dictionary[key].number++;
+                        } else {
+                            dictionary[key] = { "number": 1, "badgeClass": "badge-warning", "class": "bg-success" }
+                        }
+                    });
+
+                    $('.responsive-calendar').responsiveCalendar('clearAll');
+                    $('.responsive-calendar').responsiveCalendar('edit', dictionary);
+                }
+            });
+        }
+
+        function OnAddCalendarEventFailure(result) {
+            $("#alertModalMessageContainer").show();
+            $("#alertModalMessageContent").text(result.responseText);
+            $('#calendarModal').modal('show');
+        };
+    </script>
+    <!--КОНЕЦ. Скрипты календаря-->
+}

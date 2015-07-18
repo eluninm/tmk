@@ -378,14 +378,10 @@
     <Content Include="Views\Shared\Calendar.cshtml" />
     <Content Include="lib\responsive-calendar\css\less\responsive-calendar.less" />
     <Content Include="lib\responsive-calendar\js\coffee\responsive-calendar.coffee" />
-    <Content Include="Areas\Doctor\Views\Shared\Recommendations.cshtml" />
     <Content Include="Areas\Administrator\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Administrator\Views\Shared\DisplayTemplates\Enum.cshtml" />
     <Content Include="Views\Shared\CalendarModal.cshtml" />
-    <Content Include="Areas\Doctor\Views\Shared\MarkAsDeleted.cshtml" />
     <Content Include="Areas\Patient\Views\Shared\Recommendation.cshtml" />
-    <Content Include="Areas\Doctor\Views\Rtc\Callback.cshtml" />
-    <Content Include="Areas\Doctor\Views\Rtc\Peer.cshtml" />
     <Content Include="Areas\Administrator\Views\PaymentMethods\Create.cshtml" />
     <Content Include="Areas\Administrator\Views\PaymentMethods\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\PaymentMethods\Edit.cshtml" />
@@ -393,11 +389,9 @@
     <Content Include="Areas\Administrator\Views\Tariff\Create.cshtml" />
     <Content Include="Areas\Administrator\Views\Tariff\Edit.cshtml" />
     <Content Include="Areas\Patient\Views\Payment\Index.cshtml" />
-    <Content Include="Areas\Doctor\Views\Payment\Payment.cshtml" />
     <Content Include="Areas\Patient\Views\Consultation\Index.cshtml" />
     <Content Include="Areas\Patient\Views\Shared\CalendarModalWindow.cshtml" />
     <Content Include="Areas\Doctor\Views\Conversation\Open.cshtml" />
-    <Content Include="Areas\Doctor\Views\Shared\Profile.cshtml" />
     <Content Include="Views\Shared\Chat.cshtml" />
     <Content Include="Areas\Doctor\Views\Recommendations\List2.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
@@ -411,11 +405,11 @@
     <Content Include="Areas\Patient\Views\Conversation\Open.cshtml" />
     <Content Include="Areas\Administrator\Views\Shared\_PreShared.cshtml" />
     <Content Include="Areas\Patient\Views\Conversation\Profile.cshtml" />
-    <Content Include="Areas\Doctor\Views\Consultation\Index.cshtml" />
+    <Content Include="Areas\Doctor\Views\Home\Index.cshtml" />
     <Content Include="Areas\Doctor\Views\Recommendations\_AddRecommendationDialog.cshtml" />
     <Content Include="Areas\Patient\Views\Recommendations\List2.cshtml" />
     <Content Include="Areas\Patient\Views\History\Index.cshtml" />
-    <Content Include="Areas\Doctor\Views\Consultation\_AddTimeSpanEventDialog.cshtml" />
+    <Content Include="Areas\Doctor\Views\Home\_AddTimeSpanEventDialog.cshtml" />
     <Content Include="Content\style.less" />
     <Content Include="Areas\Patient\Views\Payment\_MethodReplenishment.cshtml" />
     <Content Include="Areas\Patient\Views\Home\Index.cshtml" />
@@ -423,6 +417,8 @@
     <Content Include="Areas\Patient\Views\Payment\Index2.cshtml" />
     <Content Include="Areas\Patient\Views\Home\MyEvents.cshtml" />
     <Content Include="Areas\Patient\Views\Shared\DisplayTemplates\ShortDateTime.cshtml" />
+    <Content Include="Areas\Doctor\Views\Home\MyEvents.cshtml" />
+    <Content Include="Areas\Doctor\Views\Home\Balance.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
     <Content Include="Content\patient.less" />
@@ -465,7 +461,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Areas\Doctor\Views\web.config" />
     <Content Include="Areas\Patient\Views\web.config" />
-    <Content Include="Areas\Doctor\Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="lib\fontawesome\fonts\fontawesome-webfont.eot" />
     <Content Include="lib\fontawesome\fonts\fontawesome-webfont.ttf" />
@@ -550,9 +545,10 @@
     <Compile Include="Areas\Administrator\Models\PaymentMethodViewModel.cs" />
     <Compile Include="Areas\Administrator\Models\SpecializationViewModel.cs" />
     <Compile Include="Areas\Administrator\Models\TariffViewModel.cs" />
-    <Compile Include="Areas\Doctor\Controllers\ConsultationController.cs" />
+    <Compile Include="Areas\Doctor\Controllers\HomeController.cs" />
     <Compile Include="Areas\Doctor\Controllers\ConversationController.cs" />
     <Compile Include="Areas\Doctor\Controllers\EventsController.cs" />
+    <Compile Include="Areas\Doctor\Controllers\_HomeController.cs" />
     <Compile Include="Areas\Doctor\Models\AddEventViewModel.cs" />
     <Compile Include="Areas\Doctor\Models\AppointmentViewModel.cs" />
     <Compile Include="Areas\Doctor\Models\EventViewModel.cs" />
@@ -566,9 +562,6 @@
     <Compile Include="Areas\Patient\Models\PaymentHistoryViewModel.cs" />
     <Compile Include="Areas\Patient\Models\RecommendationDetailViewModel.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
-    <Compile Include="Areas\Doctor\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Doctor\Controllers\PaymentController.cs" />
-    <Compile Include="Areas\Doctor\Controllers\RecommendationsController.cs" />
     <Compile Include="Areas\Doctor\Controllers\StatusController.cs" />
     <Compile Include="Areas\Doctor\DoctorAreaRegistration.cs" />
     <Compile Include="Areas\Doctor\Models\AttachmentViewModel.cs" />
@@ -619,7 +612,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Doctor\Views\Events\" />
     <Folder Include="Views\Calendar\" />
   </ItemGroup>
   <ItemGroup>
