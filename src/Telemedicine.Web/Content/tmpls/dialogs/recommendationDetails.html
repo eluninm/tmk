@@ -1,19 +1,19 @@
 ﻿<div class="modal-header modal-header-rd">
     <div class="recomendation-message-rd">
         <span class="timestamp-rd">
-            
+            {{viewModel.item.Created | date:'dd.MM.yyyy'}}
         </span> &nbsp;
         <span class="title-rd">
-            
+            {{viewModel.item.DoctorTitle}}
         </span>
         <div class="speciality-rd">
-            
+            {{viewModel.item.DoctorSpecialization}}
         </div>
     </div>
 </div>
 <div class="modal-body modal-content-rd message-rd">
-    
+    {{viewModel.item.RecommendationText}}
 </div>
 <div class="modal-footer modal-footer-rd">
-    <a class="btn btn-round-rd" data-dismiss="modal">Закрыть</a>
+    <a class="btn btn-round-rd" data-dismiss="modal" ng-click="viewModel.cancel()">Закрыть</a>
 </div>
