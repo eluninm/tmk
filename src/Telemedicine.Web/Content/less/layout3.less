@@ -17,6 +17,9 @@ body {
     height: 100%;
     overflow: auto;
 }
+.fullwidth {
+    width: 100%;
+}
 
 .sub-container {
     display: flex;
@@ -78,6 +81,9 @@ body {
                 position: absolute;
                 right: 1em;
                 top: 1.2em;
+            }
+            &.btn-primary{
+                background: @color-accent1-light;
             }
         }
     }
@@ -233,4 +239,8 @@ body {
     display: -webkit-box;
     -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
+}
+
+.fc-event .fc-bg{
+    opacity:0!important;
 }

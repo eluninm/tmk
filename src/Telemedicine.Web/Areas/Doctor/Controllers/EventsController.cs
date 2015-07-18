@@ -54,7 +54,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
 
             eventList.AddRange(
                 (await _appointmentEventService.GetAllAsync()).Select(
-                    ae => new EventViewModel() {start = ae.Date, title = "Прием пациента", color = "#38cbb5"}));
+                    ae => new EventViewModel() {start = ae.Date, title = "Прием пациента"}));
             /*eventList.AddRange(
                 (await _timeSpanEventService.GetAllAsync()).Select(
                     ts =>
@@ -98,7 +98,6 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
                                         : (new DateTime(date.Year, date.Month, date.Day,
                                             timeSpanEvent.EndDate?.Hour ?? 0, timeSpanEvent.EndDate?.Minute ?? 0, 0)),
                                 title = timeSpanEvent.Title,
-                                color = "#c0e788",
                                 allDay = false
                             });
                         }
@@ -112,7 +111,6 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
                         start = timeSpanEvent.BeginDate,
                         end = timeSpanEvent.EndDate,
                         title = timeSpanEvent.Title,
-                        color = "#c0e788",
                         allDay = timeSpanEvent.EndDate == null
                     });
                 }
