@@ -1,4 +1,5 @@
 ﻿<div class="modal-header modal-header-rd">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <div class="recomendation-message-rd">
         <span class="timestamp-rd">
             {{viewModel.item.Created | date:'dd.MM.yyyy'}}
@@ -11,9 +12,11 @@
         </div>
     </div>
 </div>
-<div class="modal-body modal-content-rd message-rd">
-    {{viewModel.item.RecommendationText}}
+<div class="modal-body">
+    <p>
+        {{viewModel.item.RecommendationText}}
+    </p>
 </div>
-<div class="modal-footer modal-footer-rd">
+<div class="modal-footer">
     <a class="btn btn-round-rd" data-dismiss="modal" ng-click="viewModel.cancel()">Закрыть</a>
 </div>
