@@ -11,7 +11,7 @@
         <div class="grid">
             <div class="page-header">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="dropdown rounded">
                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 Выберите специализацию
@@ -25,7 +25,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="input-group rounded">
                             <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="ФИО врача">
                             <span class="input-group-addon"><span class=" glyphicon glyphicon-search"></span></span>
@@ -34,70 +34,65 @@
                 </div>
             </div>
             <div class="grid-content">
-                @foreach (var doctor in Model)
-                {
-                    <div class="row list-doctor-panel">
-                        <div class="col-md-1">
-                            <a href="#" data-toggle="modal" data-target="#infomodaldialog">
-                                <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
-                            </a>
-                        </div>
-                        <div class="col-md-5">
-                            <h4 style="line-height: normal" class="pull-left">
-                                @doctor.FIO
-                                <div class="speciality">@doctor.Specialization</div>
-                            </h4>
-                            <div class="">
-                                <span class="info-icon" data-toggle="modal" data-target="#infomodaldialog"> i </span>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="doctor-status row" data-id="@doctor.Id">
-                                <div class="col-md-4">
-                                    <div class="status-text">
+                <table style="width: 100%">
+                    <colgroup>
+                        <col style="width:80px"/>
+                        <col/>
+                        <col style="width:160px"/>
+                        <col style="width:80px"/>
+                    </colgroup>
+                    @foreach (var doctor in Model)
+                    {
+                        <tr class="list-doctor-panel">
+                            <td>
+                                <a href="#" data-toggle="modal" data-target="#infomodaldialog">
+                                    <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60"/>
+                                </a>
+                            </td>
+                            <td>
+                                <h4 style="line-height: normal" class="">
+                                    @doctor.FIO
+                                    <div class="speciality">@doctor.Specialization</div>
+                                </h4>
+                            </td>
+                            <td>
+                                <div class="doctor-status container-fluid text-nowrap" data-id="@doctor.Id">
+                                    <div class="status-text" style="display: inline-block;width:80px">
                                         @doctor.Status
                                     </div>
-                                </div>
-                                <div class="col-md-6 row">
-                                    <div class="col-md-4">
+                                    <span class="text-nowrap">
                                         <span class="glyphicon glyphicon-comment status-icon"></span>
-                                    </div>
-                                    <div class="col-md-4">
                                         <span class="glyphicon glyphicon-volume-up status-icon"></span>
-                                    </div>
-                                    <div class="col-md-4">
                                         <span class="glyphicon glyphicon-facetime-video status-icon"></span>
-                                    </div>
+                                    </span>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <p>
-                                <div class="pull-right doctor-panel-btn-group rounded">
+                            </td>
+                            <td>
+                                <div class="doctor-panel-btn-group rounded text-nowrap" style="display: inline-block">
                                     <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Записаться">
                                         Записаться
                                     </a>
                                     @if (doctor.CanStartChat)
-                                        {
+                                    {
                                         <a class="btn btn-success start-chat-btn rounded" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
                                             Консультация
                                         </a>
-                                        }
-                                        else
-                                        {
+                                    }
+                                    else
+                                    {
                                         <a class="btn btn-success start-chat-btn disabled rounded" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
                                             Консультация
                                         </a>
-                                        }
+                                    }
                                 </div>
-                            </p>
-                        </div>
-                    </div>
-                }
+                            </td>
+                        </tr>
+                    }
+                </table>
             </div>
             <div class="grid-pager row">
                 <div class="col-md-5">Всего записей: 1 000</div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <nav>
                         <ul class="pagination rounded">
                             <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
@@ -110,23 +105,18 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="col-md-3 row">
-                    <div class="col-md-6">
-
-                    </div>
-                    <div class="col-md-6 row">
-                        <div class="dropdown rounded dropup">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                10 записей
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">20 записей</a></li>
-                                <li><a href="#">50 записей</a></li>
-                                <li><a href="#">100 записей</a></li>
-                                <li><a href="#">Все записи</a></li>
-                            </ul>
-                        </div>
+                <div class="col-md-2 row">
+                    <div class="dropdown rounded dropup">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            10 записей
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">20 записей</a></li>
+                            <li><a href="#">50 записей</a></li>
+                            <li><a href="#">100 записей</a></li>
+                            <li><a href="#">Все записи</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
