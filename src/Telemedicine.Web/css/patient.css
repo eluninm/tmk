@@ -835,20 +835,45 @@ body {
   color: #e79924;
 }
 .list-doctor-panel .status-icon {
+  vertical-align: middle;
   height: 2.5em;
   width: 2.5em;
-  border: 2px solid #3cb776;
-  color: #3cb776;
-  border-radius: 1.5em;
-  text-align: center;
-  line-height: 2.2em;
+  display: inline-block;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  outline: none;
+  /*height: 2.5em;
+        width: 2.5em;
+        border: 2px solid @color-accent4;
+        color: @color-accent4;
+        border-radius: 1.5em;
+        text-align: center;
+        line-height: 2.2em;
+        &:hover {
+            text-decoration: none;
+        }
+
+        &.disabled {
+            border-color: @color-background1;
+            color: @color-background1;
+        }
+            */
+
 }
-.list-doctor-panel .status-icon:hover {
-  text-decoration: none;
+.list-doctor-panel .status-icon.message-icon {
+  background-image: url('/img/chat.svg');
 }
-.list-doctor-panel .status-icon.disabled {
-  border-color: #e4e4e4;
-  color: #e4e4e4;
+.list-doctor-panel .status-icon.voice-icon {
+  background-image: url('/img/voice_green.svg');
+}
+.list-doctor-panel .status-icon.voice-icon.disabled {
+  background-image: url('/img/voice.svg');
+}
+.list-doctor-panel .status-icon.video-icon {
+  background-image: url('/img/video_green.svg');
+}
+.list-doctor-panel .status-icon.video-icon.disabled {
+  background-image: url('/img/video.svg');
 }
 .list-doctor-panel .info-icon {
   background-image: url('/img/info.svg');
@@ -857,6 +882,7 @@ body {
   display: inline-block;
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  outline: none;
   /*font-style:italic;
         color: @color-background1;
         border-color: @color-background1;*/

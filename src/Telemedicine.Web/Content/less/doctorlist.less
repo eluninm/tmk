@@ -34,14 +34,35 @@
     }
 
     .status-icon {
-        height: 2.5em;
+        vertical-align:middle;
+        height:2.5em;
+        width:2.5em;
+        display:inline-block;
+        background-size:100% 100%;
+        background-repeat:no-repeat;
+        outline:none;
+        &.message-icon{
+            background-image:url('/img/chat.svg');
+        }
+        &.voice-icon{
+            background-image:url('/img/voice_green.svg');
+            &.disabled{
+                background-image:url('/img/voice.svg');
+            }
+        }
+        &.video-icon{
+            background-image:url('/img/video_green.svg');
+            &.disabled{
+                background-image:url('/img/video.svg');
+            }
+        }
+        /*height: 2.5em;
         width: 2.5em;
         border: 2px solid @color-accent4;
         color: @color-accent4;
         border-radius: 1.5em;
         text-align: center;
         line-height: 2.2em;
-
         &:hover {
             text-decoration: none;
         }
@@ -50,6 +71,7 @@
             border-color: @color-background1;
             color: @color-background1;
         }
+            */
     }
 
     .info-icon {
@@ -59,6 +81,7 @@
         display:inline-block;
         background-size:100% 100%;
         background-repeat:no-repeat;
+        outline:none;
         /*font-style:italic;
         color: @color-background1;
         border-color: @color-background1;*/
