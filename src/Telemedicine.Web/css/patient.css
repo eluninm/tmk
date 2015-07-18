@@ -512,6 +512,9 @@ body {
 .fc-event .fc-bg {
   opacity: 0 !important;
 }
+.text-center {
+  text-align: center;
+}
 .chat-message {
   position: relative;
   min-height: 45px;
@@ -1206,4 +1209,11 @@ body {
 }
 .page-header.chat-page-header::after {
   padding-top: 10px;
+}
+.incomingCallDialog .modal-content .modal-body .sub-title {
+  font-size: 11px;
+}
+.incomingCallDialog .modal-content .modal-body p {
+  margin-top: 6px;
+  font-size: 14px;
 }
