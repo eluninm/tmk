@@ -241,6 +241,7 @@
     <Content Include="img\arrow_more_icon.svg" />
     <Content Include="img\arrow_right.png" />
     <Content Include="img\arrow_right.svg" />
+    <Content Include="img\attached_chat.png" />
     <Content Include="img\calendar_icon.png" />
     <Content Include="img\calendar_icon.svg" />
     <Content Include="img\calendar_icon_calendar.png" />
@@ -252,6 +253,8 @@
     <Content Include="img\card_icon_menu.svg" />
     <Content Include="img\chat.png" />
     <Content Include="img\chat.svg" />
+    <Content Include="img\Chat_chat.png" />
+    <Content Include="img\Chat_chat.svg" />
     <Content Include="img\check.png" />
     <Content Include="img\check.svg" />
     <Content Include="img\clock_blue.png" />
@@ -271,8 +274,14 @@
     <Content Include="img\no_avatar.png" />
     <Content Include="img\no_chat.png" />
     <Content Include="img\no_chat.svg" />
+    <Content Include="img\pacient_my_records.png" />
+    <Content Include="img\pacient_my_records.svg" />
+    <Content Include="img\phone_chat.png" />
+    <Content Include="img\phone_chat.svg" />
     <Content Include="img\video.png" />
     <Content Include="img\video.svg" />
+    <Content Include="img\video_chat.png" />
+    <Content Include="img\video_chat.svg" />
     <Content Include="img\video_green.png" />
     <Content Include="img\video_green.svg" />
     <Content Include="img\voice.png" />
