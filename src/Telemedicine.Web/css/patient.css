@@ -1031,6 +1031,9 @@ body {
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bolder;
 }
+.grid .row-rd {
+  padding: 30px;
+}
 .grid-content .myevent {
   padding-left: 30px;
   padding-bottom: 23px;
@@ -1047,7 +1050,18 @@ body {
   color: #395c9c;
   text-decoration: underline;
   line-height: 60px;
+  text-transform: uppercase;
 }
 .grid-content .myevent .speciality {
   margin-top: 6px;
+  color: #e79924;
+}
+.grid-content .myevent .payment-calendar {
+  margin-left: 25px;
+}
+.grid-content .myevent .img {
+  margin-left: 20px;
+}
+.grid-content .myevent .cancel-icon {
+  background: url('/img/pacient_my_records.svg');
 }

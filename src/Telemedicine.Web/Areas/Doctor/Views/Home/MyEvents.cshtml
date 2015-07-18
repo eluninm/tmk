@@ -7,322 +7,105 @@
     <h1 class="page-header row">Мои записи</h1>
     <div class="container-fluid unscrollable row" style="display: flex;flex-direction: column">
         <div class="grid">
+            <div class="row row-rd" style="padding: 30px 0;">
+                <div class="col-md-4">
+                    <div class="input-group rounded">
+                        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" placeholder="ФИО пациента">
+                        <span class="input-group-addon"><span class=" glyphicon glyphicon-search"></span></span>
+                    </div>    
+                </div>
+            </div>
             <div class="page-header">
                 <div class="row">
-                    <div class="col-md-1">
-                        <b>Дата</b>
-                    </div>
-                    <div class="col-md-9">
-                        <b>Описание</b>
-                    </div>
-                    <div class="col-md-1">
-                        <b>Статус</b>
-                    </div>
+                    <table style="width: 100%">
+                        <colgroup>
+                            <col style="width: 90px;"/>
+                            <col style="width: 413px;"/>
+                            <col/>
+                            <col style="width: 150px;"/>
+                        </colgroup>
+                        <tr class="myevent">
+                            <th>
+                                ФИО
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                                Дата
+                            </th>
+                            <th>    
+                                Статус
+                            </th>
+                        </tr>
+                    </table>
                 </div>
             </div>
             <div class="grid-content">
-                <div class="list-doctor-panel">
-                    <div class="row myevent">
-                        <div class="col-md-1">
+                <table style="width: 100%">
+                    <colgroup>
+                        <col style="width: 90px;"/>
+                        <col style="width: 400px;"/>
+                        <col />
+                        <col style="width: 150px;"/>
+                    </colgroup>
+                    <tr class="myevent">
+                        <td>
+                            <a class="img" href="#" data-toggle="modal" data-target="#infomodaldialog">
+                                <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
+                            </a>
+                        </td>
+                        <td class="text-nowrap">
+                            <span style="line-height: normal; float: left;margin-right: 15px">
+                                Иванов Иван Иванович
+                            </span>
+                            <a href="#" class="info-icon small glyphicon" data-toggle="modal" data-target="#infomodaldialog"></a>
+                        </td>
+                        <td class="text-nowrap">
                             <div class="payment-calendar">
                                 <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
                             </div>
                             <div class="payment-calendar">
                                 <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
                             </div>
-                        </div>
-                        <div class="col-md-9">
-                            <h4 style="line-height: normal">
-                                Овчинникова Елена Олеговна
-                                <div class="speciality">
-                                    Психолог
-                                </div>
-                            </h4>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="doctor-panel-btn-group rounded">
-                                <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
-                                    Начать
+                        </td>
+                        <td>
+                            <div class="input-group rounded">
+                                <span class="glyphicon cancel-icon"></span>
+                                <a class="action" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
+                                    отклонено
                                 </a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row myevent">
-                        <div class="col-md-1">
+                        </td>
+                    </tr>
+                    <tr class="myevent">
+                        <td>
+                            <a class="img" href="#" data-toggle="modal" data-target="#infomodaldialog">
+                                <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
+                            </a>
+                        </td>
+                        <td class="text-nowrap">
+                            <span style="line-height: normal; float: left;margin-right: 15px">
+                                Иванов Иван Иванович
+                            </span>
+                            <a href="#" class="info-icon small glyphicon" data-toggle="modal" data-target="#infomodaldialog"></a>
+                        </td>
+                        <td class="text-nowrap">
                             <div class="payment-calendar">
                                 <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
                             </div>
                             <div class="payment-calendar">
                                 <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
                             </div>
-                        </div>
-                        <div class="col-md-9">
-                            <h4 style="line-height: normal">
-                                Ежов Игорь Николаевич
-                                <div class="speciality">
-                                    Отоларинголог
-                                </div>
-                            </h4>
-                        </div>
-                        <div class="col-md-1">
+                        </td>
+                        <td>
                             <div class="doctor-panel-btn-group rounded">
                                 <a class="action" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
                                     ПОСМОТРЕТЬ
                                 </a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row myevent">
-                        <div class="col-md-1">
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <h4 style="line-height: normal">
-                                Овчинникова Елена Олеговна
-                                <div class="speciality">
-                                    Психолог
-                                </div>
-                            </h4>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="doctor-panel-btn-group rounded">
-                                <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
-                                    Начать
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row myevent">
-                        <div class="col-md-1">
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <h4 style="line-height: normal">
-                                Ежов Игорь Николаевич
-                                <div class="speciality">
-                                    Отоларинголог
-                                </div>
-                            </h4>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="doctor-panel-btn-group rounded">
-                                <a class="action" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
-                                    ПОСМОТРЕТЬ
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row myevent">
-                        <div class="col-md-1">
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <h4 style="line-height: normal">
-                                Овчинникова Елена Олеговна
-                                <div class="speciality">
-                                    Психолог
-                                </div>
-                            </h4>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="doctor-panel-btn-group rounded">
-                                <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
-                                    Начать
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row myevent">
-                        <div class="col-md-1">
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <h4 style="line-height: normal">
-                                Ежов Игорь Николаевич
-                                <div class="speciality">
-                                    Отоларинголог
-                                </div>
-                            </h4>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="doctor-panel-btn-group rounded">
-                                <a class="action" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
-                                    ПОСМОТРЕТЬ
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row myevent">
-                        <div class="col-md-1">
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <h4 style="line-height: normal">
-                                Овчинникова Елена Олеговна
-                                <div class="speciality">
-                                    Психолог
-                                </div>
-                            </h4>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="doctor-panel-btn-group rounded">
-                                <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
-                                    Начать
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row myevent">
-                        <div class="col-md-1">
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <h4 style="line-height: normal">
-                                Ежов Игорь Николаевич
-                                <div class="speciality">
-                                    Отоларинголог
-                                </div>
-                            </h4>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="doctor-panel-btn-group rounded">
-                                <a class="action" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
-                                    ПОСМОТРЕТЬ
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row myevent">
-                        <div class="col-md-1">
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <h4 style="line-height: normal">
-                                Овчинникова Елена Олеговна
-                                <div class="speciality">
-                                    Психолог
-                                </div>
-                            </h4>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="doctor-panel-btn-group rounded">
-                                <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
-                                    Начать
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row myevent">
-                        <div class="col-md-1">
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <h4 style="line-height: normal">
-                                Ежов Игорь Николаевич
-                                <div class="speciality">
-                                    Отоларинголог
-                                </div>
-                            </h4>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="doctor-panel-btn-group rounded">
-                                <a class="action" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
-                                    ПОСМОТРЕТЬ
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row myevent">
-                        <div class="col-md-1">
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <h4 style="line-height: normal">
-                                Овчинникова Елена Олеговна
-                                <div class="speciality">
-                                    Психолог
-                                </div>
-                            </h4>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="doctor-panel-btn-group rounded">
-                                <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
-                                    Начать
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row myevent">
-                        <div class="col-md-1">
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>@DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>@DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <h4 style="line-height: normal">
-                                Ежов Игорь Николаевич
-                                <div class="speciality">
-                                    Отоларинголог
-                                </div>
-                            </h4>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="doctor-panel-btn-group rounded">
-                                <a class="action" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Начать">
-                                    ПОСМОТРЕТЬ
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="grid-pager row">
                 <div class="col-md-5">Всего записей: 1 000</div>
