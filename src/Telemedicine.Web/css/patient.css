@@ -433,6 +433,13 @@ body {
   border-bottom-right-radius: 12px;
   padding: 25px;
 }
+.recommendation-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
 .chat-message {
   position: relative;
   min-height: 45px;
@@ -854,6 +861,62 @@ body {
 .grid-body {
   border-bottom: 1px #e4e4e4 solid;
   padding-bottom: 20px;
+}
+.recomendation-message-rd {
+  padding-top: 15px;
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.title-rd {
+  margin: 15px 0;
+  font-size: 12px;
+  color: #e79924;
+}
+.timestamp-rd {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+.speciality-rd {
+  font-size: 11px;
+  color: #8c8c8c;
+}
+.message-rd {
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  color: black;
+}
+.modal-header-rd {
+  border: none;
+}
+.btn-round-rd {
+  margin-top: 20px;
+  margin-right: 10px;
+  height: 2.5em;
+  border-radius: 1.5em;
+  text-transform: lowercase;
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #b5b5b5;
+  color: white;
+}
+.btn-round-rd:hover {
+  background-color: #919191;
+  color: white;
+}
+.btn-round-rd:active {
+  position: relative;
+  top: 1px;
+  color: white;
+}
+.modal-footer-rd {
+  border: none;
+  background-color: #f7f7f7;
+  height: 100px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.modal-content-rd {
+  max-height: 270px;
+  overflow-y: auto;
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .grid .page-header {
   margin: 0px;
