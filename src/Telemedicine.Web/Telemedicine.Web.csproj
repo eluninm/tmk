@@ -496,7 +496,6 @@
     <Content Include="Areas\Patient\Views\_ViewStart.cshtml" />
     <None Include="Properties\PublishProfiles\altarix-tmk.pubxml" />
     <Content Include="Views\Chat\Index.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Temp\Index.cshtml" />
     <Content Include="Views\Temp\IndexLayout.cshtml" />
     <Content Include="Views\Temp\Demo2.cshtml" />
@@ -525,7 +524,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Scripts\jquery-2.1.4.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\ApiMapperConfiguration.cs" />
