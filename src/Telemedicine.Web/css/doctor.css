@@ -441,6 +441,9 @@ body {
   border-bottom-right-radius: 12px;
   padding: 25px;
 }
+.modal-content .modal-footer .btn-round-rd {
+  margin: 0;
+}
 .recommendation-text {
   overflow: hidden;
   text-overflow: ellipsis;
