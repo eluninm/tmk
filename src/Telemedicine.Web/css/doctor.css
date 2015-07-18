@@ -321,6 +321,10 @@ body {
 .sub-container > div.unscrollable {
   overflow-y: auto;
 }
+.btn.start-chat-btn {
+  background: #e79924;
+  border-color: #e79924;
+}
 .rounded.dropdown .dropdown-toggle {
   background: white;
   height: 2.5em;
@@ -514,6 +518,7 @@ body {
   text-decoration: underline;
   line-height: 60px;
   text-transform: uppercase;
+  margin-left: 9px;
 }
 .grid-content .myevent .speciality {
   margin-top: 6px;
@@ -527,11 +532,12 @@ body {
 }
 .grid-content .myevent .cancel-icon {
   vertical-align: middle;
-  height: 2.5em;
-  width: 2.5em;
+  width: 15px;
+  height: 15px;
   display: inline-block;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   outline: none;
-  background: url('/img/pacient_my_records.svg');
+  background-position: center;
+  background-image: url('/img/pacient_my_records.svg');
 }
