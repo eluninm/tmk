@@ -419,6 +419,7 @@
     <Content Include="Areas\Patient\Views\Shared\DisplayTemplates\ShortDateTime.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\MyEvents.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\Balance.cshtml" />
+    <Content Include="Areas\Doctor\Views\Home\Index2.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
     <Content Include="Content\patient.less" />
@@ -550,6 +551,7 @@
     <Compile Include="Areas\Doctor\Controllers\HomeController.cs" />
     <Compile Include="Areas\Doctor\Controllers\ConversationController.cs" />
     <Compile Include="Areas\Doctor\Controllers\EventsController.cs" />
+    <Compile Include="Areas\Doctor\Controllers\RecommendationController.cs" />
     <Compile Include="Areas\Doctor\Controllers\_HomeController.cs" />
     <Compile Include="Areas\Doctor\Models\AddEventViewModel.cs" />
     <Compile Include="Areas\Doctor\Models\AppointmentViewModel.cs" />
@@ -614,6 +616,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Doctor\Views\Recommendation\" />
     <Folder Include="Views\Calendar\" />
   </ItemGroup>
   <ItemGroup>
@@ -661,7 +664,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>9563</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

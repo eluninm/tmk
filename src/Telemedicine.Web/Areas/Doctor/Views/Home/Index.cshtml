@@ -5,14 +5,17 @@
 }
 
 <br/>
-@Html.Action("GetStatus", "Status")
-
-    <div >
-        <br/>
-        <div class="dropdown">
+<div class="row">
+    <div class="col-md-4">
+        @Html.Action("GetStatus", "Status")
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <div class="dropdown rounded">
             <a class="btn btn-primary dropdown-toggle" id="selectMonth" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <span id="selectedMonth">Месяц</span> <span class="caret"></span></a>
-
+                <span id="selectedMonth">Месяц</span> <span class="caret"></span>
+            </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="selectMonth">
                 <li>
                     <a onclick="selectMonth(0);">Январь</a>
@@ -51,27 +54,29 @@
                     <a onclick="selectMonth(11);">Декабрь</a>
                 </li>
             </ul>
-
-            <a class="btn btn-primary" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
-                 <span class="glyphicon glyphicon-plus"></span>
-            </a>
         </div>
-
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-primary rounded fullwidth" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
+            <span class="glyphicon">+</span> Добавить
+        </a>
     </div>
 
-    <div id="calendar"></div>
+</div>
 
-    <div>
-        <h4>Записанные пациенты</h4>
-        <table class="table table-responsive">
-            <thead>
+<div id="calendar"></div>
+
+<div>
+    <h4>Записанные пациенты</h4>
+    <table class="table table-responsive">
+        <thead>
             <tr>
                 <th>Дата события</th>
                 <th>ФИО Пациента</th>
                 <th>Тип события</th>
             </tr>
-            </thead>
-            <tbody>
+        </thead>
+        <tbody>
             @foreach (var appointment in Model)
             {
                 <tr>
@@ -80,17 +85,17 @@
                     <td>Запись к врачу</td>
                 </tr>
             }
-            </tbody>
-        </table>
-        <br/>
-    </div>
+        </tbody>
+    </table>
+    <br />
+</div>
 
 
 
 <div class="modal fade" id="addEventDialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            
+
         </div>
     </div>
 </div>
@@ -98,32 +103,33 @@
 @section scripts
 {
     <script type="text/javascript">
-        $(function() {
-            $(".dropdown-menu li a").click(function() {
+        $(function () {
+            $(".dropdown-menu li a").click(function () {
                 $("#selectedMonth").text($(this).text());
 
             });
 
-            $.getJSON('@Url.Action("GetEvents", "Events")', "json", function(data) {
+            $.getJSON('@Url.Action("GetEvents", "Events")', "json", function (data) {
                 $('#calendar').fullCalendar({
                     lang: 'ru',
                     events: data,
-                    defaultView: "agendaWeek", 
+                    defaultView: "agendaWeek",
                     minTime: '07:00',
                     maxTime: '21:00',
-                    height: 300
+                    height: 300,
+                    eventColor: '#3e67ae'
                 });
             });
         });
-        
-        
+
+
         function onAddSuccess() {
             $("#addEventDialog").modal('hide');
             window.location.href = '@Url.Action("Index", "Home")';
         }
         function selectMonth(monthNumber) {
             var date = new Date();
-            $('#calendar').fullCalendar('gotoDate', new Date(date.getFullYear(),monthNumber,1));
+            $('#calendar').fullCalendar('gotoDate', new Date(date.getFullYear(), monthNumber, 1));
         }
 
     </script>

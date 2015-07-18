@@ -21,19 +21,21 @@
     }
 }
 
-<div class="dropdown" id="statusInformer">
-    <div class="btn-group " style="width: 340px;">
-        <button style="width: 100%;" type="button" class="btn tm-light-bg status-btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            @Model.CurrentStatus.DisplayName.ToLower() <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-            @foreach (var item in Model.AvailableStatuses)
-            {
-                <li>@Ajax.ActionLink(item.DisplayName, "ChangeStatus", "Status", new {id = item.Id}, new AjaxOptions
-                    {
-                        HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "statusInformer"
-                    }, null)</li>
-            }
-        </ul>
-    </div>
+<div class="dropdown rounded" id="statusInformer">
+    <a class="btn btn-primary dropdown-toggle" id="selectMonth" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        @Model.CurrentStatus.DisplayName.ToLower() <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        @foreach (var item in Model.AvailableStatuses)
+        {
+            <li>
+                @Ajax.ActionLink(item.DisplayName, "ChangeStatus", "Status", new {id = item.Id}, new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "statusInformer"
+                }, null)
+            </li>
+        }
+    </ul>
 </div>

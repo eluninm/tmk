@@ -286,6 +286,9 @@ body {
   height: 100%;
   overflow: auto;
 }
+.fullwidth {
+  width: 100%;
+}
 .sub-container {
   display: flex;
   flex-direction: column;
@@ -339,6 +342,9 @@ body {
   position: absolute;
   right: 1em;
   top: 1.2em;
+}
+.rounded.dropdown .dropdown-toggle.btn-primary {
+  background: #3e67ae;
 }
 .rounded.input-group > input-group-addon {
   height: 2.5em;
@@ -489,6 +495,9 @@ body {
   display: -webkit-box;
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
+}
+.fc-event .fc-bg {
+  opacity: 0 !important;
 }
 .chat-message {
   position: relative;

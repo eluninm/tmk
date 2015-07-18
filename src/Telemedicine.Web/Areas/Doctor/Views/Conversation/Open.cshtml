@@ -30,19 +30,8 @@
                     Выберите консультацию <br /> для просмотра истории общения
                 </p>
             </div>
-            <div style="flex: 1; overflow-y: auto;">
-                @for (var i = 0; i < 20; i++)
-                {
-                    <div class="chat-message">
-                        <img class="chat-image img-circle @(i%2 == 0 ? "target" : "me")" src="/img/no_avatar.png" />
-                        <div class="chat-message  @(i%2 == 0 ? "target" : "me")">
-                            <p>test</p>
-                            <div class="chat-details small">
-                                @DateTime.Now.ToShortDateString() @DateTime.Now.ToShortTimeString()
-                            </div>
-                        </div>
-                    </div>
-                }
+            <div style="flex: 1; overflow-y: auto;" id="chatMessageList">
+
             </div>
             <div class="chat-enter-box tm-noactive-bg" id="messageBox">
                 <button class="chat-send-btn btn" id="sendMessageBtn"></button>
@@ -64,7 +53,7 @@
             <after style="background: red"></after>
         </h1>
         <div class="content row">
-@*            @Html.Action("List2", "Recommendations", new { id = @ViewBag.TargetUserId })*@
+            @Html.Action("List2", "Recommendations", new { id = @ViewBag.TargetUserId })
         </div>
     </div>
 </div>
@@ -97,7 +86,10 @@
         }
 
         function addMessage(message) {
-            $('#chatMessageList').append('<div class="chat-message ' + message.Direction + '">' + message.Message + '</div>');
+            $('#chatMessageList').append('<div class="chat-message">'
+                + '<img class="chat-image img-circle ' + message.Direction + '" src="/img/no_avatar.png" />'
+                + '<div class="chat-message ' + message.Direction + '"><p>' + message.Message + '</p>'
+                + '<div class="chat-details small">' + message.Created + '</div></div></div>');
             $(".chat-panel .panel-body").scrollTop($(".chat-panel .panel-body")[0].scrollHeight);
         }
 
