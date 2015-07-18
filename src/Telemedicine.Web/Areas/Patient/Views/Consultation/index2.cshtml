@@ -167,7 +167,7 @@
                             </div>
                         </div>
                     </div>
-                    <a class="btn btn-primary rounded" data-dismiss="modal">
+                    <a class="btn btn-primary rounded" id="modalRequestButton2">
                         ЗАПИСАТЬСЯ
                     </a>
                     <a class="btn btn-success start-chat-btn rounded" data-dismiss="modal">
@@ -206,7 +206,7 @@
                             СТОИМОСТЬ КОНСУЛЬТАЦИИ 500 р.
                         </div>
                     </div>
-                    <a class="btn btn-primary rounded" data-dismiss="modal">
+                    <a class="btn btn-primary rounded" data-dismiss="modal" id="modalRequestButton1">
                         ЗАПИСАТЬСЯ
                     </a>
                     <a class="btn btn-success start-chat-btn rounded" data-dismiss="modal">
@@ -217,31 +217,60 @@
         </div>
     </div>
     <div class="modal fade" id="waitDoctorAnswerDialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog waitdoctoranswerdialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body doctordeclinecall">
-                    <p class="speciality">ИЗВИНИТЕ, ПРИНИМАЮЩИЙ ВРАЧ ОТКЛОНИЛ КОНСУЛЬТАЦИЮ</p>
-                    <p class="text">Попробуйте записаться к нему на другое время или выбрать другого врача</p>
-                </div>
-                <div class="modal-footer">
-
-                </div>
+                
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="doctorDeclineCall">
+    <div class="modal fade doctordeclinecall" id="doctorDeclineCall">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body doctordeclinecall">
+                <div class="modal-body">
                     <p class="speciality">ИЗВИНИТЕ, ПРИНИМАЮЩИЙ ВРАЧ ОТКЛОНИЛ КОНСУЛЬТАЦИЮ</p>
                     <p class="text">Попробуйте записаться к нему на другое время или выбрать другого врача</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade paymentmodaldialog" id="paymentModalDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title pull-left">Оплата консультации</h3>
+                    <h3 class="price">500.00 р.</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row sub-title">
+                        Выберите способ оплаты
+                    </div>
+                    <div class="row">
+                        <div class="dropdown rounded">
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Средство платежа
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">Банковской картой</a></li>
+                                <li><a href="#">Webmoney</a></li>
+                                <li><a href="#">Мобильный телефон</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary rounded" data-dismiss="modal">
+                        ОПЛАТИТЬ
+                    </a>
+                    <a class="btn rounded btn-round-rd" data-dismiss="modal">
+                        ОТМЕНА
+                    </a>
                 </div>
             </div>
         </div>
@@ -310,6 +339,16 @@
                     }
                 });
             };
+
+            $("#modalRequestButton1").click(function() {
+                $("#appointmentModalDialog").modal("hide");
+                $("#paymentModalDialog").modal("show");
+            });
+
+            $("#modalRequestButton2").click(function () {
+                $("#infomodaldialog").modal("hide");
+                $("#appointmentModalDialog").modal("show");
+            });
         });
 
         function callToDoctor(userId) {
