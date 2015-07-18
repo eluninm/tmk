@@ -18,40 +18,40 @@
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="selectMonth">
                 <li>
-                    <a onclick="selectMonth(0);">Январь</a>
+                    <a onclick=" selectMonth(0); ">Январь</a>
                 </li>
                 <li>
-                    <a onclick="selectMonth(1);">Февраль</a>
+                    <a onclick=" selectMonth(1); ">Февраль</a>
                 </li>
                 <li>
-                    <a onclick="selectMonth(2);">Март</a>
+                    <a onclick=" selectMonth(2); ">Март</a>
                 </li>
                 <li>
-                    <a onclick="selectMonth(3);">Апрель</a>
+                    <a onclick=" selectMonth(3); ">Апрель</a>
                 </li>
                 <li>
-                    <a onclick="selectMonth(4);">Май</a>
+                    <a onclick=" selectMonth(4); ">Май</a>
                 </li>
                 <li>
-                    <a onclick="selectMonth(5);">Июнь</a>
+                    <a onclick=" selectMonth(5); ">Июнь</a>
                 </li>
                 <li>
-                    <a onclick="selectMonth(6);">Июль</a>
+                    <a onclick=" selectMonth(6); ">Июль</a>
                 </li>
                 <li>
-                    <a onclick="selectMonth(7);">Август</a>
+                    <a onclick=" selectMonth(7); ">Август</a>
                 </li>
                 <li>
-                    <a onclick="selectMonth(8);">Сентябрь</a>
+                    <a onclick=" selectMonth(8); ">Сентябрь</a>
                 </li>
                 <li>
-                    <a onclick="selectMonth(9);">Отктябрь</a>
+                    <a onclick=" selectMonth(9); ">Отктябрь</a>
                 </li>
                 <li>
-                    <a onclick="selectMonth(10);">Ноябрь</a>
+                    <a onclick=" selectMonth(10); ">Ноябрь</a>
                 </li>
                 <li>
-                    <a onclick="selectMonth(11);">Декабрь</a>
+                    <a onclick=" selectMonth(11); ">Декабрь</a>
                 </li>
             </ul>
         </div>
@@ -70,26 +70,25 @@
     <h4>Записанные пациенты</h4>
     <table class="table table-responsive">
         <thead>
-            <tr>
-                <th>Дата события</th>
-                <th>ФИО Пациента</th>
-                <th>Тип события</th>
-            </tr>
+        <tr>
+            <th>Дата события</th>
+            <th>ФИО Пациента</th>
+            <th>Тип события</th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var appointment in Model)
-            {
-                <tr>
-                    <td>@appointment.Date</td>
-                    <td>@appointment.PatientFio</td>
-                    <td>Запись к врачу</td>
-                </tr>
-            }
+        @foreach (var appointment in Model)
+        {
+            <tr>
+                <td>@appointment.Date</td>
+                <td>@appointment.PatientFio</td>
+                <td>Запись к врачу</td>
+            </tr>
+        }
         </tbody>
     </table>
-    <br />
+    <br/>
 </div>
-
 
 
 <div class="modal fade" id="addEventDialog">
@@ -103,13 +102,25 @@
 @section scripts
 {
     <script type="text/javascript">
-        $(function () {
-            $(".dropdown-menu li a").click(function () {
+        $(function() {
+            $(".dropdown-menu li a").click(function() {
                 $("#selectedMonth").text($(this).text());
 
             });
 
-            $.getJSON('@Url.Action("GetEvents", "Events")', "json", function (data) {
+            var months = [
+                "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+                "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+            ];
+
+            $("#selectedMonth").text(months[(new Date()).getMonth()]);
+
+            $("#selectedMonth").bind('DOMSubtreeModified', function() {
+                if ($.inArray($("#selectedMonth").text(), months) == -1)
+                    $("#selectedMonth").text(months[(new Date()).getMonth()]);
+            });
+
+            $.getJSON('@Url.Action("GetEvents", "Events")', "json", function(data) {
                 $('#calendar').fullCalendar({
                     lang: 'ru',
                     events: data,
@@ -127,6 +138,7 @@
             $("#addEventDialog").modal('hide');
             window.location.href = '@Url.Action("Index", "Home")';
         }
+
         function selectMonth(monthNumber) {
             var date = new Date();
             $('#calendar').fullCalendar('gotoDate', new Date(date.getFullYear(), monthNumber, 1));
