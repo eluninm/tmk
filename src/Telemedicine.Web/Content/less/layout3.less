@@ -17,6 +17,7 @@ body {
     height: 100%;
     overflow: auto;
 }
+
 .fullwidth {
     width: 100%;
 }
@@ -85,7 +86,8 @@ body {
                 right: 1em;
                 top: 1.2em;
             }
-            &.btn-primary{
+
+            &.btn-primary {
                 background: @color-accent1-light;
             }
         }
@@ -120,6 +122,7 @@ body {
         color: white;
     }
 
+
     &.btn-default {
         background: @color-btn-default-background;
         background-color: @color-btn-default-background;
@@ -141,6 +144,19 @@ body {
         border-radius: 1.5em;
         .font-regular;
     }
+}
+
+.fc-button {
+    height: 35px;
+    border-radius: 2em!important;
+    text-transform: uppercase;
+    .font-regular;
+    font-size: 11px;
+    background-color:@color-btn-default-background!important;
+    padding: 12px 35px 25px 35px;
+    color: white;
+    box-shadow:none!important;
+    text-shadow:none!important;
 }
 
 .linkimage {
@@ -244,6 +260,6 @@ body {
     -webkit-box-orient: vertical;
 }
 
-.fc-event .fc-bg{
-    opacity:0!important;
+.fc-event .fc-bg {
+    opacity: 0 !important;
 }

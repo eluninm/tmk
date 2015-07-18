@@ -383,6 +383,19 @@ body {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: normal;
 }
+.fc-button {
+  height: 35px;
+  border-radius: 2em !important;
+  text-transform: uppercase;
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  font-size: 11px;
+  background-color: #b1b1b1 !important;
+  padding: 12px 35px 25px 35px;
+  color: white;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
 .linkimage {
   content: '';
   height: 2em;
