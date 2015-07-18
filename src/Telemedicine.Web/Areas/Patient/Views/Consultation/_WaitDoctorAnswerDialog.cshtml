@@ -1,15 +1,17 @@
 ﻿@model Telemedicine.Web.Areas.Patient.Models.ChatDialogViewModel
      
 <div class="modal-header">
-    <h3>Начать консультацию</h3>
 </div>
 
 <div class="modal-body">
-    @Model.DoctorDisplayName <br/>
-    @Model.Specialization
+    <div class="sub-title">
+        начинается консультация
+    </div>
+    <div class="text">@Model.DoctorDisplayName</div>
+    <div class="speciality">@Model.Specialization</div>
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-success" data-loading-text="Вызов доктора..." id="callToDoctorBtn" onclick="callToDoctor('@Model.DoctorUserId')">Начать консультацию</button> 
-    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="cancelCall()">Отмена</button>
+    <button type="button" class="btn btn-success rounded" data-loading-text="Вызов доктора..." id="callToDoctorBtn" onclick="callToDoctor('@Model.DoctorUserId')">Начать консультацию</button> 
+    <button type="button" class="btn btn-default rounded" data-dismiss="modal" onclick="cancelCall()">Отмена</button>
 </div>

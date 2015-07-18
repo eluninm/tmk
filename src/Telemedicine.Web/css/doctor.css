@@ -325,6 +325,11 @@ body {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 11px;
   padding: 12px 35px 25px 35px;
+  color: white;
+}
+.rounded.btn-default {
+  background: #b1b1b1;
+  background-color: #b1b1b1;
 }
 .rounded.pagination > li:first-child > a,
 .rounded.pagination > li:last-child > a,
@@ -422,6 +427,12 @@ body {
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 11px;
   line-height: 20px;
+}
+.modal-content .modal-body .sub-title {
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  line-height: 20px;
+  color: #8c8c8c;
 }
 .modal-content .modal-footer {
   border: none;
