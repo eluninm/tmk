@@ -39,6 +39,11 @@
 }
 
 @font-face {
+    font-family: GothaProLight;
+    src: url('/css/fonts/GothaProLig.otf');
+}
+
+@font-face {
     font-family: GothaProMedium;
     src: url('/css/fonts/GothaProMed.otf');
 }
@@ -55,14 +60,22 @@
 
 .font-normal {
     font-family: GothaProMedium,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
 }
 
 .font-regular {
     font-family: GothaProReg,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
+}
+
+.font-light {
+    font-family: GothaProLight,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
 }
 
 .font-medium {
     font-family: GothaProMedium,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
 }
 
 .font-bold {
@@ -75,6 +88,14 @@
 }
 .font12px {
     font-size:12px;
+}
+
+.flex{
+    display:flex;
+}
+.flex-column{
+    .flex;
+    flex-direction:column;
 }
 
 @color-background-sidebar: #1B67B2;

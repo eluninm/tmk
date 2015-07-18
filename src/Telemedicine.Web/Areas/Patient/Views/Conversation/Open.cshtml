@@ -5,7 +5,24 @@
 
 <div class="row fullheight" style="position: relative" ng-controller="HistoryController as viewModel" data-id="1">
     <div class="col-md-9 fullheight sub-container">
-        <h1 class="page-header row">История</h1>
+        <h1 class="page-header row chat-page-header">
+            <div class="col-md-6 flex chat-interlocutor">
+                <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60"/>
+                <span class="title">
+                    Ежов Игорь Николаевич
+                </span>
+            </div>
+            <div class="col-md-4 flex chat-time">
+                <div class="time">
+                    11:45
+                </div>
+                <div class="title">Время<br/>консультации</div>
+            </div>
+            <div class="col-md-2 chat-buttons">
+                <a href="#" class="btn chat-phone"></a>
+                <a href="#" class="btn chat-video"></a>
+            </div>
+        </h1>
         <div class="content row unscrollable" style="display: flex; flex-direction: column">
             <div class="chat-nocontent" ng-hide="viewModel.selectedConsultationId" style="display: none;">
                 <img src="/img/no_chat.png" />

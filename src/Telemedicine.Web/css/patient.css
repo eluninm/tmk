@@ -11,6 +11,10 @@
   src: url('/css/fonts/GothaProIta.otf');
 }
 @font-face {
+  font-family: GothaProLight;
+  src: url('/css/fonts/GothaProLig.otf');
+}
+@font-face {
   font-family: GothaProMedium;
   src: url('/css/fonts/GothaProMed.otf');
 }
@@ -24,12 +28,19 @@
 }
 .font-normal {
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
 }
 .font-regular {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+}
+.font-light {
+  font-family: GothaProLight, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
 }
 .font-medium {
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
 }
 .font-bold {
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -40,6 +51,13 @@
 }
 .font12px {
   font-size: 12px;
+}
+.flex {
+  display: flex;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
 }
 /*override variables here*/
 
@@ -195,6 +213,7 @@
 .grid .grid-pager {
   line-height: 2.5em;
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   font-size: 14px;
 }
 .grid .grid-pager .pagination {
@@ -259,6 +278,7 @@ body {
 }
 .main-container {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   height: 100%;
   overflow: auto;
 }
@@ -326,6 +346,7 @@ body {
   border-radius: 2em;
   text-transform: uppercase;
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   font-size: 11px;
   padding: 12px 35px 25px 35px;
   color: white;
@@ -346,6 +367,7 @@ body {
   height: 2.5em;
   border-radius: 1.5em;
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
 }
 .linkimage {
   content: '';
@@ -419,6 +441,7 @@ body {
 }
 .modal-content .modal-title {
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   color: black;
   margin-left: 15px;
   margin-top: 8px;
@@ -428,11 +451,13 @@ body {
 }
 .modal-content .modal-body p {
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   font-size: 11px;
   line-height: 20px;
 }
 .modal-content .modal-body .sub-title {
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   font-size: 12px;
   line-height: 20px;
   color: #8c8c8c;
@@ -477,6 +502,7 @@ body {
 .chat-message.me,
 .chat-message.target {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   font-size: 12px;
   color: black;
 }
@@ -500,6 +526,7 @@ body {
   margin-top: 45px;
   color: #8c8c8c;
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
 }
 .chat-message::before {
   content: "\00a0";
@@ -634,6 +661,7 @@ body {
 .recomendation-message-container .recomendation-message .message {
   margin: 15px 0;
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   font-size: 12px;
   color: black;
 }
@@ -668,6 +696,7 @@ body {
 }
 .consultation-message-container .consultation-message .author .title {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   font-size: 14px;
 }
 .consultation-message-container .consultation-message .author .speciality {
@@ -700,6 +729,7 @@ body {
 .doctordeclinecall .speciality {
   font-size: 10px;
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   font-weight: bolder;
   color: #e79924;
   text-align: center;
@@ -710,6 +740,7 @@ body {
 .doctordeclinecall .text {
   font-size: 14px;
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   font-weight: bolder;
   text-align: center;
   margin: 0 auto;
@@ -799,6 +830,7 @@ body {
 .waitdoctoranswerdialog .speciality {
   font-size: 10px;
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   font-weight: bolder;
   color: #e79924;
   text-align: center;
@@ -809,6 +841,7 @@ body {
 .waitdoctoranswerdialog .text {
   font-size: 14px;
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   font-weight: bolder;
   text-align: center;
   margin: 0 auto;
@@ -823,6 +856,7 @@ body {
 .paymentmodaldialog .price {
   color: #395c9c;
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   margin-top: 14px;
 }
 .paymentmodaldialog .modal-title {
@@ -843,6 +877,7 @@ body {
 }
 .list-doctor-panel h4 {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   font-size: 14px;
 }
 .list-doctor-panel .doctor-status {
@@ -923,13 +958,16 @@ body {
 }
 .balance-info .text {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   margin-left: 33px;
 }
 .balance-info .summa {
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
 }
 .balance-info .rouble {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
 }
 .balance-refill {
   margin-left: 33px;
@@ -942,12 +980,14 @@ body {
   border-radius: 1.5em;
   text-transform: uppercase;
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
 }
 .payment-calendar {
   font-size: 12px;
   display: block;
   margin-bottom: 10px;
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
 }
 .payment-calendar .glyphicon {
   font-size: 1.1em;
@@ -965,6 +1005,7 @@ body {
 .recomendation-message-rd {
   padding-top: 15px;
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
 }
 .title-rd {
   margin: 15px 0;
@@ -981,6 +1022,7 @@ body {
 }
 .message-rd {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   font-size: 12px;
   color: black;
 }
@@ -992,6 +1034,7 @@ body {
   border-radius: 1.5em;
   text-transform: lowercase;
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
   background-color: #b5b5b5;
   color: white;
 }
@@ -1014,6 +1057,7 @@ body {
   max-height: 270px;
   overflow-y: auto;
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
 }
 .grid .page-header {
   margin: 0px;
@@ -1045,4 +1089,56 @@ body {
 }
 .grid-content .myevent .speciality {
   margin-top: 6px;
+}
+.page-header.chat-page-header .chat-interlocutor .title {
+  margin-left: 10px;
+  padding: 10px 15px 10px 0;
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  flex: 1;
+}
+.page-header.chat-page-header .chat-interlocutor::after {
+  content: ":";
+  display: inline-block;
+  width: 5px;
+}
+.page-header.chat-page-header .chat-time {
+  padding: 10px 0 10px 25px;
+}
+.page-header.chat-page-header .chat-time::after {
+  content: ":";
+  display: inline-block;
+  width: 5px;
+  margin-left: 35px;
+}
+.page-header.chat-page-header .chat-time .time {
+  font-family: GothaProLight, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  font-size: 34px;
+  color: #3e67ae;
+}
+.page-header.chat-page-header .chat-time .title {
+  font-family: GothaProLight, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  font-size: 10px;
+  padding: 7px;
+}
+.page-header.chat-page-header .chat-buttons {
+  padding: 10px 0 10px 25px;
+}
+.page-header.chat-page-header .chat-buttons .chat-phone,
+.page-header.chat-page-header .chat-buttons .chat-video {
+  height: 34px;
+  width: 34px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.page-header.chat-page-header .chat-buttons .chat-phone {
+  background-image: url('/img/phone_chat.svg');
+}
+.page-header.chat-page-header .chat-buttons .chat-video {
+  background-image: url('/img/video_chat.svg');
+}
+.page-header.chat-page-header::after {
+  padding-top: 10px;
 }
