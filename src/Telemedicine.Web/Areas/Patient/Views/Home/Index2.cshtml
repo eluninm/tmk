@@ -33,7 +33,7 @@
                         <div class="title">{{recommendation.DoctorTitle}}</div>
                         <div class="speciality">{{recommendation.DoctorSpecialization}}</div>
                     </div>
-                    <div class="message text-truncate">
+                    <div class="message recommendation-text">
                         {{recommendation.RecommendationText}}
                     </div>
                     <div class="details">
@@ -72,18 +72,6 @@
         </div>
     </div>
 </div>
-
-@section styles{
-    <style>
-        .text-truncate {
-              overflow : hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 6;
-  -webkit-box-orient: vertical;
-        }
-    </style>
-}
 
 @section scripts
 {

@@ -433,6 +433,13 @@ body {
   border-bottom-right-radius: 12px;
   padding: 25px;
 }
+.recommendation-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
 .chat-message {
   position: relative;
   min-height: 45px;
