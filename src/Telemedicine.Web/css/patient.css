@@ -326,7 +326,8 @@ body {
   border-radius: 2em;
   text-transform: uppercase;
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 10px;
+  font-size: 11px;
+  padding: 12px 35px 25px 35px;
 }
 .rounded.pagination > li:first-child > a,
 .rounded.pagination > li:last-child > a,
@@ -398,6 +399,39 @@ body {
   height: auto;
   max-height: 300px;
   overflow-x: hidden;
+}
+.modal-dialog {
+  width: 700px;
+}
+.modal-sm {
+  width: 400px;
+}
+.modal-content {
+  border-radius: 12px;
+}
+.modal-content .modal-header {
+  border: none;
+}
+.modal-content .modal-title {
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  margin-left: 15px;
+  margin-top: 8px;
+}
+.modal-content .modal-body {
+  margin: 0 30px;
+}
+.modal-content .modal-body p {
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 11px;
+  line-height: 20px;
+}
+.modal-content .modal-footer {
+  border: none;
+  background-color: #f7f7f7;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  padding: 25px;
 }
 .chat-message {
   position: relative;
@@ -620,6 +654,102 @@ body {
 .consultation-message-container .consultation-message:first-child::before {
   border-top: none;
 }
+.doctordeclinecall .speciality {
+  font-size: 10px;
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  color: #e79924;
+  text-align: center;
+  width: 200px;
+  margin: 0 auto;
+  margin-bottom: 12px;
+}
+.doctordeclinecall .text {
+  font-size: 14px;
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  text-align: center;
+  margin: 0 auto;
+  width: 250px;
+  margin-bottom: 32px;
+}
+.infomodaldialog .row1 {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+.infomodaldialog .row1 .subtitle {
+  margin-left: 75px;
+  margin-top: 4px;
+}
+.infomodaldialog .row1 .subtitle h4 {
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+}
+.infomodaldialog .row1 .subtitle .speciality {
+  font-size: 12px;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  color: #e79924;
+}
+.infomodaldialog .modal-footer .btn.start-chat-btn {
+  background: #e79924;
+}
+.infomodaldialog .modal-footer .doctor-status {
+  color: #3cb776;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  font-size: 12px;
+  line-height: 2.5em;
+  text-transform: uppercase;
+}
+.infomodaldialog .modal-footer .status-icon {
+  height: 2.5em;
+  width: 2.5em;
+  border: 2px solid #3cb776;
+  color: #3cb776;
+  border-radius: 1.5em;
+  text-align: center;
+  line-height: 2.2em;
+}
+.infomodaldialog .modal-footer .status-icon:hover {
+  text-decoration: none;
+}
+.infomodaldialog .modal-footer .status-icon.disabled {
+  border-color: #e4e4e4;
+  color: #e4e4e4;
+}
+.appointmentmodaldialog .row1 {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+.appointmentmodaldialog .row1 .subtitle {
+  margin-left: 75px;
+  margin-top: 4px;
+}
+.appointmentmodaldialog .row1 .subtitle h4 {
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+}
+.appointmentmodaldialog .row1 .subtitle .speciality {
+  font-size: 12px;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  color: #e79924;
+}
+.appointmentmodaldialog .modal-footer .btn.start-chat-btn {
+  background: #e79924;
+}
+.appointmentmodaldialog .modal-footer .status-text {
+  color: #8c8c8c;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  font-size: 12px;
+  line-height: 2.5em;
+  text-transform: uppercase;
+  margin-left: 25px;
+}
 .list-doctor-panel {
   padding: 10px;
   border-bottom: 1px solid #e4e4e4;
@@ -747,14 +877,74 @@ body {
 }
 .grid-content .myevent .btn {
   margin-top: 10px;
-  font-size: 12px;
-  padding: 10px 45px 28px 45px;
-  border-radius: 25px;
 }
 .grid-content .myevent .action {
   color: #395c9c;
   text-decoration: underline;
+  line-height: 60px;
 }
 .grid-content .myevent .speciality {
   margin-top: 6px;
+}
+.recomendation-message-rd {
+  padding-top: 15px;
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.title-rd {
+  margin: 15px 0;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  font-size: 12px;
+  color: #e79924;
+}
+.timestamp-rd {
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  font-size: 12px;
+  color: #8c8c8c;
+}
+.speciality-rd {
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  font-size: 11px;
+  color: #8c8c8c;
+}
+.message-rd {
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  color: black;
+}
+.modal-header-rd {
+  border: none;
+}
+.btn-round-rd {
+  margin-top: 20px;
+  margin-right: 10px;
+  height: 2.5em;
+  border-radius: 1.5em;
+  text-transform: lowercase;
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #b5b5b5;
+  color: white;
+}
+.btn-round-rd:hover {
+  background-color: #919191;
+  color: white;
+}
+.btn-round-rd:active {
+  position: relative;
+  top: 1px;
+  color: white;
+}
+.modal-footer-rd {
+  border: none;
+  background-color: #f7f7f7;
+  height: 100px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+.modal-content-rd {
+  max-height: 270px;
+  overflow-y: auto;
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

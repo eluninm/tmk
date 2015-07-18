@@ -1,0 +1,25 @@
+﻿@model Telemedicine.Web.Areas.Patient.Models.RecommendationDetailViewModel
+
+    <div class="modal-header modal-header-rd">
+        <div class="recomendation-message-rd">
+            <span class="timestamp-rd">
+                @Html.DisplayFor(m => m.Date, "ShortDateTime")
+            </span> &nbsp;
+            <span class="title-rd">
+                    @Html.DisplayFor(m => m.DoctorFIO)
+            </span> 
+            <div class="speciality-rd">
+                @Html.DisplayFor(m => m.SpecializationDisplayName)
+            </div>
+
+        </div>
+
+    </div>
+    <div class="modal-body modal-content-rd message-rd">
+
+        @Html.DisplayFor(m => m.Content)
+
+    </div>
+    <div class="modal-footer modal-footer-rd">
+        <a   class="btn btn-round-rd" data-dismiss="modal">Закрыть</a>
+    </div>
