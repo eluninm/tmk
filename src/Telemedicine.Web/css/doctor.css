@@ -56,7 +56,7 @@
 .sidebar #menu1 {
   /*background-color: @color-accent3;*/
   color: transparent;
-  background-image: url('/img/exit_menu.png');
+  background-image: url('/img/exit_menu.svg');
   height: 2em;
   width: 2.5em;
   margin-top: 10px;
@@ -325,6 +325,11 @@ body {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 11px;
   padding: 12px 35px 25px 35px;
+  color: white;
+}
+.rounded.btn-default {
+  background: #b1b1b1;
+  background-color: #b1b1b1;
 }
 .rounded.pagination > li:first-child > a,
 .rounded.pagination > li:last-child > a,
@@ -423,12 +428,21 @@ body {
   font-size: 11px;
   line-height: 20px;
 }
+.modal-content .modal-body .sub-title {
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  line-height: 20px;
+  color: #8c8c8c;
+}
 .modal-content .modal-footer {
   border: none;
   background-color: #f7f7f7;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   padding: 25px;
+}
+.modal-content .modal-footer .btn-round-rd {
+  margin: 0;
 }
 .recommendation-text {
   overflow: hidden;

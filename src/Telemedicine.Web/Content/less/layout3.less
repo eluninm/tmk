@@ -53,6 +53,8 @@ body {
     }
 }
 
+
+
 .rounded {
     &.dropdown {
         .dropdown-toggle {
@@ -96,7 +98,14 @@ body {
         .font-regular;
         font-size: 11px;
         padding: 12px 35px 25px 35px;
+        color: white;
     }
+
+    &.btn-default{
+        background: @color-btn-default-background;
+        background-color: @color-btn-default-background;
+    }
+
     &.pagination{
         > li:first-child > a,
         > li:last-child > a,
@@ -185,6 +194,13 @@ body {
             font-size: 11px;
             line-height: 20px;
         }
+
+        .sub-title{
+            .font-normal;
+            font-size: 12px;
+            line-height: 20px;
+            color: @color-text1;
+        }
     }
 
     .modal-footer{
@@ -193,7 +209,13 @@ body {
         border-bottom-left-radius: 12px;
         border-bottom-right-radius: 12px;
         padding: 25px;
+
+        .btn-round-rd{
+            margin: 0;
+        }
     }
+
+    
 }
 
 .recommendation-text {
