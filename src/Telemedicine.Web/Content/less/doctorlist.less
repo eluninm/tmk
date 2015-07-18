@@ -1,18 +1,20 @@
 ﻿.list-doctor-panel {
     padding: 10px;
-    border-bottom:1px solid @color-background1;
+    border-bottom: 1px solid @color-background1;
+
     .doctor-panel-btn-group {
         margin: 0 15px;
+
         .btn.start-chat-btn {
             background: @color-accent3;
             border-color: @color-accent3;
+
             &:hover {
                 box-shadow: rgba(0,0,0,.1) 1px 100px inset;
             }
         }
 
-        .btn{
-
+        .btn {
         }
     }
 
@@ -27,6 +29,12 @@
         font-size: 12px;
         line-height: 2.5em;
         text-transform: uppercase;
+
+        .status-text {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            vertical-align: middle;
+        }
     }
 
     .speciality {
@@ -36,26 +44,31 @@
     }
 
     .status-icon {
-        vertical-align:middle;
-        height:2.5em;
-        width:2.5em;
-        display:inline-block;
-        background-size:100% 100%;
-        background-repeat:no-repeat;
-        outline:none;
-        &.message-icon{
-            background-image:url('/img/chat.svg');
+        vertical-align: middle;
+        height: 2.5em;
+        width: 2.5em;
+        display: inline-block;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        outline: none;
+
+        &.message-icon {
+            background-image: url('/img/chat.svg');
         }
-        &.voice-icon{
-            background-image:url('/img/voice_green.svg');
-            &.disabled{
-                background-image:url('/img/voice.svg');
+
+        &.voice-icon {
+            background-image: url('/img/voice_green.svg');
+
+            &.disabled {
+                background-image: url('/img/voice.svg');
             }
         }
-        &.video-icon{
-            background-image:url('/img/video_green.svg');
-            &.disabled{
-                background-image:url('/img/video.svg');
+
+        &.video-icon {
+            background-image: url('/img/video_green.svg');
+
+            &.disabled {
+                background-image: url('/img/video.svg');
             }
         }
         /*height: 2.5em;
@@ -77,13 +90,13 @@
     }
 
     .info-icon {
-        background-image:url('/img/info.svg');
-        height:2.5em;
-        width:2.5em;
-        display:inline-block;
-        background-size:100% 100%;
-        background-repeat:no-repeat;
-        outline:none;
+        background-image: url('/img/info.svg');
+        height: 2.5em;
+        width: 2.5em;
+        display: inline-block;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        outline: none;
         /*font-style:italic;
         color: @color-background1;
         border-color: @color-background1;*/

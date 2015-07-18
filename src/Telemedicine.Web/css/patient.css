@@ -910,6 +910,11 @@ body {
   line-height: 2.5em;
   text-transform: uppercase;
 }
+.list-doctor-panel .doctor-status .status-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  vertical-align: middle;
+}
 .list-doctor-panel .speciality {
   font-size: 12px;
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
