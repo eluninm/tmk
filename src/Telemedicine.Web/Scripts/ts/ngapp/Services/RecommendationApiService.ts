@@ -9,7 +9,7 @@ module Telemedicine {
         static $inject = ["$http", "urlResolverService"];
         constructor($http: ng.IHttpService,
             urlResolverService: UrlResolverService) {
-            super("~/api/v1/recommendations", urlResolverService, $http);
+            super("~/api/v1/recommendation", urlResolverService, $http);
         }
     }
 }

@@ -451,6 +451,7 @@
     <Content Include="Content\less\conversation.less" />
     <Content Include="Content\less\myevents.less" />
     <Content Include="Content\less\recommendationDetailDialog.less" />
+    <Content Include="Content\less\chatpage.less" />
     <Content Include="Content\less\myevents-doctor.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -523,6 +524,7 @@
     <Compile Include="Api\Controllers\ConversationController.cs" />
     <Compile Include="Api\Controllers\PatientController.cs" />
     <Compile Include="Api\Controllers\RecommendationController.cs" />
+    <Compile Include="Api\Dto\BeginConsultationDto.cs" />
     <Compile Include="Api\Dto\ConsultationDto.cs" />
     <Compile Include="Api\Dto\ConsultationMessageDto.cs" />
     <Compile Include="Api\Dto\RecommendationDto.cs" />
@@ -628,15 +630,16 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ModalControllerBase.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\UrlResolverService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\ConsultationController.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorListController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\SimpleModalControllers.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultationMessage.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultation.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctor.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\ConsultationApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\PatientApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\RecommendationApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\HistoryController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IRecommendation.ts" />
-    <TypeScriptCompile Include="Scripts\ts\ngapp\Services\TestService.ts" />
     <TypeScriptCompile Include="Scripts\ts\rtc\RtcConnectionManager.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\MediaStream.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\RTCPeerConnection.d.ts" />

@@ -1,0 +1,62 @@
+﻿.page-header.chat-page-header {
+    .chat-interlocutor {
+        .title {
+            margin-left: 10px;
+            padding: 10px 15px 10px 0;
+            .font-medium;
+            flex: 1;
+        }
+
+        &::after {
+            content: ":";
+            display: inline-block;
+            width: 5px;
+        }
+    }
+
+    .chat-time {
+        padding: 10px 0 10px 25px;
+
+        &::after {
+            content: ":";
+            display: inline-block;
+            width: 5px;
+            margin-left: 35px;
+        }
+
+        .time {
+            .font-light;
+            font-size: 34px;
+            color: @color-accent1-light;
+        }
+
+        .title {
+            .font-light;
+            font-size: 10px;
+            padding: 7px;
+        }
+    }
+
+    .chat-buttons {
+        padding: 10px 0 10px 25px;
+
+        .chat-phone,
+        .chat-video {
+            height: 34px;
+            width: 34px;
+            background-repeat: no-repeat;
+            background-size:100%;
+
+        }
+        .chat-phone{
+            background-image:url('/img/phone_chat.svg');
+        }
+        .chat-video{
+            background-image:url('/img/video_chat.svg');
+        }
+    }
+
+    &::after {
+        padding-top: 10px;
+    }
+}

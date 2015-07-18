@@ -63,7 +63,7 @@ var Telemedicine;
     var RecommendationApiService = (function (_super) {
         __extends(RecommendationApiService, _super);
         function RecommendationApiService($http, urlResolverService) {
-            _super.call(this, "~/api/v1/recommendations", urlResolverService, $http);
+            _super.call(this, "~/api/v1/recommendation", urlResolverService, $http);
         }
         RecommendationApiService.$inject = ["$http", "urlResolverService"];
         return RecommendationApiService;
@@ -78,7 +78,7 @@ var Telemedicine;
         function PatientApiService($http, urlResolverService) {
             this.$http = $http;
             this.urlResolverService = urlResolverService;
-            this.baseUrl = "/api/v1/patients";
+            this.baseUrl = "/api/v1/patient";
         }
         PatientApiService.prototype.patientRecommendations = function (patientId) {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + patientId + "/recommendations");
@@ -100,7 +100,7 @@ var Telemedicine;
         function ConsultationApiService($http, urlResolverService) {
             this.$http = $http;
             this.urlResolverService = urlResolverService;
-            this.baseUrl = "/api/v1/consultations";
+            this.baseUrl = "/api/v1/consultation";
         }
         ConsultationApiService.prototype.consultationMessages = function (consultationId) {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + consultationId + "/messages");
@@ -162,56 +162,6 @@ var Telemedicine;
     })();
     Telemedicine.HistoryController = HistoryController;
 })(Telemedicine || (Telemedicine = {}));
-/// <reference path="../../dts/angular-ui-bootstrap.d.ts" />
-var Telemedicine;
-(function (Telemedicine) {
-    var ItemModalViewModel = (function () {
-        function ItemModalViewModel($modalInstance, item) {
-            this.$modalInstance = $modalInstance;
-            this.item = item;
-        }
-        ItemModalViewModel.prototype.ok = function () {
-            this.$modalInstance.close(true);
-        };
-        ItemModalViewModel.prototype.cancel = function () {
-            this.$modalInstance.dismiss("cancel");
-        };
-        return ItemModalViewModel;
-    })();
-    Telemedicine.ItemModalViewModel = ItemModalViewModel;
-})(Telemedicine || (Telemedicine = {}));
-///<reference path="../common/ModalControllerBase.ts"/>
-var Telemedicine;
-(function (Telemedicine) {
-    var RecommendationDetailsController = (function (_super) {
-        __extends(RecommendationDetailsController, _super);
-        function RecommendationDetailsController($modalInstance, item) {
-            _super.call(this, $modalInstance, item);
-        }
-        return RecommendationDetailsController;
-    })(Telemedicine.ItemModalViewModel);
-    Telemedicine.RecommendationDetailsController = RecommendationDetailsController;
-})(Telemedicine || (Telemedicine = {}));
-///<reference path="Controllers/HistoryController.ts" />
-///<reference path="Controllers/SimpleModalControllers.ts" />
-var Telemedicine;
-(function (Telemedicine) {
-    function moduleConfiguration($logProvider) {
-        // TODO: Enable debug logging based on server config
-        // TODO: Capture all logged errors and send back to server
-        $logProvider.debugEnabled(true);
-    }
-    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration).controller("HistoryController", Telemedicine.HistoryController).controller("ConsultationController", Telemedicine.ConsultationController).controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController).service("recommendationService", Telemedicine.RecommendationApiService).service("urlResolverService", Telemedicine.UrlResolverService).service("patientApiService", Telemedicine.PatientApiService).service("consultationApiService", Telemedicine.ConsultationApiService);
-})(Telemedicine || (Telemedicine = {}));
-var Telemedicine;
-(function (Telemedicine) {
-    var ItemRouteParams = (function () {
-        function ItemRouteParams() {
-        }
-        return ItemRouteParams;
-    })();
-    Telemedicine.ItemRouteParams = ItemRouteParams;
-})(Telemedicine || (Telemedicine = {}));
 ///<reference path="../Services/RecommendationApiService.ts"/>
 ///<reference path="../Services/PatientApiService.ts"/>
 ///<reference path="../Services/ConsultationApiService.ts"/>
@@ -253,14 +203,87 @@ var Telemedicine;
     })();
     Telemedicine.ConsultationController = ConsultationController;
 })(Telemedicine || (Telemedicine = {}));
+///<reference path="../Services/RecommendationApiService.ts"/>
+///<reference path="../Services/PatientApiService.ts"/>
+///<reference path="../Services/ConsultationApiService.ts"/>
 var Telemedicine;
 (function (Telemedicine) {
-    var TestService = (function () {
-        function TestService() {
+    var DoctorListController = (function () {
+        function DoctorListController(patientApiService, consultationApiService, recommendationService, $element, $modal) {
+            this.patientApiService = patientApiService;
+            this.consultationApiService = consultationApiService;
+            this.recommendationService = recommendationService;
+            this.$element = $element;
+            this.$modal = $modal;
+            this.loadDoctors();
         }
-        return TestService;
+        DoctorListController.prototype.loadDoctors = function () {
+        };
+        DoctorListController.prototype.openDoctorDetails = function (recommendation) {
+            this.$modal.open({
+                templateUrl: "/Content/tmpls/dialogs/recommendationDetails.html",
+                controller: "RecommendationDetailsController as viewModel",
+                resolve: {
+                    item: function () { return recommendation; }
+                }
+            });
+        };
+        DoctorListController.$inject = ["patientApiService", "consultationApiService", "recommendationService", "$element", "$modal"];
+        return DoctorListController;
     })();
-    Telemedicine.TestService = TestService;
+    Telemedicine.DoctorListController = DoctorListController;
+})(Telemedicine || (Telemedicine = {}));
+/// <reference path="../../dts/angular-ui-bootstrap.d.ts" />
+var Telemedicine;
+(function (Telemedicine) {
+    var ItemModalViewModel = (function () {
+        function ItemModalViewModel($modalInstance, item) {
+            this.$modalInstance = $modalInstance;
+            this.item = item;
+        }
+        ItemModalViewModel.prototype.ok = function () {
+            this.$modalInstance.close(true);
+        };
+        ItemModalViewModel.prototype.cancel = function () {
+            this.$modalInstance.dismiss("cancel");
+        };
+        return ItemModalViewModel;
+    })();
+    Telemedicine.ItemModalViewModel = ItemModalViewModel;
+})(Telemedicine || (Telemedicine = {}));
+///<reference path="../common/ModalControllerBase.ts"/>
+var Telemedicine;
+(function (Telemedicine) {
+    var RecommendationDetailsController = (function (_super) {
+        __extends(RecommendationDetailsController, _super);
+        function RecommendationDetailsController($modalInstance, item) {
+            _super.call(this, $modalInstance, item);
+        }
+        return RecommendationDetailsController;
+    })(Telemedicine.ItemModalViewModel);
+    Telemedicine.RecommendationDetailsController = RecommendationDetailsController;
+})(Telemedicine || (Telemedicine = {}));
+///<reference path="Controllers/HistoryController.ts" />
+///<reference path="Controllers/ConsultationController.ts" />
+///<reference path="Controllers/DoctorListController.ts" />
+///<reference path="Controllers/SimpleModalControllers.ts" />
+var Telemedicine;
+(function (Telemedicine) {
+    function moduleConfiguration($logProvider) {
+        // TODO: Enable debug logging based on server config
+        // TODO: Capture all logged errors and send back to server
+        $logProvider.debugEnabled(true);
+    }
+    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration).controller("HistoryController", Telemedicine.HistoryController).controller("ConsultationController", Telemedicine.ConsultationController).controller("DoctorListController", Telemedicine.DoctorListController).controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController).service("recommendationService", Telemedicine.RecommendationApiService).service("urlResolverService", Telemedicine.UrlResolverService).service("patientApiService", Telemedicine.PatientApiService).service("consultationApiService", Telemedicine.ConsultationApiService);
+})(Telemedicine || (Telemedicine = {}));
+var Telemedicine;
+(function (Telemedicine) {
+    var ItemRouteParams = (function () {
+        function ItemRouteParams() {
+        }
+        return ItemRouteParams;
+    })();
+    Telemedicine.ItemRouteParams = ItemRouteParams;
 })(Telemedicine || (Telemedicine = {}));
 var RtcChat;
 (function (RtcChat) {

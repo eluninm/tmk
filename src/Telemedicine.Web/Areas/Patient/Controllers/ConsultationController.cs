@@ -59,6 +59,25 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             return View("Index2", viewModel);
         }
 
+        public async Task<ActionResult> Index_Old()
+        {
+            var doctors = _doctorService.GetAll();
+            var viewModel = (from doctor in doctors
+                             select
+          new DoctorViewModel()
+          {
+              FIO = doctor.User.DisplayName,
+              Id = doctor.Id,
+              Specialization = doctor.Specialization.DisplayName,
+              Status = doctor.DoctorStatus.DisplayName,
+              CanStartChat = doctor.DoctorStatus.Name != DoctorStatusNames.Busy
+          }).ToList();
+
+            ViewBag.Specializations = await _specializationService.GetSpecializationsAsync();
+
+            return View("Index", viewModel);
+        }
+
         public async Task<ActionResult> StartDialog(int id)
         {
             var doctor = await _doctorService.GetByIdAsync(id);

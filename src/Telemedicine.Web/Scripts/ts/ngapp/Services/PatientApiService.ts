@@ -8,7 +8,7 @@ module Telemedicine {
     }
 
     export class PatientApiService implements IPatientApiService {
-        private baseUrl = "/api/v1/patients";
+        private baseUrl = "/api/v1/patient";
 
         constructor(private $http: ng.IHttpService,
                     private urlResolverService: UrlResolverService) {
