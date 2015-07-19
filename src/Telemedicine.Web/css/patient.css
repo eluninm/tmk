@@ -275,6 +275,9 @@ html,
 body {
   height: 100%;
 }
+.uppercase {
+  text-transform: uppercase;
+}
 .main-container {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: normal;
@@ -376,8 +379,6 @@ body {
   color: white;
   height: 2em;
   text-transform: uppercase;
-  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: normal;
   font-size: 11px;
   padding: 0.9em 1em 2.1em;
 }
@@ -385,8 +386,6 @@ body {
   height: 2em;
   border-radius: 2em;
   text-transform: uppercase;
-  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: normal;
   font-size: 11px;
   padding: 0.9em 1em 2.1em;
   color: white;
@@ -543,6 +542,30 @@ body {
 }
 .text-center {
   text-align: center;
+}
+.tm.icon.arrow-left {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+  background-image: url('/img/arrow_left.svg');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.tm.icon.arrow-left.white {
+  background-image: url('/img/arrow_left_white.svg');
+}
+.tm.icon.arrow-right {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+  background-image: url('/img/arrow_right.svg');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.tm.icon.arrow-right.white {
+  background-image: url('/img/arrow_right_white.svg');
 }
 .chat-message {
   position: relative;
@@ -980,6 +1003,9 @@ body {
 .list-doctor-panel .status-icon.message-icon {
   background-image: url('/img/chat.svg');
 }
+.list-doctor-panel .status-icon.message-icon.disabled {
+  background-image: url('/img/chat_gray.svg');
+}
 .list-doctor-panel .status-icon.voice-icon {
   background-image: url('/img/voice_green.svg');
 }
@@ -1236,6 +1262,13 @@ body {
 }
 .fc-event {
   background-color: #3e67ae;
+}
+.fc-toolbar .fc-left {
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.fc-toolbar .fc-left h2 {
+  margin-top: 10px;
+  font-size: 21px;
 }
 .addTimeSpanEventDialog .modal-body .row3 {
   margin-top: 24px;

@@ -7,6 +7,10 @@ body {
     height: 100%;
 }
 
+.uppercase {
+    text-transform: uppercase;
+}
+
 .main-container {
     .font-regular;
     height: 100%;
@@ -134,7 +138,6 @@ body {
                 color: @color-background;
                 height: 2em;
                 text-transform: uppercase;
-                .font-regular;
                 font-size: 11px;
                 padding: .9em 1em 2.1em;
             }
@@ -145,7 +148,6 @@ body {
         height: 2em;
         border-radius: 2em;
         text-transform: uppercase;
-        .font-regular;
         font-size: 11px;
         padding: .9em 1em 2.1em;
         color: white;
@@ -270,7 +272,7 @@ body {
             color: @color-text1;
         }
 
-        input[type='text']{
+        input[type='text'] {
             color: black;
         }
     }
@@ -302,4 +304,35 @@ body {
 
 .text-center {
     text-align: center;
+}
+
+.tm {
+    &.icon {
+        &.arrow-left {
+            height: 1em;
+            width: 1em;
+            display: inline-block;
+            background-image: url('/img/arrow_left.svg');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            &.white {
+                background-image: url('/img/arrow_left_white.svg');
+            }
+        }
+
+        &.arrow-right {
+            height: 1em;
+            width: 1em;
+            display: inline-block;
+            background-image: url('/img/arrow_right.svg');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            &.white {
+                background-image: url('/img/arrow_right_white.svg');
+            }
+        }
+    }
 }

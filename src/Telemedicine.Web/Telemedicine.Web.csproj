@@ -201,6 +201,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="img\arrow_left_white.svg" />
+    <Content Include="img\arrow_right_white.svg" />
+    <Content Include="img\chat_gray.svg" />
     <Content Include="lib\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
     <Content Include="Content\less\OwlCarousel\AjaxLoader.gif" />
     <Content Include="Content\less\OwlCarousel\grabbing.png" />
@@ -408,7 +411,6 @@
     <Content Include="Areas\Doctor\Views\Recommendations\_AddRecommendationDialog.cshtml" />
     <Content Include="Areas\Patient\Views\Recommendations\List2.cshtml" />
     <Content Include="Areas\Patient\Views\History\Index.cshtml" />
-    <Content Include="Areas\Doctor\Views\Home\_AddTimeSpanEventDialog.cshtml" />
     <Content Include="Content\style.less" />
     <Content Include="Areas\Patient\Views\Payment\_MethodReplenishment.cshtml" />
     <Content Include="Areas\Patient\Views\Home\Index.cshtml" />
@@ -419,6 +421,7 @@
     <Content Include="Areas\Doctor\Views\Home\MyEvents.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\Balance.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\Index2.cshtml" />
+    <Content Include="Areas\Doctor\Views\Home\_AddTimeSpanEventDialog.cshtml" />
     <Content Include="Areas\Patient\Views\Doctor\Index_Old.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
