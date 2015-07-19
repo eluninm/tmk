@@ -1,212 +1,237 @@
 ﻿@using Telemedicine.Core.Models.Enums 
 @model Telemedicine.Web.Areas.Doctor.Models.AddEventViewModel
 @using (Ajax.BeginForm("AddTimeSpanEvent", "Home", new { @class = "form", @role = "form", @id = "addEventDialogForm" },
-                                                            new AjaxOptions() { HttpMethod = "Post", OnSuccess = "onAddSuccess" }, FormMethod.Post))
+                                                                        new AjaxOptions() { HttpMethod = "Post", OnSuccess = "onAddSuccess" }, FormMethod.Post))
 {
     <div class="modal-header">
-        <h3>Добавление события</h3>
-    </div> <div class="modal-body">
-               @Html.ValidationSummary("", new { @class = "text-danger" })
-
-               <div class="form-group">
-                   @Html.LabelFor(m => m.Title, new {@class = "control-label", @for = "isOnDate"})
-                   @Html.EditorFor(m => m.Title, new {htmlAttributes = new {@class = "form-control", @id = "isOnDate"}})
-               </div>
-               <div id="hideIfRepeat">
-                   <div class="form-group">
-                       @Html.LabelFor(m => m.Begin, new { htmlAttributes = new { @class = "control-label", @for = "beginDate" } })
-                       <div class='input-group date' id='beginDate'>
-                           @Html.EditorFor(m => m.Begin, new { htmlAttributes = new { @class = "form-control", @placeholder = "Начало события", @id = "beginDateDatetimePicker" } })
-                           <span class="input-group-addon">
-                               <span class="glyphicon glyphicon-calendar"></span>
-                           </span>
-                           @Html.ValidationMessageFor(m => m.Begin)
-                       </div>
-                   </div>
-
-                   <div class="form-group">
-                       @Html.LabelFor(m => m.End, new { htmlAttributes = new { @class = "control-label", @for = "endDate" } })
-                       <div class='input-group date' id='endDate'>
-                           @Html.EditorFor(m => m.End, new { htmlAttributes = new { @class = "form-control", @placeholder = "Конец события", @id = "endDateDatetimePicker" } })
-                           <span class="input-group-addon">
-                               <span class="glyphicon glyphicon-calendar"></span>
-                           </span>
-                           @Html.ValidationMessageFor(m => m.End)
-                       </div>
-                   </div>
-               </div>
-     
-
-                <div class="form-group">
-                   @Html.LabelFor(m => m.IsRepeat, new {@class = "control-label", @for = "isRepeat" })
-                   @Html.EditorFor(m => m.IsRepeat, new {htmlAttributes = new {@id = "isRepeat" } })
-               </div> 
-
-               <div class="form-group" id="selectedRepeatTypegroup">
-                   @Html.LabelFor(m => m.SelectedRepeatType, new {@class = "control-label", @for = "selectedRepeatType"})
-                   @Html.EnumDropDownListFor(m => m.SelectedRepeatType, null, new {@class = "form-control", @id = "selectedRepeatType"})
-               </div>
-
-               <div class="form-group" id="selectedIntervalIdgroup">
-                   @Html.LabelFor(m => m.SelectedIntervalId, new {@class = "control-label", @for = "selectedIntervalId" })
-                   @Html.DropDownListFor(m => m.SelectedIntervalId, Model.IntervalItems, new {@class = "form-control", @id = "selectedIntervalId" })
-               </div>
-
-               <div class="form-group" id="begingroup">
-                   @Html.LabelFor(m => m.RepeatBeginDate, new {htmlAttributes = new {@class = "control-label", @for = "repeatBeginDatetimePicker2" } })
-                   <div class='input-group date' id='beginDate'>
-                       @Html.EditorFor(m => m.RepeatBeginDate, new {htmlAttributes = new {@class = "form-control", @placeholder = "Конец события", @id = "repeatBeginDatetimePicker2" } })
-                       <span class="input-group-addon">
-                           <span class="glyphicon glyphicon-calendar"></span>
-                       </span>
-                       @Html.ValidationMessageFor(m => m.Begin)
-                   </div>
-               </div>
-
-               <div class="form-group" id="dayOfWeek">
-                   @Html.Label("Дни повторений")
-                   <br/>
-                   <div class="form-group">
-                       @Html.LabelFor(m => m.Monday, new {@class = "control-label", @for = "Monday"})
-
-                       @Html.EditorFor(m => m.Monday, new {htmlAttributes = new {@id = "Monday"}})
-                   </div>
-
-                   <div class="form-group">
-                       @Html.LabelFor(m => m.Tuesday, new {@class = "control-label", @for = "Tuesday"})
-                       @Html.EditorFor(m => m.Tuesday, new {htmlAttributes = new {@id = "Tuesday"}})
-                   </div>
-
-                   <div class="form-group">
-                       @Html.LabelFor(m => m.Wednesday, new {@class = "control-label", @for = "Wednesday"})
-                       @Html.EditorFor(m => m.Wednesday, new {htmlAttributes = new {@id = "Wednesday"}})
-                   </div>
-
-                   <div class="form-group">
-                       @Html.LabelFor(m => m.Thursday, new {@class = "control-label", @for = "Thursday"})
-                       @Html.EditorFor(m => m.Thursday, new {htmlAttributes = new {@id = "Thursday"}})
-                   </div>
-
-                   <div class="form-group">
-                       @Html.LabelFor(m => m.Friday, new {@class = "control-label", @for = "Friday"})
-                       @Html.EditorFor(m => m.Friday, new {htmlAttributes = new {@id = "Friday"}})
-                   </div>
-
-                   <div class="form-group">
-                       @Html.LabelFor(m => m.Saturday, new {@class = "control-label", @for = "Saturday"})
-                       @Html.EditorFor(m => m.Saturday, new {htmlAttributes = new {@id = "Saturday"}})
-                   </div>
-
-                   <div class="form-group">
-                       @Html.LabelFor(m => m.Sunday, new {@class = "control-label", @for = "Sunday"})
-                       @Html.EditorFor(m => m.Sunday, new {htmlAttributes = new {@id = "Sunday"}})
-                   </div>
-               </div>
-               <div id="ending">
-                   @Html.Label("Окончание")
-
-                   <div class="form-group">
-                       @Html.RadioButtonFor(m => m.SelectedEndType, value: ((int)EndTypeRepeatInterval.Never).ToString(), htmlAttributes: new { htmlAttributes = new { @id = "never" } })
-                       @Html.Label("Никогда", new { @class = "control-label", @for = "never" })
-                   </div>
-
-                   <div class="form-group">
-                       @Html.RadioButtonFor(m => m.SelectedEndType, value: ((int)EndTypeRepeatInterval.AfterNRepeat).ToString())
-                       @Html.Label("После", new { @class = "control-label", @for = "after" })
-                       @Html.TextBoxFor(m => m.After, new { htmlAttributes = new { @id = "after" } })
-                       @Html.Label("повторений", new { @class = "control-label" })
-                   </div>
-
-                   <div class="form-group">
-                       @Html.RadioButtonFor(m => m.SelectedEndType, value: ((int)EndTypeRepeatInterval.AfterDate).ToString()) 
-                       @Html.LabelFor(m => m.RepeatEndDate, new { @class = "control-label", @for = "after" })
-                       <div class='input-group date' id='beginDate'>
-                           @Html.EditorFor(m => m.RepeatEndDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Конец события", @id = "endDateDatetimePicker2" } })
-                           <span class="input-group-addon">
-                               <span class="glyphicon glyphicon-calendar"></span>
-                           </span>
-                           @Html.ValidationMessageFor(m => m.Begin)
-                       </div>
-                   </div>
-               </div>
-               </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title">Добавление события</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row sub-title">
+            @Html.LabelFor(m => m.Title, new { @class = "control-label", @for = "title" })
+        </div>
+        <div class="row">
+            @Html.EditorFor(m => m.Title, new { htmlAttributes = new { @class = "rounded form-control", @id = "title" } }) 
+        </div>
+        <div class="row row3">
+            <div class="col-md-4">
+                <div class="sub-title">
+                    @Html.LabelFor(m => m.Begin, new { htmlAttributes = new { @class = "control-label", @for = "beginDate" } })
+                </div>
+                <div>
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.Begin, new { htmlAttributes = new { @class = "rounded form-control", @placeholder = "Начало события", @id = "beginDateDatetimePicker" } }) 
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="sub-title">
+                    @Html.LabelFor(m => m.End, new { htmlAttributes = new { @class = "control-label", @for = "endDateDatetimePicker" } })
+                </div>
+                <div>
+                    <div class="input-group">
+                        @Html.EditorFor(m => m.End, new { htmlAttributes = new { @class = "rounded form-control", @placeholder = "Конец события", @id = "endDateDatetimePicker" } }) 
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="checkbox checkbox-circle alldaycheckbox">
+                    <input id="alldaycheckbox" name="IsOnDate" type="checkbox" value="true"> 
+                    @Html.LabelFor(m => m.IsOnDate, new {@for = "alldaycheckbox"})
+                </div>
+            </div>
+        </div>
+        <div class="row row4">
+            <div class="col-md-4">
+                <div class="row sub-title">
+                    Повторять событие
+                </div>
+                <div class="row row-dropdown">
+                    <div class="rounded dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">
+                            Только один раз
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li>
+                                <div class="checkbox checkbox-circle">
+                                    <input id="monday" type="checkbox" value="true" name="Monday">
+                                    <label for="monday">
+                                        Понедельник
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox checkbox-circle">
+                                    <input id="tuesday" type="checkbox" value="true" name="Tuesday">
+                                    <label for="tuesday">
+                                        Вторник
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox checkbox-circle">
+                                    <input id="wednesday" type="checkbox" value="true" name="Wednesday">
+                                    <label for="wednesday">
+                                        Среда
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox checkbox-circle">
+                                    <input id="thursday" type="checkbox" value="true" name="Thursday">
+                                    <label for="thursday">
+                                        Четверг
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox checkbox-circle">
+                                    <input id="friday" type="checkbox" value="true" name="Friday">
+                                    <label for="friday">
+                                        Пятница
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox checkbox-circle">
+                                    <input id="saturday" type="checkbox" value="true" name="Saturday">
+                                    <label for="saturday">
+                                        Суббота
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox checkbox-circle">
+                                    <input id="sunday" type="checkbox" value="true" name="Sunday">
+                                    <label for="sunday">
+                                        Воскресенье
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="input-group days-list">
+                    <a id="mondayGly" onclick="cancelSelectDay('monday');" href="#">понедельник <span class="glyphicon glyphicon-remove"></span></a>
+                    <a id="tuesdayGly" onclick="cancelSelectDay('tuesday');" href="#">вторник<span class="glyphicon glyphicon-remove"></span></a>
+                    <a id="wednesdayGly" onclick="cancelSelectDay('wednesday');" href="#">среда<span class="glyphicon glyphicon-remove"></span></a>
+                    <a id="thursdayGly" onclick="cancelSelectDay('thursday');" href="#">четверг<span class="glyphicon glyphicon-remove"></span></a>
+                    <a id="fridayGly" onclick="cancelSelectDay('friday');" href="#">пятница<span class="glyphicon glyphicon-remove"></span></a>
+                    <a id="saturdayGly" onclick="cancelSelectDay('saturday');" href="#">суббота<span class="glyphicon glyphicon-remove"></span></a>
+                    <a id="sundayGly" onclick="cancelSelectDay('sunday');" href="#">воскресенье<span class="glyphicon glyphicon-remove"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-success">Добавить</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        <button type="submit" class="btn btn-primary rounded">добавить</button> 
+        <a class="btn rounded-rd" data-dismiss="modal">
+            закрыть
+        </a>
     </div>
 }
 
 
-<script>
-    $(function() {
+<script type="text/javascript">
+
+    function cancelSelectDay(day) {
+        var id = "#" + day;
+        var idGly = "#" + day + "Gly "; 
+        console.log(id);
+
+        $(id).prop("checked", false);
+        $(idGly).hide();
+    };
+
+    $(function () {
+        //инициализация всплывающего окна дял добавления записи
         $("#beginDateDatetimePicker").datetimepicker({
             locale: 'ru'
         });
-
         $("#endDateDatetimePicker").datetimepicker({
             locale: 'ru'
         });
-
-        $("#endDateDatetimePicker2").datetimepicker({
-            locale: 'ru'
+        $(".glyphicon-calendar").click(function () {
+            $(this).parent().parent().find(".form-control").focus();
         });
-        $("#repeatBeginDatetimePicker2").datetimepicker({
-            locale: 'ru'
+        $('.dropdown-menu input, .dropdown-menu label').click(function (e) {
+            e.stopPropagation();
         });
 
-        if ($( "#selectedRepeatType" ).val() != 4) {
-            $("#dayOfWeek").hide();
-        } else {
-            $("#dayOfWeek").show();
-        }
 
-        $('#selectedRepeatType').change(function () {
-            var value = $(this).val();
-            if (value != 4) {
-                $("#dayOfWeek").hide();
+        $("#mondayGly").hide();
+        $("#tuesdayGly").hide();
+        $("#wednesdayGly").hide();
+        $("#thursdayGly").hide();
+        $("#fridayGly").hide();
+        $("#saturdayGly").hide();
+        $("#sundayGly").hide();
+
+        $("#monday").change(function () {
+            if ($(this).is(":checked")) {
+                $("#mondayGly").show(); 
             } else {
-                $("#dayOfWeek").show();
-            }
-            console.log(value);
-        });
-        $('#selectedRepeatType').change(function () {
-            var value = $('#selectedRepeatType').val();
-
-            if (value > 0 && value < 4) {
-                $("#selectedIntervalIdgroup").hide();
-            } else {
-                $("#selectedIntervalIdgroup").show();
+                $("#mondayGly").hide();
             }
         });
 
-        $('#isRepeat').change(function () {
-            var value = document.getElementById("isRepeat").checked;
-            if (value == true) {
-                $("#selectedRepeatTypegroup").show();
-                $("#selectedIntervalIdgroup").show();
-                $("#begingroup").show(); 
-                $("#ending").show();
-                $("#hideIfRepeat").hide();
-                console.log("1" + value);
+        $("#tuesday").change(function () {
+            if ($(this).is(":checked")) {
+                $("#tuesdayGly").show();
             } else {
-                $("#selectedRepeatTypegroup").hide();
-                $("#selectedIntervalIdgroup").hide();
-                $("#begingroup").hide();
-                $("#dayOfWeek").hide();
-                $("#ending").hide();
-                $("#hideIfRepeat").show();
-                console.log("2" + value);
+                $("#tuesdayGly").hide();
             }
-            
         });
 
-        if (document.getElementById("isRepeat").checked == false) {
-            $("#selectedRepeatTypegroup").hide();
-            $("#selectedIntervalIdgroup").hide();
-            $("#begingroup").hide();
-            $("#dayOfWeek").hide();
-            $("#ending").hide();
-        }
+        $("#wednesday").change(function () {
+            if ($(this).is(":checked")) {
+                $("#wednesdayGly").show();
+            } else {
+                $("#wednesdayGly").hide();
+            }
+        });
+
+        $("#thursday").change(function () {
+            if ($(this).is(":checked")) {
+                $("#thursdayGly").show();
+            } else {
+                $("#thursdayGly").hide();
+            }
+        });
+
+        $("#friday").change(function () {
+            if ($(this).is(":checked")) {
+                $("#fridayGly").show();
+            } else {
+                $("#fridayGly").hide();
+            }
+        });
+
+        $("#saturday").change(function () {
+            if ($(this).is(":checked")) {
+                $("#saturdayGly").show();
+            } else {
+                $("#saturdayGly").hide();
+            }
+        });
+
+        $("#sunday").change(function () {
+            if ($(this).is(":checked")) {
+                $("#sundayGly").show();
+            } else {
+                $("#sundayGly").hide();
+            }
+        });
     });
 
 </script>

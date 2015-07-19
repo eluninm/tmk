@@ -409,7 +409,6 @@
     <Content Include="Areas\Doctor\Views\Recommendations\_AddRecommendationDialog.cshtml" />
     <Content Include="Areas\Patient\Views\Recommendations\List2.cshtml" />
     <Content Include="Areas\Patient\Views\History\Index.cshtml" />
-    <Content Include="Areas\Doctor\Views\Home\_AddTimeSpanEventDialog.cshtml" />
     <Content Include="Content\style.less" />
     <Content Include="Areas\Patient\Views\Payment\_MethodReplenishment.cshtml" />
     <Content Include="Areas\Patient\Views\Home\Index.cshtml" />
@@ -420,6 +419,7 @@
     <Content Include="Areas\Doctor\Views\Home\MyEvents.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\Balance.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\Index2.cshtml" />
+    <Content Include="Areas\Doctor\Views\Home\_AddTimeSpanEventDialog.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
     <Content Include="Content\patient.less" />
