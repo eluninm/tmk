@@ -13,11 +13,12 @@ module Telemedicine {
     angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration)
         .controller("HistoryController", HistoryController)
         .controller("ConsultationController", ConsultationController)
-        .controller("DoctorListController", DoctorListController)
         .controller("RecommendationDetailsController", RecommendationDetailsController)
+        .controller("DoctorListController", DoctorListController)
         .service("recommendationService", RecommendationApiService)
         .service("urlResolverService", UrlResolverService)
         .service("patientApiService", PatientApiService)
         .service("consultationApiService", ConsultationApiService)
+        .service("doctorApiService", DoctorApiService)
     ;
 }

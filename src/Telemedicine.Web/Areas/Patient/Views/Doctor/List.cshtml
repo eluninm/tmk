@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
 
-<div class="fullheight sub-container row container-fluid">
+<div class="fullheight sub-container row container-fluid" ng-controller="DoctorListController as viewModel">
     <h1 class="page-header row">Врачи</h1>
     <div class="container-fluid unscrollable row" style="display: flex; flex-direction: column">
         <div class="grid">
@@ -41,30 +41,28 @@
                         <col style="width:160px" />
                         <col style="width:80px" />
                     </colgroup>
-                    @foreach (var doctor in Model)
-                    {
-                        <tr class="list-doctor-panel">
+                        <tr class="list-doctor-panel" ng-repeat="doctor in viewModel.doctors">
                             <td>
                                 <a href="#" data-toggle="modal" data-target="#infomodaldialog">
-                                    <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
+                                    <img class="img-circle doctor-panel-img" ng-src="{{doctor.AvatarUrl}}" height="60" width="60" />
                                 </a>
                             </td>
                             <td class="text-nowrap">
                                 <span style="line-height: normal; float: left;margin-right: 15px">
-                                    @doctor.FIO<br/>
-                                    <span class="speciality">Гинеколог</span>
+                                    {{doctor.Title}} <br/>
+                                    <span class="speciality">{{doctor.Specialization}}</span>
                                 </span>
-                                <a href="#" class="info-icon small glyphicon"  data-toggle="modal" data-target="#infomodaldialog"></a>
+                                <a href="#" class="info-icon small glyphicon" data-toggle="modal" data-target="#infomodaldialog"></a>
                             </td>
                             <td>
-                                <div class="doctor-status container-fluid text-nowrap" data-id="@doctor.Id">
+                                <div class="doctor-status container-fluid text-nowrap">
                                     <div class="status-text" style="display: inline-block;width:82px">
-                                        @doctor.Status
+                                        {{doctor.StatusText}}
                                     </div>
                                     <span class="text-nowrap">
-                                        <span class="glyphicon status-icon message-icon"></span>
-                                        <span class="glyphicon status-icon voice-icon"></span>
-                                        <span class="glyphicon status-icon video-icon"></span>
+                                        <span class="glyphicon status-icon message-icon" ng-class="{'message-icon-disabled': !doctor.IsChatAvailable}"></span>
+                                        <span class="glyphicon status-icon voice-icon" ng-class="{'voice-icon-disabled': !doctor.IsAudioAvailable}"></span>
+                                        <span class="glyphicon status-icon video-icon" ng-class="{'video-icon-disabled': !doctor.IsVideoAvailable}"></span>
                                     </span>
                                 </div>
                             </td>
@@ -73,22 +71,12 @@
                                     <a class="btn btn-primary rounded" data-toggle="modal" data-target="#appointmentModalDialog" href="#" title="Записаться">
                                         Записаться
                                     </a>
-                                    @if (doctor.CanStartChat)
-                                    {
-                                        <a class="btn btn-success start-chat-btn rounded" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
-                                            Консультация
-                                        </a>
-                                    }
-                                    else
-                                    {
-                                        <a class="btn btn-success start-chat-btn disabled rounded" data-id="@doctor.Id" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@Url.Action("StartDialog", new {id = doctor.Id})" title="Начать чат">
-                                            Консультация
-                                        </a>
-                                    }
+                                    <a class="btn btn-success start-chat-btn rounded" ng-class="{'disabled': !doctor.IsChatAvailable}" data-toggle="modal" data-target="#waitDoctorAnswerDialog" href="@*@Url.Action("StartDialog", new {id = doctor.Id})*@" title="Начать чат">
+                                        Консультация
+                                    </a>
                                 </div>
                             </td>
                         </tr>
-                    }
                 </table>
             </div>
             <div class="grid-pager row">
@@ -304,41 +292,43 @@
                 $('#doctorDeclineCall').modal('show');
             };
 
-            signalHub.client.onDoctorChangeStatus = function (status) {
-                $('.doctor-status-text').each(function () {
-                    var id = $(this).data('id');
-                    if (id == status.DoctorId) {
-                        $(this).html(status.StatusText);
-                        var el = $(this);
-                        el.removeClass('text-danger');
-                        el.removeClass('text-success');
-                        el.removeClass('text-info');
+            //signalHub.client.onDoctorChangeStatus = function (status) {
+            //    alert('test');
 
-                        if (status.StatusName == "Busy") {
-                            el.addClass('text-danger');
-                        }
-                        if (status.StatusName == "Available") {
-                            el.addClass('text-success');
-                        }
-                        if (status.StatusName == "Duty") {
-                            el.addClass('text-success');
-                        }
-                        if (status.StatusName == "VideoChat") {
-                            el.addClass('text-info');
-                        }
-                    }
-                });
-                $('.start-chat-btn').each(function () {
-                    var id = $(this).data('id');
-                    if (id == status.DoctorId) {
-                        if (status.CanCall) {
-                            $(this).removeClass('disabled');
-                        } else {
-                            $(this).addClass('disabled');
-                        }
-                    }
-                });
-            };
+            //    $('.doctor-status-text').each(function () {
+            //        var id = $(this).data('id');
+            //        if (id == status.DoctorId) {
+            //            $(this).html(status.StatusText);
+            //            var el = $(this);
+            //            el.removeClass('text-danger');
+            //            el.removeClass('text-success');
+            //            el.removeClass('text-info');
+
+            //            if (status.StatusName == "Busy") {
+            //                el.addClass('text-danger');
+            //            }
+            //            if (status.StatusName == "Available") {
+            //                el.addClass('text-success');
+            //            }
+            //            if (status.StatusName == "Duty") {
+            //                el.addClass('text-success');
+            //            }
+            //            if (status.StatusName == "VideoChat") {
+            //                el.addClass('text-info');
+            //            }
+            //        }
+            //    });
+            //    $('.start-chat-btn').each(function () {
+            //        var id = $(this).data('id');
+            //        if (id == status.DoctorId) {
+            //            if (status.CanCall) {
+            //                $(this).removeClass('disabled');
+            //            } else {
+            //                $(this).addClass('disabled');
+            //            }
+            //        }
+            //    });
+            //};
 
             $("#modalRequestButton1").click(function() {
                 $("#appointmentModalDialog").modal("hide");

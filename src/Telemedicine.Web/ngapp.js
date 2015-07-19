@@ -203,32 +203,73 @@ var Telemedicine;
     })();
     Telemedicine.ConsultationController = ConsultationController;
 })(Telemedicine || (Telemedicine = {}));
-///<reference path="../Services/RecommendationApiService.ts"/>
-///<reference path="../Services/PatientApiService.ts"/>
-///<reference path="../Services/ConsultationApiService.ts"/>
+///<reference path="../common/ApiServiceBase.ts"/>
+///<reference path="../common/UrlResolverService.ts"/>
+var Telemedicine;
+(function (Telemedicine) {
+    var DoctorApiService = (function () {
+        function DoctorApiService($http, urlResolverService) {
+            this.$http = $http;
+            this.urlResolverService = urlResolverService;
+            this.baseUrl = "/api/v1/doctor";
+        }
+        DoctorApiService.prototype.getDoctorList = function () {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl);
+            return this.$http.get(url).then(function (result) { return result.data; });
+        };
+        DoctorApiService.prototype.getDoctorDetails = function (doctorId) {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/details");
+            return this.$http.get(url).then(function (result) { return result.data; });
+        };
+        return DoctorApiService;
+    })();
+    Telemedicine.DoctorApiService = DoctorApiService;
+})(Telemedicine || (Telemedicine = {}));
+///<reference path="ISignalClient.ts"/>
+///<reference path="ISignalServer.ts"/>
+///<reference path="../Services/DoctorApiService.ts"/>
+///<reference path="../SignalR/SignalR.ts"/>
 var Telemedicine;
 (function (Telemedicine) {
     var DoctorListController = (function () {
-        function DoctorListController(patientApiService, consultationApiService, recommendationService, $element, $modal) {
-            this.patientApiService = patientApiService;
-            this.consultationApiService = consultationApiService;
-            this.recommendationService = recommendationService;
-            this.$element = $element;
+        function DoctorListController(doctorApiService, $modal, $scope) {
+            this.doctorApiService = doctorApiService;
             this.$modal = $modal;
+            this.$scope = $scope;
             this.loadDoctors();
+            this.initializeSignaling();
         }
         DoctorListController.prototype.loadDoctors = function () {
+            var _this = this;
+            this.doctorApiService.getDoctorList().then(function (result) {
+                _this.doctors = result;
+            });
         };
-        DoctorListController.prototype.openDoctorDetails = function (recommendation) {
+        DoctorListController.prototype.openDoctorDetails = function (doctor) {
             this.$modal.open({
                 templateUrl: "/Content/tmpls/dialogs/recommendationDetails.html",
                 controller: "RecommendationDetailsController as viewModel",
                 resolve: {
-                    item: function () { return recommendation; }
+                    item: function () { return doctor; }
                 }
             });
         };
-        DoctorListController.$inject = ["patientApiService", "consultationApiService", "recommendationService", "$element", "$modal"];
+        DoctorListController.prototype.initializeSignaling = function () {
+            var _this = this;
+            var signal = $.connection.signalHub;
+            signal.client.onDoctorUpdated = function (s) { return _this.onDoctorStatusChanged(s); };
+        };
+        DoctorListController.prototype.onDoctorStatusChanged = function (doctor) {
+            var _this = this;
+            for (var i = 0; i < this.doctors.length; i++) {
+                if (this.doctors[i].Id == doctor.Id) {
+                    this.$scope.$apply(function () {
+                        _this.doctors[i] = doctor;
+                    });
+                }
+            }
+        };
+        DoctorListController.$inject = ["doctorApiService", "$modal", "$scope"];
         return DoctorListController;
     })();
     Telemedicine.DoctorListController = DoctorListController;
@@ -274,7 +315,7 @@ var Telemedicine;
         // TODO: Capture all logged errors and send back to server
         $logProvider.debugEnabled(true);
     }
-    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration).controller("HistoryController", Telemedicine.HistoryController).controller("ConsultationController", Telemedicine.ConsultationController).controller("DoctorListController", Telemedicine.DoctorListController).controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController).service("recommendationService", Telemedicine.RecommendationApiService).service("urlResolverService", Telemedicine.UrlResolverService).service("patientApiService", Telemedicine.PatientApiService).service("consultationApiService", Telemedicine.ConsultationApiService);
+    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration).controller("HistoryController", Telemedicine.HistoryController).controller("ConsultationController", Telemedicine.ConsultationController).controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController).controller("DoctorListController", Telemedicine.DoctorListController).service("recommendationService", Telemedicine.RecommendationApiService).service("urlResolverService", Telemedicine.UrlResolverService).service("patientApiService", Telemedicine.PatientApiService).service("consultationApiService", Telemedicine.ConsultationApiService).service("doctorApiService", Telemedicine.DoctorApiService);
 })(Telemedicine || (Telemedicine = {}));
 var Telemedicine;
 (function (Telemedicine) {
@@ -285,129 +326,157 @@ var Telemedicine;
     })();
     Telemedicine.ItemRouteParams = ItemRouteParams;
 })(Telemedicine || (Telemedicine = {}));
-var RtcChat;
-(function (RtcChat) {
-    var CallerInfo = (function () {
-        function CallerInfo() {
-        }
-        return CallerInfo;
-    })();
-    RtcChat.CallerInfo = CallerInfo;
-    var ChatTextMessage = (function () {
-        function ChatTextMessage() {
-        }
-        return ChatTextMessage;
-    })();
-    RtcChat.ChatTextMessage = ChatTextMessage;
-})(RtcChat || (RtcChat = {}));
-/// <reference path="SignalR.ts" />
-var RtcChat;
-(function (RtcChat) {
-    var VideoChat = (function () {
-        function VideoChat(config, signalr) {
-            var _this = this;
-            this.config = config;
-            this.signalr = signalr;
-            this.addStream = function (stream) {
-                _this.peerConnection.addStream(stream);
-            };
-            this.ensureSignaling();
-        }
-        VideoChat.prototype.startConnection = function (roomId) {
-            if (this.peerConnection == null && this.roomId == null) {
-                this.peerConnection = this.createConnection();
-                this.roomId = roomId;
-                if (this.onConnectionReady != null) {
-                    this.onConnectionReady();
-                }
-            }
-        };
-        VideoChat.prototype.stopConnection = function (roomId) {
-            this.roomId = null;
-            if (this.peerConnection != null) {
-                this.peerConnection.close();
-                this.peerConnection = null;
-            }
-        };
-        VideoChat.prototype.ensureSignaling = function () {
-            var _this = this;
-            this.signalr.signalingHub.client.onDescription = function (roomId, remoteDescriptionString) {
-                var remoteDescription = new RTCSessionDescription($.parseJSON(remoteDescriptionString));
-                _this.onRemoteDescription(remoteDescription);
-            };
-            this.signalr.signalingHub.client.onCandidate = function (roomId, remoteCandidateString) {
-                var iceCandidate = new RTCIceCandidate($.parseJSON(remoteCandidateString));
-                _this.onRemoteCandidate(iceCandidate);
-            };
-        };
-        VideoChat.prototype.createConnection = function () {
-            var _this = this;
-            var connection = new RTCPeerConnection(this.config);
-            connection.onicecandidate = function (c) { return _this.onLocalCandidate(c); };
-            connection.onaddstream = function (s) { return _this.onStreamAdded(s); };
-            connection.onsignalingstatechange = function () {
-                console.info("Signaling state: %s", connection.signalingState);
-            };
-            connection.oniceconnectionstatechange = function () {
-                console.info("Connection state: %s", connection.iceConnectionState);
-            };
-            connection.onnegotiationneeded = function () {
-                console.warn("Negatiation needed!");
-                _this.peerConnection.createOffer(function (sd) { return _this.onLocalDescription(sd); }, _this.onError);
-            };
-            return connection;
-        };
-        VideoChat.prototype.onLocalDescription = function (sessionDescription) {
-            var _this = this;
-            this.peerConnection.setLocalDescription(sessionDescription, function () {
-                _this.signalr.signalingHub.server.sendDescription(_this.roomId, JSON.stringify(_this.peerConnection.localDescription));
-                if (sessionDescription.type === "offer") {
-                    console.info("Offer sended");
-                }
-                if (sessionDescription.type === "answer") {
-                    console.info("Answer sended");
-                }
-            }, this.onError);
-        };
-        VideoChat.prototype.onRemoteDescription = function (sessionDescription) {
-            var _this = this;
-            this.ensureConnection();
-            this.peerConnection.setRemoteDescription(sessionDescription, function () {
-                if (sessionDescription.type === "offer") {
-                    _this.peerConnection.createAnswer(function (sd) { return _this.onLocalDescription(sd); }, _this.onError);
-                    console.info("Offer received");
-                }
-                if (sessionDescription.type === "answer") {
-                    console.info("Answer received");
-                }
-            }, this.onError);
-        };
-        VideoChat.prototype.onLocalCandidate = function (event) {
-            if (event.candidate) {
-                this.signalr.signalingHub.server.sendCandidate(this.roomId, JSON.stringify(event.candidate));
-                console.info("Local ICE candidate occur: %s", event.candidate.candidate);
-            }
-        };
-        VideoChat.prototype.onRemoteCandidate = function (iceCandidate) {
-            this.peerConnection.addIceCandidate(iceCandidate, function () {
-                console.info("Remote ICE candidate occur: %s", iceCandidate.candidate);
-            }, this.onError);
-        };
-        VideoChat.prototype.onError = function (error) {
-            console.error(error);
-        };
-        VideoChat.prototype.onStreamAdded = function (event) {
-            if (this.onStreamReceived != null) {
-                this.onStreamReceived(event.stream);
-            }
-        };
-        VideoChat.prototype.ensureConnection = function () {
-            if (this.peerConnection == null) {
-                this.startConnection("");
-            }
-        };
-        return VideoChat;
-    })();
-    RtcChat.VideoChat = VideoChat;
-})(RtcChat || (RtcChat = {}));
+///// <reference path="SignalR.ts" />
+//module RtcChat {
+//    export interface IVideoChat {
+//        startConnection(roomId: string);
+//        stopConnection(roomId: string);
+//    }
+//    export class VideoChat implements IVideoChat {
+//        private peerConnection: RTCPeerConnection;
+//        private roomId: string;
+//        constructor(private config: RTCConfiguration, private signalr: ISignalR) {
+//            this.ensureSignaling();
+//        }
+//        startConnection(roomId: string): void {
+//            if (this.peerConnection == null && this.roomId == null) {
+//                this.peerConnection = this.createConnection();
+//                this.roomId = roomId;
+//                if (this.onConnectionReady != null) {
+//                    this.onConnectionReady();
+//                }
+//            }
+//        }
+//        stopConnection(roomId: string): void {
+//            this.roomId = null;
+//            if (this.peerConnection != null) {
+//                this.peerConnection.close();
+//                this.peerConnection = null;
+//            }
+//        }
+//        private ensureSignaling() {
+//            this.signalr.signalingHub.client.onDescription = (roomId, remoteDescriptionString) => {
+//                var remoteDescription = new RTCSessionDescription($.parseJSON(remoteDescriptionString));
+//                this.onRemoteDescription(remoteDescription);
+//            }
+//            this.signalr.signalingHub.client.onCandidate = (roomId, remoteCandidateString) => {
+//                var iceCandidate = new RTCIceCandidate($.parseJSON(remoteCandidateString));
+//                this.onRemoteCandidate(iceCandidate);
+//            }
+//        }
+//        private createConnection(): RTCPeerConnection {
+//            var connection = new RTCPeerConnection(this.config);
+//            connection.onicecandidate = c => this.onLocalCandidate(c);
+//            connection.onaddstream = s => this.onStreamAdded(s);
+//            connection.onsignalingstatechange = () => {
+//                console.info("Signaling state: %s", connection.signalingState);
+//            };
+//            connection.oniceconnectionstatechange = () => {
+//                console.info("Connection state: %s", connection.iceConnectionState);
+//            };
+//            connection.onnegotiationneeded = () => {
+//                console.warn("Negatiation needed!");
+//                this.peerConnection.createOffer((sd) => this.onLocalDescription(sd), this.onError);
+//            };
+//            return connection;
+//        }
+//        private onLocalDescription(sessionDescription: RTCSessionDescription) {
+//            this.peerConnection.setLocalDescription(sessionDescription, () => {
+//                this.signalr.signalingHub.server.sendDescription(this.roomId, JSON.stringify(this.peerConnection.localDescription));
+//                if (sessionDescription.type === "offer") {
+//                    console.info("Offer sended");
+//                }
+//                if (sessionDescription.type === "answer") {
+//                    console.info("Answer sended");
+//                }
+//            }, this.onError);
+//        }
+//        private onRemoteDescription(sessionDescription: RTCSessionDescription) {
+//            this.ensureConnection();
+//            this.peerConnection.setRemoteDescription(sessionDescription, () => {
+//                if (sessionDescription.type === "offer") {
+//                    this.peerConnection.createAnswer((sd) => this.onLocalDescription(sd), this.onError);
+//                    console.info("Offer received");
+//                }
+//                if (sessionDescription.type === "answer") {
+//                    console.info("Answer received");
+//                }
+//            }, this.onError);
+//        }
+//        private onLocalCandidate(event: RTCIceCandidateEvent): void {
+//            if (event.candidate) {
+//                this.signalr.signalingHub.server.sendCandidate(this.roomId, JSON.stringify(event.candidate));
+//                console.info("Local ICE candidate occur: %s", event.candidate.candidate);
+//            }
+//        }
+//        private onRemoteCandidate(iceCandidate: RTCIceCandidate) {
+//            this.peerConnection.addIceCandidate(iceCandidate, () => {
+//                console.info("Remote ICE candidate occur: %s", iceCandidate.candidate);
+//            }, this.onError);
+//        }
+//        private onError(error: DOMError) {
+//            console.error(error);
+//        }
+//        onStreamAdded(event: RTCMediaStreamEvent): void {
+//            if (this.onStreamReceived != null) {
+//                this.onStreamReceived(event.stream);
+//            }
+//        }
+//        private addStream = (stream: MediaStream) => {
+//            this.peerConnection.addStream(stream);
+//        };
+//        onConnectionReady;
+//        onStreamReceived;
+//        private ensureConnection() {
+//            if (this.peerConnection == null) {
+//                this.startConnection("");
+//            }
+//        }
+//    }
+//} 
+//module RtcChat {
+//    export interface ISignalR extends SignalR {
+//        signalingHub: ISignalingHubProxy;
+//        messageHub: IMessageHubProxy;
+//    }
+//    export interface ISignalingHubProxy extends HubProxy {
+//        server: ISignalingServer;
+//        client: ISignalingClient;
+//    }
+//    export interface IMessageHubProxy extends HubProxy {
+//        server: IMessageServer;
+//        client: IMessageClient;
+//    }
+//    export interface ISignalingServer {
+//        startCall(roomId: string): JQueryPromise<void>;
+//        endCall(roomId: string): JQueryPromise<void>;
+//        acceptCall(): JQueryPromise<void>;
+//        sendCandidate(roomId: string, candidate: string): JQueryPromise<void>;
+//        sendDescription(roomId: string, description: string): JQueryPromise<void>;
+//    }
+//    export interface ISignalingClient {
+//        onCall(roomId: string, callerInfo: CallerInfo);
+//        onAnswer(roomId: string, accepted: boolean);
+//        onCandidate(roomId: string, candidate: string);
+//        onDescription(roomId: string, description: string);
+//        onHang(roomId: string);
+//    }
+//    export interface IMessageServer {
+//        getPreviousMessages(): Array<ChatTextMessage>;
+//        sendMessage(message: string);
+//    }
+//    export interface IMessageClient {
+//        onMessage(message: ChatTextMessage);
+//    }
+//    export class CallerInfo {
+//        DisplayName: string;
+//        CallerId: string;
+//        AvatarUrl: string;
+//    }
+//    export class ChatTextMessage {
+//        UserName: string;
+//        UserDisplayName: string;
+//        Message: string;
+//    }
+//} 
 //# sourceMappingURL=ngapp.js.map

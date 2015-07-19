@@ -1,5 +1,5 @@
 ﻿module Telemedicine {
-    export interface IDoctorListItem {
+    export interface IDoctor {
         Id: number;
         Title: string;
         Specialization: string;

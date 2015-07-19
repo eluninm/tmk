@@ -983,13 +983,13 @@ body {
 .list-doctor-panel .status-icon.voice-icon {
   background-image: url('/img/voice_green.svg');
 }
-.list-doctor-panel .status-icon.voice-icon.disabled {
+.list-doctor-panel .status-icon.voice-icon-disabled {
   background-image: url('/img/voice.svg');
 }
 .list-doctor-panel .status-icon.video-icon {
   background-image: url('/img/video_green.svg');
 }
-.list-doctor-panel .status-icon.video-icon.disabled {
+.list-doctor-panel .status-icon.video-icon-disabled {
   background-image: url('/img/video.svg');
 }
 .list-doctor-panel .info-icon {

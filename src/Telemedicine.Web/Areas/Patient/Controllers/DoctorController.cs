@@ -14,7 +14,7 @@ using Telemedicine.Web.Areas.Patient.Models;
 namespace Telemedicine.Web.Areas.Patient.Controllers
 {
     [Authorize(Roles = UserRoleNames.Patient)]
-    public class ConsultationController : Controller
+    public class DoctorController : Controller
     {
         private readonly IAppointmentEventService _appointmentEventService;
         private readonly IDoctorService _doctorService;
@@ -24,7 +24,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
         private readonly ISpecializationService _specializationService;
 
 
-        public ConsultationController(
+        public DoctorController(
             IAppointmentEventService appointmentEventService, 
             IDoctorService doctorService, 
             IPatientService patientService, 
@@ -40,7 +40,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             _specializationService = specializationService;
         }
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> List()
         {
             var doctors =   _doctorService.GetAll();
             var viewModel = (from doctor in doctors
@@ -56,7 +56,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
 
             ViewBag.Specializations = await _specializationService.GetSpecializationsAsync();
 
-            return View("Index2", viewModel);
+            return View(viewModel);
         }
 
         public async Task<ActionResult> Index_Old()
@@ -75,7 +75,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
 
             ViewBag.Specializations = await _specializationService.GetSpecializationsAsync();
 
-            return View("Index", viewModel);
+            return View("Index_Old", viewModel);
         }
 
         public async Task<ActionResult> StartDialog(int id)

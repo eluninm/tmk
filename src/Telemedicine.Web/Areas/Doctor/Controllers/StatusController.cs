@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using AutoMapper;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.SignalR;
 using Telemedicine.Core.Consts;
@@ -12,6 +13,7 @@ using Telemedicine.Core.Data;
 using Telemedicine.Core.Domain.Consts;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Core.Identity;
+using Telemedicine.Web.Api.Dto;
 using Telemedicine.Web.Areas.Doctor.Models;
 using Telemedicine.Web.Hubs;
 
@@ -21,12 +23,10 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
     public class StatusController : Controller
     {
         private readonly IDoctorService _service;
-        private readonly IDbContextProvider _provider;
 
-        public StatusController(IDoctorService service, IDbContextProvider provider)
+        public StatusController(IDoctorService service)
         {
             _service = service;
-            _provider = provider;
         }
 
         //http://aspnetwebstack.codeplex.com/workitem/601
@@ -38,22 +38,23 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             return PartialView("Status", new DoctorStatusViewModel {CurrentStatus = status, AvailableStatuses = available});
         }
 
-        public ActionResult ChangeStatus(int id)
+        public async Task<ActionResult> ChangeStatus(int id)
         {
             var currentUserId = User.Identity.GetUserId();
             var status = _service.SetStatusByUserId(currentUserId, id);
             var available = _service.GetAvailableStatuses();
 
-            var doctor = _provider.Context.Set<Core.Models.Doctor>().Include("DoctorStatus").FirstOrDefault(t => t.UserId == currentUserId);
+            var doctor = await _service.GetByUserIdAsync(currentUserId);
+            var doctorDto = Mapper.Map<DoctorListItemDto>(doctor);
+            doctorDto.IsChatAvailable = doctor.DoctorStatus.Name != DoctorStatusNames.Busy;
+            doctorDto.IsAudioAvailable = doctor.DoctorStatus.Name == DoctorStatusNames.VideoChat;
+            doctorDto.IsVideoAvailable = doctor.DoctorStatus.Name == DoctorStatusNames.VideoChat;
+
+
 
             GlobalHost.ConnectionManager.GetHubContext<SignalHub>()
-                .Clients.All.OnDoctorChangeStatus(new DoctorChangeStatus
-                {
-                    DoctorId = doctor.Id.ToString(),
-                    StatusText = doctor.DoctorStatus.DisplayName,
-                    CanCall = doctor.DoctorStatus.Name != DoctorStatusNames.Busy,
-                    StatusName = doctor.DoctorStatus.Name
-                });
+                .Clients.All.OnDoctorUpdated(doctorDto);
+
 
             if (Request.IsAjaxRequest())
             {
