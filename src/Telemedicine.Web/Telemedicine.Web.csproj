@@ -201,6 +201,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="img\chat_gray.svg" />
     <Content Include="lib\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
     <Content Include="Content\less\OwlCarousel\AjaxLoader.gif" />
     <Content Include="Content\less\OwlCarousel\grabbing.png" />
