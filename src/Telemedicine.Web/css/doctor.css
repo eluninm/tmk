@@ -508,11 +508,15 @@ body {
   line-height: 20px;
 }
 .modal-content .modal-body .sub-title {
-  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: GothaProLight, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: normal;
   font-size: 12px;
   line-height: 20px;
+  margin-bottom: 4px;
   color: #8c8c8c;
+}
+.modal-content .modal-body input[type='text'] {
+  color: black;
 }
 .modal-content .modal-footer {
   border: none;

@@ -511,11 +511,15 @@ body {
   line-height: 20px;
 }
 .modal-content .modal-body .sub-title {
-  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: GothaProLight, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: normal;
   font-size: 12px;
   line-height: 20px;
+  margin-bottom: 4px;
   color: #8c8c8c;
+}
+.modal-content .modal-body input[type='text'] {
+  color: black;
 }
 .modal-content .modal-footer {
   border: none;
@@ -780,18 +784,18 @@ body {
 .consultation-message-container .consultation-message:first-child::before {
   border-top: none;
 }
-.doctordeclinecall .speciality {
+.doctordeclinecall .modal-content .modal-body .speciality {
   font-size: 10px;
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: normal;
   font-weight: bolder;
   color: #e79924;
-  text-align: center;
   width: 200px;
+  text-align: center;
   margin: 0 auto;
   margin-bottom: 12px;
 }
-.doctordeclinecall .text {
+.doctordeclinecall .modal-content .modal-body .text {
   font-size: 14px;
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: normal;
@@ -876,7 +880,7 @@ body {
 .waitdoctoranswerdialog {
   width: 500px;
 }
-.waitdoctoranswerdialog .speciality {
+.waitdoctoranswerdialog .modal-content .modal-body .speciality {
   font-size: 10px;
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: normal;
@@ -887,7 +891,7 @@ body {
   margin: 0 auto;
   margin-bottom: 12px;
 }
-.waitdoctoranswerdialog .text {
+.waitdoctoranswerdialog .modal-content .modal-body .text {
   font-size: 14px;
   font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: normal;
@@ -896,7 +900,7 @@ body {
   margin: 0 auto;
   width: 250px;
 }
-.waitdoctoranswerdialog .sub-title {
+.waitdoctoranswerdialog .modal-content .modal-body .sub-title {
   margin: 0 auto;
   text-transform: uppercase;
   font-size: 9px;
@@ -1232,4 +1236,75 @@ body {
 }
 .fc-event {
   background-color: #3e67ae;
+}
+.addTimeSpanEventDialog .modal-body .row3 {
+  margin-top: 24px;
+  margin-left: -30px;
+}
+.addTimeSpanEventDialog .modal-body .row4 {
+  margin-top: 24px;
+  margin-left: -15px;
+}
+.addTimeSpanEventDialog .modal-body .form-control {
+  border-right: none;
+}
+.addTimeSpanEventDialog .modal-body .input-group-addon {
+  background: white;
+  border-top-right-radius: 21px;
+  border-bottom-right-radius: 21px;
+}
+.addTimeSpanEventDialog .modal-body .input-group-addon .glyphicon-calendar {
+  color: #3e67ae;
+}
+.addTimeSpanEventDialog .modal-body .alldaycheckbox {
+  margin-top: 30px;
+}
+.addTimeSpanEventDialog .modal-body .row-dropdown {
+  padding-right: 25px;
+}
+.addTimeSpanEventDialog .modal-body .row-dropdown .open .dropdown-toggle.btn-default {
+  background-color: white;
+  z-index: 1001;
+  position: relative;
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.addTimeSpanEventDialog .modal-body .row-dropdown .open .dropdown-toggle.btn-default:focus {
+  background-color: white;
+  z-index: 1001;
+  position: relative;
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.addTimeSpanEventDialog .modal-body .row-dropdown .open .dropdown-toggle.btn-default:hover {
+  background-color: white;
+  z-index: 1001;
+  position: relative;
+  border-bottom: none;
+}
+.addTimeSpanEventDialog .modal-body .row-dropdown .dropdown .dropdown-menu {
+  padding-top: 20px;
+  margin-top: -18px;
+  border-top: none;
+  width: 187.5px;
+  border-bottom-left-radius: 21px;
+  border-bottom-right-radius: 21px;
+}
+.addTimeSpanEventDialog .modal-body .row-dropdown .dropdown .dropdown-menu li {
+  margin-left: 12px;
+}
+.addTimeSpanEventDialog .modal-body .days-list {
+  margin-top: 25px;
+}
+.addTimeSpanEventDialog .modal-body .days-list a {
+  text-transform: uppercase;
+  margin-right: 12px;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 11px;
+}
+.addTimeSpanEventDialog .modal-body .days-list a .glyphicon-remove {
+  color: #8c8c8c;
+  margin-left: 4px;
 }
