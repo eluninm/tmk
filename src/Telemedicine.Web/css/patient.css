@@ -1230,3 +1230,6 @@ body {
   margin-top: 6px;
   font-size: 14px;
 }
+.fc-event {
+  background-color: #3e67ae;
+}
