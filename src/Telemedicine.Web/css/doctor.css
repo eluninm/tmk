@@ -343,6 +343,9 @@ body {
   border-radius: 1.5em;
   width: 100%;
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 2em;
 }
 .rounded.dropdown .dropdown-toggle .caret {
   position: absolute;
