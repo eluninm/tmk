@@ -328,6 +328,14 @@ body {
   background: #e79924;
   border-color: #e79924;
 }
+.btn.start-chat-btn:hover {
+  background: #e79924;
+  border-color: #e79924;
+}
+.btn.start-chat-btn:active {
+  background: #e79924;
+  border-color: #e79924;
+}
 .rounded.dropdown .dropdown-toggle {
   background: white;
   height: 2.5em;
