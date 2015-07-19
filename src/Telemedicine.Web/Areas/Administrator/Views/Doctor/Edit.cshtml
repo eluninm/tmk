@@ -48,10 +48,19 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.SpecializationId, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.SpecializationId, new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.SpecializationId, (IEnumerable<SelectListItem>)ViewBag.Specializations, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.SpecializationId, (IEnumerable<SelectListItem>) ViewBag.Specializations, new {@class = "form-control"})
                 @Html.ValidationMessageFor(model => model.MiddleName)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description)
             </div>
         </div>
     </div>

@@ -32,6 +32,9 @@ namespace Telemedicine.Core.Identity
         public DateTime? LastLoginDate { get; set; }
 
         public string PaymentInstrument { get; set; }
+
         public virtual List<UserEvent> UserEvents { get; set; }
+
+        public string AvatarUrl { get; set; }
     }
 }

@@ -524,6 +524,7 @@
   <ItemGroup>
     <Compile Include="Api\ApiMapperConfiguration.cs" />
     <Compile Include="Api\Controllers\ConversationController.cs" />
+    <Compile Include="Api\Controllers\DoctorController.cs" />
     <Compile Include="Api\Controllers\PatientController.cs" />
     <Compile Include="Api\Controllers\RecommendationController.cs" />
     <Compile Include="Api\Dto\BeginConsultationDto.cs" />

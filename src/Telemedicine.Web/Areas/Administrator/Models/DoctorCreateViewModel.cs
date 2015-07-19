@@ -32,5 +32,8 @@ namespace Telemedicine.Web.Areas.Administrator.Models
         [Required]
         [DisplayName("Специализация")]
         public int SpecializationId { get; set; }
+
+        [DisplayName("Описание")]
+        public string Description { get; set; }
     }
 }

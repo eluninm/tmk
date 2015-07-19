@@ -15,19 +15,10 @@ namespace Telemedicine.Web
             app.UseContainer();
 
             AreaRegistration.RegisterAllAreas();
+            GlobalConfiguration.Configure(WebApiConfig.Configure);
             RouteConfig.Configure(RouteTable.Routes);
-            GlobalConfiguration.Configure(t => t.MapHttpAttributeRoutes());
             AuthConfig.Configure(app);
-
             app.MapSignalR();
-          //  ExecuteMigrations();
-        }
-
-        private void ExecuteMigrations()
-        {
-            var configuration = new Telemedicine.Core.Migrations.Configuration();
-            var migrator = new DbMigrator(configuration);
-            migrator.Update();
         }
     }
 }
