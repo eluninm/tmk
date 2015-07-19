@@ -201,7 +201,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
+    <Content Include="lib\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
     <Content Include="Content\less\OwlCarousel\AjaxLoader.gif" />
     <Content Include="Content\less\OwlCarousel\grabbing.png" />
     <Content Include="Content\less\OwlCarousel\owl.carousel.css" />
@@ -455,6 +455,7 @@
     <Content Include="Content\less\chatpage.less" />
     <Content Include="Content\less\usercalldialog.less" />
     <Content Include="Content\less\fullcalendar.less" />
+    <Content Include="Content\less\addTimeSpanEventDialog.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

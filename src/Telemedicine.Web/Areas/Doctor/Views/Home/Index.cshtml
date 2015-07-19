@@ -66,9 +66,12 @@
             </li>
         </ul>
     </div>
-    <a class="btn btn-primary rounded" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
+    <a class="btn btn-primary rounded" data-toggle="modal" data-target="#addEventDialog" title="Добавить событие">
         <span class="glyphicon">+</span> Добавить
     </a>
+    @*<a class="btn btn-primary rounded" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
+        <span class="glyphicon">+</span> Добавить
+    </a>*@
 </div>
 
 <div id="calendar"></div>
@@ -148,10 +151,151 @@
 </div>
 
 
-<div class="modal fade" id="addEventDialog">
+@*<div class="modal fade" id="addEventDialog">
     <div class="modal-dialog">
         <div class="modal-content">
 
+        </div>
+    </div>
+</div>*@
+<div class="modal fade" id="addEventDialog">
+    <div class="modal-dialog addTimeSpanEventDialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Добавление события</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row sub-title">
+                    Выберите способ оплаты
+                </div>
+                <div class="row">
+                    <input type="text" class="rounded form-control">
+                </div>
+                <div class="row row3">
+                    <div class="col-md-4">
+                        <div class="sub-title">
+                            Начальная дата
+                        </div>
+                        <div>
+                            <div class="input-group">
+                                <input type="text" class="rounded form-control" placeholder="Начало события" id="beginDateDatetimePicker">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="sub-title">
+                            Конечная дата
+                        </div>
+                        <div>
+                            <div class="input-group">
+                                <input type="text" class="rounded form-control" placeholder="Конец события" id="endDateDatetimePicker">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="checkbox checkbox-circle alldaycheckbox">
+                            <input id="alldaycheckbox" type="checkbox">
+                            <label for="alldaycheckbox">
+                                Весь день
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row4">
+                    <div class="col-md-4">
+                        <div class="row sub-title">
+                            Повторять событие
+                        </div>
+                        <div class="row row-dropdown">
+                            <div class="rounded dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true">
+                                    Только один раз
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li>
+                                        <div class="checkbox checkbox-circle">
+                                            <input id="checkbox0" type="checkbox">
+                                            <label for="checkbox0">
+                                                Понедельник
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="checkbox checkbox-circle">
+                                            <input id="checkbox1" type="checkbox">
+                                            <label for="checkbox1">
+                                                Вторник
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="checkbox checkbox-circle">
+                                            <input id="checkbox2" type="checkbox">
+                                            <label for="checkbox2">
+                                                Среда
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="checkbox checkbox-circle">
+                                            <input id="checkbox3" type="checkbox">
+                                            <label for="checkbox3">
+                                                Четверг
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="checkbox checkbox-circle">
+                                            <input id="checkbox4" type="checkbox">
+                                            <label for="checkbox4">
+                                                Пятница
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="checkbox checkbox-circle">
+                                            <input id="checkbox5" type="checkbox">
+                                            <label for="checkbox5">
+                                                Суббота
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="checkbox checkbox-circle">
+                                            <input id="checkbox6" type="checkbox">
+                                            <label for="checkbox6">
+                                                Воскресенье
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="input-group days-list">
+                            <a href="#">понедельник <span class="glyphicon glyphicon-remove"></span></a>
+                            <a href="#">вторник<span class="glyphicon glyphicon-remove"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary rounded">
+                    добавить
+                </a>
+                <a class="btn rounded-rd" data-dismiss="modal">
+                    закрыть
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -192,6 +336,20 @@
                     height: 300,
 //                    eventColor: '#3e67ae'
                 });
+            });
+
+            //инициализация всплывающего окна дял добавления записи
+            $("#beginDateDatetimePicker").datetimepicker({
+                locale: 'ru'
+            });
+            $("#endDateDatetimePicker").datetimepicker({
+                locale: 'ru'
+            });
+            $(".glyphicon-calendar").click(function() {
+                $(this).parent().parent().find(".form-control").focus();
+            });
+            $('.dropdown-menu input, .dropdown-menu label').click(function (e) {
+                e.stopPropagation();
             });
         });
 
