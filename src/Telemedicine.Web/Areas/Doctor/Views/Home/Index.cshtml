@@ -25,7 +25,7 @@
     </span>
     <div class="dropdown rounded" style="display: inline-block; width: 120px;">
         <a class="btn btn-primary dropdown-toggle" id="selectMonth" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <span id="selectedMonth">Месяц</span> <span class="caret"></span>
+            <span id="selectedMonth" class="uppercase" style="font-size:11px">Месяц</span> <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="selectMonth">
             <li>
@@ -74,36 +74,24 @@
 
 <div id="calendar"></div>
 
-<div style="height:calc(100% - 420px)">
-    <h4>Записанные пациенты</h4>
+<div style="height:calc(100% - 500px)">
+    <h3 class="page-header font-bold" style="border:none;">Записи на сегодня</h3>
     <div class="grid">
-        <div class="page-header">
+        <div class="page-header" style="border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4;">
             <table style="width: 100%">
-                <colgroup>
-                    <col />
-                    <col />
-                    <col />
-                </colgroup>
                 <tr>
-                    <td>Дата события</td>
-                    <td>ФИО Пациента</td>
-                    <td>Тип события</td>
+                    <td class="col-md-3 uppercase font-bold">Время</td>
+                    <td class="col-md-9uppercase font-bold">Пациент</td>
                 </tr>
             </table>
         </div>
         <div class="grid-content">
-            <table style="width: 100%">
-                <colgroup>
-                    <col style="width: 33.3%" />
-                    <col style="width: 33.3%" />
-                    <col style="width: 33.3%" />
-                </colgroup>
+            <table style="width: 100%; ">
                 @foreach (var appointment in Model)
                 {
                     <tr>
                         <td class="col-md-4">@appointment.Date.ToString("dd.MM.yyyy HH:mm")</td>
                         <td class="col-md-4">@appointment.PatientFio</td>
-                        <td class="col-md-4">Запись к врачу</td>
                     </tr>
                 }
             </table>
@@ -155,7 +143,7 @@
 
         </div>
     </div>
-</div> 
+</div>
 
 @section scripts
 {
@@ -185,6 +173,7 @@
                         center: '',
                         right: ''
                     },
+                    columnFormat:'dd D',
                     lang: 'ru',
                     events: data,
                     defaultView: "agendaWeek",

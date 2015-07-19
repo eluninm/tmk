@@ -275,6 +275,9 @@ html,
 body {
   height: 100%;
 }
+.uppercase {
+  text-transform: uppercase;
+}
 .main-container {
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: normal;
@@ -376,8 +379,6 @@ body {
   color: white;
   height: 2em;
   text-transform: uppercase;
-  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: normal;
   font-size: 11px;
   padding: 0.9em 1em 2.1em;
 }
@@ -385,8 +386,6 @@ body {
   height: 2em;
   border-radius: 2em;
   text-transform: uppercase;
-  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: normal;
   font-size: 11px;
   padding: 0.9em 1em 2.1em;
   color: white;
@@ -1236,6 +1235,13 @@ body {
 }
 .fc-event {
   background-color: #3e67ae;
+}
+.fc-toolbar .fc-left {
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.fc-toolbar .fc-left h2 {
+  margin-top: 10px;
+  font-size: 21px;
 }
 .addTimeSpanEventDialog .modal-body .row3 {
   margin-top: 24px;
