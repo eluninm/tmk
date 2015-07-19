@@ -46,10 +46,8 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             {
                 listItems.Add(new SelectListItem() {Text = i.ToString(), Value = i.ToString()});
             }
-
-            viewModel.IntervalItems = listItems;
-            viewModel.Begin = DateTime.Now;
-            viewModel.RepeatBeginDate = DateTime.Now;
+             
+            viewModel.Begin = DateTime.Now; 
             return PartialView("_AddTimeSpanEventDialog", viewModel);
         }
 
@@ -61,71 +59,22 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             {
                 TimeSpanEvent timeSpanEvent = new TimeSpanEvent()
                 {
-                    BeginDate = viewModel.IsRepeat ? viewModel.RepeatBeginDate : viewModel.Begin,
-                    EndDate = viewModel.IsRepeat ? viewModel.RepeatEndDate : viewModel.End,
+                    BeginDate = viewModel.Begin,
+                    EndDate = viewModel.End,
                     Title = viewModel.Title,
-                    IsRepeat = viewModel.IsRepeat, 
                     Owner = doctor.User,
-                    Interval = viewModel.SelectedEndType,
-                    RepeatType = viewModel.SelectedRepeatType,
-                    RepeatInterval = viewModel.SelectedIntervalId
+                    IsRepeat = viewModel.IsOnDate,
+
+                    Monday = viewModel.Monday,
+                    Tuesday = viewModel.Tuesday,
+                    Wednesday = viewModel.Wednesday,
+                    Thursday = viewModel.Thursday,
+                    Friday = viewModel.Friday,
+                    Saturday = viewModel.Saturday,
+                    Sunday = viewModel.Sunday
                 };
 
-                timeSpanEvent.RepeatCount = viewModel.After;
-                switch (viewModel.SelectedRepeatType)
-                {
-                    case TypeRepeatingEvent.EveryBusinessDay:
-                    {
-                        timeSpanEvent.Monday = true;
-                        timeSpanEvent.Tuesday = true;
-                        timeSpanEvent.Wednesday = true;
-                        timeSpanEvent.Thursday = true;
-                        timeSpanEvent.Friday = true;
-                        timeSpanEvent.Interval = 0;
-                        timeSpanEvent.RepeatInterval = 0;
-                        break;
-                    }
-
-                    case TypeRepeatingEvent.EveryMondayWednesdayFriday:
-                    {
-                        timeSpanEvent.Monday = true;
-                        timeSpanEvent.Wednesday = true;
-                        timeSpanEvent.Friday = true;
-                            timeSpanEvent.Interval = 0;
-                            timeSpanEvent.RepeatInterval = 0;
-                            break;
-                    }
-                    case TypeRepeatingEvent.EveryTuesdayThursday:
-                    {
-                        timeSpanEvent.Tuesday = true;
-                        timeSpanEvent.Thursday = true;
-                            timeSpanEvent.Interval = 0;
-                            timeSpanEvent.RepeatInterval = 0;
-                            break;
-                    }
-                    case TypeRepeatingEvent.Everyday:
-                    {
-                        timeSpanEvent.Monday = true;
-                        timeSpanEvent.Tuesday = true;
-                        timeSpanEvent.Wednesday = true;
-                        timeSpanEvent.Thursday = true;
-                        timeSpanEvent.Friday = true;
-                        timeSpanEvent.Saturday = true;
-                        timeSpanEvent.Sunday = true;
-                        break;
-                    }
-                    case TypeRepeatingEvent.EveryWeek:
-                        {
-                            timeSpanEvent.Monday = viewModel.Monday;
-                            timeSpanEvent.Tuesday = viewModel.Tuesday;
-                            timeSpanEvent.Wednesday = viewModel.Wednesday;
-                            timeSpanEvent.Thursday = viewModel.Thursday;
-                            timeSpanEvent.Friday = viewModel.Friday;
-                            timeSpanEvent.Saturday = viewModel.Saturday;
-                            timeSpanEvent.Sunday = viewModel.Sunday;
-                            break;
-                        }
-                }
+                 
                 await _timeSpanEventService.CreateAsync(timeSpanEvent);
             }
             List<SelectListItem> listItems = new List<SelectListItem>();
@@ -133,8 +82,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             {
                 listItems.Add(new SelectListItem() {Text = i.ToString(), Value = i.ToString()});
             }
-
-            viewModel.IntervalItems = listItems;
+             
             viewModel.Begin = DateTime.Now;
             return PartialView("_AddTimeSpanEventDialog", viewModel);
         }

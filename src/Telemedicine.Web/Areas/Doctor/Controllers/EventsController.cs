@@ -33,74 +33,35 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
 
         public async Task<string> GetEvents()
         {
-            /*await _appointmentEventService.CreateAsync(new AppointmentEvent()
-            {
-                Date = DateTime.Today,
-                DateCreation = DateTime.Now,
-                Doctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId()),
-                Patient = await _patientService.GetByIdAsync(2)
-            });
-
-
-            await _timeSpanEventService.CreateAsync(new TimeSpanEvent()
-            {
-                BeginDate = new DateTime(2015,7,9,1,0,0),
-                EndDate = new DateTime(2015,7,9,22,0,0),
-                Owner = (await _doctorService.GetByUserIdAsync(User.Identity.GetUserId())).User,
-                Title = "День рождения"
-            });
-            */
+            
             List<EventViewModel> eventList = new List<EventViewModel>();
 
             eventList.AddRange(
                 (await _appointmentEventService.GetAllAsync()).Select(
                     ae => new EventViewModel() {start = ae.Date, title = "Прием пациента"}));
-            /*eventList.AddRange(
-                (await _timeSpanEventService.GetAllAsync()).Select(
-                    ts =>
-                        new EventViewModel()
-                        {
-                            start = ts.BeginDate,
-                            end = ts.EndDate,
-                            title = ts.Title,
-                            color = "#c0e788",
-                            allDay = ts.EndDate == null
-                        }));*/
+             
             var timeSpanEvents = (await _timeSpanEventService.GetAllAsync());
 
             foreach (TimeSpanEvent timeSpanEvent in timeSpanEvents)
             {
-                if (timeSpanEvent.IsRepeat)
-                {
-                    int id = (new Random()).Next(0, 999999);
-                    List<DayOfWeek?> days = GetDaysOfWeek(timeSpanEvent);
-                    if (timeSpanEvent.RepeatType == TypeRepeatingEvent.Everyday)
-                    {
-                        days.Clear();
-                        days.Add(null);
-                    }
+                int id = (new Random()).Next(0, 999999);
+                List<DayOfWeek> days = GetDaysOfWeek(timeSpanEvent);
 
+                if (days.Any())
+                { 
                     List<DateTime> dates = new List<DateTime>();
                     dates.Add(timeSpanEvent.BeginDate);
-                    foreach (DayOfWeek? dayOfWeek in days)
+                    foreach (DayOfWeek dayOfWeek in days)
                     {
                         dates.AddRange(GetDate(dayOfWeek, timeSpanEvent));
-                        foreach (DateTime date in dates)
-                        {
-                            eventList.Add(new EventViewModel()
-                            {
-                                start =
-                                    new DateTime(date.Year, date.Month, date.Day, timeSpanEvent.BeginDate.Hour,
-                                        timeSpanEvent.BeginDate.Minute, 0),
-                                end =
-                                    timeSpanEvent.EndDate == null
-                                        ? (DateTime?) null
-                                        : (new DateTime(date.Year, date.Month, date.Day,
-                                            timeSpanEvent.EndDate?.Hour ?? 0, timeSpanEvent.EndDate?.Minute ?? 0, 0)),
-                                title = timeSpanEvent.Title,
-                                allDay = false
-                            });
-                        }
+                        eventList.AddRange(dates.Select(date => new EventViewModel()
+                        { 
+                            start = new DateTime(date.Year, date.Month, date.Day, timeSpanEvent.BeginDate.Hour, timeSpanEvent.BeginDate.Minute, 0),
+                            end = timeSpanEvent.EndDate == null ? (DateTime?) null : (new DateTime(date.Year, date.Month, date.Day, timeSpanEvent.EndDate?.Hour ?? 0,
+                            timeSpanEvent.EndDate?.Minute ?? 0, 0)),
+                            title = timeSpanEvent.Title,
+                            allDay = timeSpanEvent.IsRepeat
+                        }));
                         dates.Clear();
                     }
                 }
@@ -111,7 +72,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
                         start = timeSpanEvent.BeginDate,
                         end = timeSpanEvent.EndDate,
                         title = timeSpanEvent.Title,
-                        allDay = timeSpanEvent.EndDate == null
+                        allDay = timeSpanEvent.IsRepeat
                     });
                 }
             }
@@ -120,80 +81,33 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
         }
 
 
-        private List<DateTime> GetDate(DayOfWeek? dayOfWeek, TimeSpanEvent timeSpanEvent)
+        private List<DateTime> GetDate(DayOfWeek dayOfWeek, TimeSpanEvent timeSpanEvent)
         {
-            List<DateTime> list = new List<DateTime>();
-            DateTime now = DateTime.Now;
-            DateTime beginDate = timeSpanEvent.BeginDate;
-            DateTime endDate = new DateTime(now.Year + 2, 1, 1);
-            if (dayOfWeek != null)
+            List<DateTime> list = new List<DateTime>(); 
+            DateTime beginDate = timeSpanEvent.BeginDate.AddDays(1);
+            DateTime endDate = new DateTime(beginDate.Year + 1, 1, 1);
+
+            while (beginDate.DayOfWeek != dayOfWeek)
             {
-                if (beginDate.DayOfWeek != DayOfWeek.Monday && timeSpanEvent.RepeatType != TypeRepeatingEvent.Everyday)
-                    while (beginDate.DayOfWeek != DayOfWeek.Monday)
-                    {
-                        beginDate = beginDate.Subtract(new TimeSpan(1, 0, 0, 0));
-                    }
+                beginDate = beginDate.AddDays(1);
+            }
 
-
-                while (beginDate.DayOfWeek != dayOfWeek)
-                {
-                    beginDate = beginDate.AddDays(1);
-                }
-
-                if (((timeSpanEvent.RepeatType == TypeRepeatingEvent.Everyday) || (timeSpanEvent.RepeatType == TypeRepeatingEvent.EveryBusinessDay ||
-                         timeSpanEvent.RepeatType == TypeRepeatingEvent.EveryMondayWednesdayFriday ||
-                         timeSpanEvent.RepeatType == TypeRepeatingEvent.EveryTuesdayThursday) || (timeSpanEvent.RepeatType == TypeRepeatingEvent.EveryWeek))
-                         && beginDate > timeSpanEvent.BeginDate  )
+            while (beginDate <= endDate)
+            {
+                if (beginDate.DayOfWeek == dayOfWeek)
                 {
                     list.Add(beginDate);
                 }
-                 
-            }
-            int repeatCouner = 0;
-            timeSpanEvent.RepeatInterval = (timeSpanEvent.RepeatInterval > 0
-                ? timeSpanEvent.RepeatInterval - 1
-                : timeSpanEvent.RepeatInterval);
 
-            while (beginDate < endDate &&
-                   (((timeSpanEvent.Interval == EndTypeRepeatInterval.AfterDate) && beginDate < timeSpanEvent.EndDate) ||
-                    ((timeSpanEvent.Interval == EndTypeRepeatInterval.AfterNRepeat) &&
-                     repeatCouner < timeSpanEvent.RepeatCount) ||
-                    (timeSpanEvent.Interval == EndTypeRepeatInterval.Never)))
-            {
-                repeatCouner++;
-                if (timeSpanEvent.RepeatType == TypeRepeatingEvent.EveryYear)
-                {
-                    beginDate = beginDate.AddYears(1 + timeSpanEvent.RepeatInterval);
-                }
-                else if (timeSpanEvent.RepeatType == TypeRepeatingEvent.EveryMonth)
-                {
-                    beginDate = beginDate.AddMonths(1 + timeSpanEvent.RepeatInterval);
-                }
-                else if (timeSpanEvent.RepeatType == TypeRepeatingEvent.EveryWeek)
-                {
-                    beginDate = beginDate.AddDays(7 *(timeSpanEvent.RepeatInterval==0?1: timeSpanEvent.RepeatInterval) );
-                }
-                else if (timeSpanEvent.RepeatType == TypeRepeatingEvent.EveryBusinessDay ||
-                         timeSpanEvent.RepeatType == TypeRepeatingEvent.EveryMondayWednesdayFriday ||
-                         timeSpanEvent.RepeatType == TypeRepeatingEvent.EveryTuesdayThursday)
-                {
-                    beginDate = beginDate.AddDays(7);
-                }
-                else
-                {
-                    beginDate =
-                        beginDate.AddDays(1 + timeSpanEvent.RepeatInterval );
-                }
-
-                list.Add(beginDate);
+                beginDate = beginDate.AddDays(7);
             }
 
             return list;
         }
 
-        private List<DayOfWeek?> GetDaysOfWeek(TimeSpanEvent timeSpanEvent)
+        private List<DayOfWeek> GetDaysOfWeek(TimeSpanEvent timeSpanEvent)
         {
-            List<DayOfWeek?> list = new List<DayOfWeek?>();
+            List<DayOfWeek> list = new List<DayOfWeek>();
             if (timeSpanEvent.Monday)
             {
                 list.Add(DayOfWeek.Monday);
@@ -227,12 +141,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             if (timeSpanEvent.Sunday)
             {
                 list.Add(DayOfWeek.Sunday);
-            }
-
-            if (timeSpanEvent.RepeatType == TypeRepeatingEvent.EveryYear || timeSpanEvent.RepeatType == TypeRepeatingEvent.EveryMonth)
-            {
-                list.Add(timeSpanEvent.BeginDate.DayOfWeek);
-            }
+            } 
 
             return list;
         }

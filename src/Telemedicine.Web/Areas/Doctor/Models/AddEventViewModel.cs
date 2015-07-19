@@ -21,10 +21,7 @@ namespace Telemedicine.Web.Areas.Doctor.Models
 
         [DisplayName("Заголовок")]
         public string Title { get; set; }
-
-        [DisplayName("Повторять событие")]
-        public bool IsRepeat { get; set; }
-
+ 
 
         [DisplayName("Понедельник")]
         public bool Monday { get; set; }
@@ -39,24 +36,6 @@ namespace Telemedicine.Web.Areas.Doctor.Models
         [DisplayName("Суббота")]
         public bool Saturday { get; set; }
         [DisplayName("Воскресенье")]
-        public bool Sunday { get; set; } 
-
-        [DisplayName("Повторяется")]
-        public TypeRepeatingEvent SelectedRepeatType { get; set; } 
-
-        [DisplayName("Повторять с интервалом")]
-        public int SelectedIntervalId { get; set; }
-
-        public IEnumerable<SelectListItem> IntervalItems { get; set; } 
-
-        public EndTypeRepeatInterval SelectedEndType { get; set; } 
-
-        public int After { get; set; }
-
-        [DisplayName("Дата окончания")]
-        public DateTime? RepeatEndDate { get; set; }
-
-        [DisplayName("Дата начала")]
-        public DateTime RepeatBeginDate { get; set; }
+        public bool Sunday { get; set; }  
     }
 }
