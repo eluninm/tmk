@@ -3,24 +3,26 @@
     ViewBag.Title = "Главная";
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
-
 <br />
 <div class="row">
     <div class="col-md-4">
         @Html.Action("GetStatus", "Status")
     </div>
 </div>
+<br />
 <div class="pull-right" style="font-size: 10px;">
-        <a class="btn btn-primary rounded" onclick="$('#calendar').fullCalendar('today')">
-            Сегодня
-        </a>
-        <a class="btn btn-primary rounded" onclick="$('#calendar').fullCalendar('prev')">
+    <a class="btn btn-default rounded" onclick="$('#calendar').fullCalendar('today')">
+        Сегодня
+    </a>
+    <span class="input-group rounded" style="display: inline-block;">
+        <a class="btn btn-default " onclick="$('#calendar').fullCalendar('prev')">
             <span class="glyphicon glyphicon-arrow-left"></span>
 
         </a>
-        <a class="btn btn-primary rounded" onclick="$('#calendar').fullCalendar('next')">
+        <a class="btn btn-default " onclick="$('#calendar').fullCalendar('next')">
             <span class="glyphicon glyphicon-arrow-right"></span>
         </a>
+    </span>
         <div class="dropdown rounded" style="display: inline-block; width: 120px;">
             <a class="btn btn-primary dropdown-toggle" id="selectMonth" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <span id="selectedMonth">Месяц</span> <span class="caret"></span>
@@ -82,14 +84,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var appointment in Model)
-            {
-                <tr>
-                    <td>@appointment.Date</td>
-                    <td>@appointment.PatientFio</td>
-                    <td>Запись к врачу</td>
-                </tr>
-            }
+        @foreach (var appointment in Model)
+        {
+            <tr>
+                <td>@appointment.Date.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@appointment.PatientFio</td>
+                <td>Запись к врачу</td>
+            </tr>
+        }
         </tbody>
     </table>
     <br />
