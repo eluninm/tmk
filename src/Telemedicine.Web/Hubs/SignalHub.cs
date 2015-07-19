@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.SignalR;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Core.Identity;
+using Telemedicine.Web.Api.Dto;
 
 namespace Telemedicine.Web.Hubs
 {
@@ -136,14 +137,6 @@ namespace Telemedicine.Web.Hubs
 
         void OnDeclineCall();
 
-        void OnDoctorChangeStatus(DoctorChangeStatus status);
-    }
-
-    public class DoctorChangeStatus
-    {
-        public string DoctorId { get; set; }
-        public string StatusText { get; set; }
-        public bool CanCall { get; set; }
-        public string StatusName { get; set; }
+        void OnDoctorUpdated(DoctorListItemDto status);
     }
 }

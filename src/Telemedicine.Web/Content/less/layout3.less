@@ -331,3 +331,34 @@ body {
         }
     }
 }
+
+.tm {
+    &.icon {
+        &.arrow-left {
+            height: 1em;
+            width: 1em;
+            display: inline-block;
+            background-image: url('/img/arrow_left.svg');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            &.white {
+                background-image: url('/img/arrow_left_white.svg');
+            }
+        }
+
+        &.arrow-right {
+            height: 1em;
+            width: 1em;
+            display: inline-block;
+            background-image: url('/img/arrow_right.svg');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            &.white {
+                background-image: url('/img/arrow_right_white.svg');
+            }
+        }
+    }
+}

@@ -541,6 +541,7 @@ body {
 .text-center {
   text-align: center;
 }
+<<<<<<< HEAD
 /*стили датапикера*/
 
 .bootstrap-datetimepicker-widget .datepicker .datepicker-days table .day {
@@ -555,6 +556,31 @@ body {
 }
 .bootstrap-datetimepicker-widget .datepicker .glyphicon-triangle-left {
   color: #3e67ae;
+=======
+.tm.icon.arrow-left {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+  background-image: url('/img/arrow_left.svg');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.tm.icon.arrow-left.white {
+  background-image: url('/img/arrow_left_white.svg');
+}
+.tm.icon.arrow-right {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+  background-image: url('/img/arrow_right.svg');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.tm.icon.arrow-right.white {
+  background-image: url('/img/arrow_right_white.svg');
+>>>>>>> d0e895dd1d0ba7eef38d286be099ecace627401b
 }
 .grid .page-header {
   margin: 0px;
