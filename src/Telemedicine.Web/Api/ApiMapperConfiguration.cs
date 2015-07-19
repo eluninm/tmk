@@ -25,6 +25,13 @@ namespace Telemedicine.Web.Api
 
             Mapper.CreateMap<ChatMessage, ConsultationMessageDto>()
                 .ForMember(d => d.UserName, e => e.MapFrom(s => s.Creator.UserName));
+
+            Mapper.CreateMap<Doctor, DoctorListItemDto>()
+                .ForMember(t => t.Title, e => e.MapFrom(s => s.User.DisplayName))
+                .ForMember(t => t.Specialization, e => e.MapFrom(s => s.Specialization.DisplayName))
+                .ForMember(t => t.AvatarUrl, e => e.MapFrom(s => s.User.AvatarUrl))
+                .ForMember(t => t.StatusText, e => e.MapFrom(s => s.DoctorStatus.DisplayName))
+                .ForMember(t => t.StatusName, e => e.MapFrom(s => s.DoctorStatus.Name));
         }
     }
 }

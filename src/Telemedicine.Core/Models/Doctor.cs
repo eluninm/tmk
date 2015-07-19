@@ -23,5 +23,7 @@ namespace Telemedicine.Core.Models
         public int SpecializationId { get; set; }
 
         public PaymentMethod PaymentMethod { get; set; }
+
+        public string Description { get; set; }
     }
 }

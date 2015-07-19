@@ -279,6 +279,10 @@
     <Compile Include="Migrations\201507170618008_ConsultationDoctorPatientFields.Designer.cs">
       <DependentUpon>201507170618008_ConsultationDoctorPatientFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507191440538_DoctorUserFields.cs" />
+    <Compile Include="Migrations\201507191440538_DoctorUserFields.Designer.cs">
+      <DependentUpon>201507191440538_DoctorUserFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AppointmentEvent.cs" />
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\AttachmentContent.cs" />
@@ -437,6 +441,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507170618008_ConsultationDoctorPatientFields.resx">
       <DependentUpon>201507170618008_ConsultationDoctorPatientFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507191440538_DoctorUserFields.resx">
+      <DependentUpon>201507191440538_DoctorUserFields.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

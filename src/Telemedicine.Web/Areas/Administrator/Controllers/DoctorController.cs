@@ -78,6 +78,7 @@ namespace Telemedicine.Web.Areas.Administrator.Controllers
                         var doctor = new Core.Models.Doctor();
                         doctor.UserId = user.Id;
                         doctor.SpecializationId = model.SpecializationId;
+                        doctor.Description = model.Description;
                         await _doctorService.CreateAsync(doctor);
 
                         return RedirectToAction("Index");
@@ -122,7 +123,8 @@ namespace Telemedicine.Web.Areas.Administrator.Controllers
                 FirstName = doctor.User.FirstName,
                 LastName = doctor.User.LastName,
                 MiddleName = doctor.User.MiddleName,
-                SpecializationId = doctor.SpecializationId
+                SpecializationId = doctor.SpecializationId,
+                Description = doctor.Description
             }; 
 
             return View(doctorViewModel);
@@ -154,6 +156,7 @@ namespace Telemedicine.Web.Areas.Administrator.Controllers
                 if (identityResult.Succeeded)
                 {
                     doctor.SpecializationId = model.SpecializationId;
+                    doctor.Description = model.Description;
                     await _doctorService.UpdateAsync(doctor);
 
                     return RedirectToAction("Index");
