@@ -110,7 +110,99 @@
             </div>
         </div>
     </div>
-
+    <div class="modal fade infomodaldialog" id="infomodaldialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title">Информация</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row row1">
+                        <div class="pull-left">
+                            <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
+                        </div>
+                        <div class="subtitle">
+                            <h4 style="line-height: normal" class="pull-left">
+                                Ежов Игорь Николаевич
+                                <div class="speciality">Терапевт</div>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row row2">
+                        <p>
+                            Давно выяснено, что при оценке дизайна и композиции читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому, что тот обеспечивает более или менее стандартное заполнение шаблона, а также реальное распределение букв и пробелов в абзацах, которое не получается при простой дубликации "Здесь ваш текст.. Здесь ваш текст.. Здесь ваш текст.." Многие программы электронной вёрстки и редакторы HTML используют Lorem Ipsum в качестве текста по умолчанию, так что поиск по ключевым словам "lorem ipsum" сразу показывает, как много веб-страниц всё ещё дожидаются своего настоящего рождения. За прошедшие годы текст Lorem Ipsum получил много версий. Некоторые версии появились по ошибке, некоторые - намеренно (например, юмористические варианты).
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="doctor-status row pull-left">
+                        <div class="col-md-3">
+                            <div class="status-text">
+                                ДОСТУПЕН
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="col-md-4">
+                                <span class="glyphicon glyphicon-comment status-icon"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="glyphicon glyphicon-volume-up status-icon"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="glyphicon glyphicon-facetime-video status-icon"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="btn btn-primary rounded" id="modalRequestButton2">
+                        ЗАПИСАТЬСЯ
+                    </a>
+                    <a class="btn btn-success start-chat-btn rounded" data-dismiss="modal">
+                        КОНСУЛЬТАЦИЯ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade appointmentmodaldialog" id="appointmentModalDialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title">Записаться</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row row1">
+                        <div class="pull-left">
+                            <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
+                        </div>
+                        <div class="subtitle">
+                            <h4 style="line-height: normal" class="pull-left">
+                                Иванов Арсений Матвеевич
+                                <div class="speciality">Терапевт</div>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row row2">
+                        <div id="datetimepicker12"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="doctor-status row pull-left">
+                        <div class="status-text">
+                            СТОИМОСТЬ КОНСУЛЬТАЦИИ 500 р.
+                        </div>
+                    </div>
+                    <a class="btn btn-primary rounded" data-dismiss="modal" id="modalRequestButton1">
+                        ЗАПИСАТЬСЯ
+                    </a>
+                    <a class="btn btn-success start-chat-btn rounded" data-dismiss="modal">
+                        ОТМЕНА
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="waitDoctorAnswerDialog">
         <div class="modal-dialog waitdoctoranswerdialog">
             <div class="modal-content">
@@ -182,7 +274,13 @@
             $('#datetimepicker12').datetimepicker({
                 inline: true,
                 sideBySide: true,
-                locale: 'ru'
+                locale: 'ru',
+                icons: {
+                    up: "glyphicon glyphicon-triangle-top",
+                    down: "glyphicon glyphicon-triangle-bottom",
+                    next: "glyphicon glyphicon-triangle-right",
+                    previous: "glyphicon glyphicon-triangle-left"
+                }
             });
 
             $('#waitDoctorAnswerDialog').on('hidden.bs.modal', function () {

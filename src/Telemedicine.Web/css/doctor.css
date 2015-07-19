@@ -385,6 +385,7 @@ body {
   text-transform: uppercase;
   font-size: 11px;
   padding: 0.9em 1em 2.1em;
+  /*padding: 12px 25px 25px 25px;*/
   color: white;
 }
 .rounded.btn-default {
@@ -540,6 +541,22 @@ body {
 .text-center {
   text-align: center;
 }
+<<<<<<< HEAD
+/*стили датапикера*/
+
+.bootstrap-datetimepicker-widget .datepicker .datepicker-days table .day {
+  border-radius: 21px;
+  line-height: 26px;
+}
+.bootstrap-datetimepicker-widget .datepicker .datepicker-days table .day.active {
+  border-radius: 21px;
+}
+.bootstrap-datetimepicker-widget .datepicker .glyphicon-triangle-right {
+  color: #3e67ae;
+}
+.bootstrap-datetimepicker-widget .datepicker .glyphicon-triangle-left {
+  color: #3e67ae;
+=======
 .tm.icon.arrow-left {
   height: 1em;
   width: 1em;
@@ -563,6 +580,7 @@ body {
 }
 .tm.icon.arrow-right.white {
   background-image: url('/img/arrow_right_white.svg');
+>>>>>>> d0e895dd1d0ba7eef38d286be099ecace627401b
 }
 .grid .page-header {
   margin: 0px;
