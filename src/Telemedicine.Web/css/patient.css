@@ -1003,7 +1003,7 @@ body {
 .list-doctor-panel .status-icon.message-icon {
   background-image: url('/img/chat.svg');
 }
-.list-doctor-panel .status-icon.message-icon.disabled {
+.list-doctor-panel .status-icon.message-icon-disabled {
   background-image: url('/img/chat_gray.svg');
 }
 .list-doctor-panel .status-icon.voice-icon {
