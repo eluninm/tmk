@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Telemedicine.Core.Domain.Models;
 using Telemedicine.Core.Models;
+using Telemedicine.Core.PagedList;
 
 namespace Telemedicine.Core.Domain.Services
 {
@@ -18,6 +19,9 @@ namespace Telemedicine.Core.Domain.Services
         Task<IEnumerable<DoctorStatus>> GetAvailableStatusesAsync();
 
         Task<IEnumerable<Doctor>> GetAllAsync();
+
+        Task<IPagedList<Doctor>> PagedAsync(int page = 1, int pageSize = 10, string titleFilter = null, int specializationFilter= 0);
+
         IEnumerable<Doctor> GetAll();
 
         Task<IEnumerable<Specialization>>  GetSpecializationsAsync();

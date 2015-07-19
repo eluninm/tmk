@@ -957,24 +957,37 @@ body {
   font-weight: normal;
   font-size: 14px;
 }
-.list-doctor-panel .doctor-status {
+.list-doctor-panel .speciality {
+  font-size: 12px;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #e79924;
+}
+.list-doctor-panel .info-icon {
+  background-image: url('/img/info.svg');
+  height: 2.5em;
+  width: 2.5em;
+  display: inline-block;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  outline: none;
+  /*font-style:italic;
+        color: @color-background1;
+        border-color: @color-background1;*/
+
+}
+.doctor-status {
   color: #3cb776;
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 12px;
   line-height: 2.5em;
   text-transform: uppercase;
 }
-.list-doctor-panel .doctor-status .status-text {
+.doctor-status .status-text {
   text-overflow: ellipsis;
   overflow: hidden;
   vertical-align: middle;
 }
-.list-doctor-panel .speciality {
-  font-size: 12px;
-  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #e79924;
-}
-.list-doctor-panel .status-icon {
+.status-icon {
   vertical-align: middle;
   height: 2.5em;
   width: 2.5em;
@@ -1000,36 +1013,23 @@ body {
             */
 
 }
-.list-doctor-panel .status-icon.message-icon {
+.status-icon.message-icon {
   background-image: url('/img/chat.svg');
 }
-.list-doctor-panel .status-icon.message-icon-disabled {
+.status-icon.message-icon-disabled {
   background-image: url('/img/chat_gray.svg');
 }
-.list-doctor-panel .status-icon.voice-icon {
+.status-icon.voice-icon {
   background-image: url('/img/voice_green.svg');
 }
-.list-doctor-panel .status-icon.voice-icon-disabled {
+.status-icon.voice-icon-disabled {
   background-image: url('/img/voice.svg');
 }
-.list-doctor-panel .status-icon.video-icon {
+.status-icon.video-icon {
   background-image: url('/img/video_green.svg');
 }
-.list-doctor-panel .status-icon.video-icon-disabled {
+.status-icon.video-icon-disabled {
   background-image: url('/img/video.svg');
-}
-.list-doctor-panel .info-icon {
-  background-image: url('/img/info.svg');
-  height: 2.5em;
-  width: 2.5em;
-  display: inline-block;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  outline: none;
-  /*font-style:italic;
-        color: @color-background1;
-        border-color: @color-background1;*/
-
 }
 .balance-info {
   text-transform: uppercase;

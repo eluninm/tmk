@@ -1,0 +1,48 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="viewModel.cancel()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">Информация</h3>
+</div>
+<div class="modal-body">
+    <div class="row row1">
+        <div class="pull-left">
+            <img class="img-circle doctor-panel-img" ng-src="{{viewModel.item.AvatarUrl}}" height="60" width="60" />
+        </div>
+        <div class="subtitle">
+            <h4 style="line-height: normal" class="pull-left">
+                {{viewModel.item.Title}}
+                <div class="speciality">{{viewModel.item.Specialization}}</div>
+            </h4>
+        </div>
+    </div>
+    <div class="row row2">
+        <p>
+            {{viewModel.doctorDetails}}
+        </p>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="doctor-status row pull-left">
+        <div class="col-md-4">
+            <div class="status-text">
+                {{viewModel.item.StatusText}}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-4">
+                <span class="glyphicon glyphicon-comment status-icon"></span>
+            </div>
+            <div class="col-md-4">
+                <span class="glyphicon glyphicon-volume-up status-icon"></span>
+            </div>
+            <div class="col-md-4">
+                <span class="glyphicon glyphicon-facetime-video status-icon"></span>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-primary rounded" ng-click="viewModel.ok()" >
+        ЗАПИСАТЬСЯ
+    </a>
+    <a class="btn btn-success start-chat-btn rounded" data-dismiss="modal">
+        КОНСУЛЬТАЦИЯ
+    </a>
+</div>

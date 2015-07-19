@@ -46,6 +46,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
 
             var doctor = await _service.GetByUserIdAsync(currentUserId);
             var doctorDto = Mapper.Map<DoctorListItemDto>(doctor);
+            doctorDto.StatusText = doctorDto.StatusName == DoctorStatusNames.Busy ? "занят" : "доступен";
             doctorDto.IsChatAvailable = doctor.DoctorStatus.Name != DoctorStatusNames.Busy;
             doctorDto.IsAudioAvailable = doctor.DoctorStatus.Name == DoctorStatusNames.VideoChat;
             doctorDto.IsVideoAvailable = doctor.DoctorStatus.Name == DoctorStatusNames.VideoChat;

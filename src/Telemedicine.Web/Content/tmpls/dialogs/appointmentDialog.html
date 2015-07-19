@@ -1,0 +1,33 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="viewModel.cancel()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">Записаться</h3>
+</div>
+<div class="modal-body">
+    <div class="row row1">
+        <div class="pull-left">
+            <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
+        </div>
+        <div class="subtitle">
+            <h4 style="line-height: normal" class="pull-left">
+                Иванов Арсений Матвеевич
+                <div class="speciality">Терапевт</div>
+            </h4>
+        </div>
+    </div>
+    <div class="row row2">
+        <div id="datetimepicker12"></div>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="doctor-status row pull-left">
+        <div class="status-text">
+            СТОИМОСТЬ КОНСУЛЬТАЦИИ 500 р.
+        </div>
+    </div>
+    <a class="btn btn-primary rounded" ng-click="viewModel.ok('appointment')">
+        ЗАПИСАТЬСЯ
+    </a>
+    <a class="btn btn-success start-chat-btn rounded" ng-click="viewModel.cancel()">
+        ОТМЕНА
+    </a>
+</div>

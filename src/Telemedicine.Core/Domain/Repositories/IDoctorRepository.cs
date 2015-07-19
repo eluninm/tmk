@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Telemedicine.Core.Domain.Entities;
 using Telemedicine.Core.Domain.Models;
 using Telemedicine.Core.Models;
+using Telemedicine.Core.PagedList;
 
 namespace Telemedicine.Core.Domain.Repositories
 {
@@ -14,5 +15,7 @@ namespace Telemedicine.Core.Domain.Repositories
         Doctor GetByUserId(string userId);
 
         IEnumerable<Doctor> GetAll();
+
+        Task<IPagedList<Doctor>> PagedAsync(int page, int pageSize, string titleFilter, int specializationFilter);
     }
 }

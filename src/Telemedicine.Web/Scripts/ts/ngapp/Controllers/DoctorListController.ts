@@ -1,40 +1,82 @@
 ﻿///<reference path="../Services/DoctorApiService.ts"/>
+///<reference path="../Services/SpecializationApiService.ts"/>
 ///<reference path="../SignalR/SignalR.ts"/>
 
 module Telemedicine {
     export class DoctorListController {
-        static $inject = ["doctorApiService", "$modal", "$scope"];
+        static $inject = ["doctorApiService", "specializationApiService", "$modal", "$scope"];
 
         constructor(private doctorApiService: DoctorApiService,
+            private specializationApiService: SpecializationApiService,
             private $modal: ng.ui.bootstrap.IModalService, private $scope: any) {
-            this.loadDoctors();
-            this.initializeSignaling();
+            this.loadPage();
+            this.loadSpecializations();
+            this.initialize();
         }
 
         public doctors: Array<IDoctor>;
+        public specializations: Array<ISpecialization>;
+        public selectedSpecialization: ISpecialization;
+        public doctorTitleFilter: string;
 
-        public loadDoctors() {
-            this.doctorApiService.getDoctorList().then(result => {
-                this.doctors = result;
+        public totalCount: number;
+        public currentPage: number = 1;
+        public pageSize: number = 1;
+
+        public loadPage(pageToLoad?: number) {
+            var page = pageToLoad || this.currentPage;
+            var sid = this.selectedSpecialization ? this.selectedSpecialization.Id : 0;
+            this.doctorApiService.getDoctorList(page, this.pageSize, this.doctorTitleFilter, sid).then(result => {
+                this.doctors = result.Data;
+                this.totalCount = result.TotalCount;
+                this.currentPage = result.Page;
+                this.pageSize = result.PageSize;
             });
         }
 
-        public openDoctorDetails(doctor: IDoctor) {
+        public loadSpecializations() {
+            this.specializationApiService.getItems().then(result => {
+                this.specializations = result;
+            });
+        }
+
+        public selectSpecialization(specialization: ISpecialization) {
+            this.selectedSpecialization = specialization;
+            this.loadPage();
+        }
+
+        public changePageSize(size: number) {
+            this.pageSize = size;
+            this.loadPage();
+        }
+
+        public openDetailsDialog(doctor: IDoctor) {
             this.$modal.open({
-                templateUrl: "/Content/tmpls/dialogs/recommendationDetails.html",
-                controller: "RecommendationDetailsController as viewModel",
+                templateUrl: "/Content/tmpls/dialogs/doctorDetails.html",
+                controller: "DoctorDetailsController as viewModel",
+                windowClass: "infomodaldialog",
                 resolve: {
                     item: () => doctor
                 }
             });
         }
 
-        initializeSignaling() {
-            var signal = $.connection.signalHub;
-            signal.client.onDoctorUpdated = (s) => this.onDoctorStatusChanged(s);
+        public openAppointmentDialog(doctor: IDoctor) {
+            var appointmentDialog = this.$modal.open({
+                templateUrl: "/Content/tmpls/dialogs/appointmentDialog.html",
+                windowClass: "appointmentmodaldialog",
+                resolve: {
+                    item: () => doctor
+                }
+            });
         }
 
-        onDoctorStatusChanged(doctor: IDoctor) {
+        initialize() {
+            var signal = $.connection.signalHub;
+            signal.client.onDoctorUpdated = (s) => this.onDoctorUpdated(s);
+        }
+
+        onDoctorUpdated(doctor: IDoctor) {
             for (var i = 0; i < this.doctors.length; i++) {
                 if (this.doctors[i].Id == doctor.Id) {
                     this.$scope.$apply(() => {

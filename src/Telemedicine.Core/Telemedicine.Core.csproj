@@ -327,6 +327,9 @@
     <Compile Include="Models\Tariff.cs" />
     <Compile Include="Models\UserChatRoom.cs" />
     <Compile Include="Models\UserEvent.cs" />
+    <Compile Include="PagedList\IPagedList.cs" />
+    <Compile Include="PagedList\PagedList.cs" />
+    <Compile Include="PagedList\PagedListExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Domain\Services\DoctorService.cs" />
     <Compile Include="Domain\Services\IDoctorService.cs" />

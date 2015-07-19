@@ -201,6 +201,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\tmpls\dialogs\appointmentDialog.html" />
+    <Content Include="Content\tmpls\dialogs\doctorDetails.html" />
     <Content Include="img\arrow_left_white.svg" />
     <Content Include="img\arrow_right_white.svg" />
     <Content Include="img\chat_gray.svg" />
@@ -531,11 +533,14 @@
     <Compile Include="Api\Controllers\DoctorController.cs" />
     <Compile Include="Api\Controllers\PatientController.cs" />
     <Compile Include="Api\Controllers\RecommendationController.cs" />
+    <Compile Include="Api\Controllers\SpecializationController.cs" />
     <Compile Include="Api\Dto\BeginConsultationDto.cs" />
     <Compile Include="Api\Dto\ConsultationDto.cs" />
     <Compile Include="Api\Dto\ConsultationMessageDto.cs" />
     <Compile Include="Api\Dto\DoctorListItemDto.cs" />
     <Compile Include="Api\Dto\RecommendationDto.cs" />
+    <Compile Include="Api\Dto\SpecializationDto.cs" />
+    <Compile Include="Api\PagedListExtensions.cs" />
     <Compile Include="AppBuilderExtensions.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -636,22 +641,27 @@
     <TypeScriptCompile Include="Scripts\ts\dts\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\app.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ApiServiceBase.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\common\IPagedList.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ItemRouteParams.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ModalControllerBase.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\UrlResolverService.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\AppointmentDialogController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\ConsultationController.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorDetailsController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorListController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\SimpleModalControllers.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultationMessage.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultation.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctorListItem.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctorStatus.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\ISpecialization.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\ConsultationApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\DoctorApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\PatientApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\RecommendationApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\HistoryController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IRecommendation.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Services\SpecializationApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\SignalR\ISignalClient.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\SignalR\ISignalServer.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\SignalR\SignalR.ts" />

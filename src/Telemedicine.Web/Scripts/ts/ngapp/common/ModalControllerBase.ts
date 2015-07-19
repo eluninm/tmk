@@ -3,7 +3,7 @@
 module Telemedicine {
     export interface IItemModalViewModel<TModel> {
         item: TModel;
-        ok();
+        ok(result?: any);
         cancel();
     }
 
@@ -12,8 +12,8 @@ module Telemedicine {
             public item: TModel) {
         }
 
-        public ok() {
-            this.$modalInstance.close(true);
+        public ok(result: string) {
+            this.$modalInstance.close(result);
         }
 
         public cancel() {

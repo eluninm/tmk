@@ -8,6 +8,7 @@ using Telemedicine.Core.Domain.Repositories;
 using Telemedicine.Core.Domain.Uow;
 using Telemedicine.Core.Identity;
 using Telemedicine.Core.Models;
+using Telemedicine.Core.PagedList;
 
 namespace Telemedicine.Core.Domain.Services
 {
@@ -126,6 +127,11 @@ namespace Telemedicine.Core.Domain.Services
         public Task<IEnumerable<Doctor>> GetAllAsync()
         {
             return _doctorRepository.GetAllAsync();
+        }
+
+        public Task<IPagedList<Doctor>> PagedAsync(int page = 1, int pageSize = 10, string titleFilter = null, int specializationFilter = 0)
+        {
+            return _doctorRepository.PagedAsync(page, pageSize, titleFilter, specializationFilter);
         }
 
         public  IEnumerable<Doctor>  GetAll()

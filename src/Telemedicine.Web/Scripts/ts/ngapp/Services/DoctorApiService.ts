@@ -3,7 +3,7 @@
 
 module Telemedicine {
     export interface IDoctorApiService {
-        getDoctorList(): ng.IPromise<Array<IDoctor>>;
+        getDoctorList(page?: number, pageSize?: number, title?: string, specializationId?: number): ng.IPromise<IPagedList<IDoctor>>;
         getDoctorDetails(doctorId: number): ng.IPromise<string>;
     }
 
@@ -14,8 +14,32 @@ module Telemedicine {
             private urlResolverService: UrlResolverService) {
         }
 
-        getDoctorList(): ng.IPromise<IDoctor[]> {
+        getDoctorList(page?: number, pageSize?: number, title?: string, specializationId?: number): ng.IPromise<IPagedList<IDoctor>> {
             var url = this.urlResolverService.resolveUrl(this.baseUrl);
+            var query: any = {}, querySeparator = "?";
+
+            if (page) {
+                query.page = page;
+            }
+            if (pageSize) {
+                query.pageSize = pageSize;
+            }
+            if (title) {
+                query.titleFilter = title;
+            }
+            if (specializationId) {
+                query.specializationIdFilter = specializationId;
+            }
+
+            for (var key in query) {
+                if (query.hasOwnProperty(key)) {
+                    url += querySeparator + key + "=" + encodeURIComponent(query[key]);
+                    if (querySeparator === "?") {
+                        querySeparator = "&";
+                    }
+                }
+            }
+            
             return this.$http.get(url).then(result => result.data);
         }
 

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.UI;
 using AutoMapper;
 using Telemedicine.Core.Consts;
 using Telemedicine.Core.Domain.Services;
@@ -24,19 +25,27 @@ namespace Telemedicine.Web.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> GetDoctors()
+        public async Task<IHttpActionResult> GetDoctors(int page = 1, int pageSize = 50, string titleFilter = null, int specializationIdFilter = 0)
         {
-            var doctors = await _doctorService.GetAllAsync();
-            var doctorDtos = doctors.Select(t =>
+            try
             {
-                var doctorDto = Mapper.Map<DoctorListItemDto>(t);
-                doctorDto.IsChatAvailable = t.DoctorStatus.Name != DoctorStatusNames.Busy;
-                doctorDto.IsAudioAvailable = t.DoctorStatus.Name == DoctorStatusNames.VideoChat;
-                doctorDto.IsVideoAvailable = t.DoctorStatus.Name == DoctorStatusNames.VideoChat;
-                return doctorDto;
-            });
-
-            return Ok(doctorDtos);
+                var doctors = await _doctorService.PagedAsync(page, pageSize, titleFilter, specializationIdFilter);
+                var pagedList = doctors.Map(t =>
+                {
+                    var doctorDto = Mapper.Map<DoctorListItemDto>(t);
+                    doctorDto.StatusText = doctorDto.StatusName == DoctorStatusNames.Busy ? "занят" : "доступен";
+                    doctorDto.IsChatAvailable = t.DoctorStatus.Name != DoctorStatusNames.Busy;
+                    doctorDto.IsAudioAvailable = t.DoctorStatus.Name == DoctorStatusNames.VideoChat;
+                    doctorDto.IsVideoAvailable = t.DoctorStatus.Name == DoctorStatusNames.VideoChat;
+                    return doctorDto;
+                });
+                return Ok(pagedList);
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
+            
         }
 
         [HttpGet]

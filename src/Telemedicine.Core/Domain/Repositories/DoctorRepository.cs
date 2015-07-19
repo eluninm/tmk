@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Telemedicine.Core.Data;
 using Telemedicine.Core.Data.EntityFramework;
 using Telemedicine.Core.Models;
+using Telemedicine.Core.PagedList;
 
 namespace Telemedicine.Core.Domain.Repositories
 {
@@ -48,6 +49,48 @@ namespace Telemedicine.Core.Domain.Repositories
                 .Include(t => t.User)
                 .Include(t => t.Specialization).Include(p => p.DoctorStatus)
                 .ToList();
+        }
+
+        public async Task<IPagedList<Doctor>> PagedAsync(int page, int pageSize, string titleFilter, int specializationFilter)
+        {
+            var query = Set
+                .Include(t => t.User)
+                .Include(t => t.Specialization)
+                .Include(p => p.DoctorStatus);
+
+            if (!string.IsNullOrWhiteSpace(titleFilter))
+            {
+                var searchString = titleFilter.Trim();
+                var groups = searchString.Split(' ');
+                if (groups.Length > 0)
+                {
+                    var ss = groups[0];
+                    query = query.Where(t => t.User.LastName.ToUpper().Contains(ss.ToUpper()));
+                }
+                if (groups.Length > 1)
+                {
+                    var ss = groups[1];
+                    query = query.Where(t => t.User.FirstName.ToUpper().Contains(ss.ToUpper()));
+                }
+                if (groups.Length > 2)
+                {
+                    var ss = groups[2];
+                    query = query.Where(t => t.User.MiddleName.ToUpper().Contains(ss.ToUpper()));
+                }
+                //else
+                //{
+                //    query = query.Where(t =>
+                //        t.User.FirstName.ToUpper().Contains(titleFilter.ToUpper())
+                //        || t.User.LastName.ToUpper().Contains(titleFilter.ToUpper())
+                //        || t.User.MiddleName.ToUpper().Contains(titleFilter.ToUpper()));
+                //}
+            }
+            if (specializationFilter != 0)
+            {
+                query = query.Where(t => t.SpecializationId == specializationFilter);
+            }
+
+            return await query.OrderBy(t => t.Id).ToPagedListAsync(page, pageSize);
         }
 
         public override Doctor GetById(int id)
