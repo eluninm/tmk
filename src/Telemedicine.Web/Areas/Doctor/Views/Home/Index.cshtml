@@ -4,15 +4,24 @@
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
 
-<br/>
+<br />
 <div class="row">
     <div class="col-md-4">
         @Html.Action("GetStatus", "Status")
     </div>
 </div>
-<div class="row">
-    <div class="col-md-2">
-        <div class="dropdown rounded">
+<div class="pull-right" style="font-size: 10px;">
+        <a class="btn btn-primary rounded" onclick="$('#calendar').fullCalendar('today')">
+            Сегодня
+        </a>
+        <a class="btn btn-primary rounded" onclick="$('#calendar').fullCalendar('prev')">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+
+        </a>
+        <a class="btn btn-primary rounded" onclick="$('#calendar').fullCalendar('next')">
+            <span class="glyphicon glyphicon-arrow-right"></span>
+        </a>
+        <div class="dropdown rounded" style="display: inline-block; width: 120px;">
             <a class="btn btn-primary dropdown-toggle" id="selectMonth" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <span id="selectedMonth">Месяц</span> <span class="caret"></span>
             </a>
@@ -55,13 +64,9 @@
                 </li>
             </ul>
         </div>
-    </div>
-    <div class="col-md-2">
-        <a class="btn btn-primary rounded fullwidth" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
+        <a class="btn btn-primary rounded" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
             <span class="glyphicon">+</span> Добавить
         </a>
-    </div>
-
 </div>
 
 <div id="calendar"></div>
@@ -70,24 +75,24 @@
     <h4>Записанные пациенты</h4>
     <table class="table table-responsive">
         <thead>
-        <tr>
-            <th>Дата события</th>
-            <th>ФИО Пациента</th>
-            <th>Тип события</th>
-        </tr>
+            <tr>
+                <th>Дата события</th>
+                <th>ФИО Пациента</th>
+                <th>Тип события</th>
+            </tr>
         </thead>
         <tbody>
-        @foreach (var appointment in Model)
-        {
-            <tr>
-                <td>@appointment.Date</td>
-                <td>@appointment.PatientFio</td>
-                <td>Запись к врачу</td>
-            </tr>
-        }
+            @foreach (var appointment in Model)
+            {
+                <tr>
+                    <td>@appointment.Date</td>
+                    <td>@appointment.PatientFio</td>
+                    <td>Запись к врачу</td>
+                </tr>
+            }
         </tbody>
     </table>
-    <br/>
+    <br />
 </div>
 
 
@@ -102,8 +107,8 @@
 @section scripts
 {
     <script type="text/javascript">
-        $(function() {
-            $(".dropdown-menu li a").click(function() {
+        $(function () {
+            $(".dropdown-menu li a").click(function () {
                 $("#selectedMonth").text($(this).text());
 
             });
@@ -115,13 +120,18 @@
 
             $("#selectedMonth").text(months[(new Date()).getMonth()]);
 
-            $("#selectedMonth").bind('DOMSubtreeModified', function() {
+            $("#selectedMonth").bind('DOMSubtreeModified', function () {
                 if ($.inArray($("#selectedMonth").text(), months) == -1)
                     $("#selectedMonth").text(months[(new Date()).getMonth()]);
             });
 
-            $.getJSON('@Url.Action("GetEvents", "Events")', "json", function(data) {
+            $.getJSON('@Url.Action("GetEvents", "Events")', "json", function (data) {
                 $('#calendar').fullCalendar({
+                    header: {
+                        left: 'title',
+                        center: '',
+                        right: ''
+                    },
                     lang: 'ru',
                     events: data,
                     defaultView: "agendaWeek",
