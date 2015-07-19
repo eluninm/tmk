@@ -135,7 +135,7 @@
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-primary rounded">добавить</button> 
-        <a class="btn rounded-rd" data-dismiss="modal">
+        <a class="btn btn-round-rd rounded" data-dismiss="modal">
             закрыть
         </a>
     </div>
@@ -154,12 +154,24 @@
     };
 
     $(function () {
-        //инициализация всплывающего окна дял добавления записи
+        //инициализация всплывающего окна для добавления записи
         $("#beginDateDatetimePicker").datetimepicker({
-            locale: 'ru'
+            locale: 'ru',
+            icons: {
+                up: "glyphicon glyphicon-triangle-top",
+                down: "glyphicon glyphicon-triangle-bottom",
+                next: "glyphicon glyphicon-triangle-right",
+                previous: "glyphicon glyphicon-triangle-left"
+            }
         });
         $("#endDateDatetimePicker").datetimepicker({
-            locale: 'ru'
+            locale: 'ru',
+            icons: {
+                up: "glyphicon glyphicon-triangle-top",
+                down: "glyphicon glyphicon-triangle-bottom",
+                next: "glyphicon glyphicon-triangle-right",
+                previous: "glyphicon glyphicon-triangle-left"
+            }
         });
         $(".glyphicon-calendar").click(function () {
             $(this).parent().parent().find(".form-control").focus();
