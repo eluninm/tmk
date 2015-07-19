@@ -44,7 +44,6 @@
 }
 .font-bold {
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: bolder;
 }
 .font-rouble {
   font-family: 'ALS Rubl';
@@ -206,6 +205,7 @@
   flex-direction: column;
   flex: 1;
   height: 100%;
+  overflow: hidden;
 }
 .grid .grid-pager {
   line-height: 2.5em;
@@ -232,7 +232,6 @@
   vertical-align: middle;
   font-size: 12px;
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: bolder;
   height: 50px;
 }
 .grid .grid-body {
@@ -297,7 +296,6 @@ body {
   padding: 20px 15px 0;
   border: none;
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: bolder;
   font-size: 20px;
   color: black;
 }
@@ -328,12 +326,23 @@ body {
   background: #e79924;
   border-color: #e79924;
 }
+.btn.start-chat-btn:hover {
+  background: #e79924;
+  border-color: #e79924;
+}
+.btn.start-chat-btn:active {
+  background: #e79924;
+  border-color: #e79924;
+}
 .rounded.dropdown .dropdown-toggle {
   background: white;
   height: 2.5em;
   border-radius: 1.5em;
   width: 100%;
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 2em;
 }
 .rounded.dropdown .dropdown-toggle .caret {
   position: absolute;
@@ -355,19 +364,35 @@ body {
 .rounded.input-group > .form-control {
   height: 100%;
 }
+.rounded.input-group .btn.btn-default {
+  text-shadow: none;
+  box-shadow: none;
+  border: none;
+  background-color: #b1b1b1;
+  background-image: none;
+  color: white;
+  height: 2em;
+  text-transform: uppercase;
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  font-size: 11px;
+  padding: 0.9em 1em 2.1em;
+}
 .rounded.btn {
-  height: 35px;
+  height: 2em;
   border-radius: 2em;
   text-transform: uppercase;
   font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: normal;
   font-size: 11px;
-  padding: 12px 35px 25px 35px;
+  padding: 0.9em 1em 2.1em;
   color: white;
 }
 .rounded.btn-default {
   background: #b1b1b1;
   background-color: #b1b1b1;
+  text-shadow: none;
+  box-shadow: none;
 }
 .rounded.pagination > li:first-child > a,
 .rounded.pagination > li:last-child > a,
@@ -521,7 +546,6 @@ body {
 }
 .grid .page-header b {
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: bolder;
 }
 .grid .row-rd {
   padding: 30px;

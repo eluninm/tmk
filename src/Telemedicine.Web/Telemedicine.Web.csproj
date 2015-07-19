@@ -202,11 +202,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
-    <Content Include="Content\OwlCarousel\AjaxLoader.gif" />
-    <Content Include="Content\OwlCarousel\grabbing.png" />
-    <Content Include="Content\OwlCarousel\owl.carousel.css" />
-    <Content Include="Content\OwlCarousel\owl.theme.css" />
-    <Content Include="Content\OwlCarousel\owl.transitions.css" />
+    <Content Include="Content\less\OwlCarousel\AjaxLoader.gif" />
+    <Content Include="Content\less\OwlCarousel\grabbing.png" />
+    <Content Include="Content\less\OwlCarousel\owl.carousel.css" />
+    <Content Include="Content\less\OwlCarousel\owl.theme.css" />
+    <Content Include="Content\less\OwlCarousel\owl.transitions.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\style.min.css">
@@ -454,6 +454,7 @@
     <Content Include="Content\less\recommendationDetailDialog.less" />
     <Content Include="Content\less\chatpage.less" />
     <Content Include="Content\less\usercalldialog.less" />
+    <Content Include="Content\less\fullcalendar.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -528,6 +529,7 @@
     <Compile Include="Api\Dto\BeginConsultationDto.cs" />
     <Compile Include="Api\Dto\ConsultationDto.cs" />
     <Compile Include="Api\Dto\ConsultationMessageDto.cs" />
+    <Compile Include="Api\Dto\DoctorListItemDto.cs" />
     <Compile Include="Api\Dto\RecommendationDto.cs" />
     <Compile Include="AppBuilderExtensions.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
@@ -637,7 +639,7 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\SimpleModalControllers.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultationMessage.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultation.ts" />
-    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctor.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctorListItem.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\ConsultationApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\PatientApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\RecommendationApiService.ts" />

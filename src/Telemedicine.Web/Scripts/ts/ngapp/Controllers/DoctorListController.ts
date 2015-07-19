@@ -14,7 +14,7 @@ module Telemedicine {
             this.loadDoctors();
         }
 
-        public doctors: Array<IDoctor>;
+        public doctors: Array<IDoctorListItem>;
 
         public loadDoctors() {
 
