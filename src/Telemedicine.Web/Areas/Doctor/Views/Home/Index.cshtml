@@ -3,93 +3,149 @@
     ViewBag.Title = "Главная";
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
-
-<br/>
+<br />
 <div class="row">
     <div class="col-md-4">
         @Html.Action("GetStatus", "Status")
     </div>
 </div>
-<div class="row">
-    <div class="col-md-2">
-        <div class="dropdown rounded">
-            <a class="btn btn-primary dropdown-toggle" id="selectMonth" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <span id="selectedMonth">Месяц</span> <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="selectMonth">
-                <li>
-                    <a onclick="selectMonth(0);">Январь</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(1);">Февраль</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(2);">Март</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(3);">Апрель</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(4);">Май</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(5);">Июнь</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(6);">Июль</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(7);">Август</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(8);">Сентябрь</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(9);">Отктябрь</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(10);">Ноябрь</a>
-                </li>
-                <li>
-                    <a onclick="selectMonth(11);">Декабрь</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="col-md-2">
-        <a class="btn btn-primary rounded fullwidth" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
-            <span class="glyphicon">+</span> Добавить
-        </a>
-    </div>
+<br />
+<div class="pull-right" style="font-size: 10px;">
+    <a class="btn btn-default rounded" onclick="$('#calendar').fullCalendar('today')">
+        Сегодня
+    </a>
+    <span class="input-group rounded" style="display: inline-block;">
+        <a class="btn btn-default " onclick="$('#calendar').fullCalendar('prev')">
+            <span class="glyphicon glyphicon-arrow-left"></span>
 
+        </a>
+        <a class="btn btn-default " onclick="$('#calendar').fullCalendar('next')">
+            <span class="glyphicon glyphicon-arrow-right"></span>
+        </a>
+    </span>
+    <div class="dropdown rounded" style="display: inline-block; width: 120px;">
+        <a class="btn btn-primary dropdown-toggle" id="selectMonth" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <span id="selectedMonth">Месяц</span> <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="selectMonth">
+            <li>
+                <a onclick=" selectMonth(0); ">Январь</a>
+            </li>
+            <li>
+                <a onclick=" selectMonth(1); ">Февраль</a>
+            </li>
+            <li>
+                <a onclick=" selectMonth(2); ">Март</a>
+            </li>
+            <li>
+                <a onclick=" selectMonth(3); ">Апрель</a>
+            </li>
+            <li>
+                <a onclick=" selectMonth(4); ">Май</a>
+            </li>
+            <li>
+                <a onclick=" selectMonth(5); ">Июнь</a>
+            </li>
+            <li>
+                <a onclick=" selectMonth(6); ">Июль</a>
+            </li>
+            <li>
+                <a onclick=" selectMonth(7); ">Август</a>
+            </li>
+            <li>
+                <a onclick=" selectMonth(8); ">Сентябрь</a>
+            </li>
+            <li>
+                <a onclick=" selectMonth(9); ">Отктябрь</a>
+            </li>
+            <li>
+                <a onclick=" selectMonth(10); ">Ноябрь</a>
+            </li>
+            <li>
+                <a onclick=" selectMonth(11); ">Декабрь</a>
+            </li>
+        </ul>
+    </div>
+    <a class="btn btn-primary rounded" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
+        <span class="glyphicon">+</span> Добавить
+    </a>
 </div>
 
 <div id="calendar"></div>
 
-<div>
+<div style="height:calc(100% - 420px)">
     <h4>Записанные пациенты</h4>
-    <table class="table table-responsive">
-        <thead>
-            <tr>
-                <th>Дата события</th>
-                <th>ФИО Пациента</th>
-                <th>Тип события</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var appointment in Model)
-            {
+    <div class="grid">
+        <div class="page-header">
+            <table style="width: 100%">
+                <colgroup>
+                    <col />
+                    <col />
+                    <col />
+                </colgroup>
                 <tr>
-                    <td>@appointment.Date</td>
-                    <td>@appointment.PatientFio</td>
-                    <td>Запись к врачу</td>
+                    <td>Дата события</td>
+                    <td>ФИО Пациента</td>
+                    <td>Тип события</td>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <br />
+            </table>
+        </div>
+        <div class="grid-content">
+            <table style="width: 100%">
+                <colgroup>
+                    <col style="width: 33.3%" />
+                    <col style="width: 33.3%" />
+                    <col style="width: 33.3%" />
+                </colgroup>
+                @foreach (var appointment in Model)
+                {
+                    <tr>
+                        <td class="col-md-4">@appointment.Date.ToString("dd.MM.yyyy HH:mm")</td>
+                        <td class="col-md-4">@appointment.PatientFio</td>
+                        <td class="col-md-4">Запись к врачу</td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="grid-pager row">
+            <div class="col-md-4">Всего записей: 1 000</div>
+            <div class="col-md-4">
+                <nav>
+                    <ul class="pagination rounded">
+                        <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-md-4 row">
+                <div class="col-md-6">
+                    <div class="pull-right">
+                        Показывать:
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="dropdown rounded dropup">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            10 записей
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">20 записей</a></li>
+                            <li><a href="#">50 записей</a></li>
+                            <li><a href="#">100 записей</a></li>
+                            <li><a href="#">Все записи</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 
 
 <div class="modal fade" id="addEventDialog">
@@ -109,15 +165,32 @@
 
             });
 
+            var months = [
+                "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+                "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+            ];
+
+            $("#selectedMonth").text(months[(new Date()).getMonth()]);
+
+            $("#selectedMonth").bind('DOMSubtreeModified', function () {
+                if ($.inArray($("#selectedMonth").text(), months) == -1)
+                    $("#selectedMonth").text(months[(new Date()).getMonth()]);
+            });
+
             $.getJSON('@Url.Action("GetEvents", "Events")', "json", function (data) {
                 $('#calendar').fullCalendar({
+                    header: {
+                        left: 'title',
+                        center: '',
+                        right: ''
+                    },
                     lang: 'ru',
                     events: data,
                     defaultView: "agendaWeek",
                     minTime: '07:00',
                     maxTime: '21:00',
                     height: 300,
-                    eventColor: '#3e67ae'
+//                    eventColor: '#3e67ae'
                 });
             });
         });
@@ -127,6 +200,7 @@
             $("#addEventDialog").modal('hide');
             window.location.href = '@Url.Action("Index", "Home")';
         }
+
         function selectMonth(monthNumber) {
             var date = new Date();
             $('#calendar').fullCalendar('gotoDate', new Date(date.getFullYear(), monthNumber, 1));

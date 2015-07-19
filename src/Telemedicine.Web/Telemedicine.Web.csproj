@@ -202,11 +202,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
-    <Content Include="Content\OwlCarousel\AjaxLoader.gif" />
-    <Content Include="Content\OwlCarousel\grabbing.png" />
-    <Content Include="Content\OwlCarousel\owl.carousel.css" />
-    <Content Include="Content\OwlCarousel\owl.theme.css" />
-    <Content Include="Content\OwlCarousel\owl.transitions.css" />
+    <Content Include="Content\less\OwlCarousel\AjaxLoader.gif" />
+    <Content Include="Content\less\OwlCarousel\grabbing.png" />
+    <Content Include="Content\less\OwlCarousel\owl.carousel.css" />
+    <Content Include="Content\less\OwlCarousel\owl.theme.css" />
+    <Content Include="Content\less\OwlCarousel\owl.transitions.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\style.min.css">
@@ -453,6 +453,8 @@
     <Content Include="Content\less\myevents.less" />
     <Content Include="Content\less\recommendationDetailDialog.less" />
     <Content Include="Content\less\chatpage.less" />
+    <Content Include="Content\less\usercalldialog.less" />
+    <Content Include="Content\less\fullcalendar.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
