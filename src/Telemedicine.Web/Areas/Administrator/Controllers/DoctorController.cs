@@ -64,7 +64,8 @@ namespace Telemedicine.Web.Areas.Administrator.Controllers
                     LastName = model.LastName,
                     MiddleName = model.MiddleName,
                     UserName = model.Email,
-                    Email = model.Email
+                    Email = model.Email,
+                    AvatarUrl = model.AvatarUrl
                 };
 
 
@@ -151,6 +152,7 @@ namespace Telemedicine.Web.Areas.Administrator.Controllers
                 user.LastName = model.LastName;
                 user.MiddleName = model.MiddleName;
                 user.Email = model.Email;
+                user.AvatarUrl = model.AvatarUrl;
 
                 var identityResult = await _userManager.UpdateAsync(user);
                 if (identityResult.Succeeded)

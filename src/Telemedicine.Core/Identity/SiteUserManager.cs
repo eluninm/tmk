@@ -17,5 +17,14 @@ namespace Telemedicine.Core.Identity
             : base(store)
         {
         }
+
+        public override Task<IdentityResult> UpdateAsync(SiteUser user)
+        {
+            if (string.IsNullOrEmpty(user.AvatarUrl))
+            {
+                user.AvatarUrl = "/img/no_avatar.png";
+            }
+            return base.UpdateAsync(user);
+        }
     }
 }

@@ -33,5 +33,8 @@ namespace Telemedicine.Web.Areas.Administrator.Models
 
         [DisplayName("Описание")]
         public string Description { get; set; }
+
+        [DisplayName("Картинка")]
+        public string AvatarUrl { get; set; }
     }
 }
