@@ -1,7 +1,6 @@
 ﻿@model Telemedicine.Web.Areas.Doctor.Models.RecommendationViewModel
 
-@using (Ajax.BeginForm("AddRecommendation", "Recommendations", new { @class = "form", @role = "form", @id = "addRecommendationDialogForm" },
-                                                            new AjaxOptions() { HttpMethod = "Post", OnSuccess = "onaddRecommendationSuccess" }, FormMethod.Post))
+@using (Ajax.BeginForm("AddRecommendation", "Recommendations", null, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "onaddRecommendationSuccess" }))
 {
     <div class="modal-header">
         <h3>Добавить рекомендацию</h3>

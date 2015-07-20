@@ -52,7 +52,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
         public async Task<ActionResult> AddRecommendation(RecommendationViewModel viewModel)
         {
             var doctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
-            var patient = await _patientService.GetByUserIdAsync(viewModel.PatientUserId);
+            var patient = await _patientService.GetByIdAsync(1);
             if (ModelState.IsValid)
             {
                 Recommendation recommendation = new Recommendation()
