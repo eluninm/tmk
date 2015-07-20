@@ -74,14 +74,14 @@
 
 <div id="calendar"></div>
 
-<div style="height:calc(100% - 500px)">
+<div style="height:calc(100% - 600px)">
     <h3 class="page-header font-bold" style="border:none;">Записи на сегодня</h3>
     <div class="grid">
-        <div class="page-header" style="border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4;">
+        <div class="page-header" style="border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4; padding-left: 0;">
             <table style="width: 100%">
                 <tr>
                     <td class="col-md-3 uppercase font-bold">Время</td>
-                    <td class="col-md-9uppercase font-bold">Пациент</td>
+                    <td class="col-md-9 uppercase font-bold">Пациент</td>
                 </tr>
             </table>
         </div>
@@ -90,48 +90,11 @@
                 @foreach (var appointment in Model)
                 {
                     <tr>
-                        <td class="col-md-4">@appointment.Date.ToString("dd.MM.yyyy HH:mm")</td>
-                        <td class="col-md-4">@appointment.PatientFio</td>
+                        <td class="col-md-3">@appointment.Date.ToString("dd.MM.yyyy HH:mm")</td>
+                        <td class="col-md-9">@appointment.PatientFio</td>
                     </tr>
                 }
             </table>
-        </div>
-        <div class="grid-pager row">
-            <div class="col-md-4">Всего записей: 1 000</div>
-            <div class="col-md-4">
-                <nav>
-                    <ul class="pagination rounded">
-                        <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="col-md-4 row">
-                <div class="col-md-6">
-                    <div class="pull-right">
-                        Показывать:
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="dropdown rounded dropup">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            10 записей
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="#">20 записей</a></li>
-                            <li><a href="#">50 записей</a></li>
-                            <li><a href="#">100 записей</a></li>
-                            <li><a href="#">Все записи</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -179,8 +142,8 @@
                     defaultView: "agendaWeek",
                     minTime: '07:00',
                     maxTime: '21:00',
-                    height: 300,
-//                    eventColor: '#3e67ae'
+                    height: 400,
+                    //eventColor: '#3e67ae'
                 });
             });
 
