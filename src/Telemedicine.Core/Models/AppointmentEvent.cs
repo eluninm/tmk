@@ -5,12 +5,16 @@ namespace Telemedicine.Core.Models
 {
     public class AppointmentEvent:Entity
     {
-        public Patient Patient { get; set; }
-
-        public Doctor Doctor { get; set; }
+        public DateTime Created { get; set; }
 
         public DateTime Date { get; set; }
 
-        public DateTime DateCreation { get; set; }
+        public Patient Patient { get; set; }
+
+        public int PatientId { get; set; }
+
+        public Doctor Doctor { get; set; }
+
+        public int DoctorId { get; set; }
     }
 }

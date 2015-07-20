@@ -77,20 +77,11 @@ namespace Telemedicine.Core.Data
             builder.Entity<Tariff>().ToTable("Tariffs"); 
             builder.Entity<Payment>().ToTable("Payments");
 
-            //var chatRoom = builder.Entity<ChatRoom>().HasKey(t => t.Id);
-            //chatRoom.HasMany(t => t.Members).WithMany().Map(m =>
-            //{
-            //    m.ToTable("UserChatRooms");
-            //    m.MapLeftKey("ChatRoomId");
-            //    m.MapRightKey("UserId");
-            //});
-            //chatRoom.HasMany(t => t.Messages).WithRequired();
-
             var chatMessage = builder.Entity<ChatMessage>();
             chatMessage.HasKey(t => t.Id).Property(t => t.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             chatMessage.HasRequired(t => t.Creator);
 
-            builder.Entity<AppointmentEvent>().ToTable("AppointmentsEvent");
+            builder.Entity<AppointmentEvent>().ToTable("AppointmentEvents");
 
             var conversation = builder.Entity<Conversation>();
             conversation.HasMany(t => t.Members).WithMany().Map(m =>
@@ -107,7 +98,7 @@ namespace Telemedicine.Core.Data
                 .HasColumnType("datetime2");
 
             builder.Entity<AppointmentEvent>()
-                .Property(f => f.DateCreation)
+                .Property(f => f.Created)
                 .HasColumnType("datetime2");
         }
     }
