@@ -89,7 +89,7 @@
             $('#chatMessageList').append('<div class="chat-message">'
                 + '<img class="chat-image img-circle ' + message.Direction + '" src="/img/no_avatar.png" />'
                 + '<div class="chat-message ' + message.Direction + '"><p>' + message.Message + '</p>'
-                + '<div class="chat-details small">' + message.Created + '</div></div></div>');
+                + '<div class="chat-details small">' + new Date().toLocaleString() + '</div></div></div>');
             $(".chat-panel .panel-body").scrollTop($(".chat-panel .panel-body")[0].scrollHeight);
         }
 
