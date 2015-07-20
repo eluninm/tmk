@@ -544,7 +544,6 @@ body {
 .text-center {
   text-align: center;
 }
-<<<<<<< HEAD
 /*стили датапикера*/
 
 .bootstrap-datetimepicker-widget .datepicker .datepicker-days table .day {
@@ -559,7 +558,7 @@ body {
 }
 .bootstrap-datetimepicker-widget .datepicker .glyphicon-triangle-left {
   color: #3e67ae;
-=======
+}
 .tm.icon.arrow-left {
   height: 1em;
   width: 1em;
@@ -583,7 +582,6 @@ body {
 }
 .tm.icon.arrow-right.white {
   background-image: url('/img/arrow_right_white.svg');
->>>>>>> d0e895dd1d0ba7eef38d286be099ecace627401b
 }
 .chat-message {
   position: relative;

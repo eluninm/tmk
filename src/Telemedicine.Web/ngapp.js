@@ -315,11 +315,29 @@ var Telemedicine;
             });
         };
         DoctorListController.prototype.openAppointmentDialog = function (doctor) {
+            var _this = this;
             var appointmentDialog = this.$modal.open({
                 templateUrl: "/Content/tmpls/dialogs/appointmentDialog.html",
+                controller: "AppointmentDialogController as viewModel",
                 windowClass: "appointmentmodaldialog",
                 resolve: {
                     item: function () { return doctor; }
+                }
+            });
+            appointmentDialog.result.then(function (result) {
+                if (result === "appointment") {
+                    appointmentDialog.close();
+                    _this.openPaymentDialog();
+                }
+            });
+        };
+        DoctorListController.prototype.openPaymentDialog = function () {
+            var paymentDialog = this.$modal.open({
+                templateUrl: "/Content/tmpls/dialogs/paymentDialog.html",
+                controller: "PaymentDialogController as viewModel",
+                windowClass: "paymentmodaldialog",
+                resolve: {
+                    item: function () { return null; }
                 }
             });
         };
@@ -394,11 +412,51 @@ var Telemedicine;
     })(Telemedicine.ItemModalViewModel);
     Telemedicine.DoctorDetailsController = DoctorDetailsController;
 })(Telemedicine || (Telemedicine = {}));
+///<reference path="../common/ModalControllerBase.ts"/>
+var Telemedicine;
+(function (Telemedicine) {
+    var AppointmentDialogController = (function (_super) {
+        __extends(AppointmentDialogController, _super);
+        function AppointmentDialogController($modalInstance, item) {
+            _super.call(this, $modalInstance, item);
+            this.minDate = new Date();
+        }
+        AppointmentDialogController.prototype.initDatetimepicker = function () {
+            $("#datetimepicker1").datetimepicker({
+                inline: true,
+                sideBySide: true,
+                locale: 'ru',
+                icons: {
+                    up: "glyphicon glyphicon-triangle-top",
+                    down: "glyphicon glyphicon-triangle-bottom",
+                    next: "glyphicon glyphicon-triangle-right",
+                    previous: "glyphicon glyphicon-triangle-left"
+                }
+            });
+        };
+        return AppointmentDialogController;
+    })(Telemedicine.ItemModalViewModel);
+    Telemedicine.AppointmentDialogController = AppointmentDialogController;
+})(Telemedicine || (Telemedicine = {}));
+///<reference path="../common/ModalControllerBase.ts"/>
+var Telemedicine;
+(function (Telemedicine) {
+    var PaymentDialogController = (function (_super) {
+        __extends(PaymentDialogController, _super);
+        function PaymentDialogController($modalInstance, item) {
+            _super.call(this, $modalInstance, item);
+        }
+        return PaymentDialogController;
+    })(Telemedicine.ItemModalViewModel);
+    Telemedicine.PaymentDialogController = PaymentDialogController;
+})(Telemedicine || (Telemedicine = {}));
 ///<reference path="Controllers/HistoryController.ts" />
 ///<reference path="Controllers/ConsultationController.ts" />
 ///<reference path="Controllers/DoctorListController.ts" />
 ///<reference path="Controllers/SimpleModalControllers.ts" />
 ///<reference path="Controllers/DoctorDetailsController.ts" />
+///<reference path="Controllers/AppointmentDialogController.ts" />
+///<reference path="Controllers/PaymentDialogController.ts" />
 var Telemedicine;
 (function (Telemedicine) {
     function moduleConfiguration($logProvider) {
@@ -406,7 +464,7 @@ var Telemedicine;
         // TODO: Capture all logged errors and send back to server
         $logProvider.debugEnabled(true);
     }
-    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration).controller("HistoryController", Telemedicine.HistoryController).controller("ConsultationController", Telemedicine.ConsultationController).controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController).controller("DoctorListController", Telemedicine.DoctorListController).controller("DoctorDetailsController", Telemedicine.DoctorDetailsController).service("recommendationService", Telemedicine.RecommendationApiService).service("urlResolverService", Telemedicine.UrlResolverService).service("patientApiService", Telemedicine.PatientApiService).service("consultationApiService", Telemedicine.ConsultationApiService).service("doctorApiService", Telemedicine.DoctorApiService).service("specializationApiService", Telemedicine.SpecializationApiService);
+    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration).controller("HistoryController", Telemedicine.HistoryController).controller("ConsultationController", Telemedicine.ConsultationController).controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController).controller("DoctorListController", Telemedicine.DoctorListController).controller("DoctorDetailsController", Telemedicine.DoctorDetailsController).controller("AppointmentDialogController", Telemedicine.AppointmentDialogController).controller("PaymentDialogController", Telemedicine.PaymentDialogController).service("recommendationService", Telemedicine.RecommendationApiService).service("urlResolverService", Telemedicine.UrlResolverService).service("patientApiService", Telemedicine.PatientApiService).service("consultationApiService", Telemedicine.ConsultationApiService).service("doctorApiService", Telemedicine.DoctorApiService).service("specializationApiService", Telemedicine.SpecializationApiService);
 })(Telemedicine || (Telemedicine = {}));
 var Telemedicine;
 (function (Telemedicine) {
@@ -416,19 +474,6 @@ var Telemedicine;
         return ItemRouteParams;
     })();
     Telemedicine.ItemRouteParams = ItemRouteParams;
-})(Telemedicine || (Telemedicine = {}));
-///<reference path="../common/ModalControllerBase.ts"/>
-///<reference path="../Services/DoctorApiService.ts"/>
-var Telemedicine;
-(function (Telemedicine) {
-    var AppointmentDialogController = (function (_super) {
-        __extends(AppointmentDialogController, _super);
-        function AppointmentDialogController($modalInstance, item) {
-            _super.call(this, $modalInstance, item);
-        }
-        return AppointmentDialogController;
-    })(Telemedicine.ItemModalViewModel);
-    Telemedicine.AppointmentDialogController = AppointmentDialogController;
 })(Telemedicine || (Telemedicine = {}));
 ///// <reference path="SignalR.ts" />
 //module RtcChat {

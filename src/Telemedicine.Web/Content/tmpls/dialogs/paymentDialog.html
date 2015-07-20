@@ -1,0 +1,31 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="viewModel.cancel()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title pull-left">Оплата консультации</h3>
+    <h3 class="price">500.00 р.</h3>
+</div>
+<div class="modal-body">
+    <div class="row sub-title">
+        Выберите способ оплаты
+    </div>
+    <div class="row">
+        <div class="dropdown rounded">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Средство платежа
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#">Банковской картой</a></li>
+                <li><a href="#">Webmoney</a></li>
+                <li><a href="#">Мобильный телефон</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <a class="btn btn-primary rounded" data-dismiss="modal" ng-click="viewModel.cancel()">
+        ОПЛАТИТЬ
+    </a>
+    <a class="btn rounded btn-round-rd" data-dismiss="modal" ng-click="viewModel.cancel()">
+        ОТМЕНА
+    </a>
+</div>

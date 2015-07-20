@@ -203,6 +203,7 @@
   <ItemGroup>
     <Content Include="Content\tmpls\dialogs\appointmentDialog.html" />
     <Content Include="Content\tmpls\dialogs\doctorDetails.html" />
+    <Content Include="Content\tmpls\dialogs\paymentDialog.html" />
     <Content Include="img\arrow_left_white.svg" />
     <Content Include="img\arrow_right_white.svg" />
     <Content Include="img\chat_gray.svg" />
@@ -638,6 +639,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\ts\dts\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\angular.d.ts" />
+    <TypeScriptCompile Include="Scripts\ts\dts\bootstrap.v3.datetimepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\app.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ApiServiceBase.ts" />
@@ -649,6 +651,7 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\ConsultationController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorDetailsController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorListController.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\PaymentDialogController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\SimpleModalControllers.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultationMessage.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultation.ts" />

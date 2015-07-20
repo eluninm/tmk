@@ -8,7 +8,8 @@ module Telemedicine {
 
         constructor(private doctorApiService: DoctorApiService,
             private specializationApiService: SpecializationApiService,
-            private $modal: ng.ui.bootstrap.IModalService, private $scope: any) {
+            private $modal: ng.ui.bootstrap.IModalService,
+            private $scope: any) {
             this.loadPage();
             this.loadSpecializations();
             this.initialize();
@@ -64,9 +65,28 @@ module Telemedicine {
         public openAppointmentDialog(doctor: IDoctor) {
             var appointmentDialog = this.$modal.open({
                 templateUrl: "/Content/tmpls/dialogs/appointmentDialog.html",
+                controller: "AppointmentDialogController as viewModel",
                 windowClass: "appointmentmodaldialog",
                 resolve: {
                     item: () => doctor
+                }
+            });
+
+            appointmentDialog.result.then((result) => {
+                if (result === "appointment") {
+                    appointmentDialog.close();
+                    this.openPaymentDialog();
+                }
+            });
+        }
+
+        public openPaymentDialog() {
+            var paymentDialog = this.$modal.open({
+                templateUrl: "/Content/tmpls/dialogs/paymentDialog.html",
+                controller: "PaymentDialogController as viewModel",
+                windowClass: "paymentmodaldialog",
+                resolve: {
+                    item: () => null
                 }
             });
         }
