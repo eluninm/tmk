@@ -113,7 +113,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
                     Date = viewModel.Date,
                     Doctor = await _doctorService.GetByIdAsync(viewModel.Id),
                     Patient = await _patientService.GetByUserIdAsync(User.Identity.GetUserId()),
-                    DateCreation = DateTime.Now
+                    Created = DateTime.Now
                 };
                 await _appointmentEventService.CreateAsync(appointmentEvent);
             }

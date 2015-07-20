@@ -27,5 +27,6 @@ module Telemedicine {
         .service("consultationApiService", ConsultationApiService)
         .service("doctorApiService", DoctorApiService)
         .service("specializationApiService", SpecializationApiService)
+        .service("appointmentApiService", AppointmentApiService)
     ;
 }

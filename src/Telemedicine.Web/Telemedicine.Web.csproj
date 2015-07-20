@@ -530,11 +530,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\ApiMapperConfiguration.cs" />
+    <Compile Include="Api\Controllers\AppointmentController.cs" />
     <Compile Include="Api\Controllers\ConversationController.cs" />
     <Compile Include="Api\Controllers\DoctorController.cs" />
     <Compile Include="Api\Controllers\PatientController.cs" />
     <Compile Include="Api\Controllers\RecommendationController.cs" />
     <Compile Include="Api\Controllers\SpecializationController.cs" />
+    <Compile Include="Api\Dto\AppointmentDto.cs" />
     <Compile Include="Api\Dto\BeginConsultationDto.cs" />
     <Compile Include="Api\Dto\ConsultationDto.cs" />
     <Compile Include="Api\Dto\ConsultationMessageDto.cs" />
@@ -653,11 +655,13 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorListController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\PaymentDialogController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\SimpleModalControllers.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IAppointment.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultationMessage.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultation.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctorListItem.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctorStatus.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\ISpecialization.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Services\AppointmentApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\ConsultationApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\DoctorApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\PatientApiService.ts" />

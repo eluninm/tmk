@@ -1,13 +1,15 @@
 ﻿///<reference path="../Services/DoctorApiService.ts"/>
 ///<reference path="../Services/SpecializationApiService.ts"/>
+///<reference path="../Services/AppointmentApiService.ts"/>
 ///<reference path="../SignalR/SignalR.ts"/>
 
 module Telemedicine {
     export class DoctorListController {
-        static $inject = ["doctorApiService", "specializationApiService", "$modal", "$scope"];
+        static $inject = ["doctorApiService", "specializationApiService", "appointmentApiService", "$modal", "$scope"];
 
         constructor(private doctorApiService: DoctorApiService,
             private specializationApiService: SpecializationApiService,
+            private appointmentApiService: IAppointmentApiService,
             private $modal: ng.ui.bootstrap.IModalService,
             private $scope: any) {
             this.loadPage();
@@ -63,17 +65,20 @@ module Telemedicine {
         }
 
         public openAppointmentDialog(doctor: IDoctor) {
+            var appointment: IAppointment = {DoctorId: doctor.Id, AppointmentDate: new Date()};
             var appointmentDialog = this.$modal.open({
                 templateUrl: "/Content/tmpls/dialogs/appointmentDialog.html",
                 controller: "AppointmentDialogController as viewModel",
                 windowClass: "appointmentmodaldialog",
                 resolve: {
-                    item: () => doctor
+                    item: () => doctor,
+                    appointment: () => appointment
                 }
             });
 
             appointmentDialog.result.then((result) => {
                 if (result === "appointment") {
+                    this.appointmentApiService.createItem(appointment);
                     appointmentDialog.close();
                     this.openPaymentDialog();
                 }
