@@ -29,15 +29,15 @@
         </div>
         <div class="col-md-6">
             <div class="col-md-4">
-                <span class="glyphicon glyphicon-comment status-icon"></span>
+                <span class="glyphicon status-icon message-icon" ng-class="{'message-icon-disabled': !viewModel.item.IsChatAvailable}"></span>
             </div>
             <div class="col-md-4">
-                <span class="glyphicon glyphicon-volume-up status-icon"></span>
+                <span class="glyphicon status-icon voice-icon" ng-class="{'voice-icon-disabled': !viewModel.item.IsAudioAvailable}"></span> 
             </div>
             <div class="col-md-4">
-                <span class="glyphicon glyphicon-facetime-video status-icon"></span>
+                <span class="glyphicon status-icon video-icon" ng-class="{'video-icon-disabled': !viewModel.item.IsVideoAvailable}"></span>
             </div>
-        </div>
+        </div> 
     </div>
     <a class="btn btn-primary rounded" ng-click="viewModel.ok()" >
         ЗАПИСАТЬСЯ
