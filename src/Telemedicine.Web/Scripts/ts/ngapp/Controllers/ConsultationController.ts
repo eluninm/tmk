@@ -35,7 +35,7 @@ module Telemedicine {
                 templateUrl: "/Content/tmpls/dialogs/recommendationDetails.html",
                 controller: "RecommendationDialog as viewModel",
                 resolve: {
-                    item: () => item
+                    item: () => null
                 }
             });
         }
