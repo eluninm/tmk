@@ -25,5 +25,7 @@ namespace Telemedicine.Core.Models
         public PaymentMethod PaymentMethod { get; set; }
 
         public string Description { get; set; }
+
+        public double Balance { get; set; }
     }
 }

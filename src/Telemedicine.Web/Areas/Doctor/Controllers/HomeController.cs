@@ -31,6 +31,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
 
         public async Task<ActionResult> Index()
         {
+            ViewBag.Balance = (await _doctorService.GetByUserIdAsync(User.Identity.GetUserId())).Balance;
             IEnumerable<AppointmentEvent> appointments = await _appointmentEventService.GetAllAsync();
             IEnumerable<AppointmentViewModel> appointmentViewModels =
                 appointments.Select(
@@ -87,13 +88,15 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             return PartialView("_AddTimeSpanEventDialog", viewModel);
         }
 
-        public ActionResult MyEvents()
+        public async Task<ActionResult> MyEvents()
         {
+            ViewBag.Balance = (await _doctorService.GetByUserIdAsync(User.Identity.GetUserId())).Balance;
             return View();
         }
 
-        public ActionResult Balance()
+        public async Task<ActionResult> Balance()
         {
+            ViewBag.Balance = (await _doctorService.GetByUserIdAsync(User.Identity.GetUserId())).Balance;
             return View();
         }
     }

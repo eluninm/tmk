@@ -8,7 +8,7 @@
     @Html.ActionLink("Моя запись", "MyEvents", "Home", null, new {@class = "homelink text-left"})
 </li>
 <li role="separator" class="nav-divider tm-deeper-bg"></li>
-<li class="text-center text-uppercase @Html.MenuItemClass("Balance", "Home")">
-    @Html.ActionLink("Баланс", "Balance", "Home", null, new { @class = "paymentlink text-left" })
+<li class="text-center text-uppercase @Html.MenuItemClass("Balance", "Home")"> 
+    @Html.ActionLink((string)ViewBag.Balance.ToString() + " ₽", "Balance", "Home", null, new {@class = "paymentlink text-left"})
 </li>
 <li role="separator" class="nav-divider tm-deeper-bg"></li>

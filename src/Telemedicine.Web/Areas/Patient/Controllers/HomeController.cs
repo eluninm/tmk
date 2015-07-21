@@ -49,6 +49,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
 
         public async Task<ActionResult> Index()
         {
+            ViewBag.Balance = (await _patientService.GetByUserIdAsync(User.Identity.GetUserId()))?.Balance;
             var patient = await _patientService.GetByUserIdAsync(HttpContext.User.Identity.GetUserId());
             if (patient == null)
             {
@@ -60,8 +61,9 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
         }
 
 
-        public ActionResult MyEvents()
+        public async Task<ActionResult> MyEvents()
         {
+            ViewBag.Balance = (await _patientService.GetByUserIdAsync(User.Identity.GetUserId()))?.Balance;
             return View();
         }
     }

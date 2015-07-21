@@ -33,7 +33,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
         }
 
         public async Task<ActionResult> Index()
-        {
+        { 
             ViewBag.Balance = (await _patientService.GetByUserIdAsync(User.Identity.GetUserId()))?.Balance;
             IEnumerable<Tariff> tariffs = await _tariffService.GetAllAsync();
             IEnumerable<PaymentMethod> methods = await _paymentMethodService.GetAllAsync();

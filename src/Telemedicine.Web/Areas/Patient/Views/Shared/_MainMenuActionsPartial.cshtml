@@ -12,7 +12,7 @@
 </li>
 <li role="separator" class="nav-divider tm-deeper-bg"></li>
 <li class="text-center text-uppercase @Html.MenuItemClass("Index", "Payment")">
-    @Html.ActionLink("Баланс", "Index", "Payment", null, new {@class = "paymentlink text-left"})
+    @Html.ActionLink((string)ViewBag.Balance.ToString() + " ₽", "Index", "Payment", null, new {@class = "paymentlink text-left"})
 </li>
 <li role="separator" class="nav-divider tm-deeper-bg"></li>
 
