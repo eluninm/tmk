@@ -3,7 +3,7 @@
 module Telemedicine {
     export class BalanceController{
         static $inject = ["balanceApiService",  "$scope"];
-        constructor(private balanceApiService: BalanceApiService) { 
+        constructor(private balanceApiService: BalanceApiService, private $scope: any) { 
         }
 
         public debitValue: number;
@@ -14,8 +14,11 @@ module Telemedicine {
         }
 
         public replenish(amount: number) { 
-            this.balanceApiService.replenish(amount).then(result => { 
-              }); 
+            this.balanceApiService.replenish(amount).then(result => {
+                this.debitValue = 0;
+                this.$scope.$emit('ReplenishSuccess', result);
+                console.log("213123");
+            }); 
         }
     }
 }

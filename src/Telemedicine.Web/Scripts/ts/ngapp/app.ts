@@ -16,7 +16,7 @@ module Telemedicine {
         $logProvider.debugEnabled(true);
     }
 
-    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration)
+    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration) 
         .controller("PatientPaymentListController", PatientPaymentListController) 
         .controller("HistoryController", HistoryController)
         .controller("ConsultationController", ConsultationController)

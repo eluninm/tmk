@@ -41,9 +41,9 @@ namespace Telemedicine.Web.Api.Controllers
                 return NotFound();
             }
 
-            var paymentsHistory =  _paymentHistoryService.GetByPatientIdAsync(patient.Id);
+            var paymentsHistory =  _paymentHistoryService.GetByPatientIdAsync(patient.Id).ToList();
 
-            return Ok(Mapper.Map<RecommendationDto>(paymentsHistory));
+            return Ok(paymentsHistory.Select(Mapper.Map<PaymentHistoryDto>));
         }
 
         [HttpGet]
