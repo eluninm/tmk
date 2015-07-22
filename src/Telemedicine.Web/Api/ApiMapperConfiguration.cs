@@ -35,7 +35,9 @@ namespace Telemedicine.Web.Api
 
             Mapper.CreateMap<Specialization, SpecializationDto>();
 
-
+            Mapper.CreateMap<AppointmentEvent, DoctorAppointmentDto>()
+                .ForMember(d => d.PatientTitle, e => e.MapFrom(s => s.Patient.User.DisplayName))
+                .ForMember(d => d.PatientAvatarUrl, e => e.MapFrom(s => s.Patient.User.AvatarUrl));
         }
     }
 }

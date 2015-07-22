@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Telemedicine.Core.Domain.Repositories;
 using Telemedicine.Core.Domain.Uow;
 using Telemedicine.Core.Models;
+using Telemedicine.Core.PagedList;
 
 namespace Telemedicine.Core.Domain.Services
 {
@@ -40,6 +41,10 @@ namespace Telemedicine.Core.Domain.Services
             await _unitOfWork.SaveChangesAsync();
             return newAppointment;
         }
-         
+
+        public Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page = 1, int pageSize = 10, string patientTitleFilter= null)
+        {
+            return _appointmentEventRepository.GetDoctorAppointmentsPagedAsync(doctorId, page, pageSize, patientTitleFilter);
+        }
     }
 }

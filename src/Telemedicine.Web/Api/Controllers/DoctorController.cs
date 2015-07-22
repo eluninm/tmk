@@ -18,10 +18,12 @@ namespace Telemedicine.Web.Api.Controllers
     public class DoctorController : ApiController
     {
         private readonly IDoctorService _doctorService;
+        private readonly IAppointmentEventService _appointmentService;
 
-        public DoctorController(IDoctorService doctorService)
+        public DoctorController(IDoctorService doctorService, IAppointmentEventService appointmentService)
         {
             _doctorService = doctorService;
+            _appointmentService = appointmentService;
         }
 
         [HttpGet]
@@ -50,7 +52,7 @@ namespace Telemedicine.Web.Api.Controllers
 
         [HttpGet]
         [Route("{id}/details")]
-        public async Task<IHttpActionResult> DoctorDetails(int id)
+        public async Task<IHttpActionResult> Details(int id)
         {
             var doctor = await _doctorService.GetByIdAsync(id);
             if (doctor == null)
@@ -59,6 +61,20 @@ namespace Telemedicine.Web.Api.Controllers
             }
 
             return Ok(doctor.Description);
+        }
+
+        [HttpGet]
+        [Route("{id}/appointments")]
+        public async Task<IHttpActionResult> Appointments(int id, int page = 1, int pageSize = 10, string patientTitleFiter = null)
+        {
+            var doctorAppointments = await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFiter);
+            var pagedList = doctorAppointments.Map(t =>
+            {
+                var doctorAppointmentDto = Mapper.Map<DoctorAppointmentDto>(t);
+                return doctorAppointmentDto;
+            });
+
+            return Ok(pagedList);
         }
     }
 }
