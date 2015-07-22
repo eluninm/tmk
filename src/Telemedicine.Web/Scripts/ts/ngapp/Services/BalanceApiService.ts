@@ -1,6 +1,10 @@
-﻿module Telemedicine {
+﻿///<reference path="../common/ApiServiceBase.ts"/>
+///<reference path="../common/UrlResolverService.ts"/>
+ 
+ 
+module Telemedicine {
     export interface IBalanceApiService {
-        debit(amount: number): angular.IPromise<string>;
+        debit(amount: number): angular.IPromise<string>; 
     }
 
     export class BalanceApiService implements IBalanceApiService {
@@ -10,12 +14,11 @@
             private urlResolverService: UrlResolverService) {
         }
 
-
-        public debitValue = 0;
-
-        debit(amount: number): angular.IPromise<string> {
-            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/debit/" + amount );
-            return this.$http.get(url).then(result => result.data);
+        public debit(amount: number): angular.IPromise<string> {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/debit/" + amount);
+            return this.$http.post(url, null).then(result => result.data);
         }
+
+       
     }
-}
+} 
