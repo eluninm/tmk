@@ -28,7 +28,7 @@
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
-    <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -511,6 +511,7 @@
     <Content Include="Views\Account\MainPage.cshtml" />
     <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\Shared\_Layout3.cshtml" />
+    <Content Include="tsconfig.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -654,6 +655,7 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\AppointmentDialogController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\BalanceController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\ConsultationController.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorAppointmentsController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorDetailsController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorListController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\PaymentDialogController.ts" />
@@ -689,8 +691,18 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptOutFile>ngapp.js</TypeScriptOutFile>
+    <TypeScriptOutFile>C:\Users\vyacheslav\Source\Repos\tmk\src\Telemedicine.Web\ngapp.js</TypeScriptOutFile>
     <TypeScriptOutDir>C:\Users\vyacheslav\Source\Repos\tmk\src\Telemedicine.Web\Scripts</TypeScriptOutDir>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

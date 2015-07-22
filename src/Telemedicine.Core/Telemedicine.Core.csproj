@@ -291,11 +291,16 @@
     <Compile Include="Migrations\201507211243477_DoctorAddBalance.Designer.cs">
       <DependentUpon>201507211243477_DoctorAddBalance.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507221519186_ConsultationIdFieldAddedToAppointmentEvent.cs" />
+    <Compile Include="Migrations\201507221519186_ConsultationIdFieldAddedToAppointmentEvent.Designer.cs">
+      <DependentUpon>201507221519186_ConsultationIdFieldAddedToAppointmentEvent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AppointmentEvent.cs" />
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\AttachmentContent.cs" />
     <Compile Include="Models\Conversation.cs" />
     <Compile Include="Models\Doctor.cs" />
+    <Compile Include="Models\Enums\AppointmentStatus.cs" />
     <Compile Include="Models\Enums\EndTypeRepeatInterval.cs" />
     <Compile Include="Models\Enums\TypeRepeatingEvent.cs" />
     <Compile Include="Models\TimeSpanEvent.cs" />
@@ -461,6 +466,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507211243477_DoctorAddBalance.resx">
       <DependentUpon>201507211243477_DoctorAddBalance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507221519186_ConsultationIdFieldAddedToAppointmentEvent.resx">
+      <DependentUpon>201507221519186_ConsultationIdFieldAddedToAppointmentEvent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

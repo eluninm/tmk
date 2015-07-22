@@ -90,6 +90,8 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
 
         public async Task<ActionResult> MyEvents()
         {
+            var doctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
+            ViewBag.DoctorId = doctor.Id;
             ViewBag.Balance = (await _doctorService.GetByUserIdAsync(User.Identity.GetUserId())).Balance;
             return View();
         }

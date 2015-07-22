@@ -65,9 +65,9 @@ namespace Telemedicine.Web.Api.Controllers
 
         [HttpGet]
         [Route("{id}/appointments")]
-        public async Task<IHttpActionResult> Appointments(int id, int page = 1, int pageSize = 10, string patientTitleFiter = null)
+        public async Task<IHttpActionResult> Appointments(int id, int page = 1, int pageSize = 10, string patientTitleFilter = null)
         {
-            var doctorAppointments = await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFiter);
+            var doctorAppointments = await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFilter);
             var pagedList = doctorAppointments.Map(t =>
             {
                 var doctorAppointmentDto = Mapper.Map<DoctorAppointmentDto>(t);
