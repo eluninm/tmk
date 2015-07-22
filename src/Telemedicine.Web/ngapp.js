@@ -620,6 +620,7 @@ var Telemedicine;
     (function (AppointmentStatus) {
         AppointmentStatus[AppointmentStatus["Declined"] = 0] = "Declined";
         AppointmentStatus[AppointmentStatus["Closed"] = 1] = "Closed";
+        AppointmentStatus[AppointmentStatus["Ready"] = 2] = "Ready";
     })(Telemedicine.AppointmentStatus || (Telemedicine.AppointmentStatus = {}));
     var AppointmentStatus = Telemedicine.AppointmentStatus;
 })(Telemedicine || (Telemedicine = {}));
