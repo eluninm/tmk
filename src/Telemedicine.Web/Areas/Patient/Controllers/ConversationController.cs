@@ -16,15 +16,18 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
     {
         private readonly IConversationService _conversationService;
         private readonly IDoctorService _doctorService;
+        private readonly IPatientService _patientService;
 
-        public ConversationController(IConversationService conversationService, IDoctorService doctorService)
+        public ConversationController(IConversationService conversationService, IDoctorService doctorService, IPatientService patientService)
         {
             _conversationService = conversationService;
             _doctorService = doctorService;
+            _patientService = patientService;
         }
 
         public async Task<ActionResult> Open(string id)
         {
+            ViewBag.Balance = (await _patientService.GetByUserIdAsync(User.Identity.GetUserId()))?.Balance;
             var conversation = await _conversationService.OpenConversation(id);
             if (conversation == null)
             {
