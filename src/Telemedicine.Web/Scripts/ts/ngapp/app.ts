@@ -5,6 +5,7 @@
 ///<reference path="Controllers/DoctorDetailsController.ts" />
 ///<reference path="Controllers/AppointmentDialogController.ts" />
 ///<reference path="Controllers/PaymentDialogController.ts" />
+///<reference path="Controllers/BalanceController.ts" />
 
 module Telemedicine {
     function moduleConfiguration($logProvider: ng.ILogProvider) {
@@ -21,6 +22,7 @@ module Telemedicine {
         .controller("DoctorDetailsController", DoctorDetailsController)
         .controller("AppointmentDialogController", AppointmentDialogController)
         .controller("PaymentDialogController", PaymentDialogController)
+        .controller("BalanceController", BalanceController)
         .service("recommendationService", RecommendationApiService)
         .service("urlResolverService", UrlResolverService)
         .service("patientApiService", PatientApiService)
@@ -28,5 +30,6 @@ module Telemedicine {
         .service("doctorApiService", DoctorApiService)
         .service("specializationApiService", SpecializationApiService)
         .service("appointmentApiService", AppointmentApiService)
+        .service("balanceApiService", BalanceApiService)
     ;
 }

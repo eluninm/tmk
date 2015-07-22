@@ -16,12 +16,14 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
         private readonly IConversationService _conversationService;
         private readonly IPaymentHistoryService _paymentService;
         private readonly IPatientService _patientService;
+        private readonly IDoctorService _doctorService;
 
-        public ConversationController(IConversationService conversationService, IPaymentHistoryService paymentService, IPatientService patientService)
+        public ConversationController(IConversationService conversationService, IPaymentHistoryService paymentService, IPatientService patientService, IDoctorService doctorService)
         {
             _conversationService = conversationService;
             _paymentService = paymentService;
             _patientService = patientService;
+            _doctorService = doctorService;
         }
 
         //[HttpPost]
@@ -46,6 +48,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
 
         public async Task<ActionResult> Open(string id)
         {
+            ViewBag.Balance = (await _doctorService.GetByUserIdAsync(User.Identity.GetUserId())).Balance;
             var conversation = await _conversationService.OpenConversation(id);
             if (conversation == null)
             {
