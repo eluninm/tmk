@@ -1,14 +1,15 @@
 ﻿module Telemedicine {
     export class BalanceController{
-        constructor(private balanceApiService: BalanceApiService,
-            $modalInstance: ng.ui.bootstrap.IModalServiceInstance,
-            item: IDoctor) { 
+        static $inject = ["balanceApiService",  "$scope"];
+        constructor(private balanceApiService: BalanceApiService) {
+            console.log("constructor()"); 
         }
 
-        public debitingValue: number;
+        public debitValue: number;
 
-        public debiting(amount: number) {
-            this.balanceApiService.debiting(amount).then(result => {
+        public debit(amount: number) {
+            console.log("debit()");
+            this.balanceApiService.debit(amount).then(result => {
                 //this. = result;
             });
         }
