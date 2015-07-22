@@ -99,30 +99,79 @@
 .message-input-wrap {
     background: @color-background;
     border-radius: 20px;
-    border-width:0;
+    border-width: 0;
     position: relative;
     margin-right: 50px;
     display: flex;
-    font-size:12px;
+    font-size: 12px;
+    padding-right: 2.5em;
 
     .btn.btn-primary.rounded {
         height: 100%;
         padding: .5em 2em;
     }
 
-    &::after {
-        content: '';
+    .btn.attachment {
         display: inline-block;
         height: 2.5em;
         width: 2.5em;
         background-position: center;
         background-image: url('/img/attached_chat.png');
         background-repeat: no-repeat;
-        border-radius:20px;
+        background-color: transparent;
+        border-radius: 20px;
         border-color: @color-background1;
         border-style: solid;
         border-width: 0;
     }
+}
+
+.attachments-list {
+    display: flex;
+}
+
+.attachments-list-item {
+    display: flex;
+
+    .title {
+        .font-bold;
+        font-size: 12px;
+    }
+
+    .info {
+        .font-light;
+        color: @color-text1;
+    }
+
+    &::before {
+        content: '';
+        display: inline-block;
+        height: 2.5em;
+        width: 2.5em;
+        position: relative;
+        background-position: center;
+        background-image: url('/img/icon_attached.svg');
+        background-repeat: no-repeat;
+        background-color: transparent;
+        border-radius: 20px;
+        border-color: @color-background1;
+        border-style: solid;
+        border-width: 0;
+    }
+}
+
+.btn.attachment-remove {
+    display: inline-block;
+    height: 2.5em;
+    width: 2.5em;
+    background-position: center;
+    background-image: url('/img/del_attached.svg');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border-radius: 20px;
+    border-color: @color-background1;
+    border-style: solid;
+    border-width: 0;
 }
 
 .chat-message-input {
@@ -132,7 +181,7 @@
     padding-right: 15px;
     outline: none;
     font-size: 12px;
-    border:none;
+    border: none;
 }
 
 .chat-send-btn {
@@ -173,4 +222,46 @@
     height: 119px;
     z-index: 1000;
     margin: 0 auto;
+}
+
+.attachments-file-list.list-group {
+    box-shadow:none;
+    .list-group-item {
+        border: none;
+        display: flex;
+        padding:4px 30px;
+
+        .icon {
+            display: inline-block;
+            height: 48px;
+            width: 48px;
+            background-position: center;
+            background-size: 100% 100%;
+            &.doc{
+                background-image:url('/img/docx_attached.svg');
+            }
+        }
+
+        .text {
+            padding:4px 8px;
+            display:flex;
+            flex:1;
+            flex-direction:column;
+            flex-basis:50%;
+            .title {
+                .font-regular;
+                font-size: 16px;
+            }
+
+            .info {
+                .font-light;
+                font-size:12px;
+                color: @color-text1;
+            }
+        }
+        &:nth-child(odd){
+            background-color:@color-accent5;
+        }
+    }
+    
 }
