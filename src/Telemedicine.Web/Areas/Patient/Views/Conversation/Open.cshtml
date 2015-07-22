@@ -37,8 +37,11 @@
             <div class="chat-enter-box tm-noactive-bg" id="messageBox">
                 <button class="chat-send-btn btn" id="sendMessageBtn"></button>
                 <div class="message-input-wrap input-group">
-                    <div style="flex: 1; margin-left: 1.5em;">
-                        <input class="chat-message-input" id="message-input"/>
+                    <div style="flex: 1;">
+                        <div style="display: flex">
+                            <button class="btn btn-primary rounded" style="height: 32px" data-toggle="modal" data-target="#CloseChat">Завершить</button>
+                            <input class="chat-message-input" id="message-input" />
+                        </div>
                         <ul class="attachments-list" style="display: flex">
                             <li class="attachments-list-item">
                                 <div>
@@ -67,8 +70,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Прикрепление файла</h4>
+                <h4 class="modal-title" id="AttachmentsLabel">Прикрепление файла <input type="text" data-provide="typeahead" placeholder="Поиск" style="border: none;"/></h4>
             </div>
             <div class="modal-body">
                 <div class="content-fluid row" style="margin-bottom: 15px;">
@@ -102,7 +104,31 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary rounded">Добавить</button>
                 <button type="button" class="btn btn-default rounded" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+
+<div class="modal fade" id="CloseChat" role="dialog" aria-labelledby="CloseChatLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="CloseChatLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="uppercase text-center small">
+                    Вы действительно хотите завершить консультацию?
+                </div>
+                <br/>
+                <div class="doctor text-center">
+                    <div class="font-bold" style="font-size: 1.1em">Баранов Александр Александрович</div>
+                    <div class="font-bold" style="color: #e79924">Отоларинголог</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default rounded col-md-3 pull-right" data-dismiss="modal" style="margin-left: 15px">Нет</button>
+                <button type="button" class="btn btn-primary rounded col-md-3 pull-right">Ок</button>
             </div>
         </div>
     </div>

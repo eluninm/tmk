@@ -36,7 +36,22 @@
             <div class="chat-enter-box tm-noactive-bg" id="messageBox">
                 <button class="chat-send-btn btn" id="sendMessageBtn"></button>
                 <div class="message-input-wrap input-group">
-                    <input class="chat-message-input" id="message-input" />
+                    <div style="flex: 1;">
+                        <div style="display: flex">
+                            <input class="chat-message-input" id="message-input" />
+                        </div>
+                        <ul class="attachments-list" style="display: flex">
+                            <li class="attachments-list-item">
+                                <div>
+                                    <div class="title">Файл 1</div>
+                                    <div class="info">15 Кб</div>
+                                </div>
+
+                                <div class="btn attachment-remove"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <button class="btn attachment" type="button" style="position: absolute; bottom: 0; right: 0;" data-toggle="modal" data-target="#Attachments"></button>
                 </div>
             </div>
 
@@ -61,6 +76,72 @@
 <div class="modal fade" id="addRecommendationDialog">
     <div class="modal-dialog">
         <div class="modal-content">
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="Attachments" role="dialog" aria-labelledby="AttachmentsLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Прикрепление файла <input type="text" data-provide="typeahead" placeholder="Поиск" style="border: none;"/></h4>
+            </div>
+            <div class="modal-body">
+                <div class="content-fluid row" style="margin-bottom: 15px;">
+                    <button class="btn btn-default rounded fullwidth" onclick="$(this).next().click()">Загрузить новый файл</button>
+                    <input type="file" multiple="" style="display: none;"/>
+                </div>
+                <ul class="list-group attachments-file-list" style="margin-left: -45px; margin-right: -45px;">
+                    <li class="list-group-item">
+                        <div class="icon doc"></div>
+                        <div class="text">
+                            <div class="title">Сертификат_1.docx</div>
+                            <div class="info">Добавлено 15 июля 2015 в 15:45</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="icon doc"></div>
+                        <div class="text">
+                            <div class="title">Сертификат_1.docx</div>
+                            <div class="info">Добавлено 15 июля 2015 в 15:45</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="icon image"></div>
+                        <div class="text">
+                            <div class="title">Сертификат_1.docx</div>
+                            <div class="info">Добавлено 15 июля 2015 в 15:45</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary rounded">Добавить</button>
+                <button type="button" class="btn btn-default rounded" data-dismiss="modal">Закрыть</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CloseChat" role="dialog" aria-labelledby="CloseChatLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="CloseChatLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="uppercase text-center small">
+                    Завершение консультации:
+                </div>
+                <br />
+                <div class="doctor text-center">
+                    <div class="font-bold" style="font-size: 1.1em">Баранов Александр Александрович</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary rounded col-md-3 pull-right">Ок</button>
+            </div>
         </div>
     </div>
 </div>

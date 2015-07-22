@@ -49,6 +49,30 @@ module Telemedicine {
             return this.$http.get(url).then(result => result.data);
         }
 
-        getDoctorAppointments(doctorId: number, page?: number, pageSize?: number, patientTitleFilter?: string): angular.IPromise<IPagedList<any>> { throw new Error("Not implemented"); }
+        getDoctorAppointments(doctorId: number, page?: number, pageSize?: number, patientTitleFilter?: string): angular.IPromise<IPagedList<any>> {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl +"/" +doctorId+ "/appointments");
+            var query: any = {}, querySeparator = "?";
+
+            if (page) {
+                query.page = page;
+            }
+            if (pageSize) {
+                query.pageSize = pageSize;
+            }
+            if (patientTitleFilter) {
+                query.patientTitleFilter = patientTitleFilter;
+            }
+
+            for (var key in query) {
+                if (query.hasOwnProperty(key)) {
+                    url += querySeparator + key + "=" + encodeURIComponent(query[key]);
+                    if (querySeparator === "?") {
+                        querySeparator = "&";
+                    }
+                }
+            }
+
+            return this.$http.get(url).then(result => result.data);
+        }
     }
 }

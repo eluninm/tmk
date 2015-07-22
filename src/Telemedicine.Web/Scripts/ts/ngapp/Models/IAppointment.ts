@@ -3,4 +3,9 @@
         DoctorId: number;
         AppointmentDate: Date;
     }
+
+    export enum AppointmentStatus {
+        Declined,
+        Closed
+    } 
 }

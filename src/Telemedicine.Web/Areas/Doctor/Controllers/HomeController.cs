@@ -31,11 +31,16 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
 
         public async Task<ActionResult> Index()
         {
-            ViewBag.Balance = (await _doctorService.GetByUserIdAsync(User.Identity.GetUserId())).Balance;
-            IEnumerable<AppointmentEvent> appointments = await _appointmentEventService.GetAllAsync();
-            IEnumerable<AppointmentViewModel> appointmentViewModels =
-                appointments.Select(
-                    i => new AppointmentViewModel() {Date = i.Date, PatientFio = i.Patient.User.DisplayName});
+            var currentDoctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
+            ViewBag.Balance = currentDoctor.Balance;
+            IEnumerable<AppointmentEvent> appointments = await _appointmentEventService.GetDoctorAppointmentsByDateAsync(currentDoctor.Id, DateTime.Now);
+            IEnumerable<AppointmentViewModel> appointmentViewModels = appointments.OrderBy(a => a.Date).Select(
+                i => new AppointmentViewModel
+                {
+                    Date = i.Date,
+                    PatientFio = i.Patient.User.DisplayName
+                });
+
             return View(appointmentViewModels);
         }
 
@@ -90,6 +95,8 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
 
         public async Task<ActionResult> MyEvents()
         {
+            var doctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
+            ViewBag.DoctorId = doctor.Id;
             ViewBag.Balance = (await _doctorService.GetByUserIdAsync(User.Identity.GetUserId())).Balance;
             return View();
         }
