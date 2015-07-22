@@ -26,11 +26,11 @@
                 </div>
                 <div class="row form-line">
                     <div class="col-md-7">
-                        <input type="text" class="form-control rounded" ng-model="debitValue"   placeholder="Сумма платежа">
+                        <input type="text" class="form-control rounded" ng-model="viewModel.debitValue"   placeholder="Сумма платежа">
                     </div>
                     <div class="col-md-5">
-                        <button class="btn btn-primary rounded" ng-click="viewModel.debit(debitValue)" style="width: 100%">Снять</button>
-                    </div>
+                        <button class="btn btn-primary rounded" ng-disabled="(viewModel.balance<viewModel.debitValue)" ng-click="viewModel.debit(viewModel.debitValue)" style="width: 100%">Снять</button>
+                    </div>{{viewModel.balance}}
                 </div>
             </div>
         </div>

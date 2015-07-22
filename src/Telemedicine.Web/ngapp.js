@@ -525,6 +525,10 @@ var Telemedicine;
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/replenish/" + amount);
             return this.$http.post(url, null).then(function (result) { return result.data; });
         };
+        BalanceApiService.prototype.balance = function () {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/get/");
+            return this.$http.get(url, null).then(function (result) { return result.data; });
+        };
         return BalanceApiService;
     })();
     Telemedicine.BalanceApiService = BalanceApiService;
@@ -536,9 +540,12 @@ var Telemedicine;
         function BalanceController(balanceApiService, $scope) {
             this.balanceApiService = balanceApiService;
             this.$scope = $scope;
+            this.getBalance();
         }
         BalanceController.prototype.debit = function (amount) {
+            var _this = this;
             this.balanceApiService.debit(amount).then(function (result) {
+                _this.getBalance();
             });
         };
         BalanceController.prototype.replenish = function (amount) {
@@ -547,6 +554,12 @@ var Telemedicine;
                 _this.debitValue = 0;
                 _this.$scope.$emit('ReplenishSuccess', result);
                 console.log("213123");
+            });
+        };
+        BalanceController.prototype.getBalance = function () {
+            var _this = this;
+            this.balanceApiService.balance().then(function (result) {
+                _this.balance = result;
             });
         };
         BalanceController.$inject = ["balanceApiService", "$scope"];

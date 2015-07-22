@@ -26,6 +26,15 @@ namespace Telemedicine.Web.Api.Controllers
             _patientService = patientService;
         }
 
+        [HttpGet]
+        [Route("get/")]
+        public async Task<IHttpActionResult> GetBalance()
+        {
+            var doctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
+            var patient = await _patientService.GetByUserIdAsync(User.Identity.GetUserId());
+            return Ok(doctor?.Balance ?? patient?.Balance); 
+        }
+
         [HttpPost]
         [Route("debit/{amount}")]
         public async Task<IHttpActionResult> Debit(double amount)
