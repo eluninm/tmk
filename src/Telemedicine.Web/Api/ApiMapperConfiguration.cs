@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using AutoMapper;
 using Telemedicine.Core.Models;
+using Telemedicine.Core.Models.Enums;
 using Telemedicine.Web.Api.Dto;
 
 namespace Telemedicine.Web.Api
@@ -38,6 +39,12 @@ namespace Telemedicine.Web.Api
             Mapper.CreateMap<AppointmentEvent, DoctorAppointmentDto>()
                 .ForMember(d => d.PatientTitle, e => e.MapFrom(s => s.Patient.User.DisplayName))
                 .ForMember(d => d.PatientAvatarUrl, e => e.MapFrom(s => s.Patient.User.AvatarUrl));
+
+
+            Mapper.CreateMap<PaymentHistory, PaymentHistoryDto>()
+                .ForMember(d => d.Date, e => e.MapFrom(s => s.Date))
+                .ForMember(d => d.Value, e => e.MapFrom(s => s.Value))
+                .ForMember(d => d.PaymentType, e => e.MapFrom(s => s.PaymentType == PaymentType.Replenishment? "Пополнение": "Консультация"));
         }
     }
 }

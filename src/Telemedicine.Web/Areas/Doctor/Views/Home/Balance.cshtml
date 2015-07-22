@@ -4,12 +4,12 @@
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
 
-<div class="row fullheight" style="position: relative" ng-controller="BalanceController as viewModel">
+<div class="row fullheight" style="position: relative"  >
     <div class="col-md-6 fullheight sub-container">
         <h3 class="page-header row">@ViewBag.Title</h3>
         <div class="unscrollable row container-fluid balance-container">
             <p class="balance-info page-header">
-                <span class="text">Баланс</span> <span style="color: #3e67ae" class="summa">12 567 Р</span><span></span>
+                <span class="text">Баланс</span> <span style="color: #3e67ae" class="summa"> <span ng-bind="balanceviewModel.balance"></span>  ₽</span><span></span>
             </p>
             <p class="debit-text">Снять со счета</p>
             <div class="balance-refill">
@@ -26,10 +26,10 @@
                 </div>
                 <div class="row form-line">
                     <div class="col-md-7">
-                        <input type="text" class="form-control rounded" ng-model="debitValue"   placeholder="Сумма платежа">
+                        <input type="text" class="form-control rounded" ng-model="balanceviewModel.debitValue"   placeholder="Сумма платежа">
                     </div>
                     <div class="col-md-5">
-                        <button class="btn btn-primary rounded" ng-click="viewModel.debit(debitValue)" style="width: 100%">Снять</button>
+                        <button class="btn btn-primary rounded" ng-disabled="(balanceviewModel.balance<balanceviewModel.debitValue)" ng-click="balanceviewModel.debit(balanceviewModel.debitValue)" style="width: 100%">Снять</button>
                     </div>
                 </div>
             </div>

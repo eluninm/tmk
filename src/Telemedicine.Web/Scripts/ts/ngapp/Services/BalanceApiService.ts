@@ -5,6 +5,8 @@
 module Telemedicine {
     export interface IBalanceApiService {
         debit(amount: number): angular.IPromise<string>; 
+        replenish (amount: number);
+        balance():angular.IPromise<number>;
     }
 
     export class BalanceApiService implements IBalanceApiService {
@@ -19,6 +21,14 @@ module Telemedicine {
             return this.$http.post(url, null).then(result => result.data);
         }
 
-       
+        public replenish (amount: number) {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/replenish/" + amount);
+            return this.$http.post(url, null).then(result => result.data);
+        }
+
+        public balance(): angular.IPromise<number> {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/get/");
+            return this.$http.get(url, null).then(result => result.data);
+        }
     }
 } 

@@ -26,8 +26,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
         }
 
         public async Task<ActionResult> Open(string id)
-        {
-            ViewBag.Balance = (await _patientService.GetByUserIdAsync(User.Identity.GetUserId()))?.Balance;
+        { 
             var conversation = await _conversationService.OpenConversation(id);
             if (conversation == null)
             {
