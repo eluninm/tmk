@@ -740,8 +740,8 @@ body {
 .chat-message-input {
   height: 2.5em;
   width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
+  margin-left: 1.5em;
+  margin-right: 15px;
   outline: none;
   font-size: 12px;
   border: none;
