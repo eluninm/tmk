@@ -14,8 +14,8 @@
 </li>
 
 <li role="separator" class="nav-divider tm-deeper-bg"></li>
-<li class="text-center text-uppercase @Html.MenuItemClass("Index", "Payment")">
-    @Html.ActionLink((string)ViewBag.Balance.ToString() + " ₽", "Index", "Payment", null, new {@class = "paymentlink text-left"})
+<li class="text-center text-uppercase @Html.MenuItemClass("Index", "Payment")"> 
+    <a class="paymentlink text-left ng-binding" href='@Url.Action("Index", "Payment")'><span ng-bind="balanceviewModel.balance"></span> ₽</a> 
 </li>
 <li role="separator" class="nav-divider tm-deeper-bg"></li>
 

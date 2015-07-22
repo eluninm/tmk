@@ -553,7 +553,7 @@ var Telemedicine;
             this.balanceApiService.replenish(amount).then(function (result) {
                 _this.debitValue = 0;
                 _this.$scope.$emit('ReplenishSuccess', result);
-                console.log("213123");
+                _this.getBalance();
             });
         };
         BalanceController.prototype.getBalance = function () {

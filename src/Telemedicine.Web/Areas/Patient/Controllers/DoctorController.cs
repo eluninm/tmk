@@ -41,8 +41,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
         }
 
         public async Task<ActionResult> List()
-        {
-            ViewBag.Balance = (await _patientService.GetByUserIdAsync(User.Identity.GetUserId()))?.Balance;
+        { 
             var doctors =   _doctorService.GetAll();
             var viewModel = (from doctor in doctors
                                  select

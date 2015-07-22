@@ -20,7 +20,7 @@ module Telemedicine {
             this.balanceApiService.replenish(amount).then(result => {
                 this.debitValue = 0;
                 this.$scope.$emit('ReplenishSuccess', result);
-                console.log("213123");
+                this.getBalance();
             }); 
         }
 
