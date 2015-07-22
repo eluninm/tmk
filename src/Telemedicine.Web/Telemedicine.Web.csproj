@@ -430,7 +430,6 @@
     <Content Include="Areas\Doctor\Views\Home\Balance.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\Index2.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\_AddTimeSpanEventDialog.cshtml" />
-    <Content Include="Areas\Patient\Views\Doctor\Index_Old.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
     <Content Include="Content\patient.less" />

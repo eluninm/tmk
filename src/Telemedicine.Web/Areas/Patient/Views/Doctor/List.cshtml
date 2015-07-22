@@ -1,12 +1,10 @@
-﻿@using Telemedicine.Core.Models
-@model IEnumerable<Telemedicine.Web.Areas.Patient.Models.DoctorViewModel>
-@{
-    ViewBag.Title = "Консультация";
+﻿@{
+    ViewBag.Title = "Врачи";
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
 
 <div class="fullheight sub-container row container-fluid" ng-controller="DoctorListController as viewModel">
-    <h1 class="page-header row">Врачи</h1>
+    <h1 class="page-header row">@ViewBag.Title</h1>
     <div class="container-fluid unscrollable row" style="display: flex; flex-direction: column">
         <div class="grid">
             <div class="page-header">
@@ -70,7 +68,7 @@
                             </td>
                             <td>
                                 <div class="doctor-panel-btn-group rounded text-nowrap" style="display: inline-block">
-                                    <a class="btn btn-primary rounded" href="#" @*data-toggle="modal" data-target="#appointmentModalDialog"*@ title="Записаться" ng-click="viewModel.openAppointmentDialog(doctor)">
+                                    <a class="btn btn-primary rounded" href="#" title="Записаться" ng-click="viewModel.openAppointmentDialog(doctor)">
                                         Записаться
                                     </a>
                                     <a class="btn btn-success start-chat-btn rounded" ng-class="{'disabled': !doctor.IsChatAvailable}" data-toggle="modal" data-target="#waitDoctorAnswerDialog" ng-href="/Patient/Doctor/StartDialog/{{doctor.Id}}" title="Начать чат">
