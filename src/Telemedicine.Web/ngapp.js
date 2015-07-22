@@ -482,17 +482,35 @@ var Telemedicine;
     })(Telemedicine.ItemModalViewModel);
     Telemedicine.PaymentDialogController = PaymentDialogController;
 })(Telemedicine || (Telemedicine = {}));
+///<reference path="../common/ApiServiceBase.ts"/>
+///<reference path="../common/UrlResolverService.ts"/>
+var Telemedicine;
+(function (Telemedicine) {
+    var BalanceApiService = (function () {
+        function BalanceApiService($http, urlResolverService) {
+            this.$http = $http;
+            this.urlResolverService = urlResolverService;
+            this.baseUrl = "/api/v1/balance";
+        }
+        BalanceApiService.prototype.debit = function (amount) {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/debit/" + amount);
+            return this.$http.post(url, null).then(function (result) { return result.data; });
+        };
+        return BalanceApiService;
+    })();
+    Telemedicine.BalanceApiService = BalanceApiService;
+})(Telemedicine || (Telemedicine = {}));
+///<reference path="../Services/BalanceApiService.ts"/>
 var Telemedicine;
 (function (Telemedicine) {
     var BalanceController = (function () {
         function BalanceController(balanceApiService) {
             this.balanceApiService = balanceApiService;
-            console.log("constructor()");
         }
         BalanceController.prototype.debit = function (amount) {
             console.log("debit()");
             this.balanceApiService.debit(amount).then(function (result) {
-                //this. = result;
+                console.log(result);
             });
         };
         BalanceController.$inject = ["balanceApiService", "$scope"];
@@ -541,23 +559,6 @@ var Telemedicine;
         return ItemRouteParams;
     })();
     Telemedicine.ItemRouteParams = ItemRouteParams;
-})(Telemedicine || (Telemedicine = {}));
-var Telemedicine;
-(function (Telemedicine) {
-    var BalanceApiService = (function () {
-        function BalanceApiService($http, urlResolverService) {
-            this.$http = $http;
-            this.urlResolverService = urlResolverService;
-            this.baseUrl = "/api/v1/balance";
-            this.debitValue = 0;
-        }
-        BalanceApiService.prototype.debit = function (amount) {
-            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/debit/" + amount);
-            return this.$http.get(url).then(function (result) { return result.data; });
-        };
-        return BalanceApiService;
-    })();
-    Telemedicine.BalanceApiService = BalanceApiService;
 })(Telemedicine || (Telemedicine = {}));
 ///// <reference path="SignalR.ts" />
 //module RtcChat {

@@ -22,7 +22,7 @@ module Telemedicine {
         .controller("DoctorDetailsController", DoctorDetailsController)
         .controller("AppointmentDialogController", AppointmentDialogController)
         .controller("PaymentDialogController", PaymentDialogController)
-        .controller("BalanceController", BalanceController)
+        .controller("BalanceController", BalanceController) 
         .service("recommendationService", RecommendationApiService)
         .service("urlResolverService", UrlResolverService)
         .service("patientApiService", PatientApiService)
