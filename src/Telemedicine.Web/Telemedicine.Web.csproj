@@ -366,6 +366,7 @@
     <Content Include="lib\fontawesome\css\font-awesome.css" />
     <Content Include="lib\fontawesome\css\font-awesome.min.css" />
     <Content Include="lib\fontawesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="lib\formatnet\formatnet.js" />
     <Content Include="lib\moment\locales.min.js" />
     <Content Include="lib\moment\moment.min.js" />
     <Content Include="lib\responsive-calendar\css\responsive-calendar.css" />
