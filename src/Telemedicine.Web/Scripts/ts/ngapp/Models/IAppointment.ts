@@ -6,6 +6,7 @@
 
     export enum AppointmentStatus {
         Declined,
-        Closed
+        Closed,
+        Ready
     } 
 }
