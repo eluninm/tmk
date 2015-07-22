@@ -42,6 +42,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             ViewBag.UserDisplayName = targetUser.DisplayName;
             var doctor = await _doctorService.GetByUserIdAsync(targetUser.Id);
             ViewBag.Specialization = doctor.Specialization.DisplayName;
+            ViewBag.Balance = "";
 
             var conversationViewModel = conversation.Messages.Select(t => new ConsultationMessageDto());
             return View(conversationViewModel);
