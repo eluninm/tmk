@@ -71,13 +71,31 @@
                 <h4 class="modal-title" id="myModalLabel">Прикрепление файла</h4>
             </div>
             <div class="modal-body">
-                <div class="content-fluid">
-                    <button class="btn btn-default rounded fullwidth font-bold">Загрузить новый файл</button>
-                    <input type="file" multiple="" style="display: none" />
+                <div class="content-fluid row" style="margin-bottom: 15px;">
+                    <button class="btn btn-default rounded fullwidth" onclick="$(this).next().click()">Загрузить новый файл</button>
+                    <input type="file" multiple="" style="display: none;"/>
                 </div>
-                <ul class="list-group" style="margin-left: -45px; margin-right: -45px;">
+                <ul class="list-group attachments-file-list" style="margin-left: -45px; margin-right: -45px;">
                     <li class="list-group-item">
-                        Сертификат-1.docx
+                        <div class="icon doc"></div>
+                        <div class="text">
+                            <div class="title">Сертификат_1.docx</div>
+                            <div class="info">Добавлено 15 июля 2015 в 15:45</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="icon doc"></div>
+                        <div class="text">
+                            <div class="title">Сертификат_1.docx</div>
+                            <div class="info">Добавлено 15 июля 2015 в 15:45</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="icon image"></div>
+                        <div class="text">
+                            <div class="title">Сертификат_1.docx</div>
+                            <div class="info">Добавлено 15 июля 2015 в 15:45</div>
+                        </div>
                     </li>
                 </ul>
             </div>

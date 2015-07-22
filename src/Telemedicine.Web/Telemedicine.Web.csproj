@@ -208,6 +208,7 @@
     <Content Include="img\arrow_right_white.svg" />
     <Content Include="img\chat_gray.svg" />
     <Content Include="img\del_attached.svg" />
+    <Content Include="img\docx_attached.svg" />
     <Content Include="img\icon_attached.svg" />
     <Content Include="img\icon_attached_blue.svg" />
     <Content Include="lib\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
