@@ -583,6 +583,10 @@ body {
 .tm.icon.arrow-right.white {
   background-image: url('/img/arrow_right_white.svg');
 }
+.btn.btn-primary {
+  box-shadow: none;
+  background-image: none;
+}
 .chat-message {
   position: relative;
   min-height: 45px;

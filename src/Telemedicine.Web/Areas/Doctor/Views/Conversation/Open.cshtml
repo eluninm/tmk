@@ -84,12 +84,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Прикрепление файла <input type="text" data-provide="typeahead" placeholder="Поиск" style="border: none;" /></h4>
+                <h4 class="modal-title" id="myModalLabel">Прикрепление файла <input type="text" data-provide="typeahead" placeholder="Поиск" style="border: none;"/></h4>
             </div>
             <div class="modal-body">
                 <div class="content-fluid row" style="margin-bottom: 15px;">
                     <button class="btn btn-default rounded fullwidth" onclick="$(this).next().click()">Загрузить новый файл</button>
-                    <input type="file" multiple="" style="display: none;" />
+                    <input type="file" multiple="" style="display: none;"/>
                 </div>
                 <ul class="list-group attachments-file-list" style="margin-left: -45px; margin-right: -45px;">
                     <li class="list-group-item">
@@ -119,6 +119,28 @@
                 <button type="button" class="btn btn-primary rounded">Добавить</button>
                 <button type="button" class="btn btn-default rounded" data-dismiss="modal">Закрыть</button>
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CloseChat" role="dialog" aria-labelledby="CloseChatLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="CloseChatLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="uppercase text-center small">
+                    Завершение консультации:
+                </div>
+                <br />
+                <div class="doctor text-center">
+                    <div class="font-bold" style="font-size: 1.1em">Баранов Александр Александрович</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary rounded col-md-3 pull-right">Ок</button>
             </div>
         </div>
     </div>
