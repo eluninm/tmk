@@ -21,7 +21,8 @@ namespace Telemedicine.Web.Api.Controllers
             _doctorService = doctorService;
         }
 
-        [HttpGet]
+        [HttpPost]
+        [Route("debit/{amount}")]
         public async Task<IHttpActionResult> Debit(double amount)
         {
             var doctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());

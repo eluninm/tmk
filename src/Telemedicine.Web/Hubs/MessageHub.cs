@@ -38,7 +38,8 @@ namespace Telemedicine.Web.Hubs
                 {
                     Message = message.Message,
                     UserDisplayName = message.Creator.DisplayName,
-                    UserName = message.Creator.UserName
+                    UserName = message.Creator.UserName,
+                    Created = DateTime.Now
                 };
 
                 var conversation = await conversationService.OpenConversation(conversationId);

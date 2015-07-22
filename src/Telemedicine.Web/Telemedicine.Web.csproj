@@ -661,6 +661,7 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IAppointment.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultationMessage.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultation.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctorAppointment.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctorListItem.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctorStatus.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\ISpecialization.ts" />

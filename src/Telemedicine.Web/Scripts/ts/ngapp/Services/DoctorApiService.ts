@@ -5,6 +5,7 @@ module Telemedicine {
     export interface IDoctorApiService {
         getDoctorList(page?: number, pageSize?: number, title?: string, specializationId?: number): ng.IPromise<IPagedList<IDoctor>>;
         getDoctorDetails(doctorId: number): ng.IPromise<string>;
+        getDoctorAppointments(doctorId: number, page?: number, pageSize?: number, patientTitleFilter?: string): ng.IPromise<IPagedList<IDoctorAppointment>>;
     }
 
     export class DoctorApiService implements IDoctorApiService {
@@ -47,5 +48,7 @@ module Telemedicine {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/details");
             return this.$http.get(url).then(result => result.data);
         }
+
+        getDoctorAppointments(doctorId: number, page?: number, pageSize?: number, patientTitleFilter?: string): angular.IPromise<IPagedList<any>> { throw new Error("Not implemented"); }
     }
 }
