@@ -51,6 +51,16 @@ namespace Telemedicine.Core.Domain.Repositories
             }
 
             return await query.OrderBy(t => t.Id).ToPagedListAsync(page, pageSize);
-        }        
+        }
+
+        public async Task<IEnumerable<AppointmentEvent>> GetDoctorAppointmentsByDateAsync(int doctorId, DateTime date)
+        {
+            var begin = date.Date;
+            var end = date.AddDays(1).Date;
+            var appointments = await Set.Include(t => t.Patient).Include(p => p.Patient.User)
+                .Where(a => a.Date >= begin && a.Date < end)
+                .ToListAsync();
+            return appointments;
+        }
     }
 }
