@@ -8,10 +8,13 @@ module Telemedicine {
 
         public debitValue: number;
 
-        public debit(amount: number) {
-            console.log("debit()");
-              this.balanceApiService.debit(amount).then(result => {
-                  console.log(result);
+        public debit(amount: number) { 
+              this.balanceApiService.debit(amount).then(result => { 
+              }); 
+        }
+
+        public replenish(amount: number) { 
+            this.balanceApiService.replenish(amount).then(result => { 
               }); 
         }
     }

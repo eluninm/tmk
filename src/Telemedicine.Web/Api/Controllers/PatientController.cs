@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Web.Api.Dto;
 
@@ -13,12 +14,13 @@ namespace Telemedicine.Web.Api.Controllers
         private readonly IRecommendationService _recommendationService;
         private readonly IConversationService _conversationService;
         private readonly IPatientService _patientService;
-
-        public PatientController(IRecommendationService recommendationService, IConversationService conversationService, IPatientService patientService)
+        private readonly IPaymentHistoryService _paymentHistoryService;
+        public PatientController(IRecommendationService recommendationService, IConversationService conversationService, IPatientService patientService, IPaymentHistoryService paymentHistoryService)
         {
             _recommendationService = recommendationService;
             _conversationService = conversationService;
             _patientService = patientService;
+            _paymentHistoryService = paymentHistoryService;
         }
 
         [HttpGet]
@@ -27,6 +29,21 @@ namespace Telemedicine.Web.Api.Controllers
         {
             var recommendations = await _recommendationService.GetPatientRecommendations(patientId);
             return Ok(recommendations.Select(Mapper.Map<RecommendationDto>));
+        }
+
+        [HttpGet]
+        [Route("PaymentsHistory/")]
+        public async Task<IHttpActionResult> PaymentsHistory()
+        {
+            var patient = await _patientService.GetByUserIdAsync(User.Identity.GetUserId());
+            if (patient == null)
+            {
+                return NotFound();
+            }
+
+            var paymentsHistory =  _paymentHistoryService.GetByPatientIdAsync(patient.Id);
+
+            return Ok(Mapper.Map<RecommendationDto>(paymentsHistory));
         }
 
         [HttpGet]

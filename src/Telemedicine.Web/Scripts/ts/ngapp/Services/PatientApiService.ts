@@ -5,6 +5,7 @@ module Telemedicine {
     export interface IPatientApiService {
         patientRecommendations(patientId: string): ng.IPromise<Array<IRecommendation>>;
         patientConsultations(patientId: string): ng.IPromise<Array<IConsultation>>;
+        patientPaymentHistory(): ng.IPromise<Array<IPaymentHistory>>;
     }
 
     export class PatientApiService implements IPatientApiService {
@@ -21,6 +22,12 @@ module Telemedicine {
 
         public patientConsultations(patientId: string): ng.IPromise<IConsultation[]> {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + patientId + "/consultations");
+            return this.$http.get(url).then(result => result.data);
+        }
+
+
+        public patientPaymentHistory(): ng.IPromise<Array<IPaymentHistory>> {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/PaymentsHistory");
             return this.$http.get(url).then(result => result.data);
         }
     }

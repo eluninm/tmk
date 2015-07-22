@@ -15,6 +15,7 @@ module Telemedicine {
     }
 
     angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration)
+        .controller("PatientPaymentListController", PatientPaymentListController) 
         .controller("HistoryController", HistoryController)
         .controller("ConsultationController", ConsultationController)
         .controller("RecommendationDetailsController", RecommendationDetailsController)

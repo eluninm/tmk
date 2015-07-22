@@ -548,6 +548,7 @@
     <Compile Include="Api\Dto\ConsultationMessageDto.cs" />
     <Compile Include="Api\Dto\DoctorAppointmentDto.cs" />
     <Compile Include="Api\Dto\DoctorListItemDto.cs" />
+    <Compile Include="Api\Dto\PaymentHistoryDto.cs" />
     <Compile Include="Api\Dto\RecommendationDto.cs" />
     <Compile Include="Api\Dto\SpecializationDto.cs" />
     <Compile Include="Api\PagedListExtensions.cs" />
@@ -661,6 +662,7 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\ConsultationController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorDetailsController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorListController.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\PatientPaymentListController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\PaymentDialogController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\SimpleModalControllers.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IAppointment.ts" />
@@ -669,6 +671,7 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctorAppointment.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctorListItem.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctorStatus.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IPaymentHistory.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\ISpecialization.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\AppointmentApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\BalanceApiService.ts" />
