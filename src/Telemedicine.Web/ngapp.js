@@ -52,7 +52,7 @@ var Telemedicine;
 })(Telemedicine || (Telemedicine = {}));
 ///<reference path="../common/ApiServiceBase.ts"/>
 ///<reference path="../common/UrlResolverService.ts"/>
-var __extends = (this && this.__extends) || function (d, b) {
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -503,17 +503,35 @@ var Telemedicine;
     })(Telemedicine.ItemModalViewModel);
     Telemedicine.PaymentDialogController = PaymentDialogController;
 })(Telemedicine || (Telemedicine = {}));
+///<reference path="../common/ApiServiceBase.ts"/>
+///<reference path="../common/UrlResolverService.ts"/>
+var Telemedicine;
+(function (Telemedicine) {
+    var BalanceApiService = (function () {
+        function BalanceApiService($http, urlResolverService) {
+            this.$http = $http;
+            this.urlResolverService = urlResolverService;
+            this.baseUrl = "/api/v1/balance";
+        }
+        BalanceApiService.prototype.debit = function (amount) {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/debit/" + amount);
+            return this.$http.post(url, null).then(function (result) { return result.data; });
+        };
+        return BalanceApiService;
+    })();
+    Telemedicine.BalanceApiService = BalanceApiService;
+})(Telemedicine || (Telemedicine = {}));
+///<reference path="../Services/BalanceApiService.ts"/>
 var Telemedicine;
 (function (Telemedicine) {
     var BalanceController = (function () {
         function BalanceController(balanceApiService) {
             this.balanceApiService = balanceApiService;
-            console.log("constructor()");
         }
         BalanceController.prototype.debit = function (amount) {
             console.log("debit()");
             this.balanceApiService.debit(amount).then(function (result) {
-                //this. = result;
+                console.log(result);
             });
         };
         BalanceController.$inject = ["balanceApiService", "$scope"];
@@ -569,24 +587,7 @@ var Telemedicine;
         // TODO: Capture all logged errors and send back to server
         $logProvider.debugEnabled(true);
     }
-    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration)
-        .controller("HistoryController", Telemedicine.HistoryController)
-        .controller("ConsultationController", Telemedicine.ConsultationController)
-        .controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController)
-        .controller("DoctorListController", Telemedicine.DoctorListController)
-        .controller("DoctorDetailsController", Telemedicine.DoctorDetailsController)
-        .controller("AppointmentDialogController", Telemedicine.AppointmentDialogController)
-        .controller("PaymentDialogController", Telemedicine.PaymentDialogController)
-        .controller("BalanceController", Telemedicine.BalanceController)
-        .controller("DoctorAppointmentsController", Telemedicine.DoctorAppointmentsController)
-        .service("recommendationService", Telemedicine.RecommendationApiService)
-        .service("urlResolverService", Telemedicine.UrlResolverService)
-        .service("patientApiService", Telemedicine.PatientApiService)
-        .service("consultationApiService", Telemedicine.ConsultationApiService)
-        .service("doctorApiService", Telemedicine.DoctorApiService)
-        .service("specializationApiService", Telemedicine.SpecializationApiService)
-        .service("appointmentApiService", Telemedicine.AppointmentApiService)
-        .service("balanceApiService", Telemedicine.BalanceApiService);
+    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration).controller("HistoryController", Telemedicine.HistoryController).controller("ConsultationController", Telemedicine.ConsultationController).controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController).controller("DoctorListController", Telemedicine.DoctorListController).controller("DoctorDetailsController", Telemedicine.DoctorDetailsController).controller("AppointmentDialogController", Telemedicine.AppointmentDialogController).controller("PaymentDialogController", Telemedicine.PaymentDialogController).controller("BalanceController", Telemedicine.BalanceController).controller("DoctorAppointmentsController", Telemedicine.DoctorAppointmentsController).service("recommendationService", Telemedicine.RecommendationApiService).service("urlResolverService", Telemedicine.UrlResolverService).service("patientApiService", Telemedicine.PatientApiService).service("consultationApiService", Telemedicine.ConsultationApiService).service("doctorApiService", Telemedicine.DoctorApiService).service("specializationApiService", Telemedicine.SpecializationApiService).service("appointmentApiService", Telemedicine.AppointmentApiService).service("balanceApiService", Telemedicine.BalanceApiService);
 })(Telemedicine || (Telemedicine = {}));
 var Telemedicine;
 (function (Telemedicine) {
@@ -604,23 +605,6 @@ var Telemedicine;
         AppointmentStatus[AppointmentStatus["Closed"] = 1] = "Closed";
     })(Telemedicine.AppointmentStatus || (Telemedicine.AppointmentStatus = {}));
     var AppointmentStatus = Telemedicine.AppointmentStatus;
-})(Telemedicine || (Telemedicine = {}));
-var Telemedicine;
-(function (Telemedicine) {
-    var BalanceApiService = (function () {
-        function BalanceApiService($http, urlResolverService) {
-            this.$http = $http;
-            this.urlResolverService = urlResolverService;
-            this.baseUrl = "/api/v1/balance";
-            this.debitValue = 0;
-        }
-        BalanceApiService.prototype.debit = function (amount) {
-            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/debit/" + amount);
-            return this.$http.get(url).then(function (result) { return result.data; });
-        };
-        return BalanceApiService;
-    })();
-    Telemedicine.BalanceApiService = BalanceApiService;
 })(Telemedicine || (Telemedicine = {}));
 ///// <reference path="SignalR.ts" />
 //module RtcChat {
