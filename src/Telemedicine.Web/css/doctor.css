@@ -580,6 +580,10 @@ body {
 .tm.icon.arrow-right.white {
   background-image: url('/img/arrow_right_white.svg');
 }
+.btn.btn-primary {
+  box-shadow: none;
+  background-image: none;
+}
 .grid .page-header {
   margin: 0px;
   padding-top: 20px;

@@ -27,6 +27,8 @@ namespace Telemedicine.Web.Api.Controllers
         {
             var doctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
             doctor.Balance -= amount;
+            if (doctor.Balance < 0)
+                doctor.Balance = 0;
             await _doctorService.UpdateAsync(doctor);
             return Ok();
         }

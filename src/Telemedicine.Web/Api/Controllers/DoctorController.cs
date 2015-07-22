@@ -76,5 +76,13 @@ namespace Telemedicine.Web.Api.Controllers
 
             return Ok(pagedList);
         }
+
+        [HttpGet]
+        [Route("{id}/appointments/{date}")]
+        public async Task<IHttpActionResult> Appointments(int id, DateTime date)
+        {
+            var doctorAppointments = await _appointmentService.GetDoctorAppointmentsByDateAsync(id, date);
+            return Ok(doctorAppointments);
+        }
     }
 }

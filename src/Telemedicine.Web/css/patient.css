@@ -583,6 +583,10 @@ body {
 .tm.icon.arrow-right.white {
   background-image: url('/img/arrow_right_white.svg');
 }
+.btn.btn-primary {
+  box-shadow: none;
+  background-image: none;
+}
 .chat-message {
   position: relative;
   min-height: 45px;
@@ -675,19 +679,63 @@ body {
   margin-right: 50px;
   display: flex;
   font-size: 12px;
+  padding-right: 2.5em;
 }
 .message-input-wrap .btn.btn-primary.rounded {
   height: 100%;
   padding: 0.5em 2em;
 }
-.message-input-wrap::after {
-  content: '';
+.message-input-wrap .btn.attachment {
   display: inline-block;
   height: 2.5em;
   width: 2.5em;
   background-position: center;
   background-image: url('/img/attached_chat.png');
   background-repeat: no-repeat;
+  background-color: transparent;
+  border-radius: 20px;
+  border-color: #e4e4e4;
+  border-style: solid;
+  border-width: 0;
+}
+.attachments-list {
+  display: flex;
+}
+.attachments-list-item {
+  display: flex;
+}
+.attachments-list-item .title {
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+}
+.attachments-list-item .info {
+  font-family: GothaProLight, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  color: #8c8c8c;
+}
+.attachments-list-item::before {
+  content: '';
+  display: inline-block;
+  height: 2.5em;
+  width: 2.5em;
+  position: relative;
+  background-position: center;
+  background-image: url('/img/icon_attached.svg');
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border-radius: 20px;
+  border-color: #e4e4e4;
+  border-style: solid;
+  border-width: 0;
+}
+.btn.attachment-remove {
+  display: inline-block;
+  height: 2.5em;
+  width: 2.5em;
+  background-position: center;
+  background-image: url('/img/del_attached.svg');
+  background-repeat: no-repeat;
+  background-color: transparent;
   border-radius: 20px;
   border-color: #e4e4e4;
   border-style: solid;
@@ -696,8 +744,8 @@ body {
 .chat-message-input {
   height: 2.5em;
   width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
+  margin-left: 1.5em;
+  margin-right: 15px;
   outline: none;
   font-size: 12px;
   border: none;
@@ -736,6 +784,45 @@ body {
   height: 119px;
   z-index: 1000;
   margin: 0 auto;
+}
+.attachments-file-list.list-group {
+  box-shadow: none;
+}
+.attachments-file-list.list-group .list-group-item {
+  border: none;
+  display: flex;
+  padding: 4px 30px;
+}
+.attachments-file-list.list-group .list-group-item .icon {
+  display: inline-block;
+  height: 48px;
+  width: 48px;
+  background-position: center;
+  background-size: 100% 100%;
+}
+.attachments-file-list.list-group .list-group-item .icon.doc {
+  background-image: url('/img/docx_attached.svg');
+}
+.attachments-file-list.list-group .list-group-item .text {
+  padding: 4px 8px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-basis: 50%;
+}
+.attachments-file-list.list-group .list-group-item .text .title {
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+}
+.attachments-file-list.list-group .list-group-item .text .info {
+  font-family: GothaProLight, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  font-size: 12px;
+  color: #8c8c8c;
+}
+.attachments-file-list.list-group .list-group-item:nth-child(odd) {
+  background-color: #fef6eb;
 }
 .recomendation-message-container .recomendation-message {
   padding: 20px;
