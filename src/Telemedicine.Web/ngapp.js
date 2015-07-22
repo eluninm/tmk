@@ -506,6 +506,38 @@ var Telemedicine;
     })();
     Telemedicine.ItemRouteParams = ItemRouteParams;
 })(Telemedicine || (Telemedicine = {}));
+var Telemedicine;
+(function (Telemedicine) {
+    var BalanceController = (function () {
+        function BalanceController(balanceApiService, $modalInstance, item) {
+            this.balanceApiService = balanceApiService;
+        }
+        BalanceController.prototype.debiting = function (amount) {
+            this.balanceApiService.debiting(amount).then(function (result) {
+                //this. = result;
+            });
+        };
+        return BalanceController;
+    })();
+    Telemedicine.BalanceController = BalanceController;
+})(Telemedicine || (Telemedicine = {}));
+var Telemedicine;
+(function (Telemedicine) {
+    var BalanceApiService = (function () {
+        function BalanceApiService($http, urlResolverService) {
+            this.$http = $http;
+            this.urlResolverService = urlResolverService;
+            this.baseUrl = "/api/v1/balance";
+            this.debitValue = 0;
+        }
+        BalanceApiService.prototype.debiting = function (amount) {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/debit/" + amount);
+            return this.$http.get(url).then(function (result) { return result.data; });
+        };
+        return BalanceApiService;
+    })();
+    Telemedicine.BalanceApiService = BalanceApiService;
+})(Telemedicine || (Telemedicine = {}));
 ///// <reference path="SignalR.ts" />
 //module RtcChat {
 //    export interface IVideoChat {
