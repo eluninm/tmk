@@ -4,8 +4,7 @@
 module Telemedicine {
     export interface IPatientApiService {
         patientRecommendations(patientId: string): ng.IPromise<Array<IRecommendation>>;
-        patientConsultations(patientId: string): ng.IPromise<Array<IConsultation>>;
-        patientPaymentHistory(): ng.IPromise<Array<IPaymentHistory>>;
+        patientConsultations(patientId: string): ng.IPromise<Array<IConsultation>>; 
         getPatientAppointments(patientId: number, page?: number, pageSize?: number): ng.IPromise<IPagedList<IPatientAppointment>>;
         patientPaymentHistory(page: number, pageSize: number): ng.IPromise<IPagedList<IPaymentHistory>>;
     }

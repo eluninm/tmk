@@ -52,7 +52,7 @@ var Telemedicine;
 })(Telemedicine || (Telemedicine = {}));
 ///<reference path="../common/ApiServiceBase.ts"/>
 ///<reference path="../common/UrlResolverService.ts"/>
-var __extends = (this && this.__extends) || function (d, b) {
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -746,9 +746,7 @@ var Telemedicine;
 ///<reference path="Controllers/PaymentDialogController.ts" />
 ///<reference path="Controllers/BalanceController.ts" />
 ///<reference path="Controllers/DoctorAppointmentController.ts" />
-///<reference path="Controllers/Patient/PatientAppointmentController.ts" />
-///<reference path="Controllers/PatientPaymentListController.ts" />
-///<reference path="Controllers/DoctorAppointmentsController.ts" />
+///<reference path="Controllers/Patient/PatientAppointmentController.ts" /> 
 ///<reference path="Controllers/DoctorPaymentController.ts" />
 ///<reference path="Controllers/PatientPaymentController.ts" />
 var Telemedicine;
@@ -758,26 +756,7 @@ var Telemedicine;
         // TODO: Capture all logged errors and send back to server
         $logProvider.debugEnabled(true);
     }
-    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration)
-        .controller("PatientPaymentListController", Telemedicine.PatientPaymentListController)
-        .controller("HistoryController", Telemedicine.HistoryController)
-        .controller("ConsultationController", Telemedicine.ConsultationController)
-        .controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController)
-        .controller("DoctorListController", Telemedicine.DoctorListController)
-        .controller("DoctorDetailsController", Telemedicine.DoctorDetailsController)
-        .controller("AppointmentDialogController", Telemedicine.AppointmentDialogController)
-        .controller("PaymentDialogController", Telemedicine.PaymentDialogController)
-        .controller("BalanceController", Telemedicine.BalanceController)
-        .controller("DoctorAppointmentController", Telemedicine.DoctorAppointmentController)
-        .controller("PatientAppointmentController", Telemedicine.PatientAppointmentController)
-        .service("recommendationService", Telemedicine.RecommendationApiService)
-        .service("urlResolverService", Telemedicine.UrlResolverService)
-        .service("patientApiService", Telemedicine.PatientApiService)
-        .service("consultationApiService", Telemedicine.ConsultationApiService)
-        .service("doctorApiService", Telemedicine.DoctorApiService)
-        .service("specializationApiService", Telemedicine.SpecializationApiService)
-        .service("appointmentApiService", Telemedicine.AppointmentApiService)
-        .service("balanceApiService", Telemedicine.BalanceApiService);
+    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration).controller("PatientPaymentController", Telemedicine.PatientPaymentController).controller("DoctorPaymentController", Telemedicine.DoctorPaymentController).controller("HistoryController", Telemedicine.HistoryController).controller("ConsultationController", Telemedicine.ConsultationController).controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController).controller("DoctorListController", Telemedicine.DoctorListController).controller("DoctorDetailsController", Telemedicine.DoctorDetailsController).controller("AppointmentDialogController", Telemedicine.AppointmentDialogController).controller("PaymentDialogController", Telemedicine.PaymentDialogController).controller("BalanceController", Telemedicine.BalanceController).controller("DoctorAppointmentController", Telemedicine.DoctorAppointmentController).controller("PatientAppointmentController", Telemedicine.PatientAppointmentController).service("recommendationService", Telemedicine.RecommendationApiService).service("urlResolverService", Telemedicine.UrlResolverService).service("patientApiService", Telemedicine.PatientApiService).service("consultationApiService", Telemedicine.ConsultationApiService).service("doctorApiService", Telemedicine.DoctorApiService).service("specializationApiService", Telemedicine.SpecializationApiService).service("appointmentApiService", Telemedicine.AppointmentApiService).service("balanceApiService", Telemedicine.BalanceApiService);
 })(Telemedicine || (Telemedicine = {}));
 var Telemedicine;
 (function (Telemedicine) {
