@@ -7,8 +7,9 @@
 ///<reference path="Controllers/PaymentDialogController.ts" />
 ///<reference path="Controllers/BalanceController.ts" />
 ///<reference path="Controllers/DoctorAppointmentController.ts" />
-///<reference path="Controllers/Patient/PatientAppointmentController.ts" />
-///<reference path="Controllers/PatientPaymentListController.ts" />
+///<reference path="Controllers/Patient/PatientAppointmentController.ts" /> 
+///<reference path="Controllers/DoctorPaymentController.ts" />
+///<reference path="Controllers/PatientPaymentController.ts" />
 
 module Telemedicine {
     function moduleConfiguration($logProvider: ng.ILogProvider) {
@@ -18,7 +19,8 @@ module Telemedicine {
     }
 
     angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration) 
-        .controller("PatientPaymentListController", PatientPaymentListController) 
+        .controller("PatientPaymentController", PatientPaymentController) 
+        .controller("DoctorPaymentController", DoctorPaymentController) 
         .controller("HistoryController", HistoryController)
         .controller("ConsultationController", ConsultationController)
         .controller("RecommendationDetailsController", RecommendationDetailsController)

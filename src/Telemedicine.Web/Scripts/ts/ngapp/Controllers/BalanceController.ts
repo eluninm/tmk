@@ -1,9 +1,10 @@
 ﻿///<reference path="../Services/BalanceApiService.ts"/>
+///<reference path="../Services/PatientApiService.ts"/>
 
 module Telemedicine {
     export class BalanceController{
-        static $inject = ["balanceApiService",  "$scope"];
-        constructor(private balanceApiService: BalanceApiService, private $scope: any) {
+        static $inject = ["patientApiService","balanceApiService",  "$scope"];
+        constructor(private patientApiService: PatientApiService, private balanceApiService: BalanceApiService, private $scope: any) {
             this.getBalance();
         }
 
@@ -18,9 +19,8 @@ module Telemedicine {
 
         public replenish(amount: number) { 
             this.balanceApiService.replenish(amount).then(result => {
-                this.debitValue = 0;
-                this.$scope.$emit('ReplenishSuccess', result);
-                this.getBalance();
+                this.debitValue = 0; 
+                this.getBalance(); 
             }); 
         }
 

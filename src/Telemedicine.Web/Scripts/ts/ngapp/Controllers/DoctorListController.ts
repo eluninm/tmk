@@ -77,7 +77,7 @@ module Telemedicine {
                         timeWindows: () => result
                     }
                 });
-
+                appointment.DoctorId = 666;
                 appointmentDialog.result.then((result) => {
                     if (result === "appointment") {
                         this.appointmentApiService.createItem(appointment);

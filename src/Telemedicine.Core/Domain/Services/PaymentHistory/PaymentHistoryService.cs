@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Telemedicine.Core.Domain.Repositories;
 using Telemedicine.Core.Domain.Uow;
 using Telemedicine.Core.Models;
+using Telemedicine.Core.PagedList;
 
 namespace Telemedicine.Core.Domain.Services
 {
@@ -44,6 +45,11 @@ namespace Telemedicine.Core.Domain.Services
         public IEnumerable<PaymentHistory> GetByPatientIdAsync(int id)
         {
             return _paymentHistoryRepository.GetByPatientIdAsync(id);
+        }
+
+        public async Task<IPagedList<PaymentHistory>> PagedAsync(string id, int page, int pageSize)
+        {
+            return await _paymentHistoryRepository.PagedAsync(id, page, pageSize);
         }
     }
 }

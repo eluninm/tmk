@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json;
 
 namespace Telemedicine.Web
 {
@@ -19,6 +20,16 @@ namespace Telemedicine.Web
                 name: "DefaultApi",
                 routeTemplate: "api/v1/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional });
+
+            var jsonFormatter = config.Formatters.JsonFormatter;
+            var jsonSettings = new Newtonsoft.Json.JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc
+            };
+
+            //jsonSettings.Converters.Add(new MyDateTimeConvertor());
+            //jsonFormatter.SerializerSettings = jSettings;
         }
     }
 }
