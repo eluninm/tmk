@@ -1,19 +1,18 @@
-﻿///<reference path="../Services/DoctorApiService.ts"/>
+﻿///<reference path="../../Services/PatientApiService.ts"/>
 
 module Telemedicine {
-    export class DoctorAppointmentsController {
-        static $inject = ["doctorApiService", "$modal", "$element"];
-        private doctorId: number;
+    export class PatientAppointmentController {
+        static $inject = ["patientApiService", "$modal", "$element"];
+        private patientId: number;
 
-        constructor(private doctorApiService: DoctorApiService,
+        constructor(private patientApiService: PatientApiService,
             private $modal: ng.ui.bootstrap.IModalService,
             private $element: ng.IAugmentedJQuery) {
-            this.doctorId = parseInt($element.attr("data-id"));
+            this.patientId = parseInt($element.attr("data-id"));
             this.loadPage();
         }
 
-        public appointments: Array<IDoctorAppointment>;
-        public patientTitleFilter: string;
+        public appointments: Array<IPatientAppointment>;
 
         public totalCount: number;
         public currentPage: number = 1;
@@ -21,7 +20,7 @@ module Telemedicine {
 
         public loadPage(pageToLoad?: number) {
             var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter).then(result => {
+            this.patientApiService.getPatientAppointments(this.patientId, page, this.pageSize).then(result => {
                 this.appointments = result.Data;
                 this.totalCount = result.TotalCount;
                 this.currentPage = result.Page;

@@ -40,6 +40,9 @@ namespace Telemedicine.Web.Api
                 .ForMember(d => d.PatientTitle, e => e.MapFrom(s => s.Patient.User.DisplayName))
                 .ForMember(d => d.PatientAvatarUrl, e => e.MapFrom(s => s.Patient.User.AvatarUrl));
 
+            Mapper.CreateMap<AppointmentEvent, PatientAppointmentDto>()
+                .ForMember(d => d.DoctorTitle, e => e.MapFrom(s => s.Doctor.User.DisplayName))
+                .ForMember(d => d.DoctorSpecialization, e => e.MapFrom(s => s.Doctor.Specialization.DisplayName));
 
             Mapper.CreateMap<PaymentHistory, PaymentHistoryDto>()
                 .ForMember(d => d.Date, e => e.MapFrom(s => s.Date))

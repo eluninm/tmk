@@ -19,5 +19,7 @@ namespace Telemedicine.Core.Domain.Services
         Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page = 1, int pageSize = 10, string patientTitleFilter = null);
 
         Task<IEnumerable<AppointmentEvent>> GetDoctorAppointmentsByDateAsync(int doctorId, DateTime date);
+
+        Task<IPagedList<AppointmentEvent>> GetPatientAppointmentsPagedAsync(int id, int page = 1, int pageSize = 10);
     }
 }

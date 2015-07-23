@@ -6,7 +6,8 @@
 ///<reference path="Controllers/AppointmentDialogController.ts" />
 ///<reference path="Controllers/PaymentDialogController.ts" />
 ///<reference path="Controllers/BalanceController.ts" />
-///<reference path="Controllers/DoctorAppointmentsController.ts" />
+///<reference path="Controllers/DoctorAppointmentController.ts" />
+///<reference path="Controllers/Patient/PatientAppointmentController.ts" />
 ///<reference path="Controllers/PatientPaymentListController.ts" />
 
 module Telemedicine {
@@ -26,7 +27,8 @@ module Telemedicine {
         .controller("AppointmentDialogController", AppointmentDialogController)
         .controller("PaymentDialogController", PaymentDialogController)
         .controller("BalanceController", BalanceController)
-        .controller("DoctorAppointmentsController", DoctorAppointmentsController)
+        .controller("DoctorAppointmentController", DoctorAppointmentController)
+        .controller("PatientAppointmentController", PatientAppointmentController)
         .service("recommendationService", RecommendationApiService)
         .service("urlResolverService", UrlResolverService)
         .service("patientApiService", PatientApiService)

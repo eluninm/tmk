@@ -15,12 +15,20 @@ namespace Telemedicine.Web.Api.Controllers
         private readonly IConversationService _conversationService;
         private readonly IPatientService _patientService;
         private readonly IPaymentHistoryService _paymentHistoryService;
-        public PatientController(IRecommendationService recommendationService, IConversationService conversationService, IPatientService patientService, IPaymentHistoryService paymentHistoryService)
+        private readonly IAppointmentEventService _appointmentService;
+
+        public PatientController(
+            IRecommendationService recommendationService, 
+            IConversationService conversationService, 
+            IPatientService patientService, 
+            IPaymentHistoryService paymentHistoryService,
+            IAppointmentEventService appointmentService)
         {
             _recommendationService = recommendationService;
             _conversationService = conversationService;
             _patientService = patientService;
             _paymentHistoryService = paymentHistoryService;
+            _appointmentService = appointmentService;
         }
 
         [HttpGet]
@@ -58,6 +66,20 @@ namespace Telemedicine.Web.Api.Controllers
 
             var conversations = await _conversationService.GetUserConversations(patient.UserId);
             return Ok(conversations.Select(Mapper.Map<ConsultationDto>));
+        }
+
+        [HttpGet]
+        [Route("{id}/appointments")]
+        public async Task<IHttpActionResult> Appointments(int id, int page = 1, int pageSize = 10)
+        {
+            var patientAppointments = await _appointmentService.GetPatientAppointmentsPagedAsync(id, page, pageSize);
+            var pagedList = patientAppointments.Map(t =>
+            {
+                var patientAppointmentDto = Mapper.Map<PatientAppointmentDto>(t);
+                return patientAppointmentDto;
+            });
+
+            return Ok(pagedList);
         }
     }
 }
