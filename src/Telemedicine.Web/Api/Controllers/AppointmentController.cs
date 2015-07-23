@@ -27,15 +27,16 @@ namespace Telemedicine.Web.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IHttpActionResult> AddAppointment(int doctorId, DateTime appointmentDate)
+        public async Task<IHttpActionResult> AddAppointment(AppointmentDto dto)
         {
+            var currentPatient = await _patientService.GetByUserIdAsync(User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
                 AppointmentEvent appointmentEvent = new AppointmentEvent()
                 {
-                    Date = appointmentDate,
-                    Doctor = await _doctorService.GetByIdAsync(doctorId),
-                    Patient = await _patientService.GetByUserIdAsync(User.Identity.GetUserId()),
+                    Date = dto.AppointmentDate,
+                    Doctor = await _doctorService.GetByIdAsync(dto.DoctorId),
+                    Patient = currentPatient,
                     Created = DateTime.Now
                 };
                 await _appointmentEventService.CreateAsync(appointmentEvent);
