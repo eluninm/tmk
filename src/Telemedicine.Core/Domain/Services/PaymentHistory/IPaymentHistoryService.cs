@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Telemedicine.Core.Models;
+using Telemedicine.Core.PagedList;
 
 namespace Telemedicine.Core.Domain.Services
 {
@@ -15,5 +16,7 @@ namespace Telemedicine.Core.Domain.Services
         Task<PaymentHistory> UpdateAsync(PaymentHistory paymentHistory);
 
         IEnumerable<PaymentHistory> GetByPatientIdAsync(int id);
+
+        Task<IPagedList<PaymentHistory>> PagedAsync(string id, int page, int pageSize);
     }
 }

@@ -4,17 +4,20 @@
 module Telemedicine {
     export interface IPatientApiService {
         patientRecommendations(patientId: string): ng.IPromise<Array<IRecommendation>>;
-        patientConsultations(patientId: string): ng.IPromise<Array<IConsultation>>;
-        patientPaymentHistory(): ng.IPromise<Array<IPaymentHistory>>;
+        patientConsultations(patientId: string): ng.IPromise<Array<IConsultation>>; 
         getPatientAppointments(patientId: number, page?: number, pageSize?: number): ng.IPromise<IPagedList<IPatientAppointment>>;
+        patientPaymentHistory(page: number, pageSize: number): ng.IPromise<IPagedList<IPaymentHistory>>;
     }
 
     export class PatientApiService implements IPatientApiService {
         private baseUrl = "/api/v1/patient";
 
         constructor(private $http: ng.IHttpService,
-                    private urlResolverService: UrlResolverService) {
+            private urlResolverService: UrlResolverService,
+            private $rootScope: ng.IRootScopeService) {
         }
+
+        public paymentsHistory: Array<IPaymentHistory>;
 
         public patientRecommendations(patientId: string): ng.IPromise<IRecommendation[]> {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + patientId + "/recommendations");
@@ -26,9 +29,27 @@ module Telemedicine {
             return this.$http.get(url).then(result => result.data);
         }
 
+        public patientPaymentHistory(page: number, pageSize: number): ng.IPromise<IPagedList<IPaymentHistory>> {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/paymentPage/");
 
-        public patientPaymentHistory(): ng.IPromise<Array<IPaymentHistory>> {
-            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/PaymentsHistory");
+            var query: any = {}, querySeparator = "?";
+
+            if (page) {
+                query.page = page;
+            }
+            if (pageSize) {
+                query.pageSize = pageSize;
+            }
+
+            for (var key in query) {
+                if (query.hasOwnProperty(key)) {
+                    url += querySeparator + key + "=" + encodeURIComponent(query[key]);
+                    if (querySeparator === "?") {
+                        querySeparator = "&";
+                    }
+                }
+            }
+
             return this.$http.get(url).then(result => result.data);
         }
 
