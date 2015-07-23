@@ -181,11 +181,12 @@
   font-size: 1.5em;
   color: transparent;
   line-height: 25px;
-  background-image: url('/img/Logo.png');
-  width: 172px;
-  height: 73px;
+  background-image: url('/img/vraci_white.svg');
+  width: 70px;
+  height: 130px;
   background-repeat: no-repeat;
   padding: 0;
+  left: 70px;
 }
 /* --- END Sidebar --- */
 
@@ -521,6 +522,11 @@ body {
 .modal-content .modal-body input[type='text'] {
   color: black;
 }
+.modal-content .modal-body textarea {
+  border-radius: 21px;
+  padding: 6px 21px;
+  color: black;
+}
 .modal-content .modal-footer {
   border: none;
   background-color: #f7f7f7;
@@ -586,6 +592,8 @@ body {
 .btn.btn-primary {
   box-shadow: none;
   background-image: none;
+  border: none;
+  background-color: #3e67ae;
 }
 .chat-message {
   position: relative;
@@ -1371,6 +1379,43 @@ body {
 .fc-toolbar .fc-left h2 {
   margin-top: 10px;
   font-size: 21px;
+}
+th.fc-day-header {
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  padding: 8px 0;
+}
+th.fc-day-header i1,
+th.fc-day-header i2,
+th.fc-day-header i3 {
+  display: block;
+  line-height: 0.9em;
+}
+th.fc-day-header i2 {
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 22px;
+}
+.fc-slats table {
+  table-layout: fixed;
+}
+.fc-slats tr {
+  height: 50px;
+}
+.fc-axis.fc-time {
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  text-align: right;
+  font-size: 16px;
+}
+.fc-axis.fc-time span {
+  margin-right: 8px;
+}
+.fc-axis {
+  width: 100px !important;
+}
+#calendar {
+  font-size: 16px;
 }
 .addTimeSpanEventDialog .modal-body .row3 {
   margin-top: 24px;

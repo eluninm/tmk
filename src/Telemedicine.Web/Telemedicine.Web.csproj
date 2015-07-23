@@ -328,6 +328,7 @@
     </Content>
     <Content Include="Scripts\angular-ui-bootstrap.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\fullcalendar.js" />
     <Content Include="Scripts\owl.carousel.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Views\Shared\Calendar.cshtml" />

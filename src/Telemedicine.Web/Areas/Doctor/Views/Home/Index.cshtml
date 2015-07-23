@@ -98,7 +98,35 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="CreateEvent" role="dialog" aria-labelledby="CreateEventLabel">
+    <div class="modal-dialog  modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="CreateEventLabel">Добавить прием</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    Начальная дата
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                    <input class="datepicker" id="EventStart"/>
+                </div>
+                <div>
+                    Конечная дата
+                    <button></button>
+                    <input id="EventDuration"/>
+                    <button></button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary rounded" data-dismiss="modal" data-toggle="modal" data-target="#devDialog">Добавить</button>
+                <button type="button" class="btn btn-default rounded" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="addEventDialog">
     <div class="modal-dialog addTimeSpanEventDialog">
@@ -128,7 +156,7 @@
                 if ($.inArray($("#selectedMonth").text(), months) == -1)
                     $("#selectedMonth").text(months[(new Date()).getMonth()]);
             });
-
+            $('#EventStart').datetimepicker();
             $.getJSON('@Url.Action("GetEvents", "Events")', "json", function (data) {
                 $('#calendar').fullCalendar({
                     header: {
@@ -136,13 +164,40 @@
                         center: '',
                         right: ''
                     },
-                    columnFormat:'dd D',
+                    views: {
+                        week: {
+                            smallTimeFormat:'hh:mm',
+                        }
+                    },
+                    timeFormat:'hh:mm',
+                    columnFormat: '<i1>dd</i1><i2>DD</i2><i3>MMMM</i3>',
                     lang: 'ru',
                     events: data,
                     defaultView: "agendaWeek",
                     minTime: '07:00',
                     maxTime: '21:00',
                     height: 400,
+                    allDaySlot: false,
+                    axisWidth: '100px',
+                    selectable: true,
+                    selectHelper: true,
+                    eventLimit:true,
+                    select: function (start, end) {
+                        $('#CreateEvent').modal('toggle');
+                        $('#EventStart').data('DateTimePicker').date(start);
+                        $('#EventDuration').val((end - start)/60000);
+                        /*  var title = prompt('Наименование события:');
+                        var eventData;
+                        if (title) {
+                            eventData = {
+                                title: title,
+                                start: start,
+                                end: end
+                            };
+                            $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                        }
+                        $('#calendar').fullCalendar('unselect');*/
+                    },
                     //eventColor: '#3e67ae'
                 });
             });
