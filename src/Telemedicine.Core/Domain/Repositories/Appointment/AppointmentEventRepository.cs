@@ -27,7 +27,8 @@ namespace Telemedicine.Core.Domain.Repositories
         {
             var query = Set
                 .Include(t => t.Patient)
-                .Include(t => t.Patient.User);
+                .Include(t => t.Patient.User)
+                .Where(t => t.DoctorId == doctorId);
 
             if (!string.IsNullOrWhiteSpace(patientTitleFilter))
             {
@@ -61,6 +62,16 @@ namespace Telemedicine.Core.Domain.Repositories
                 .Where(a => a.Date >= begin && a.Date < end)
                 .ToListAsync();
             return appointments;
+        }
+
+        public async Task<IPagedList<AppointmentEvent>> GetPatientAppointmentsPagedAsync(int patientId, int page, int pageSize)
+        {
+            var query = Set
+                .Include(t => t.Doctor)
+                .Include(t => t.Doctor.User)
+                .Where(t => t.PatientId == patientId);
+
+            return await query.OrderBy(t => t.Id).ToPagedListAsync(page, pageSize);
         }
     }
 }
