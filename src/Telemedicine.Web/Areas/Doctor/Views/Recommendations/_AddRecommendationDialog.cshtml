@@ -3,22 +3,15 @@
 @using (Ajax.BeginForm("AddRecommendation", "Recommendations", null, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "onaddRecommendationSuccess" }))
 {
     <div class="modal-header">
-        <h3>Добавить рекомендацию</h3>
-    </div> <div class="modal-body">
-
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title">Добавление рекомендации</h3>
+    </div> <div class="modal-body" style="padding: 0; margin-bottom: 60px;">
          @Html.HiddenFor(m=>m.PatientUserId)
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.RecommendationText, new { htmlAttributes = new { @class = "control-label", @for = "recommendationText" } })
-            <div>
-                @Html.TextAreaFor(m => m.RecommendationText, new {  @class = "form-control", rows = 5, style = "resize:none;", @id = "recommendationText"  })
-            </div>
-        </div> 
-
+         @Html.TextAreaFor(m => m.RecommendationText, new {  @class = "form-control", rows = 10, style = "resize:none;", @id = "recommendationText", placeholder = "Введите текст"  })
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-success">Добавить</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        <button type="submit" class="btn btn-primary rounded">добавить</button>
+        <button type="button" class="btn btn-round-rd" data-dismiss="modal">отмена</button>
     </div>
 }
 
