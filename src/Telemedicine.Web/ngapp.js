@@ -433,7 +433,6 @@ var Telemedicine;
                         timeWindows: function () { return result; }
                     }
                 });
-                appointment.DoctorId = 666;
                 appointmentDialog.result.then(function (result) {
                     if (result === "appointment") {
                         _this.appointmentApiService.createItem(appointment);
