@@ -9,6 +9,7 @@ namespace Telemedicine.Core.Models.Enums
     public enum AppointmentStatus
     {
         Declined,
-        Closed
+        Closed,
+        Ready
     }
 }

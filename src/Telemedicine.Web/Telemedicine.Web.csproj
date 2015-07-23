@@ -430,7 +430,6 @@
     <Content Include="Areas\Doctor\Views\Home\Balance.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\Index2.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\_AddTimeSpanEventDialog.cshtml" />
-    <Content Include="Areas\Patient\Views\Doctor\Index_Old.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
     <Content Include="Content\patient.less" />
@@ -549,6 +548,7 @@
     <Compile Include="Api\Dto\ConsultationMessageDto.cs" />
     <Compile Include="Api\Dto\DoctorAppointmentDto.cs" />
     <Compile Include="Api\Dto\DoctorListItemDto.cs" />
+    <Compile Include="Api\Dto\PatientAppointmentDto.cs" />
     <Compile Include="Api\Dto\PaymentHistoryDto.cs" />
     <Compile Include="Api\Dto\RecommendationDto.cs" />
     <Compile Include="Api\Dto\SpecializationDto.cs" />
@@ -661,7 +661,8 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\AppointmentDialogController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\BalanceController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\ConsultationController.ts" />
-    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorAppointmentsController.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\Patient\PatientAppointmentController.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorAppointmentController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorDetailsController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorListController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\PatientPaymentController.ts" />
@@ -673,6 +674,7 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctorAppointment.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctorListItem.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IDoctorStatus.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IPatientAppointment.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IPaymentHistory.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\ISpecialization.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\AppointmentApiService.ts" />
@@ -699,8 +701,8 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptOutFile>C:\Repository\Axbit\TMK\src\Telemedicine.Web\ngapp.js</TypeScriptOutFile>
-    <TypeScriptOutDir>C:\Repository\Axbit\TMK\src\Telemedicine.Web\Scripts</TypeScriptOutDir>
+    <TypeScriptOutFile>ngapp.js</TypeScriptOutFile>
+    <TypeScriptOutDir>C:\Users\vyacheslav\Source\Repos\tmk\src\Telemedicine.Web\Scripts</TypeScriptOutDir>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>

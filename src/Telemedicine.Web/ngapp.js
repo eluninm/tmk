@@ -52,7 +52,7 @@ var Telemedicine;
 })(Telemedicine || (Telemedicine = {}));
 ///<reference path="../common/ApiServiceBase.ts"/>
 ///<reference path="../common/UrlResolverService.ts"/>
-var __extends = this.__extends || function (d, b) {
+var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -91,6 +91,25 @@ var Telemedicine;
         };
         PatientApiService.prototype.patientPaymentHistory = function (page, pageSize) {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/paymentPage/");
+            var query = {}, querySeparator = "?";
+            if (page) {
+                query.page = page;
+            }
+            if (pageSize) {
+                query.pageSize = pageSize;
+            }
+            for (var key in query) {
+                if (query.hasOwnProperty(key)) {
+                    url += querySeparator + key + "=" + encodeURIComponent(query[key]);
+                    if (querySeparator === "?") {
+                        querySeparator = "&";
+                    }
+                }
+            }
+            return this.$http.get(url).then(function (result) { return result.data; });
+        };
+        PatientApiService.prototype.getPatientAppointments = function (patientId, page, pageSize) {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + patientId + "/appointments");
             var query = {}, querySeparator = "?";
             if (page) {
                 query.page = page;
@@ -587,8 +606,8 @@ var Telemedicine;
 ///<reference path="../Services/DoctorApiService.ts"/>
 var Telemedicine;
 (function (Telemedicine) {
-    var DoctorAppointmentsController = (function () {
-        function DoctorAppointmentsController(doctorApiService, $modal, $element) {
+    var DoctorAppointmentController = (function () {
+        function DoctorAppointmentController(doctorApiService, $modal, $element) {
             this.doctorApiService = doctorApiService;
             this.$modal = $modal;
             this.$element = $element;
@@ -597,7 +616,7 @@ var Telemedicine;
             this.doctorId = parseInt($element.attr("data-id"));
             this.loadPage();
         }
-        DoctorAppointmentsController.prototype.loadPage = function (pageToLoad) {
+        DoctorAppointmentController.prototype.loadPage = function (pageToLoad) {
             var _this = this;
             var page = pageToLoad || this.currentPage;
             this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter).then(function (result) {
@@ -607,14 +626,46 @@ var Telemedicine;
                 _this.pageSize = result.PageSize;
             });
         };
-        DoctorAppointmentsController.prototype.changePageSize = function (size) {
+        DoctorAppointmentController.prototype.changePageSize = function (size) {
             this.pageSize = size;
             this.loadPage();
         };
-        DoctorAppointmentsController.$inject = ["doctorApiService", "$modal", "$element"];
-        return DoctorAppointmentsController;
+        DoctorAppointmentController.$inject = ["doctorApiService", "$modal", "$element"];
+        return DoctorAppointmentController;
     })();
-    Telemedicine.DoctorAppointmentsController = DoctorAppointmentsController;
+    Telemedicine.DoctorAppointmentController = DoctorAppointmentController;
+})(Telemedicine || (Telemedicine = {}));
+///<reference path="../../Services/PatientApiService.ts"/>
+var Telemedicine;
+(function (Telemedicine) {
+    var PatientAppointmentController = (function () {
+        function PatientAppointmentController(patientApiService, $modal, $element) {
+            this.patientApiService = patientApiService;
+            this.$modal = $modal;
+            this.$element = $element;
+            this.currentPage = 1;
+            this.pageSize = 1;
+            this.patientId = parseInt($element.attr("data-id"));
+            this.loadPage();
+        }
+        PatientAppointmentController.prototype.loadPage = function (pageToLoad) {
+            var _this = this;
+            var page = pageToLoad || this.currentPage;
+            this.patientApiService.getPatientAppointments(this.patientId, page, this.pageSize).then(function (result) {
+                _this.appointments = result.Data;
+                _this.totalCount = result.TotalCount;
+                _this.currentPage = result.Page;
+                _this.pageSize = result.PageSize;
+            });
+        };
+        PatientAppointmentController.prototype.changePageSize = function (size) {
+            this.pageSize = size;
+            this.loadPage();
+        };
+        PatientAppointmentController.$inject = ["patientApiService", "$modal", "$element"];
+        return PatientAppointmentController;
+    })();
+    Telemedicine.PatientAppointmentController = PatientAppointmentController;
 })(Telemedicine || (Telemedicine = {}));
 ///<reference path="../Services/PatientApiService.ts"/>
 var Telemedicine;
@@ -694,6 +745,9 @@ var Telemedicine;
 ///<reference path="Controllers/AppointmentDialogController.ts" />
 ///<reference path="Controllers/PaymentDialogController.ts" />
 ///<reference path="Controllers/BalanceController.ts" />
+///<reference path="Controllers/DoctorAppointmentController.ts" />
+///<reference path="Controllers/Patient/PatientAppointmentController.ts" />
+///<reference path="Controllers/PatientPaymentListController.ts" />
 ///<reference path="Controllers/DoctorAppointmentsController.ts" />
 ///<reference path="Controllers/DoctorPaymentController.ts" />
 ///<reference path="Controllers/PatientPaymentController.ts" />
@@ -704,7 +758,26 @@ var Telemedicine;
         // TODO: Capture all logged errors and send back to server
         $logProvider.debugEnabled(true);
     }
-    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration).controller("PatientPaymentController", Telemedicine.PatientPaymentController).controller("DoctorPaymentController", Telemedicine.DoctorPaymentController).controller("HistoryController", Telemedicine.HistoryController).controller("ConsultationController", Telemedicine.ConsultationController).controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController).controller("DoctorListController", Telemedicine.DoctorListController).controller("DoctorDetailsController", Telemedicine.DoctorDetailsController).controller("AppointmentDialogController", Telemedicine.AppointmentDialogController).controller("PaymentDialogController", Telemedicine.PaymentDialogController).controller("BalanceController", Telemedicine.BalanceController).controller("DoctorAppointmentsController", Telemedicine.DoctorAppointmentsController).service("recommendationService", Telemedicine.RecommendationApiService).service("urlResolverService", Telemedicine.UrlResolverService).service("patientApiService", Telemedicine.PatientApiService).service("consultationApiService", Telemedicine.ConsultationApiService).service("doctorApiService", Telemedicine.DoctorApiService).service("specializationApiService", Telemedicine.SpecializationApiService).service("appointmentApiService", Telemedicine.AppointmentApiService).service("balanceApiService", Telemedicine.BalanceApiService);
+    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration)
+        .controller("PatientPaymentListController", Telemedicine.PatientPaymentListController)
+        .controller("HistoryController", Telemedicine.HistoryController)
+        .controller("ConsultationController", Telemedicine.ConsultationController)
+        .controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController)
+        .controller("DoctorListController", Telemedicine.DoctorListController)
+        .controller("DoctorDetailsController", Telemedicine.DoctorDetailsController)
+        .controller("AppointmentDialogController", Telemedicine.AppointmentDialogController)
+        .controller("PaymentDialogController", Telemedicine.PaymentDialogController)
+        .controller("BalanceController", Telemedicine.BalanceController)
+        .controller("DoctorAppointmentController", Telemedicine.DoctorAppointmentController)
+        .controller("PatientAppointmentController", Telemedicine.PatientAppointmentController)
+        .service("recommendationService", Telemedicine.RecommendationApiService)
+        .service("urlResolverService", Telemedicine.UrlResolverService)
+        .service("patientApiService", Telemedicine.PatientApiService)
+        .service("consultationApiService", Telemedicine.ConsultationApiService)
+        .service("doctorApiService", Telemedicine.DoctorApiService)
+        .service("specializationApiService", Telemedicine.SpecializationApiService)
+        .service("appointmentApiService", Telemedicine.AppointmentApiService)
+        .service("balanceApiService", Telemedicine.BalanceApiService);
 })(Telemedicine || (Telemedicine = {}));
 var Telemedicine;
 (function (Telemedicine) {
@@ -720,6 +793,7 @@ var Telemedicine;
     (function (AppointmentStatus) {
         AppointmentStatus[AppointmentStatus["Declined"] = 0] = "Declined";
         AppointmentStatus[AppointmentStatus["Closed"] = 1] = "Closed";
+        AppointmentStatus[AppointmentStatus["Ready"] = 2] = "Ready";
     })(Telemedicine.AppointmentStatus || (Telemedicine.AppointmentStatus = {}));
     var AppointmentStatus = Telemedicine.AppointmentStatus;
 })(Telemedicine || (Telemedicine = {}));
