@@ -2,18 +2,22 @@
 
 module Telemedicine {
     export class PatientPaymentController {
-        static $inject = ["patientApiService", "balanceApiService", "$scope"];
-
+        static $inject = ["patientApiService", "balanceApiService", "$element"];
+        private patientId: number;
         constructor(private patientApiService: PatientApiService,
             private balanceApiService: BalanceApiService,
-            private math: Math,
-            private $scope: any) {
-            this.loadPage(1);
-            this.getBalance();
+            private $element: ng.IAugmentedJQuery) {
+
+            this.patientId = parseInt($element.data("id"));
+
+            this.loadPage();
+            this.loadBalance();
         }
 
-        public paymentsHistory: Array<IPaymentHistory>;
+        public payments: Array<IPaymentHistory>;
+
         public paymentValue: number;
+
         public balance: number;
         public totalCount: number;
         public currentPage: number;
@@ -21,50 +25,29 @@ module Telemedicine {
 
         public loadPage(pageToLoad?: number) {
             var page = pageToLoad || this.currentPage; 
-            this.patientApiService.patientPaymentHistory(page, this.pageSize).then(result => {
-                this.paymentsHistory = result.Data;
+            this.patientApiService.getPaymentHistory(this.patientId, page, this.pageSize).then(result => {
+                this.payments = result.Data;
                 this.totalCount = result.TotalCount;
                 this.currentPage = result.Page;
                 this.pageSize = result.PageSize;
             });
         }
 
-        public replenish(amount: number) {
-            this.balanceApiService.replenish(amount).then(result => {
-                this.getBalance();
-            });
+        public replenish() {
+            if (this.paymentValue && this.paymentValue > 0) {
+                this.balanceApiService.replenish(this.paymentValue).then(result => {
+                    this.loadBalance();
+                    this.loadPage();
+                    this.paymentValue = null;
+                });
+            }
         }
 
-        public getBalance() {
+        public loadBalance() {
             this.balanceApiService.balance().then(result => {
                 this.balance = result;
             });
         }
-
-
-        public getPreviousPage(): number {
-           /* var totalPages = this.totalCount / this.pageSize;
-            var roundedTotalPages = this.math.round(totalPages);
-            if ((totalPages - roundedTotalPages) != 0.0) {
-                
-            }*/
-            return this.currentPage - 1;
-        }
-
-        public getNextPage(): number {
-            return this.currentPage - 1;
-        }
-
-
-        public previousPage() {
-            this.loadPage(this.currentPage - 1);
-        }
-
-        public nextPage() {
-            this.loadPage(this.currentPage + 1);
-            console.log("nextPage");
-        }
-         
     }
 }
  

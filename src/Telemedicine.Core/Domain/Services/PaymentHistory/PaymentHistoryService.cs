@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Telemedicine.Core.Domain.Repositories;
 using Telemedicine.Core.Domain.Uow;
 using Telemedicine.Core.Models;
+using Telemedicine.Core.Models.Enums;
 using Telemedicine.Core.PagedList;
 
 namespace Telemedicine.Core.Domain.Services

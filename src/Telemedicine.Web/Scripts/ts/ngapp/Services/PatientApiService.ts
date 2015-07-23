@@ -6,7 +6,7 @@ module Telemedicine {
         patientRecommendations(patientId: string): ng.IPromise<Array<IRecommendation>>;
         patientConsultations(patientId: string): ng.IPromise<Array<IConsultation>>; 
         getPatientAppointments(patientId: number, page?: number, pageSize?: number): ng.IPromise<IPagedList<IPatientAppointment>>;
-        patientPaymentHistory(page: number, pageSize: number): ng.IPromise<IPagedList<IPaymentHistory>>;
+        getPaymentHistory(patientId:number, page: number, pageSize: number): ng.IPromise<IPagedList<IPaymentHistory>>;
     }
 
     export class PatientApiService implements IPatientApiService {
@@ -29,8 +29,8 @@ module Telemedicine {
             return this.$http.get(url).then(result => result.data);
         }
 
-        public patientPaymentHistory(page: number, pageSize: number): ng.IPromise<IPagedList<IPaymentHistory>> {
-            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/paymentPage/");
+        public getPaymentHistory(patientId: number, page: number, pageSize: number): ng.IPromise<IPagedList<IPaymentHistory>> {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + patientId + "/paymentHistory");
 
             var query: any = {}, querySeparator = "?";
 

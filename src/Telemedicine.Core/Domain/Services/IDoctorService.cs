@@ -36,5 +36,7 @@ namespace Telemedicine.Core.Domain.Services
         IEnumerable<DoctorStatus> GetAvailableStatuses();
 
         Doctor GetById(int id);
+
+        Task Debit(int doctorId, double amount);
     }
 }

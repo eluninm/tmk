@@ -33,45 +33,12 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
         }
 
         public async Task<ActionResult> Index()
-        {  
-            IEnumerable<Tariff> tariffs = await _tariffService.GetAllAsync();
-            IEnumerable<PaymentMethod> methods = await _paymentMethodService.GetAllAsync();
-            PaymentSettingsViewModel viewModel = new PaymentSettingsViewModel();
-
-            var patient = await _patientService.GetByUserIdAsync(User.Identity.GetUserId());
-            var paymant = await _paymentService.GetByPatientIdAsync(patient?.Id ?? -1);
-
-            if (paymant != null)
-            {
-                viewModel.SelectedMethodId = paymant?.PaymentMethod?.Id ?? -1;
-                viewModel.SelectedTariffId = paymant?.Tariff?.Id ?? -1;
-                viewModel.AutoPayment = paymant?.AutoPayment ?? false;
-            }
-
-            viewModel.PaymentMethodListItems = from method in methods
-                select
-                    new SelectListItem()
-                    {
-                        Text = method.Name,
-                        Value = method.Id.ToString(),
-                        Selected = (viewModel.SelectedMethodId == method.Id)
-                    };
-            viewModel.TariffListItems = from tariff in tariffs
-                select
-                    new SelectListItem
-                    {
-                        Text = tariff.Name,
-                        Value = tariff.Id.ToString(),
-                        Selected = (viewModel.SelectedTariffId == tariff.Id)
-                    };
-            viewModel.PaymentHistoryViewModel = await GetPaymentHistory();
-            return View("Index2", viewModel);
-        }
-
-        public ActionResult Index2()
         {
-            return View();
+            var patient = await _patientService.GetByUserIdAsync(User.Identity.GetUserId());
+            ViewBag.PatientId = patient.Id;
+            return View("Index2");
         }
+
 
         [HttpPost]
         public async Task<ActionResult> Index(PaymentSettingsViewModel viewModel)

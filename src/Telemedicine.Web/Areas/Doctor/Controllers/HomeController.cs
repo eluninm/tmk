@@ -101,7 +101,9 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
         }
 
         public async Task<ActionResult> Balance()
-        { 
+        {
+            var doctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
+            ViewBag.DoctorId = doctor.Id;
             return View();
         }
     }

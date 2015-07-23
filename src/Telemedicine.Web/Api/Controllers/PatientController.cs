@@ -72,27 +72,25 @@ namespace Telemedicine.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("paymentPage/")]
-        public async Task<IHttpActionResult> PaymentPage(int page = 1, int pageSize = 30)
+        [Route("{patientId}/paymentHistory")]
+        public async Task<IHttpActionResult> PaymentPage(int patientId, int page = 1, int pageSize = 10)
         {
-            try
-            {
-                IPagedList<PaymentHistory> payments =
-                    await _paymentHistoryService.PagedAsync(User.Identity.GetUserId(), page, pageSize);
+            var patient = await _patientService.GetByIdAsync(patientId);
 
-
-                var pagedList = payments.Map(t =>
-                {
-                    var doctorDto = Mapper.Map<PaymentHistoryDto>(t);
-                    return doctorDto;
-                });
-
-                return Ok(pagedList);
-            }
-            catch (Exception exp)
+            if (patient == null)
             {
                 return NotFound();
             }
+
+
+            var payments = await _paymentHistoryService.PagedAsync(User.Identity.GetUserId(), page, pageSize);
+            var pagedList = payments.Map(t =>
+            {
+                var doctorDto = Mapper.Map<PaymentHistoryDto>(t);
+                return doctorDto;
+            });
+
+            return Ok(pagedList);
         }
 
         [HttpGet]
