@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json;
+using Telemedicine.Web.Api.Formatters;
 
 namespace Telemedicine.Web
 {
@@ -28,8 +29,8 @@ namespace Telemedicine.Web
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc
             };
 
-            //jsonSettings.Converters.Add(new MyDateTimeConvertor());
-            //jsonFormatter.SerializerSettings = jSettings;
+            jsonSettings.Converters.Add(new Datetimepicker3DateTimeConvertor());
+            jsonFormatter.SerializerSettings = jsonSettings;
         }
     }
 }
