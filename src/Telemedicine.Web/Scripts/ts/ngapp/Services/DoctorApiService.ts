@@ -6,6 +6,7 @@ module Telemedicine {
         getDoctorList(page?: number, pageSize?: number, title?: string, specializationId?: number): ng.IPromise<IPagedList<IDoctor>>;
         getDoctorDetails(doctorId: number): ng.IPromise<string>;
         getDoctorAppointments(doctorId: number, page?: number, pageSize?: number, patientTitleFilter?: string): ng.IPromise<IPagedList<IDoctorAppointment>>;
+        getDoctorTimeWindows(doctorId: number): ng.IPromise<IDoctorTimeWindows>;
     }
 
     export class DoctorApiService implements IDoctorApiService {
@@ -73,6 +74,11 @@ module Telemedicine {
             }
 
             return this.$http.get(url).then(result => result.data);
+        }
+
+        getDoctorTimeWindows(doctorId: number): ng.IPromise<IDoctorTimeWindows> {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/timeWindows");
+            return this.$http.get(url).then(result => result.data); 
         }
     }
 }

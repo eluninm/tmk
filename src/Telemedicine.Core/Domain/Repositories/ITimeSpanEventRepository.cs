@@ -1,12 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Telemedicine.Core.Models;
 
 namespace Telemedicine.Core.Domain.Repositories
 {
     public interface ITimeSpanEventRepository:IRepository<TimeSpanEvent>
     {
-        /*Task<TimeSpanEvent> GetByCalendarEventIdAsync(string userId);
-
-        Doctor GetByCalendarEventId(string userId);*/
+        Task<IEnumerable<TimeSpanEvent>> GetTimeSpansByDates(int doctorId, DateTime startSearchDate,
+            DateTime stopSearchDate);
     }
 }
