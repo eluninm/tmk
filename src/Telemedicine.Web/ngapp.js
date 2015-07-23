@@ -540,8 +540,8 @@ var Telemedicine;
                 inline: true,
                 sideBySide: true,
                 locale: 'ru',
-                minDate: this.timeWindows.MinDate,
-                maxDate: this.timeWindows.MaxDate,
+                minDate: this.timeWindows.MinDate.toString(),
+                maxDate: this.timeWindows.MaxDate.toString(),
                 stepping: this.timeWindows.WindowSize,
                 defaultDate: this.timeWindows.NearestAvailable.toString(),
                 icons: {

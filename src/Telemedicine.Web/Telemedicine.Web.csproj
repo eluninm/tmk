@@ -496,6 +496,7 @@
     <Compile Include="Api\Dto\PaymentHistoryDto.cs" />
     <Compile Include="Api\Dto\RecommendationDto.cs" />
     <Compile Include="Api\Dto\SpecializationDto.cs" />
+    <Compile Include="Api\Formatters\Datetimepicker3DateTimeConvertor.cs" />
     <Compile Include="Api\PagedListExtensions.cs" />
     <Compile Include="AppBuilderExtensions.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
