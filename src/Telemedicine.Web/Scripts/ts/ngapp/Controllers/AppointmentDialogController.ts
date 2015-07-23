@@ -15,10 +15,9 @@ module Telemedicine {
         constructor(
             $modalInstance: ng.ui.bootstrap.IModalServiceInstance,
             item: IDoctor,
-            public appointment: IAppointment) {
+            public appointment: IAppointment,
+            private timeWindows: IDoctorTimeWindows) {
             super($modalInstance, item);
-
-            this.minDate = new Date();
         }
 
         public initDatetimepicker() {
@@ -26,7 +25,10 @@ module Telemedicine {
                 inline: true,
                 sideBySide: true,
                 locale: 'ru',
-                minDate: this.minDate,
+                minDate: this.timeWindows.MinDate,
+                maxDate: this.timeWindows.MaxDate,
+                stepping: this.timeWindows.WindowSize,
+                defaultDate: this.timeWindows.NearestAvailable.toString(),
                 icons: {
                     up: "glyphicon glyphicon-triangle-top",
                     down: "glyphicon glyphicon-triangle-bottom",
@@ -37,12 +39,10 @@ module Telemedicine {
         }
 
         public book() {
-            this.appointment.AppointmentDate = new Date();
+            this.appointment.AppointmentDate = $("#datetimepicker1").datetimepicker().data("date");
             this.ok("appointment");
         }
 
-        public minDate: Date;
-        public maxDate: Date;
         public appointmentDate: Date;
         public appointmentTime: any;
     }

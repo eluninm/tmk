@@ -38,5 +38,8 @@ namespace Telemedicine.Core.Models
         public bool Friday { get; set; }
         public bool Saturday { get; set; }
         public bool Sunday { get; set; }
+
+        [NotMapped]
+        public int DoctorId { get; set; }
     }
 }

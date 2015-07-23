@@ -19,11 +19,13 @@ namespace Telemedicine.Web.Api.Controllers
     {
         private readonly IDoctorService _doctorService;
         private readonly IAppointmentEventService _appointmentService;
+        private readonly ITimeSpanEventService _timeSpanService;
 
-        public DoctorController(IDoctorService doctorService, IAppointmentEventService appointmentService)
+        public DoctorController(IDoctorService doctorService, IAppointmentEventService appointmentService, ITimeSpanEventService timeSpanService)
         {
             _doctorService = doctorService;
             _appointmentService = appointmentService;
+            _timeSpanService = timeSpanService;
         }
 
         [HttpGet]
@@ -83,6 +85,14 @@ namespace Telemedicine.Web.Api.Controllers
         {
             var doctorAppointments = await _appointmentService.GetDoctorAppointmentsByDateAsync(id, date);
             return Ok(doctorAppointments);
+        }
+
+        [HttpGet]
+        [Route("{id}/timeWindows")]
+        public async Task<IHttpActionResult> TimeWindows(int id)
+        {
+            var doctorTimeWindows = await _timeSpanService.GetDoctorTimeWindowsAsync(id);
+            return Ok(doctorTimeWindows);
         }
     }
 }

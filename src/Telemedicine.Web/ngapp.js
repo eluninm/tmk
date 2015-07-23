@@ -303,6 +303,10 @@ var Telemedicine;
             }
             return this.$http.get(url).then(function (result) { return result.data; });
         };
+        DoctorApiService.prototype.getDoctorTimeWindows = function (doctorId) {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/timeWindows");
+            return this.$http.get(url).then(function (result) { return result.data; });
+        };
         return DoctorApiService;
     })();
     Telemedicine.DoctorApiService = DoctorApiService;
@@ -399,21 +403,24 @@ var Telemedicine;
         DoctorListController.prototype.openAppointmentDialog = function (doctor) {
             var _this = this;
             var appointment = { DoctorId: doctor.Id, AppointmentDate: new Date() };
-            var appointmentDialog = this.$modal.open({
-                templateUrl: "/Content/tmpls/dialogs/appointmentDialog.html",
-                controller: "AppointmentDialogController as viewModel",
-                windowClass: "appointmentmodaldialog",
-                resolve: {
-                    item: function () { return doctor; },
-                    appointment: function () { return appointment; }
-                }
-            });
-            appointmentDialog.result.then(function (result) {
-                if (result === "appointment") {
-                    _this.appointmentApiService.createItem(appointment);
-                    appointmentDialog.close();
-                    _this.openPaymentDialog();
-                }
+            this.doctorApiService.getDoctorTimeWindows(doctor.Id).then(function (result) {
+                var appointmentDialog = _this.$modal.open({
+                    templateUrl: "/Content/tmpls/dialogs/appointmentDialog.html",
+                    controller: "AppointmentDialogController as viewModel",
+                    windowClass: "appointmentmodaldialog",
+                    resolve: {
+                        item: function () { return doctor; },
+                        appointment: function () { return appointment; },
+                        timeWindows: function () { return result; }
+                    }
+                });
+                appointmentDialog.result.then(function (result) {
+                    if (result === "appointment") {
+                        _this.appointmentApiService.createItem(appointment);
+                        appointmentDialog.close();
+                        _this.openPaymentDialog();
+                    }
+                });
             });
         };
         DoctorListController.prototype.openPaymentDialog = function () {
@@ -503,17 +510,20 @@ var Telemedicine;
 (function (Telemedicine) {
     var AppointmentDialogController = (function (_super) {
         __extends(AppointmentDialogController, _super);
-        function AppointmentDialogController($modalInstance, item, appointment) {
+        function AppointmentDialogController($modalInstance, item, appointment, timeWindows) {
             _super.call(this, $modalInstance, item);
             this.appointment = appointment;
-            this.minDate = new Date();
+            this.timeWindows = timeWindows;
         }
         AppointmentDialogController.prototype.initDatetimepicker = function () {
             $("#datetimepicker1").datetimepicker({
                 inline: true,
                 sideBySide: true,
                 locale: 'ru',
-                minDate: this.minDate,
+                minDate: this.timeWindows.MinDate,
+                maxDate: this.timeWindows.MaxDate,
+                stepping: this.timeWindows.WindowSize,
+                defaultDate: this.timeWindows.NearestAvailable.toString(),
                 icons: {
                     up: "glyphicon glyphicon-triangle-top",
                     down: "glyphicon glyphicon-triangle-bottom",
@@ -523,7 +533,7 @@ var Telemedicine;
             });
         };
         AppointmentDialogController.prototype.book = function () {
-            this.appointment.AppointmentDate = new Date();
+            this.appointment.AppointmentDate = $("#datetimepicker1").datetimepicker().data("date");
             this.ok("appointment");
         };
         return AppointmentDialogController;

@@ -65,23 +65,26 @@ module Telemedicine {
         }
 
         public openAppointmentDialog(doctor: IDoctor) {
-            var appointment: IAppointment = {DoctorId: doctor.Id, AppointmentDate: new Date()};
-            var appointmentDialog = this.$modal.open({
-                templateUrl: "/Content/tmpls/dialogs/appointmentDialog.html",
-                controller: "AppointmentDialogController as viewModel",
-                windowClass: "appointmentmodaldialog",
-                resolve: {
-                    item: () => doctor,
-                    appointment: () => appointment
-                }
-            });
+            var appointment: IAppointment = { DoctorId: doctor.Id, AppointmentDate: new Date() };
+            this.doctorApiService.getDoctorTimeWindows(doctor.Id).then(result => {
+                var appointmentDialog = this.$modal.open({
+                    templateUrl: "/Content/tmpls/dialogs/appointmentDialog.html",
+                    controller: "AppointmentDialogController as viewModel",
+                    windowClass: "appointmentmodaldialog",
+                    resolve: {
+                        item: () => doctor,
+                        appointment: () => appointment,
+                        timeWindows: () => result
+                    }
+                });
 
-            appointmentDialog.result.then((result) => {
-                if (result === "appointment") {
-                    this.appointmentApiService.createItem(appointment);
-                    appointmentDialog.close();
-                    this.openPaymentDialog();
-                }
+                appointmentDialog.result.then((result) => {
+                    if (result === "appointment") {
+                        this.appointmentApiService.createItem(appointment);
+                        appointmentDialog.close();
+                        this.openPaymentDialog();
+                    }
+                });
             });
         }
 
