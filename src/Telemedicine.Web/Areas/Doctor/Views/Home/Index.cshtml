@@ -66,7 +66,7 @@
             </li>
         </ul>
     </div>
-    
+
     <a class="btn btn-primary rounded" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
         <span class="glyphicon">+</span> Добавить
     </a>
@@ -107,22 +107,47 @@
             <div class="modal-body">
                 <div>
                     Начальная дата
-                    <button></button>
-                    <button></button>
-                    <button></button>
-                    <button></button>
-                    <input class="datepicker" id="EventStart"/>
+                    <div class="text-center">
+                        <button style="background: transparent; border: none; outline: none;" onclick="var d = $('#EventStart').data('DateTimePicker').date()._d; $('#EventStart').data('DateTimePicker').date(new Date(d.setDate(d.getDate() + 1)));">
+                            <div class="tm icon arrow-up"></div>
+                        </button>
+                    </div>
+                    <div style="display: flex;">
+                        <button style="background: transparent; border: none; outline: none;" onclick="var d = $('#EventStart').data('DateTimePicker').date()._d; $('#EventStart').data('DateTimePicker').date(new Date(d.setMinutes(d.getMinutes() - 1)));">
+                            <div class="tm icon arrow-left"></div>
+                        </button>
+                        <input class="datepicker text-center" id="EventStart" style="flex: 1; font-weight: 700; border: none;outline: none"/>
+                        <button style="background: transparent; border: none; outline: none;" onclick="var d = $('#EventStart').data('DateTimePicker').date()._d; $('#EventStart').data('DateTimePicker').date(new Date(d.setMinutes(d.getMinutes() + 1)));">
+                            <div class="tm icon arrow-right"></div>
+                        </button>
+                    </div>
+
+                    <div class="text-center">
+                        <button style="background: transparent; border: none; outline: none;" onclick="var d = $('#EventStart').data('DateTimePicker').date()._d; $('#EventStart').data('DateTimePicker').date(new Date(d.setDate(d.getDate() - 1)));">
+                            <div class="tm icon arrow-down"></div>
+                        </button>
+                    </div>
                 </div>
                 <div>
-                    Конечная дата
-                    <button></button>
-                    <input id="EventDuration"/>
-                    <button></button>
+                    Длительность
+                    <br/>
+                    <br/>
+                    <div class="text-center" style="display: flex;">
+                        <button style="background: transparent; border: none; outline: none;" onclick="EventDuration.value = parseInt(EventDuration.value)-1;$(EventDuration).change()">
+                            <div class="tm icon arrow-left"></div>
+                        </button>
+                        <label id="EventDurationText" style="flex: 1" onclick="$(this).toggle(false); $(EventDuration).toggle(true).focus();"></label>
+                        <input id="EventDuration" class="text-center" onchange="var t = parseInt(EventDuration.value) || 0; if (t < 0) { t = 0 }; this.value = t; EventDurationText.innerHTML = (t > 59 ? Math.floor(t / 60) + ' ч. ' : '') + (t % 60) + ' мин.'; $(EventDurationText).toggle(true); $(EventDuration).toggle(false).focus()" style="display: none; flex: 1; font-weight: 700; outline: none; border: none;" onblur="$(this).change()" />
+                        <button style="background: transparent; border: none; outline: none;" onclick="EventDuration.value = parseInt(EventDuration.value) + 1; $(EventDuration).change()">
+                            <div class="tm icon arrow-right"></div>
+                        </button>
+                    </div>
+                    
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary rounded" data-dismiss="modal" data-toggle="modal" data-target="#devDialog">Добавить</button>
-                <button type="button" class="btn btn-default rounded" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary rounded">Добавить</button>
+                <button type="button" class="btn btn-default rounded" data-dismiss="modal">Отменить</button>
             </div>
         </div>
     </div>
@@ -156,7 +181,9 @@
                 if ($.inArray($("#selectedMonth").text(), months) == -1)
                     $("#selectedMonth").text(months[(new Date()).getMonth()]);
             });
-            $('#EventStart').datetimepicker();
+            $('#EventStart').datetimepicker({
+                locale:'ru'
+            });
             $.getJSON('@Url.Action("GetEvents", "Events")', "json", function (data) {
                 $('#calendar').fullCalendar({
                     header: {
@@ -166,10 +193,10 @@
                     },
                     views: {
                         week: {
-                            smallTimeFormat:'hh:mm',
+                            smallTimeFormat: 'hh:mm',
                         }
                     },
-                    timeFormat:'hh:mm',
+                    timeFormat: 'hh:mm',
                     columnFormat: '<i1>dd</i1><i2>DD</i2><i3>MMMM</i3>',
                     lang: 'ru',
                     events: data,
@@ -181,11 +208,12 @@
                     axisWidth: '100px',
                     selectable: true,
                     selectHelper: true,
-                    eventLimit:true,
+                    eventLimit: true,
                     select: function (start, end) {
                         $('#CreateEvent').modal('toggle');
                         $('#EventStart').data('DateTimePicker').date(start);
-                        $('#EventDuration').val((end - start)/60000);
+                        $('#EventDuration').val((end - start) / 60000);
+                        $('#EventDuration').change();
                         /*  var title = prompt('Наименование события:');
                         var eventData;
                         if (title) {
@@ -209,7 +237,7 @@
             $("#endDateDatetimePicker").datetimepicker({
                 locale: 'ru'
             });
-            $(".glyphicon-calendar").click(function() {
+            $(".glyphicon-calendar").click(function () {
                 $(this).parent().parent().find(".form-control").focus();
             });
             $('.dropdown-menu input, .dropdown-menu label').click(function (e) {
