@@ -647,8 +647,8 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptOutFile>ngapp.js</TypeScriptOutFile>
-    <TypeScriptOutDir>C:\Users\vyacheslav\Source\Repos\tmk\src\Telemedicine.Web\Scripts</TypeScriptOutDir>
+    <TypeScriptOutFile>C:\Repository\Axbit\TMK\src\Telemedicine.Web\ngapp.js</TypeScriptOutFile>
+    <TypeScriptOutDir>C:\Repository\Axbit\TMK\src\Telemedicine.Web\Scripts</TypeScriptOutDir>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
