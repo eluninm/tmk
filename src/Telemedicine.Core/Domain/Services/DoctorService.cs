@@ -8,6 +8,7 @@ using Telemedicine.Core.Domain.Repositories;
 using Telemedicine.Core.Domain.Uow;
 using Telemedicine.Core.Identity;
 using Telemedicine.Core.Models;
+using Telemedicine.Core.Models.Enums;
 using Telemedicine.Core.PagedList;
 
 namespace Telemedicine.Core.Domain.Services
@@ -177,6 +178,13 @@ namespace Telemedicine.Core.Domain.Services
         public Doctor GetById(int id)
         {
             return _doctorRepository.GetById(id);
+        }
+
+        public async Task Debit(int doctorId, double amount)
+        {
+            var doctor = await GetByIdAsync(doctorId);
+            doctor.Balance -= amount;
+            await UpdateAsync(doctor);
         }
     }
 }

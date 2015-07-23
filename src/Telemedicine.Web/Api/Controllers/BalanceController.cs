@@ -40,10 +40,12 @@ namespace Telemedicine.Web.Api.Controllers
         public async Task<IHttpActionResult> Debit(double amount)
         {
             var doctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
-            doctor.Balance -= amount;
-            if (doctor.Balance < 0)
-                doctor.Balance = 0;
-            await _doctorService.UpdateAsync(doctor);
+            if (doctor == null)
+            {
+                return NotFound();
+            }
+
+            await _doctorService.Debit(doctor.Id, amount);
             return Ok();
         }
 
@@ -52,15 +54,7 @@ namespace Telemedicine.Web.Api.Controllers
         public async Task<IHttpActionResult> Replenish(double amount)
         {
             var patient = await _patientService.GetByUserIdAsync(User.Identity.GetUserId());
-            PaymentHistory paymentHistory = new PaymentHistory();
-            paymentHistory.Date = DateTime.Now;
-            paymentHistory.Patient = patient;
-            paymentHistory.PaymentType = PaymentType.Replenishment;
-            paymentHistory.Value = amount; 
-
-            await _paymentHistoryService.CreateAsync(paymentHistory);
-            patient.Balance += amount;
-            await _patientService.UpdateAsync(patient);
+            await _patientService.Replenish(patient.Id, amount);
             return Ok();
         }
     }

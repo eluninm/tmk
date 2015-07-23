@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.UI;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using Telemedicine.Core.Consts;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Web.Api.Dto;
@@ -20,12 +21,18 @@ namespace Telemedicine.Web.Api.Controllers
         private readonly IDoctorService _doctorService;
         private readonly IAppointmentEventService _appointmentService;
         private readonly ITimeSpanEventService _timeSpanService;
+        private readonly IPaymentHistoryService _paymentHistoryService;
 
-        public DoctorController(IDoctorService doctorService, IAppointmentEventService appointmentService, ITimeSpanEventService timeSpanService)
+        public DoctorController(
+            IDoctorService doctorService, 
+            IAppointmentEventService appointmentService, 
+            ITimeSpanEventService timeSpanService,
+            IPaymentHistoryService paymentHistoryService)
         {
             _doctorService = doctorService;
             _appointmentService = appointmentService;
             _timeSpanService = timeSpanService;
+            _paymentHistoryService = paymentHistoryService;
         }
 
         [HttpGet]
@@ -93,6 +100,27 @@ namespace Telemedicine.Web.Api.Controllers
         {
             var doctorTimeWindows = await _timeSpanService.GetDoctorTimeWindowsAsync(id);
             return Ok(doctorTimeWindows);
+        }
+
+        [HttpGet]
+        [Route("{doctorId}/paymentHistory")]
+        public async Task<IHttpActionResult> PaymentPage(int doctorId, int page = 1, int pageSize = 10)
+        {
+            var doctor = await _doctorService.GetByIdAsync(doctorId);
+
+            if (doctor == null)
+            {
+                return NotFound();
+            }
+            
+            var payments = await _paymentHistoryService.PagedAsync(User.Identity.GetUserId(), page, pageSize);
+            var pagedList = payments.Map(t =>
+            {
+                var doctorDto = Mapper.Map<PaymentHistoryDto>(t);
+                return doctorDto;
+            });
+
+            return Ok(pagedList);
         }
     }
 }

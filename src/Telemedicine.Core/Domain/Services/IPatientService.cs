@@ -20,5 +20,7 @@ namespace Telemedicine.Core.Domain.Services
         Task<Patient> GetByUserIdAsync(string id);
 
         Patient GetByUserId(string userId);
+
+        Task Replenish(int patientId, double amount);
     }
 }

@@ -4,12 +4,12 @@
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
 
-<div class="row fullheight" style="position: relative" ng-controller="PatientPaymentController as ppViewModel">
+<div class="row fullheight" style="position: relative" ng-controller="PatientPaymentController as viewModel" data-id="@ViewBag.PatientId">
     <div class="col-md-6 fullheight sub-container">
         <h3 class="page-header row">@ViewBag.Title</h3>
         <div class="unscrollable row container-fluid balance-container">
             <p class="balance-info page-header">
-                <span class="text">Баланс</span> <span style="color: #3e67ae" class="summa"> <span ng-bind="ppViewModel.balance"></span>  ₽</span><span></span>
+                <span class="text">Баланс</span> <span style="color: #3e67ae" class="summa"> {{viewModel.balance}}  ₽</span><span></span>
             </p>
             <div class="balance-refill">
                 <div class="dropdown rounded form-line" style="width: 100%">
@@ -25,10 +25,10 @@
                 </div>
                 <div class="row form-line">
                     <div class="col-md-7">
-                        <input type="text" class="form-control rounded" ng-model="ppViewModel.paymentValue" placeholder="Сумма платежа">
+                        <input type="text" class="form-control rounded" ng-model="viewModel.paymentValue" placeholder="Сумма платежа">
                     </div>
                     <div class="col-md-5">
-                        <button class="btn btn-primary rounded" ng-click="ppViewModel.replenish(ppViewModel.paymentValue)" style="width: 100%">Пополнить</button>
+                        <button class="btn btn-primary rounded" ng-click="viewModel.replenish()" style="width: 100%">Пополнить</button>
                     </div>
                 </div>
             </div>
@@ -46,35 +46,35 @@
                     </div>
                 </div>
                 <div class="grid-content" >
-                    <div class="grid-body" ng-repeat="paymentHistory in ppViewModel.paymentsHistory">
+                    <div class="grid-body" ng-repeat="payment in viewModel.payments">
                         <div class="grid-col grid-col-33">
                             <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div>{{paymentHistory.Date | date:'yyyy-MM-dd'}}
+                                <div class="glyphicon glyphicon-calendar"></div>{{payment.Date | date:'yyyy-MM-dd'}}
                             </div>
                             <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div>{{paymentHistory.Date | date:'HH:mm'}}
+                                <div class="glyphicon glyphicon-time"></div>{{payment.Date | date:'HH:mm'}}
                             </div>
                         </div>
                         <div class="grid-col grid-col-33">
                             <div class="font-bold payment-type">Пополнение</div>
                         </div>
                         <div class="grid-col grid-col-33">
-                            <div class="font-medium font12px">{{paymentHistory.Value}} ₽</div>
+                            <div class="font-medium font12px">{{payment.Value}} ₽</div>
                         </div>
                     </div>
                    
                 </div>
                 <div class="grid-pager row">
-                    <div class="col-md-6">Всего записей: {{ppViewModel.totalCount}}</div>
+                    <div class="col-md-6">Всего записей: {{viewModel.totalCount}}</div>
                     <div class="col-md-6">
                         <nav>
-                            <ul class="pagination rounded">
-                                <li><a href="#" aria-label="Previous" ng-click="ppViewModel.previousPage()" ng-disabled="(ppViewModel.currentPage <= 1)"><span aria-hidden="true">«</span></a></li>
-                                <li><a ng-click="ppViewModel.previousPage()" href="#">{{ppViewModel.getPreviousPage()}}</a></li>
-                                <li class="active"><a href="#">{{ppViewModel.currentPage}}</a></li>
-                                <li><a ng-click="ppViewModel.nextPage()" href="#">{{ppViewModel.currentPage+1}}</a></li>
-                                <li><a href="#" ng-click="ppViewModel.nextPage()" ng-disabled="(ppViewModel.currentPage >= ppViewModel.totalCount)" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                            </ul>
+                            <pagination class="pagination rounded" ng-change="viewModel.loadPage()"
+                                        ng-model="viewModel.currentPage"
+                                        page="viewModel.currentPage" items-per-page="viewModel.pageSize"
+                                        total-items="viewModel.totalCount" max-size="6"
+                                        rotate="false" boundary-links="false" previous-text="&laquo;"
+                                        next-text="&raquo;">
+                            </pagination>
                         </nav>
                     </div>
                 </div>

@@ -7,6 +7,7 @@ module Telemedicine {
         getDoctorDetails(doctorId: number): ng.IPromise<string>;
         getDoctorAppointments(doctorId: number, page?: number, pageSize?: number, patientTitleFilter?: string): ng.IPromise<IPagedList<IDoctorAppointment>>;
         getDoctorTimeWindows(doctorId: number): ng.IPromise<IDoctorTimeWindows>;
+        getPaymentHistory(doctorId: number, page?: number, pageSize?: number): ng.IPromise<IPagedList<IPaymentHistory>>;
     }
 
     export class DoctorApiService implements IDoctorApiService {
@@ -79,6 +80,30 @@ module Telemedicine {
         getDoctorTimeWindows(doctorId: number): ng.IPromise<IDoctorTimeWindows> {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/timeWindows");
             return this.$http.get(url).then(result => result.data); 
+        }
+
+        getPaymentHistory(doctorId: number, page?: number, pageSize?: number): angular.IPromise<IPagedList<IPaymentHistory>> {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/paymentHistory");
+
+            var query: any = {}, querySeparator = "?";
+
+            if (page) {
+                query.page = page;
+            }
+            if (pageSize) {
+                query.pageSize = pageSize;
+            }
+
+            for (var key in query) {
+                if (query.hasOwnProperty(key)) {
+                    url += querySeparator + key + "=" + encodeURIComponent(query[key]);
+                    if (querySeparator === "?") {
+                        querySeparator = "&";
+                    }
+                }
+            }
+
+            return this.$http.get(url).then(result => result.data);
         }
     }
 }

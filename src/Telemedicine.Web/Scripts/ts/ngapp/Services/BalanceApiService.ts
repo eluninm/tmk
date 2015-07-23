@@ -27,7 +27,7 @@ module Telemedicine {
         }
 
         public balance(): angular.IPromise<number> {
-            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/get/");
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/get");
             return this.$http.get(url, null).then(result => result.data);
         }
     }
