@@ -178,11 +178,12 @@
   font-size: 1.5em;
   color: transparent;
   line-height: 25px;
-  background-image: url('/img/Logo.png');
-  width: 172px;
-  height: 73px;
+  background-image: url('/img/vraci_white.svg');
+  width: 70px;
+  height: 130px;
   background-repeat: no-repeat;
   padding: 0;
+  left: 70px;
 }
 /* --- END Sidebar --- */
 
@@ -518,6 +519,11 @@ body {
 .modal-content .modal-body input[type='text'] {
   color: black;
 }
+.modal-content .modal-body textarea {
+  border-radius: 21px;
+  padding: 6px 21px;
+  color: black;
+}
 .modal-content .modal-footer {
   border: none;
   background-color: #f7f7f7;
@@ -580,9 +586,35 @@ body {
 .tm.icon.arrow-right.white {
   background-image: url('/img/arrow_right_white.svg');
 }
+.tm.icon.arrow-up {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+  background-image: url('/img/arrow_big_up.svg');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.tm.icon.arrow-up.white {
+  background-image: url('/img/arrow_right_white.svg');
+}
+.tm.icon.arrow-down {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+  background-image: url('/img/arrow_big_down.svg');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.tm.icon.arrow-down.white {
+  background-image: url('/img/arrow_right_white.svg');
+}
 .btn.btn-primary {
   box-shadow: none;
   background-image: none;
+  border: none;
+  background-color: #3e67ae;
 }
 .grid .page-header {
   margin: 0px;
