@@ -62,7 +62,7 @@
     <div class="col-md-3 fullheight sub-container">
         <h1 class="page-header row">История болезни</h1>
         <div class="content row">
-            @Html.Action("List2", "Recommendations", new {id = @ViewBag.TargetUserId})
+@*            @Html.Action("List2", "Recommendations", new {id = @ViewBag.TargetUserId})*@
         </div>
     </div>
 </div>
@@ -70,10 +70,19 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="AttachmentsLabel">Прикрепление файла <input type="text" data-provide="typeahead" placeholder="Поиск" style="border: none;"/></h4>
+                <h4 class="modal-title" id="AttachmentsLabel">Прикрепление файла <button onclick="$('#searchCheckbox').click(); $(this).text($('#searchCheckbox')[0].checked ? 'Отмена' : 'Поиск');" style="border: none; background: none; color: #b1b1b1; margin-left: 15px;">Поиск</button></h4>
             </div>
             <div class="modal-body">
-                <div class="content-fluid row" style="margin-bottom: 15px;">
+                <input type="checkbox" id="searchCheckbox" style="display: none" onchange="$('#filesearch').toggle(this.checked); $('#fileinput').toggle(!this.checked);"/>
+                <div class="content-fluid row" style="margin-bottom: 15px;display:none" id="filesearch">
+                    <div class="input-group rounded">
+                        <input class="form-control" placeholder="Поиск по файлам"/>
+                        <div class="input-group-addon" style="background: #b1b1b1; color: white">
+                            <div class="fa fa-search"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-fluid row" style="margin-bottom: 15px;" id="fileinput">
                     <button class="btn btn-default rounded fullwidth" onclick="$(this).next().click()">Загрузить новый файл</button>
                     <input type="file" multiple="" style="display: none;"/>
                 </div>

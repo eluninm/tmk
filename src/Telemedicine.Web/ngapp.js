@@ -88,6 +88,10 @@ var Telemedicine;
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + patientId + "/consultations");
             return this.$http.get(url).then(function (result) { return result.data; });
         };
+        PatientApiService.prototype.patientPaymentHistory = function () {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/PaymentsHistory");
+            return this.$http.get(url).then(function (result) { return result.data; });
+        };
         return PatientApiService;
     })();
     Telemedicine.PatientApiService = PatientApiService;
@@ -517,6 +521,14 @@ var Telemedicine;
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/debit/" + amount);
             return this.$http.post(url, null).then(function (result) { return result.data; });
         };
+        BalanceApiService.prototype.replenish = function (amount) {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/replenish/" + amount);
+            return this.$http.post(url, null).then(function (result) { return result.data; });
+        };
+        BalanceApiService.prototype.balance = function () {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/get/");
+            return this.$http.get(url, null).then(function (result) { return result.data; });
+        };
         return BalanceApiService;
     })();
     Telemedicine.BalanceApiService = BalanceApiService;
@@ -525,13 +537,29 @@ var Telemedicine;
 var Telemedicine;
 (function (Telemedicine) {
     var BalanceController = (function () {
-        function BalanceController(balanceApiService) {
+        function BalanceController(balanceApiService, $scope) {
             this.balanceApiService = balanceApiService;
+            this.$scope = $scope;
+            this.getBalance();
         }
         BalanceController.prototype.debit = function (amount) {
-            console.log("debit()");
+            var _this = this;
             this.balanceApiService.debit(amount).then(function (result) {
-                console.log(result);
+                _this.getBalance();
+            });
+        };
+        BalanceController.prototype.replenish = function (amount) {
+            var _this = this;
+            this.balanceApiService.replenish(amount).then(function (result) {
+                _this.debitValue = 0;
+                _this.$scope.$emit('ReplenishSuccess', result);
+                _this.getBalance();
+            });
+        };
+        BalanceController.prototype.getBalance = function () {
+            var _this = this;
+            this.balanceApiService.balance().then(function (result) {
+                _this.balance = result;
             });
         };
         BalanceController.$inject = ["balanceApiService", "$scope"];
@@ -571,6 +599,27 @@ var Telemedicine;
     })();
     Telemedicine.DoctorAppointmentsController = DoctorAppointmentsController;
 })(Telemedicine || (Telemedicine = {}));
+///<reference path="../Services/PatientApiService.ts"/>
+var Telemedicine;
+(function (Telemedicine) {
+    var PatientPaymentListController = (function () {
+        function PatientPaymentListController(patientApiService, $scope) {
+            this.patientApiService = patientApiService;
+            this.$scope = $scope;
+            this.getPaymentList();
+            $scope.$on('ReplenishSuccess', this.getPaymentList);
+        }
+        PatientPaymentListController.prototype.getPaymentList = function () {
+            var _this = this;
+            this.patientApiService.patientPaymentHistory().then(function (result) {
+                _this.paymentsHistory = result;
+            });
+        };
+        PatientPaymentListController.$inject = ["patientApiService", "$scope"];
+        return PatientPaymentListController;
+    })();
+    Telemedicine.PatientPaymentListController = PatientPaymentListController;
+})(Telemedicine || (Telemedicine = {}));
 ///<reference path="Controllers/HistoryController.ts" />
 ///<reference path="Controllers/ConsultationController.ts" />
 ///<reference path="Controllers/DoctorListController.ts" />
@@ -580,6 +629,7 @@ var Telemedicine;
 ///<reference path="Controllers/PaymentDialogController.ts" />
 ///<reference path="Controllers/BalanceController.ts" />
 ///<reference path="Controllers/DoctorAppointmentsController.ts" />
+///<reference path="Controllers/PatientPaymentListController.ts" />
 var Telemedicine;
 (function (Telemedicine) {
     function moduleConfiguration($logProvider) {
@@ -588,6 +638,7 @@ var Telemedicine;
         $logProvider.debugEnabled(true);
     }
     angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration)
+        .controller("PatientPaymentListController", Telemedicine.PatientPaymentListController)
         .controller("HistoryController", Telemedicine.HistoryController)
         .controller("ConsultationController", Telemedicine.ConsultationController)
         .controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController)
