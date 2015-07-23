@@ -1,25 +1,23 @@
 ﻿///<reference path="../Services/PatientApiService.ts"/>
 
 module Telemedicine {
-    export class PatientPaymentListController {
+    export class DoctorPaymentController {
         static $inject = ["patientApiService", "$scope"];
 
         constructor(private patientApiService: PatientApiService,
-            private $scope: any) {
-            this.getPaymentList();
-            $scope.$on('ReplenishSuccess', this.getPaymentList);
+            private $scope: any) {  
         }
 
         public paymentsHistory: Array<IPaymentHistory>;
 
-         
+        
 
-
-        public getPaymentList() {
+        /*public getPaymentList() {
             this.patientApiService.patientPaymentHistory().then(result => {
                 this.paymentsHistory = result;
+                this.$scope.$apply();
             });
-        }
+        }*/
     }
 }
  

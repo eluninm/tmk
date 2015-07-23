@@ -1,9 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
 using Telemedicine.Core.Domain.Services;
+using Telemedicine.Core.Models;
+using Telemedicine.Core.PagedList;
 using Telemedicine.Web.Api.Dto;
 
 namespace Telemedicine.Web.Api.Controllers
@@ -15,7 +18,9 @@ namespace Telemedicine.Web.Api.Controllers
         private readonly IConversationService _conversationService;
         private readonly IPatientService _patientService;
         private readonly IPaymentHistoryService _paymentHistoryService;
-        public PatientController(IRecommendationService recommendationService, IConversationService conversationService, IPatientService patientService, IPaymentHistoryService paymentHistoryService)
+
+        public PatientController(IRecommendationService recommendationService, IConversationService conversationService,
+            IPatientService patientService, IPaymentHistoryService paymentHistoryService)
         {
             _recommendationService = recommendationService;
             _conversationService = conversationService;
@@ -41,7 +46,7 @@ namespace Telemedicine.Web.Api.Controllers
                 return NotFound();
             }
 
-            var paymentsHistory =  _paymentHistoryService.GetByPatientIdAsync(patient.Id).ToList();
+            var paymentsHistory = _paymentHistoryService.GetByPatientIdAsync(patient.Id).ToList();
 
             return Ok(paymentsHistory.Select(Mapper.Map<PaymentHistoryDto>));
         }
@@ -58,6 +63,30 @@ namespace Telemedicine.Web.Api.Controllers
 
             var conversations = await _conversationService.GetUserConversations(patient.UserId);
             return Ok(conversations.Select(Mapper.Map<ConsultationDto>));
+        }
+
+        [HttpGet]
+        [Route("paymentPage/")]
+        public async Task<IHttpActionResult> PaymentPage(int page = 1, int pageSize = 30)
+        {
+            try
+            {
+                IPagedList<PaymentHistory> payments =
+                    await _paymentHistoryService.PagedAsync(User.Identity.GetUserId(), page, pageSize);
+
+
+                var pagedList = payments.Map(t =>
+                {
+                    var doctorDto = Mapper.Map<PaymentHistoryDto>(t);
+                    return doctorDto;
+                });
+
+                return Ok(pagedList);
+            }
+            catch (Exception exp)
+            {
+                return NotFound();
+            }
         }
     }
 }
