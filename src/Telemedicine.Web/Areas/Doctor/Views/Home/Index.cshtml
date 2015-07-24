@@ -70,6 +70,8 @@
     <a class="btn btn-primary rounded" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
         <span class="glyphicon">+</span> Добавить
     </a>
+    <a style="display: none;" class="btn btn-primary rounded" data-toggle="modal" id="createEventLink" data-target="#CreateEvent" href="@Url.Action("AddCalendarEvent")"> 
+    </a>
 </div>
 
 <div id="calendar"></div>
@@ -101,54 +103,7 @@
 <div class="modal fade" id="CreateEvent" role="dialog" aria-labelledby="CreateEventLabel">
     <div class="modal-dialog  modal-sm" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="CreateEventLabel">Добавить прием</h4>
-            </div>
-            <div class="modal-body">
-                <div>
-                    Начальная дата
-                    <div class="text-center">
-                        <button style="background: transparent; border: none; outline: none;" onclick="var d = $('#EventStart').data('DateTimePicker').date()._d; $('#EventStart').data('DateTimePicker').date(new Date(d.setDate(d.getDate() + 1)));">
-                            <div class="tm icon arrow-up"></div>
-                        </button>
-                    </div>
-                    <div style="display: flex;">
-                        <button style="background: transparent; border: none; outline: none;" onclick="var d = $('#EventStart').data('DateTimePicker').date()._d; $('#EventStart').data('DateTimePicker').date(new Date(d.setMinutes(d.getMinutes() - 1)));">
-                            <div class="tm icon arrow-left"></div>
-                        </button>
-                        <input class="datepicker text-center" id="EventStart" style="flex: 1; font-weight: 700; border: none;outline: none"/>
-                        <button style="background: transparent; border: none; outline: none;" onclick="var d = $('#EventStart').data('DateTimePicker').date()._d; $('#EventStart').data('DateTimePicker').date(new Date(d.setMinutes(d.getMinutes() + 1)));">
-                            <div class="tm icon arrow-right"></div>
-                        </button>
-                    </div>
-
-                    <div class="text-center">
-                        <button style="background: transparent; border: none; outline: none;" onclick="var d = $('#EventStart').data('DateTimePicker').date()._d; $('#EventStart').data('DateTimePicker').date(new Date(d.setDate(d.getDate() - 1)));">
-                            <div class="tm icon arrow-down"></div>
-                        </button>
-                    </div>
-                </div>
-                <div>
-                    Длительность
-                    <br/>
-                    <br/>
-                    <div class="text-center" style="display: flex;">
-                        <button style="background: transparent; border: none; outline: none;" onclick="EventDuration.value = parseInt(EventDuration.value)-1;$(EventDuration).change()">
-                            <div class="tm icon arrow-left"></div>
-                        </button>
-                        <label id="EventDurationText" style="flex: 1" onclick="$(this).toggle(false); $(EventDuration).toggle(true).focus();"></label>
-                        <input id="EventDuration" class="text-center" onchange="var t = parseInt(EventDuration.value) || 0; if (t < 0) { t = 0 }; this.value = t; EventDurationText.innerHTML = (t > 59 ? Math.floor(t / 60) + ' ч. ' : '') + (t % 60) + ' мин.'; $(EventDurationText).toggle(true); $(EventDuration).toggle(false).focus()" style="display: none; flex: 1; font-weight: 700; outline: none; border: none;" onblur="$(this).change()" />
-                        <button style="background: transparent; border: none; outline: none;" onclick="EventDuration.value = parseInt(EventDuration.value) + 1; $(EventDuration).change()">
-                            <div class="tm icon arrow-right"></div>
-                        </button>
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary rounded">Добавить</button>
-                <button type="button" class="btn btn-default rounded" data-dismiss="modal">Отменить</button>
-            </div>
+           
         </div>
     </div>
 </div>
@@ -164,6 +119,9 @@
 @section scripts
 {
     <script type="text/javascript">
+        var EventStartDate;
+        var EventDurationVal;
+
         $(function () {
             $(".dropdown-menu li a").click(function () {
                 $("#selectedMonth").text($(this).text());
@@ -181,9 +139,9 @@
                 if ($.inArray($("#selectedMonth").text(), months) == -1)
                     $("#selectedMonth").text(months[(new Date()).getMonth()]);
             });
-            $('#EventStart').datetimepicker({
+           /* $('#EventStart').datetimepicker({
                 locale:'ru'
-            });
+            });*/
             $.getJSON('@Url.Action("GetEvents", "Events")', "json", function (data) {
                 $('#calendar').fullCalendar({
                     header: {
@@ -210,10 +168,13 @@
                     selectHelper: true,
                     eventLimit: true,
                     select: function (start, end) {
-                        $('#CreateEvent').modal('toggle');
-                        $('#EventStart').data('DateTimePicker').date(start);
-                        $('#EventDuration').val((end - start) / 60000);
-                        $('#EventDuration').change();
+                        $("#createEventLink").click();
+                        //$('#CreateEvent').modal('toggle');
+                        EventStartDate = start;
+                        EventDurationVal = (end - start) / 60000;
+                        //$('#EventStart').data('DateTimePicker').date(start);
+                        //$('#EventDuration').val((end - start) / 60000);
+                        //$('#EventDuration').change();
                         /*  var title = prompt('Наименование события:');
                         var eventData;
                         if (title) {
@@ -248,6 +209,11 @@
 
         function onAddSuccess() {
             $("#addEventDialog").modal('hide');
+            window.location.href = '@Url.Action("Index", "Home")';
+        }
+
+        function onAddCalendarEventSuccess() {
+            $("#CreateEvent").modal('hide');
             window.location.href = '@Url.Action("Index", "Home")';
         }
 

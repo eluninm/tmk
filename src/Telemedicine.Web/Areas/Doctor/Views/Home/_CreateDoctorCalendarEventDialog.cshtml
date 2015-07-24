@@ -1,0 +1,94 @@
+﻿@model Telemedicine.Web.Areas.Doctor.Models.AddCalendarEventViewModel
+@*@using (Ajax.BeginForm("AddCalendarEvent", "Home", new {@class = "form", @role = "form", @id = "addCalendarEventDialogForm"},
+    new AjaxOptions() {HttpMethod = "Post", OnSuccess = "onAddCalendarEventSuccess"}, FormMethod.Post))*@
+
+
+
+@using (Html.BeginForm("AddCalendarEvent","Home",FormMethod.Post))
+{
+    <div class="modal-header">
+        <h4 class="modal-title" id="CreateEventLabel">Добавить прием</h4>
+    </div>
+    <div class="modal-body">
+        <div>
+            Начальная дата
+            <div class="text-center">
+                <button style="background: transparent; border: none; outline: none;" onclick="ArrowUp()">
+                    <div class="tm icon arrow-up"></div>
+                </button>
+            </div>
+            <div style="display: flex;">
+                <button style="background: transparent; border: none; outline: none;" onclick="ArrowLeft()">
+                    <div class="tm icon arrow-left"></div>
+                </button>
+                 <input class="datepicker text-center" Name="Date" id="EventStart" style="flex: 1; font-weight: 700; border: none; outline: none"/> 
+                <button style="background: transparent; border: none; outline: none;" onclick="ArrowRight()">
+                    <div class="tm icon arrow-right"></div>
+                </button>
+            </div>
+
+            <div class="text-center">
+                <button style="background: transparent; border: none; outline: none;" onclick="ArrowDown()">
+                    <div class="tm icon arrow-down"></div>
+                </button>
+            </div>
+        </div>
+        <div>
+            Длительность
+            <br/>
+            <br/>
+            <div class="text-center" style="display: flex;">
+                <button style="background: transparent; border: none; outline: none;" onclick=" EventDuration.value = parseInt(EventDuration.value) - 1;$(EventDuration).change() ">
+                    <div class="tm icon arrow-left"></div>
+                </button>
+                <label id="EventDurationText" style="flex: 1" onclick=" $(this).toggle(false); $(EventDuration).toggle(true).focus(); "></label>
+                <input id="EventDuration" Name="Duration" class="text-center" onchange=" var t = parseInt(EventDuration.value) || 0; if (t < 0) { t = 0 }; this.value = t; EventDurationText.innerHTML = (t > 59 ? Math.floor(t / 60) + ' ч. ' : '') + (t % 60) + ' мин.'; $(EventDurationText).toggle(true); $(EventDuration).toggle(false).focus() " style="display: none; flex: 1; font-weight: 700; outline: none; border: none;" onblur=" $(this).change() "/>
+                <button style="background: transparent; border: none; outline: none;" onclick=" EventDuration.value = parseInt(EventDuration.value) + 1; $(EventDuration).change() ">
+                    <div class="tm icon arrow-right"></div>
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary rounded">Добавить</button>
+        <button type="button" class="btn btn-default rounded" data-dismiss="modal">Отменить</button>
+    </div>
+}
+
+
+<script type="text/javascript">
+    function ArrowUp(event) {
+
+        var d = $('#EventStart').data('DateTimePicker').date()._d;
+        $('#EventStart').data('DateTimePicker').date(new Date(d.setDate(d.getDate() + 1)));
+        event.preventDefault();
+    };
+
+    function ArrowDown() {
+        var d = $('#EventStart').data('DateTimePicker').date()._d;
+        $('#EventStart').data('DateTimePicker').date(new Date(d.setDate(d.getDate() - 1)));
+    };
+
+    function ArrowLeft() {
+        var d = $('#EventStart').data('DateTimePicker').date()._d;
+        $('#EventStart').data('DateTimePicker').date(new Date(d.setMinutes(d.getMinutes() - 1)));
+    };
+    function ArrowRight() {
+        var d = $('#EventStart').data('DateTimePicker').date()._d;
+        $('#EventStart').data('DateTimePicker').date(new Date(d.setMinutes(d.getMinutes() + 1)));
+    };
+     
+
+    $(function () {
+        $('#EventStart').datetimepicker({
+            locale: 'ru'
+        });
+
+        $('#EventStart').data('DateTimePicker').date(EventStartDate);
+        console.log(EventStartDate);
+        console.log(EventDurationVal);
+        $('#EventDuration').val(EventDurationVal);
+        $('#EventDuration').change();
+    });
+</script>

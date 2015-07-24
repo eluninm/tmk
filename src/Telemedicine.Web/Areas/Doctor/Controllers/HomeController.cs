@@ -43,6 +43,31 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             return View(appointmentViewModels);
         }
 
+
+        public ActionResult AddCalendarEvent()
+        { 
+            return PartialView("_CreateDoctorCalendarEventDialog");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddCalendarEvent(AddCalendarEventViewModel viewModel)
+        {
+            var doctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
+            if (ModelState.IsValid)
+            {
+                TimeSpanEvent timeSpanEvent = new TimeSpanEvent()
+                {
+                    BeginDate = viewModel.Date,
+                    EndDate = viewModel.Date.AddMinutes(viewModel.Duration),
+                    IsRepeat = false,
+                    Owner = doctor.User,
+                };
+                 
+                await _timeSpanEventService.CreateAsync(timeSpanEvent);
+            }
+            return PartialView("_CreateDoctorCalendarEventDialog");
+        }
+
         public ActionResult AddTimeSpanEvent()
         {
             AddEventViewModel viewModel = new AddEventViewModel();

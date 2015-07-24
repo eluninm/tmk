@@ -375,6 +375,7 @@
     <Content Include="Areas\Doctor\Views\Home\Balance.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\Index2.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\_AddTimeSpanEventDialog.cshtml" />
+    <Content Include="Areas\Doctor\Views\Home\_CreateDoctorCalendarEventDialog.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
     <Content Include="Content\patient.less" />
@@ -524,6 +525,7 @@
     <Compile Include="Areas\Doctor\Controllers\EventsController.cs" />
     <Compile Include="Areas\Doctor\Controllers\RecommendationController.cs" />
     <Compile Include="Areas\Doctor\Controllers\_HomeController.cs" />
+    <Compile Include="Areas\Doctor\Models\AddCalendarEventViewModel.cs" />
     <Compile Include="Areas\Doctor\Models\AddEventViewModel.cs" />
     <Compile Include="Areas\Doctor\Models\AppointmentViewModel.cs" />
     <Compile Include="Areas\Doctor\Models\EventViewModel.cs" />
