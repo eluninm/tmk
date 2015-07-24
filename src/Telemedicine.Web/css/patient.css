@@ -1441,6 +1441,27 @@ th.fc-day-header i2 {
 #calendar {
   font-size: 16px;
 }
+.fc td,
+.fc th {
+  border-left: none;
+  border-right: none;
+}
+.fc-widget-header {
+  border-top: none;
+}
+.fc .fc-widget-header {
+  border-top: none;
+}
+.fc .fc-sat,
+.fc .fc-sun {
+  color: #3e67ae;
+}
+.fc td.fc-today {
+  border: none;
+}
+.fc .fc-row.fc-widget-header {
+  border-right: none;
+}
 .addTimeSpanEventDialog .modal-body .row3 {
   margin-top: 24px;
   margin-left: -30px;
