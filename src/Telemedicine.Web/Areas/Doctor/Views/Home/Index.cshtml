@@ -103,10 +103,10 @@
 <div class="modal fade" id="CreateEvent" role="dialog" aria-labelledby="CreateEventLabel">
     <div class="modal-dialog  modal-sm" role="document">
         <div class="modal-content">
-           
-        </div>
-    </div>
-</div>
+                    
+                </div>
+            </div>
+            </div>
 
 <div class="modal fade" id="addEventDialog">
     <div class="modal-dialog addTimeSpanEventDialog">
@@ -167,6 +167,7 @@
                     selectable: true,
                     selectHelper: true,
                     eventLimit: true,
+                    slotDuration: '00:15:00',
                     select: function (start, end) {
                         $("#createEventLink").click();
                         //$('#CreateEvent').modal('toggle');
