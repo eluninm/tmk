@@ -68,7 +68,7 @@ namespace Telemedicine.Web.Api.Controllers
             }
 
             var conversations = await _conversationService.GetUserConversations(patient.UserId);
-            return Ok(conversations.Select(Mapper.Map<ConsultationDto>));
+            return Ok(conversations.Select(Mapper.Map<ConsultationInfoDto>));
         }
 
         [HttpGet]

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Telemedicine.Web.Api.Dto
 {
-    public class ConsultationDto
+    public class ConsultationInfoDto
     {
         public string Id { get; set; }
 

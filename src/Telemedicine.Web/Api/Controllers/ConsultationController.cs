@@ -20,11 +20,13 @@ namespace Telemedicine.Web.Api.Controllers
     {
         private readonly IConversationService _conversationService;
         private readonly IPatientService _patientService;
+        private readonly ISignalServer _signalServer;
 
         public ConsultationController(IConversationService conversationService, IPatientService patientService, ISignalServer signalServer)
         {
             _conversationService = conversationService;
             _patientService = patientService;
+            _signalServer = signalServer;
         }
 
         [HttpPost]
@@ -39,7 +41,10 @@ namespace Telemedicine.Web.Api.Controllers
             }
 
             var consultation = await _conversationService.BeginConsultation(patient.Id, doctorId);
-            return Ok(Mapper.Map<ConsultationDto>(consultation));
+            var beginConsultationDto = Mapper.Map<ConsultationInfoDto>(consultation);
+
+            _signalServer.BeginConsultation();
+            return Ok();
         }
 
         [HttpPost]

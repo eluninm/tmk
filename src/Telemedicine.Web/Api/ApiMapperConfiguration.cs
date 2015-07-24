@@ -19,7 +19,7 @@ namespace Telemedicine.Web.Api
                 .ForMember(d => d.DoctorSpecialization, e => e.MapFrom(s => s.Doctor.Specialization.DisplayName))
                 .ForMember(d => d.DoctorTitle, e => e.MapFrom(s => s.Doctor.User.DisplayName));
 
-            Mapper.CreateMap<Conversation, ConsultationDto>()
+            Mapper.CreateMap<Conversation, ConsultationInfoDto>()
                 .ForMember(d => d.Id, e => e.MapFrom(s => s.Id))
                 .ForMember(d => d.DoctorTitle, e => e.MapFrom(s => s.Doctor.User.DisplayName))
                 .ForMember(d => d.DoctorSpecialization, e => e.MapFrom(s => s.Doctor.Specialization.DisplayName));

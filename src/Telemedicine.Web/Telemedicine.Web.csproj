@@ -490,7 +490,7 @@
     <Compile Include="Api\Controllers\SpecializationController.cs" />
     <Compile Include="Api\Dto\AppointmentDto.cs" />
     <Compile Include="Api\Dto\BeginConsultationDto.cs" />
-    <Compile Include="Api\Dto\ConsultationDto.cs" />
+    <Compile Include="Api\Dto\ConsultationInfoDto.cs" />
     <Compile Include="Api\Dto\ConsultationMessageDto.cs" />
     <Compile Include="Api\Dto\DoctorAppointmentDto.cs" />
     <Compile Include="Api\Dto\DoctorListItemDto.cs" />

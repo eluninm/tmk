@@ -7,7 +7,10 @@ namespace Telemedicine.Web.Api.Dto
 {
     public class BeginConsultationDto
     {
-        public string DoctorId { get; set; }
+        public int DoctorId { get; set; }
+
+        public int PatientId { get; set; }
+
 
 
     }
