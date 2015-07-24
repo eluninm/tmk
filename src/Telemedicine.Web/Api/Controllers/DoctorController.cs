@@ -80,6 +80,7 @@ namespace Telemedicine.Web.Api.Controllers
             var pagedList = doctorAppointments.Map(t =>
             {
                 var doctorAppointmentDto = Mapper.Map<DoctorAppointmentDto>(t);
+                doctorAppointmentDto.PatientAvatarUrl = "/img/no_avatar.png";
                 return doctorAppointmentDto;
             });
 
