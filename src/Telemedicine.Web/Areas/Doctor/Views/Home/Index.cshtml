@@ -144,6 +144,7 @@
             });*/
             $.getJSON('@Url.Action("GetEvents", "Events")', "json", function (data) {
                 $('#calendar').fullCalendar({
+                    firstDay: moment().format('d'),
                     header: {
                         left: 'title',
                         center: '',
