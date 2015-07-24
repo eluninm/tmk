@@ -36,9 +36,12 @@ namespace Telemedicine.Web.Api.Controllers
                 return NotFound();
             }
 
-            var consultation = await _conversationService.BeginConversation2(patient.Id, doctorId);
+            var consultation = await _conversationService.BeginConsultation(patient.Id, doctorId);
             return Ok(Mapper.Map<ConsultationDto>(consultation));
         }
+
+        [HttpPost]
+        [System.Web.Http.Authorize(Roles = UserRoleNames.Doctor)]
 
         [HttpGet]
         [Route("{conversationId}/messages")]

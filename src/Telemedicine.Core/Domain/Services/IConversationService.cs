@@ -27,7 +27,7 @@ namespace Telemedicine.Core.Domain.Services
 
         Task<IEnumerable<ChatMessage>> GetConversationMessages(string conversationId);
 
-        Task<Conversation> BeginConversation2(int patientId, int doctorId);
+        Task<Conversation> BeginConsultation(int patientId, int doctorId);
     }
 
     public class ConversationService: IConversationService
@@ -137,7 +137,7 @@ namespace Telemedicine.Core.Domain.Services
             return messages;
         }
 
-        public async Task<Conversation> BeginConversation2(int patientId, int doctorId)
+        public async Task<Conversation> BeginConsultation(int patientId, int doctorId)
         {
             var patient = await _patientService.GetByIdAsync(patientId);
             var doctor = await _doctorService.GetByIdAsync(doctorId);

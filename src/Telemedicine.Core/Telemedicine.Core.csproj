@@ -301,6 +301,7 @@
     <Compile Include="Models\Conversation.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Enums\AppointmentStatus.cs" />
+    <Compile Include="Models\Enums\ConsultationStatus.cs" />
     <Compile Include="Models\Enums\EndTypeRepeatInterval.cs" />
     <Compile Include="Models\Enums\TypeRepeatingEvent.cs" />
     <Compile Include="Models\TimeSpanEvent.cs" />
