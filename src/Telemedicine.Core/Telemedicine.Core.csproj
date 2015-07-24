@@ -101,6 +101,8 @@
     <Compile Include="Domain\Repositories\Appointment\IAppointmentEventRepository.cs" />
     <Compile Include="Domain\Repositories\AttachmentContent\AttachmentContentRepository.cs" />
     <Compile Include="Domain\Repositories\Attachment\AttachmentRepository.cs" />
+    <Compile Include="Domain\Repositories\DoctorPayment\DoctorPaymentRepository.cs" />
+    <Compile Include="Domain\Repositories\DoctorPayment\IDoctorPaymentRepository.cs" />
     <Compile Include="Domain\Repositories\TimeSpanEventRepository.cs" />
     <Compile Include="Domain\Repositories\DoctorRepository.cs" />
     <Compile Include="Domain\Repositories\DoctorStatusRepository.cs" />
@@ -127,6 +129,8 @@
     <Compile Include="Domain\Services\Appointment\IAppointmentEventService.cs" />
     <Compile Include="Domain\Services\AttachmentContent\AttachmentContentService.cs" />
     <Compile Include="Domain\Services\Attachment\AttachmentService.cs" />
+    <Compile Include="Domain\Services\DoctorPayment\DoctorPaymentService.cs" />
+    <Compile Include="Domain\Services\DoctorPayment\IDoctorPaymentService.cs" />
     <Compile Include="Domain\Services\TimeSpanEventService.cs" />
     <Compile Include="Domain\Services\AttachmentContent\IAttachmentContentService.cs" />
     <Compile Include="Domain\Services\Attachment\IAttachmentService.cs" />
@@ -295,11 +299,16 @@
     <Compile Include="Migrations\201507221519186_ConsultationIdFieldAddedToAppointmentEvent.Designer.cs">
       <DependentUpon>201507221519186_ConsultationIdFieldAddedToAppointmentEvent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507241506582_AddDoctorPayment.cs" />
+    <Compile Include="Migrations\201507241506582_AddDoctorPayment.Designer.cs">
+      <DependentUpon>201507241506582_AddDoctorPayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AppointmentEvent.cs" />
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\AttachmentContent.cs" />
     <Compile Include="Models\Conversation.cs" />
     <Compile Include="Models\Doctor.cs" />
+    <Compile Include="Models\DoctorPaymentHistory.cs" />
     <Compile Include="Models\Enums\AppointmentStatus.cs" />
     <Compile Include="Models\Enums\EndTypeRepeatInterval.cs" />
     <Compile Include="Models\Enums\TypeRepeatingEvent.cs" />
@@ -469,6 +478,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507221519186_ConsultationIdFieldAddedToAppointmentEvent.resx">
       <DependentUpon>201507221519186_ConsultationIdFieldAddedToAppointmentEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507241506582_AddDoctorPayment.resx">
+      <DependentUpon>201507241506582_AddDoctorPayment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

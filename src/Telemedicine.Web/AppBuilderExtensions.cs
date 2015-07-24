@@ -100,6 +100,7 @@ namespace Telemedicine.Web
             builder.RegisterType<UserEventRepository>().As<IUserEventRepository>(); 
             builder.RegisterType<AppointmentEventRepository>().As<IAppointmentEventRepository>(); 
             builder.RegisterType<PaymentHistoryRepository>().As<IPaymentHistoryRepository>(); 
+            builder.RegisterType<DoctorPaymentRepository>().As<IDoctorPaymentRepository>(); 
 
             builder.RegisterType<DoctorService>().As<IDoctorService>();
             builder.RegisterType<PatientService>().As<IPatientService>();
@@ -115,6 +116,7 @@ namespace Telemedicine.Web
             builder.RegisterType<UserEventsService>().As<IUserEventsService>();
             builder.RegisterType<AppointmentEventService>().As<IAppointmentEventService>();
             builder.RegisterType<PaymentHistoryService>().As<IPaymentHistoryService>();
+            builder.RegisterType<DoctorPaymentService>().As<IDoctorPaymentService>();
         }
     }
 }
