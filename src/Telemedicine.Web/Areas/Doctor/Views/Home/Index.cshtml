@@ -205,6 +205,21 @@
             $('.dropdown-menu input, .dropdown-menu label').click(function (e) {
                 e.stopPropagation();
             });
+
+            $('#CreateEvent').on('shown.bs.modal', function () {
+                var pickerTime = shiftTime(new Date(EventStartDate));
+
+                $('#EventStart').datetimepicker({
+                    locale: 'ru'
+                });
+
+                $('#EventStart').data('DateTimePicker').date(pickerTime);
+
+                console.log(EventStartDate);
+                console.log(EventDurationVal);
+                $('#EventDuration').val(EventDurationVal);
+                $('#EventDuration').change();
+            });
         });
 
 
@@ -221,6 +236,36 @@
         function selectMonth(monthNumber) {
             var date = new Date();
             $('#calendar').fullCalendar('gotoDate', new Date(date.getFullYear(), monthNumber, 1));
+        }
+
+        function ArrowUp() {
+            var d = $('#EventStart').data('DateTimePicker').date()._d;
+            $('#EventStart').data('DateTimePicker').date(new Date(d.setDate(d.getDate() + 1)));
+        };
+
+        function ArrowDown() {
+            var d = $('#EventStart').data('DateTimePicker').date()._d;
+            $('#EventStart').data('DateTimePicker').date(new Date(d.setDate(d.getDate() - 1)));
+        };
+
+        function ArrowLeft() {
+            var d = $('#EventStart').data('DateTimePicker').date()._d;
+            $('#EventStart').data('DateTimePicker').date(new Date(d.setMinutes(d.getMinutes() - 15)));
+        };
+        function ArrowRight() {
+            var d = $('#EventStart').data('DateTimePicker').date()._d;
+            $('#EventStart').data('DateTimePicker').date(new Date(d.setMinutes(d.getMinutes() + 15)));
+        };
+
+        function shiftTime(date) {
+            var minutes = date.getMinutes();
+            var shift = minutes % 15;
+            if (shift > 0) {
+                var timeshift = 15 - shift;
+                date.setMinutes(minutes + timeshift);
+            }
+            var utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+            return new Date(utc);
         }
 
     </script>
