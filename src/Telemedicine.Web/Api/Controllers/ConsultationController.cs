@@ -9,6 +9,8 @@ using Telemedicine.Core.Domain.Consts;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Core.Extensions;
 using Telemedicine.Web.Api.Dto;
+using Telemedicine.Web.Hubs;
+using Telemedicine.Web.Hubs.Interfaces;
 
 namespace Telemedicine.Web.Api.Controllers
 {
@@ -19,7 +21,7 @@ namespace Telemedicine.Web.Api.Controllers
         private readonly IConversationService _conversationService;
         private readonly IPatientService _patientService;
 
-        public ConsultationController(IConversationService conversationService, IPatientService patientService)
+        public ConsultationController(IConversationService conversationService, IPatientService patientService, ISignalServer signalServer)
         {
             _conversationService = conversationService;
             _patientService = patientService;

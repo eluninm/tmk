@@ -9,7 +9,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.SignalR;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Core.Identity;
-using Telemedicine.Web.Api.Dto;
 
 namespace Telemedicine.Web.Hubs
 {
@@ -23,14 +22,7 @@ namespace Telemedicine.Web.Hubs
     [Microsoft.AspNet.SignalR.Authorize]
     public class SignalHub : Hub<ISignalClient>
     {
-        private readonly static ConnectionMapping<string> _connections = new ConnectionMapping<string>();
-
-        private readonly ILifetimeScope _hubLifetimeScope;
-
-        public SignalHub()
-        {
-            //_hubLifetimeScope = lifetimeScope.BeginLifetimeScope();
-        }
+        public readonly static ConnectionMapping<string> Connections = new ConnectionMapping<string>();
 
         public CallResult StartCall(string targetUserId)
         {
@@ -46,12 +38,12 @@ namespace Telemedicine.Web.Hubs
             };
 
             //if user not connected - return false
-            if (!_connections.GetConnections(targetUserId).Any())
+            if (!Connections.GetConnections(targetUserId).Any())
             {
                 return new CallResult {Success = false};
             }
 
-            foreach (var connectionId in _connections.GetConnections(targetUserId))
+            foreach (var connectionId in Connections.GetConnections(targetUserId))
             {
                 Groups.Add(connectionId, groupId);
                 Clients.Client(connectionId).OnCall(callerInfo);
@@ -70,7 +62,7 @@ namespace Telemedicine.Web.Hubs
             try
             {
                 string userId = Context.User.Identity.GetUserId();
-                var peerUser = _connections.GetUserIds().FirstOrDefault(t => t != Context.User.Identity.GetUserId());
+                var peerUser = Connections.GetUserIds().FirstOrDefault(t => t != Context.User.Identity.GetUserId());
 
                 var conversationService = DependencyResolver.Current.GetService<IConversationService>();
                 var conversation = await conversationService.BeginConversation(peerUser, userId);
@@ -92,14 +84,14 @@ namespace Telemedicine.Web.Hubs
         public override Task OnConnected()
         {
             string userId = Context.User.Identity.GetUserId();
-            _connections.Add(userId, Context.ConnectionId);
+            Connections.Add(userId, Context.ConnectionId);
             return base.OnConnected();
         }
 
         public override Task OnDisconnected(bool stopCalled)
         {
             string userId = Context.User.Identity.GetUserId();
-            _connections.Remove(userId, Context.ConnectionId);
+            Connections.Remove(userId, Context.ConnectionId);
 
             return base.OnDisconnected(stopCalled);
         }
@@ -108,35 +100,12 @@ namespace Telemedicine.Web.Hubs
         {
             string userId = Context.User.Identity.GetUserId();
 
-            if (!_connections.GetConnections(userId).Contains(Context.ConnectionId))
+            if (!Connections.GetConnections(userId).Contains(Context.ConnectionId))
             {
-                _connections.Add(userId, Context.ConnectionId);
+                Connections.Add(userId, Context.ConnectionId);
             }
 
             return base.OnReconnected();
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _hubLifetimeScope?.Dispose();
-            }
-
-            base.Dispose(disposing);
-        }
-    }
-
-    public interface ISignalClient
-    {
-        void OnCall(CallerInfo callerInfo);
-
-        void OnCancelCall();
-
-        void OnAcceptCall(string conversationId);
-
-        void OnDeclineCall();
-
-        void OnDoctorUpdated(DoctorListItemDto status);
     }
 }

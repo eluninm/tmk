@@ -482,7 +482,7 @@
     <Compile Include="Api\ApiMapperConfiguration.cs" />
     <Compile Include="Api\Controllers\AppointmentController.cs" />
     <Compile Include="Api\Controllers\BalanceController.cs" />
-    <Compile Include="Api\Controllers\ConversationController.cs" />
+    <Compile Include="Api\Controllers\ConsultationController.cs" />
     <Compile Include="Api\Controllers\DoctorController.cs" />
     <Compile Include="Api\Controllers\PatientController.cs" />
     <Compile Include="Api\Controllers\RecommendationController.cs" />
@@ -568,8 +568,10 @@
     <Compile Include="Controllers\TempController.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
-    <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Hubs\ConnectionMapping.cs" />
+    <Compile Include="Hubs\HubContext.cs" />
+    <Compile Include="Hubs\Interfaces\ISignalClient.cs" />
+    <Compile Include="Hubs\Interfaces\ISignalServer.cs" />
     <Compile Include="Hubs\SignalHub.cs" />
     <Compile Include="Hubs\SignalingHub.cs" />
     <Compile Include="Model\DoctorsJsonSerialization.cs" />

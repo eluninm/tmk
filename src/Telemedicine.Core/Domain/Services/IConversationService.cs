@@ -154,15 +154,6 @@ namespace Telemedicine.Core.Domain.Services
             _dbContext.Set<Conversation>().Add(conversation);
             await _dbContext.SaveChangesAsync();
 
-            //await _paymentService.CreateAsync(new PaymentHistory
-            //{
-            //    ConversationId = conversation.Id,
-            //    Date = conversation.Created,
-            //    Patient = patient,
-            //    PaymentType = PaymentType.Consultation,
-            //    Value = -500
-            //});
-
             return conversation;
         }
     }
