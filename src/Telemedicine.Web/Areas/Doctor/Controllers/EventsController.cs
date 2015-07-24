@@ -36,9 +36,9 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             
             List<EventViewModel> eventList = new List<EventViewModel>();
 
-            eventList.AddRange(
-                (await _appointmentEventService.GetAllAsync()).Select(
-                    ae => new EventViewModel() {start = ae.Date, title = "Прием пациента"}));
+            //eventList.AddRange(
+            //    (await _appointmentEventService.GetAllAsync()).Select(
+            //        ae => new EventViewModel() {start = ae.Date, title = "Прием пациента"}));
              
             var timeSpanEvents = (await _timeSpanEventService.GetAllAsync());
 

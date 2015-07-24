@@ -10,71 +10,10 @@
     </div>
 </div>
 <br />
-<div class="pull-right" style="font-size: 10px;">
-    <a class="btn btn-default rounded" onclick="$('#calendar').fullCalendar('today')">
-        Сегодня
-    </a>
-    <span class="input-group rounded" style="display: inline-block;">
-        <a class="btn btn-default " onclick="$('#calendar').fullCalendar('prev')">
-            <span class="tm icon arrow-left white"></span>
-
-        </a>
-        <a class="btn btn-default " onclick="$('#calendar').fullCalendar('next')">
-            <span class="tm icon arrow-right white"></span>
-        </a>
-    </span>
-    <div class="dropdown rounded" style="display: inline-block; width: 120px;">
-        <a class="btn btn-primary dropdown-toggle" id="selectMonth" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <span id="selectedMonth" class="uppercase" style="font-size:11px">Месяц</span> <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="selectMonth">
-            <li>
-                <a onclick=" selectMonth(0); ">Январь</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(1); ">Февраль</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(2); ">Март</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(3); ">Апрель</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(4); ">Май</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(5); ">Июнь</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(6); ">Июль</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(7); ">Август</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(8); ">Сентябрь</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(9); ">Отктябрь</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(10); ">Ноябрь</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(11); ">Декабрь</a>
-            </li>
-        </ul>
-    </div>
-
-    <a class="btn btn-primary rounded" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
-        <span class="glyphicon">+</span> Добавить
-    </a>
-</div>
 
 <div id="calendar"></div>
 
-<div style="height:calc(100% - 600px)">
+<div style="height: calc(100% - 600px);min-height:200px">
     <h3 class="page-header font-bold" style="border:none;">Записи на сегодня</h3>
     <div class="grid">
         <div class="page-header" style="border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4; padding-left: 0;">
@@ -101,57 +40,10 @@
 <div class="modal fade" id="CreateEvent" role="dialog" aria-labelledby="CreateEventLabel">
     <div class="modal-dialog  modal-sm" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="CreateEventLabel">Добавить прием</h4>
-            </div>
-            <div class="modal-body">
-                <div>
-                    Начальная дата
-                    <div class="text-center">
-                        <button style="background: transparent; border: none; outline: none;" onclick="var d = $('#EventStart').data('DateTimePicker').date()._d; $('#EventStart').data('DateTimePicker').date(new Date(d.setMinutes(d.getMinutes() + 15)));">
-                            <div class="tm icon arrow-up"></div>
-                        </button>
-                    </div>
-                    <div style="display: flex;">
-                        <button style="background: transparent; border: none; outline: none;" onclick="var d = $('#EventStart').data('DateTimePicker').date()._d; $('#EventStart').data('DateTimePicker').date(new Date(d.setDate(d.getDate() - 1)));">
-                            <div class="tm icon arrow-left"></div>
-                        </button>
-                        <input class="datepicker text-center" id="EventStart" style="flex: 1; font-weight: 700; border: none;outline: none"/>
-                        <button style="background: transparent; border: none; outline: none;" onclick="var d = $('#EventStart').data('DateTimePicker').date()._d; $('#EventStart').data('DateTimePicker').date(new Date(d.setDate(d.getDate() + 1)));">
-                            <div class="tm icon arrow-right"></div>
-                        </button>
-                    </div>
-
-                    <div class="text-center">
-                        <button style="background: transparent; border: none; outline: none;" onclick="var d = $('#EventStart').data('DateTimePicker').date()._d; $('#EventStart').data('DateTimePicker').date(new Date(d.setMinutes(d.getMinutes() - 15)));">
-                            <div class="tm icon arrow-down"></div>
-                        </button>
-                    </div>
-                </div>
-                <div>
-                    Длительность
-                    <br/>
-                    <br/>
-                    <div class="text-center" style="display: flex;">
-                        <button style="background: transparent; border: none; outline: none;" onclick="EventDuration.value = parseInt(EventDuration.value) - 15;$(EventDuration).change()">
-                            <div class="tm icon arrow-left"></div>
-                        </button>
-                        <label id="EventDurationText" style="flex: 1" onclick="$(this).toggle(false); $(EventDuration).toggle(true).focus();"></label>
-                        <input id="EventDuration" class="text-center" onchange="var t = parseInt(EventDuration.value) || 0; if (t < 0) { t = 0 }; this.value = t; EventDurationText.innerHTML = (t > 59 ? Math.floor(t / 60) + ' ч. ' : '') + (t % 60) + ' мин.'; $(EventDurationText).toggle(true); $(EventDuration).toggle(false).focus()" style="display: none; flex: 1; font-weight: 700; outline: none; border: none;" onblur="$(this).change()" />
-                        <button style="background: transparent; border: none; outline: none;" onclick="EventDuration.value = parseInt(EventDuration.value) + 15; $(EventDuration).change()">
-                            <div class="tm icon arrow-right"></div>
-                        </button>
-                    </div>
                     
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary rounded">Добавить</button>
-                <button type="button" class="btn btn-default rounded" data-dismiss="modal">Отменить</button>
             </div>
-        </div>
-    </div>
-</div>
 
 <div class="modal fade" id="addEventDialog">
     <div class="modal-dialog addTimeSpanEventDialog">
@@ -164,6 +56,9 @@
 @section scripts
 {
     <script type="text/javascript">
+        var EventStartDate;
+        var EventDurationVal;
+
         $(function () {
             $(".dropdown-menu li a").click(function () {
                 $("#selectedMonth").text($(this).text());
@@ -181,16 +76,13 @@
                 if ($.inArray($("#selectedMonth").text(), months) == -1)
                     $("#selectedMonth").text(months[(new Date()).getMonth()]);
             });
-            $('#EventStart').datetimepicker({
+           /* $('#EventStart').datetimepicker({
                 locale:'ru'
-            });
+            });*/
             $.getJSON('@Url.Action("GetEvents", "Events")', "json", function (data) {
                 $('#calendar').fullCalendar({
-                    header: {
-                        left: 'title',
-                        center: '',
-                        right: ''
-                    },
+                    firstDay: moment().format('d'),
+                    header: false,
                     views: {
                         week: {
                             smallTimeFormat: 'H:mm',
@@ -211,10 +103,13 @@
                     eventLimit: true,
                     slotDuration: '00:15:00',
                     select: function (start, end) {
-                        $('#CreateEvent').modal('toggle');
-                        $('#EventStart').data('DateTimePicker').date(start);
-                        $('#EventDuration').val((end - start) / 60000);
-                        $('#EventDuration').change();
+                        $("#createEventLink").click();
+                        //$('#CreateEvent').modal('toggle');
+                        EventStartDate = start;
+                        EventDurationVal = (end - start) / 60000;
+                        //$('#EventStart').data('DateTimePicker').date(start);
+                        //$('#EventDuration').val((end - start) / 60000);
+                        //$('#EventDuration').change();
                         /*  var title = prompt('Наименование события:');
                         var eventData;
                         if (title) {
@@ -244,6 +139,21 @@
             $('.dropdown-menu input, .dropdown-menu label').click(function (e) {
                 e.stopPropagation();
             });
+
+            $('#CreateEvent').on('shown.bs.modal', function () {
+                var pickerTime = shiftTime(new Date(EventStartDate));
+
+                $('#EventStart').datetimepicker({
+                    locale: 'ru'
+                });
+
+                $('#EventStart').data('DateTimePicker').date(pickerTime);
+
+                console.log(EventStartDate);
+                console.log(EventDurationVal);
+                $('#EventDuration').val(EventDurationVal);
+                $('#EventDuration').change();
+            });
         });
 
 
@@ -252,9 +162,44 @@
             window.location.href = '@Url.Action("Index", "Home")';
         }
 
+        function onAddCalendarEventSuccess() {
+            $("#CreateEvent").modal('hide');
+            window.location.href = '@Url.Action("Index", "Home")';
+        }
+
         function selectMonth(monthNumber) {
             var date = new Date();
             $('#calendar').fullCalendar('gotoDate', new Date(date.getFullYear(), monthNumber, 1));
+        }
+
+        function ArrowUp() {
+            var d = $('#EventStart').data('DateTimePicker').date()._d;
+            $('#EventStart').data('DateTimePicker').date(new Date(d.setDate(d.getDate() + 1)));
+        };
+
+        function ArrowDown() {
+            var d = $('#EventStart').data('DateTimePicker').date()._d;
+            $('#EventStart').data('DateTimePicker').date(new Date(d.setDate(d.getDate() - 1)));
+        };
+
+        function ArrowLeft() {
+            var d = $('#EventStart').data('DateTimePicker').date()._d;
+            $('#EventStart').data('DateTimePicker').date(new Date(d.setMinutes(d.getMinutes() - 15)));
+        };
+        function ArrowRight() {
+            var d = $('#EventStart').data('DateTimePicker').date()._d;
+            $('#EventStart').data('DateTimePicker').date(new Date(d.setMinutes(d.getMinutes() + 15)));
+        };
+
+        function shiftTime(date) {
+            var minutes = date.getMinutes();
+            var shift = minutes % 15;
+            if (shift > 0) {
+                var timeshift = 15 - shift;
+                date.setMinutes(minutes + timeshift);
+            }
+            var utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+            return new Date(utc);
         }
 
     </script>
