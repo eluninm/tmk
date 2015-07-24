@@ -10,69 +10,6 @@
     </div>
 </div>
 <br />
-<div class="pull-right" style="font-size: 10px;">
-    <a class="btn btn-default rounded" onclick="$('#calendar').fullCalendar('today')">
-        Сегодня
-    </a>
-    <span class="input-group rounded" style="display: inline-block;">
-        <a class="btn btn-default " onclick="$('#calendar').fullCalendar('prev')">
-            <span class="tm icon arrow-left white"></span>
-
-        </a>
-        <a class="btn btn-default " onclick="$('#calendar').fullCalendar('next')">
-            <span class="tm icon arrow-right white"></span>
-        </a>
-    </span>
-    <div class="dropdown rounded" style="display: inline-block; width: 120px;">
-        <a class="btn btn-primary dropdown-toggle" id="selectMonth" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <span id="selectedMonth" class="uppercase" style="font-size:11px">Месяц</span> <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="selectMonth">
-            <li>
-                <a onclick=" selectMonth(0); ">Январь</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(1); ">Февраль</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(2); ">Март</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(3); ">Апрель</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(4); ">Май</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(5); ">Июнь</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(6); ">Июль</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(7); ">Август</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(8); ">Сентябрь</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(9); ">Отктябрь</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(10); ">Ноябрь</a>
-            </li>
-            <li>
-                <a onclick=" selectMonth(11); ">Декабрь</a>
-            </li>
-        </ul>
-    </div>
-
-    <a class="btn btn-primary rounded" data-toggle="modal" data-target="#addEventDialog" href="@Url.Action("AddTimeSpanEvent")" title="Добавить событие">
-        <span class="glyphicon">+</span> Добавить
-    </a>
-    <a style="display: none;" class="btn btn-primary rounded" data-toggle="modal" id="createEventLink" data-target="#CreateEvent" href="@Url.Action("AddCalendarEvent")"> 
-    </a>
-</div>
 
 <div id="calendar"></div>
 
@@ -145,11 +82,7 @@
             $.getJSON('@Url.Action("GetEvents", "Events")', "json", function (data) {
                 $('#calendar').fullCalendar({
                     firstDay: moment().format('d'),
-                    header: {
-                        left: 'title',
-                        center: '',
-                        right: ''
-                    },
+                    header: false,
                     views: {
                         week: {
                             smallTimeFormat: 'H:mm',
