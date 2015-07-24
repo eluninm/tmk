@@ -10,7 +10,8 @@ namespace Telemedicine.Core.Models.Enums
     {
         New,
         InProgress,
-        Closed,
+        Completed,
+        SelfCancelled,
         Declined
     }
 }
