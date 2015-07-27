@@ -63,10 +63,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Sex, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.Sex, new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Sex, new { @class = "form-control" }) 
+                @Html.EnumDropDownListFor(model => model.Sex, new {@class = "form-control"})
                 @Html.ValidationMessageFor(model => model.Sex)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.AvatarUrl, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.AvatarUrl, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AvatarUrl)
             </div>
         </div>
     </div>

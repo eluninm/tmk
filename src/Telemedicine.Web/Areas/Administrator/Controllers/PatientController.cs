@@ -58,7 +58,8 @@ namespace Telemedicine.Web.Areas.Administrator.Controllers
                     LastName = model.LastName,
                     MiddleName = model.MiddleName,
                     UserName = model.Email,
-                    Email = model.Email
+                    Email = model.Email,
+                    AvatarUrl = model.AvatarUrl
                 };
 
                 var identityResult = await _userManager.CreateAsync(user, model.Password);
@@ -105,7 +106,8 @@ namespace Telemedicine.Web.Areas.Administrator.Controllers
                 LastName = patient.User.LastName,
                 MiddleName = patient.User.MiddleName,
                 Age = patient.Age,
-                Sex = patient.Sex
+                Sex = patient.Sex,
+                AvatarUrl = patient.User.AvatarUrl
             };
 
             return View(doctorViewModel);
@@ -132,6 +134,7 @@ namespace Telemedicine.Web.Areas.Administrator.Controllers
                 user.LastName = model.LastName;
                 user.MiddleName = model.MiddleName;
                 user.Email = model.Email;
+                user.AvatarUrl = model.AvatarUrl;
 
                 patient.Sex = model.Sex;
                 patient.Age = model.Age;

@@ -34,5 +34,8 @@ namespace Telemedicine.Web.Areas.Administrator.Models
 
         [DisplayName("Пол")]
         public Sex Sex { get; set; }
+
+        [DisplayName("Картинка")]
+        public string AvatarUrl { get; set; }
     }
 }
