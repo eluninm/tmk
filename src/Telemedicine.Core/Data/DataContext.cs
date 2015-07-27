@@ -100,6 +100,9 @@ namespace Telemedicine.Core.Data
             builder.Entity<AppointmentEvent>()
                 .Property(f => f.Created)
                 .HasColumnType("datetime2");
+
+
+            builder.Entity<DoctorPaymentHistory>().ToTable("DoctorPaymentsHistory");
         }
     }
 }

@@ -203,7 +203,9 @@
   <ItemGroup>
     <Content Include="Content\tmpls\dialogs\appointmentDialog.html" />
     <Content Include="Content\tmpls\dialogs\doctorDetails.html" />
-    <Content Include="Content\tmpls\dialogs\paymentDialog.html" />
+    <Content Include="Content\tmpls\dialogs\paymentDialog.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="img\arrow_left_white.svg" />
     <Content Include="img\arrow_right_white.svg" />
     <Content Include="img\chat_gray.svg" />

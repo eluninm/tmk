@@ -1,15 +1,17 @@
 ﻿///<reference path="../Services/DoctorApiService.ts"/>
 ///<reference path="../Services/SpecializationApiService.ts"/>
 ///<reference path="../Services/AppointmentApiService.ts"/>
-///<reference path="../SignalR/SignalR.ts"/>
+///<reference path="../SignalR/SignalR.ts"/> 
+///<reference path="../Services/PatientApiService.ts"/>
 
 module Telemedicine {
     export class DoctorListController {
-        static $inject = ["doctorApiService", "specializationApiService", "appointmentApiService", "$modal", "$scope"];
+        static $inject = ["patientApiService","doctorApiService", "specializationApiService", "appointmentApiService", "$modal", "$scope"];
 
-        constructor(private doctorApiService: DoctorApiService,
+        constructor(private patientApiService: PatientApiService,
+            private doctorApiService: DoctorApiService,
             private specializationApiService: SpecializationApiService,
-            private appointmentApiService: IAppointmentApiService,
+            private appointmentApiService: IAppointmentApiService, 
             private $modal: ng.ui.bootstrap.IModalService,
             private $scope: any) {
             this.loadPage();
@@ -82,20 +84,27 @@ module Telemedicine {
                     if (result === "appointment") {
                         this.appointmentApiService.createItem(appointment);
                         appointmentDialog.close();
-                        this.openPaymentDialog();
+                        this.openPaymentDialog(doctor);
+                        console.log("Send doctor id:" + doctor.Id);
                     }
                 });
             });
         }
 
-        public openPaymentDialog() {
+        public openPaymentDialog(doctor: IDoctor) {
+            console.log("openPaymentDialog doctor id:" + doctor.Id);
             var paymentDialog = this.$modal.open({
                 templateUrl: "/Content/tmpls/dialogs/paymentDialog.html",
                 controller: "PaymentDialogController as viewModel",
                 windowClass: "paymentmodaldialog",
                 resolve: {
-                    item: () => null
+                    item: () => null  
                 }
+            });
+
+            paymentDialog.result.then((result) => {
+                console.log(result);
+                this.patientApiService.payConsultation(doctor.Id, 500);
             });
         }
 

@@ -22,17 +22,18 @@ namespace Telemedicine.Web.Api.Controllers
         private readonly IAppointmentEventService _appointmentService;
         private readonly ITimeSpanEventService _timeSpanService;
         private readonly IPaymentHistoryService _paymentHistoryService;
-
+        private readonly IDoctorPaymentService _doctorPaymentService;
         public DoctorController(
             IDoctorService doctorService, 
             IAppointmentEventService appointmentService, 
             ITimeSpanEventService timeSpanService,
-            IPaymentHistoryService paymentHistoryService)
+            IPaymentHistoryService paymentHistoryService, IDoctorPaymentService doctorPaymentService)
         {
             _doctorService = doctorService;
             _appointmentService = appointmentService;
             _timeSpanService = timeSpanService;
             _paymentHistoryService = paymentHistoryService;
+            _doctorPaymentService = doctorPaymentService;
         }
 
         [HttpGet]
@@ -113,8 +114,8 @@ namespace Telemedicine.Web.Api.Controllers
             {
                 return NotFound();
             }
-            
-            var payments = await _paymentHistoryService.PagedAsync(User.Identity.GetUserId(), page, pageSize);
+            var payments = await _doctorPaymentService.PagedAsync(doctorId, page, pageSize);
+            // var payments = await _paymentHistoryService.PagedAsync(User.Identity.GetUserId(), page, pageSize);
             var pagedList = payments.Map(t =>
             {
                 var doctorDto = Mapper.Map<PaymentHistoryDto>(t);

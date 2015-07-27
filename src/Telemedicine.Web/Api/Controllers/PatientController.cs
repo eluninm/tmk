@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNet.Identity;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Core.Models;
+using Telemedicine.Core.Models.Enums;
 using Telemedicine.Core.PagedList;
 using Telemedicine.Web.Api.Dto;
 
@@ -19,19 +20,24 @@ namespace Telemedicine.Web.Api.Controllers
         private readonly IPatientService _patientService;
         private readonly IPaymentHistoryService _paymentHistoryService;
         private readonly IAppointmentEventService _appointmentService;
+        private readonly IDoctorPaymentService _doctorPaymentService;
+        private readonly IDoctorService _doctorService;
 
         public PatientController(
-            IRecommendationService recommendationService, 
-            IConversationService conversationService, 
-            IPatientService patientService, 
+            IRecommendationService recommendationService,
+            IConversationService conversationService,
+            IPatientService patientService,
             IPaymentHistoryService paymentHistoryService,
-            IAppointmentEventService appointmentService)
+            IAppointmentEventService appointmentService,
+            IDoctorPaymentService doctorPaymentService, IDoctorService doctorService)
         {
             _recommendationService = recommendationService;
             _conversationService = conversationService;
             _patientService = patientService;
             _paymentHistoryService = paymentHistoryService;
             _appointmentService = appointmentService;
+            _doctorPaymentService = doctorPaymentService;
+            _doctorService = doctorService;
         }
 
         [HttpGet]
@@ -105,6 +111,45 @@ namespace Telemedicine.Web.Api.Controllers
             });
 
             return Ok(pagedList);
+        }
+
+        [HttpPost]
+        [Route("payConsultation/{doctorId}/{number}/")]
+        public async Task<IHttpActionResult> PayConsultation([FromUri]int doctorId, [FromUri]int number)
+        {
+            var doctor = await _doctorService.GetByIdAsync(doctorId);
+            var patient = await _patientService.GetByUserIdAsync(User.Identity.GetUserId());
+            if (doctor != null)
+            {
+                DoctorPaymentHistory doctorPaymentHistory = new DoctorPaymentHistory()
+                {
+                    Date = DateTime.Now,
+                    Value = number,
+                    DoctorId = doctorId
+                };
+
+                await _doctorPaymentService.CreateAsync(doctorPaymentHistory);
+
+                PaymentHistory paymentHistory = new PaymentHistory()
+                {
+                    Date = DateTime.Now,
+                    Patient = patient,
+                    PaymentType = PaymentType.Consultation,
+                    Value = number
+                };
+
+                await _paymentHistoryService.CreateAsync(paymentHistory);
+
+                patient.Balance -= number;
+                doctor.Balance += number;
+
+                await _patientService.UpdateAsync(patient);
+                await _doctorService.UpdateAsync(doctor);
+
+
+                return Ok(true);
+            }
+            return Ok(false);
         }
     }
 }
