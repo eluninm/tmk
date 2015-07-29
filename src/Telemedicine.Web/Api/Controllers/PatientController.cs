@@ -45,6 +45,7 @@ namespace Telemedicine.Web.Api.Controllers
         public async Task<IHttpActionResult> PatientRecommendations(int patientId)
         {
             var recommendations = await _recommendationService.GetPatientRecommendations(patientId);
+            recommendations = recommendations.OrderByDescending(item => item.CreateDate);
             return Ok(recommendations.Select(Mapper.Map<RecommendationDto>));
         }
 
