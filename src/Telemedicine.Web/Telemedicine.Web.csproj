@@ -620,6 +620,7 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\PatientPaymentController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\PaymentDialogController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\SimpleModalControllers.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Filters\ToDate.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IAppointment.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultationMessage.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IConsultation.ts" />

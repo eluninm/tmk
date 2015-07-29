@@ -9,7 +9,8 @@
 ///<reference path="Controllers/DoctorAppointmentController.ts" />
 ///<reference path="Controllers/Patient/PatientAppointmentController.ts" /> 
 ///<reference path="Controllers/Doctor/DoctorPaymentController.ts" />
-///<reference path="Controllers/PatientPaymentController.ts" />
+///<reference path="Controllers/PatientPaymentController.ts" /> 
+///<reference path="Filters/ToDate.ts" /> 
 
 module Telemedicine {
     function moduleConfiguration($logProvider: ng.ILogProvider) {
@@ -18,9 +19,9 @@ module Telemedicine {
         $logProvider.debugEnabled(true);
     }
 
-    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration) 
-        .controller("PatientPaymentController", PatientPaymentController) 
-        .controller("DoctorPaymentController", DoctorPaymentController) 
+    angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration)
+        .controller("PatientPaymentController", PatientPaymentController)
+        .controller("DoctorPaymentController", DoctorPaymentController)
         .controller("HistoryController", HistoryController)
         .controller("ConsultationController", ConsultationController)
         .controller("RecommendationDetailsController", RecommendationDetailsController)
@@ -38,6 +39,6 @@ module Telemedicine {
         .service("doctorApiService", DoctorApiService)
         .service("specializationApiService", SpecializationApiService)
         .service("appointmentApiService", AppointmentApiService)
-        .service("balanceApiService", BalanceApiService)
-    ;
+        .service("balanceApiService", BalanceApiService).filter("toDate", Telemedicine.ToDate);
 }
+    

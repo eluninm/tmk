@@ -30,10 +30,10 @@
                     <tr class="myevent" ng-repeat="item in viewModel.appointments">
                         <td>
                             <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div> {{item.Date | date:'dd.MM.yyyy'}}
+                                <div class="glyphicon glyphicon-calendar"></div> {{item.Date | toDate | date:'dd.MM.yyyy'}}
                             </div>
                             <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div> {{item.Date | date:'HH:mm'}}
+                                <div class="glyphicon glyphicon-time"></div> {{item.Date | toDate |date:'HH:mm'}}
                             </div>
                         </td>
                         <td class="text-nowrap">

@@ -51,10 +51,10 @@
                     <div class="grid-body" ng-repeat="payment in viewModel.payments">
                         <div class="grid-col grid-col-33">
                             <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div> {{payment.Date | date:'yyyy-MM-dd'}}
+                                <div class="glyphicon glyphicon-calendar"></div> {{payment.Date | toDate | date:'yyyy-MM-dd'}}
                             </div>
                             <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div> {{payment.Date | date:'HH:mm'}}
+                                <div class="glyphicon glyphicon-time"></div> {{payment.Date | toDate | date:'HH:mm'}}
                             </div>
                         </div>
                         <div class="grid-col grid-col-33">
