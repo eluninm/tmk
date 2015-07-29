@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Telemedicine.Core.Identity;
 
 namespace Telemedicine.Web.Controllers
@@ -27,6 +29,14 @@ namespace Telemedicine.Web.Controllers
             var surrentUser = HttpContext.User.Identity.GetUserDisplayName();
             ViewBag.DisplayName = surrentUser;
             return PartialView("NavProfileBox");
+        }
+
+
+        public ActionResult Avatar()
+        {
+            var user =  _userManager.FindById(HttpContext.User.Identity.GetUserId());
+
+            return PartialView("_Avatar", user?.AvatarUrl);
         }
 
         public async Task<ActionResult> UserCallDialog(string id)
