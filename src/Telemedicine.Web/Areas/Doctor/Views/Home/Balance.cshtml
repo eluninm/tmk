@@ -4,8 +4,7 @@
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
  
-    
-<div class="row fullheight" style="position: relative" ng-controller="DoctorPaymentController as viewModel" data-id="@ViewBag.DoctorId">
+     
     <!--<div class="col-md-6 fullheight sub-container">
         <h3 class="page-header row">@ViewBag.Title</h3>
         <div class="unscrollable row container-fluid balance-container">
@@ -36,7 +35,7 @@
             </div>
         </div>
     </div>-->
-    <div class="fullheight sub-container">
+    <div class="fullheight sub-container row container-fluid" ng-controller="DoctorPaymentController as viewModel" data-id="@ViewBag.DoctorId">
         <h3 style="padding-bottom: 30px;" class="page-header">@ViewBag.Title</h3> 
         <div class="container-fluid row unscrollable" style="display: flex; flex-direction: column;">
             <div class="grid unscrollable payments-grid">
@@ -82,4 +81,4 @@
             </div>
         </div>
     </div>
-</div>
+ 
