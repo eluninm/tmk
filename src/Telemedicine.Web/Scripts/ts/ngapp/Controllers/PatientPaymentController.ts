@@ -2,16 +2,18 @@
 
 module Telemedicine {
     export class PatientPaymentController {
-        static $inject = ["patientApiService", "balanceApiService", "$element"];
+        static $inject = ["patientApiService", "balanceApiService", "$element","$scope"];
         private patientId: number;
         constructor(private patientApiService: PatientApiService,
             private balanceApiService: BalanceApiService,
-            private $element: ng.IAugmentedJQuery) {
+            private $element: ng.IAugmentedJQuery,
+            private $scope:any) {
 
             this.patientId = parseInt($element.data("id"));
 
             this.loadPage();
             this.loadBalance();
+
         }
 
         public payments: Array<IPaymentHistory>;
@@ -39,13 +41,18 @@ module Telemedicine {
                     this.loadBalance();
                     this.loadPage();
                     this.paymentValue = null;
+                    
                 });
+
+
+                
             }
         }
 
         public loadBalance() {
             this.balanceApiService.balance().then(result => {
                 this.balance = result;
+                this.$scope.$emit('child', this.balance);
             });
         }
     }

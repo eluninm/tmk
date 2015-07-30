@@ -617,10 +617,12 @@ var Telemedicine;
 (function (Telemedicine) {
     var BalanceController = (function () {
         function BalanceController(patientApiService, balanceApiService, $scope) {
+            var _this = this;
             this.patientApiService = patientApiService;
             this.balanceApiService = balanceApiService;
             this.$scope = $scope;
             this.getBalance();
+            $scope.$on('child', function (event, data) { return _this.balanceUpdatedEventHandler(event, data); });
         }
         BalanceController.prototype.debit = function (amount) {
             var _this = this;
@@ -635,10 +637,14 @@ var Telemedicine;
                 _this.getBalance();
             });
         };
+        BalanceController.prototype.balanceUpdatedEventHandler = function (event, data) {
+            this.balance2 = data;
+            this.$scope.$digest();
+        };
         BalanceController.prototype.getBalance = function () {
             var _this = this;
             this.balanceApiService.balance().then(function (result) {
-                _this.balance = result;
+                _this.balance2 = result;
             });
         };
         BalanceController.$inject = ["patientApiService", "balanceApiService", "$scope"];
@@ -758,10 +764,11 @@ var Telemedicine;
 var Telemedicine;
 (function (Telemedicine) {
     var PatientPaymentController = (function () {
-        function PatientPaymentController(patientApiService, balanceApiService, $element) {
+        function PatientPaymentController(patientApiService, balanceApiService, $element, $scope) {
             this.patientApiService = patientApiService;
             this.balanceApiService = balanceApiService;
             this.$element = $element;
+            this.$scope = $scope;
             this.patientId = parseInt($element.data("id"));
             this.loadPage();
             this.loadBalance();
@@ -790,9 +797,10 @@ var Telemedicine;
             var _this = this;
             this.balanceApiService.balance().then(function (result) {
                 _this.balance = result;
+                _this.$scope.$emit('child', _this.balance);
             });
         };
-        PatientPaymentController.$inject = ["patientApiService", "balanceApiService", "$element"];
+        PatientPaymentController.$inject = ["patientApiService", "balanceApiService", "$element", "$scope"];
         return PatientPaymentController;
     })();
     Telemedicine.PatientPaymentController = PatientPaymentController;

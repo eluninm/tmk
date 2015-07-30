@@ -25,8 +25,8 @@
 
     @RenderSection("styles", false)
 </head>
-<body ng-app="Telemedicine"   data-url-base="@Url.Content("~/")" >
-    <div class="sidebar" ng-controller="BalanceController as balanceviewModel">
+<body ng-app="Telemedicine"   data-url-base="@Url.Content("~/")" ng-controller="BalanceController as balanceviewModel">
+    <div class="sidebar" >
         <div class="nav-profile">
             @Html.Action("NavProfileBox", "Home", new { area = "" })
         </div>

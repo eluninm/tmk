@@ -6,10 +6,11 @@ module Telemedicine {
         static $inject = ["patientApiService","balanceApiService",  "$scope"];
         constructor(private patientApiService: PatientApiService, private balanceApiService: BalanceApiService, private $scope: any) {
             this.getBalance();
+            $scope.$on('child', (event, data) => this.balanceUpdatedEventHandler(event, data));
         }
 
         public debitValue: number;
-        public balance: number;
+        public balance2: number;
 
         public debit(amount: number) { 
             this.balanceApiService.debit(amount).then(result => { 
@@ -24,10 +25,16 @@ module Telemedicine {
             }); 
         }
 
+        public balanceUpdatedEventHandler(event, data) {
+              
+                this.balance2 = data;
+                this.$scope.$digest();
+            
+        }
 
         public getBalance() {
             this.balanceApiService.balance().then(result => {
-                this.balance = result; 
+                this.balance2 = result; 
             }); 
         }
     }
