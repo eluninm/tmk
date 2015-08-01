@@ -394,6 +394,10 @@ body {
   color: white;
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.rounded.btn.font-regular {
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+}
 .rounded.btn-default {
   background: #b1b1b1;
   background-color: #b1b1b1;
@@ -671,7 +675,7 @@ body {
   height: 1em;
   width: 1em;
   display: inline-block;
-  background-image: url('/img/pacient_my_records.svg');
+  background-image: url('/img/remove_orange.svg');
   background-size: 100%;
   background-repeat: no-repeat;
   vertical-align: middle;

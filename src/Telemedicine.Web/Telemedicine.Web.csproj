@@ -206,6 +206,7 @@
     <Content Include="Content\tmpls\dialogs\paymentDialog.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="img\remove_orange.svg" />
     <Content Include="img\arrow_left_white.svg" />
     <Content Include="img\arrow_right_white.svg" />
     <Content Include="img\chat_gray.svg" />

@@ -391,6 +391,10 @@ body {
   color: white;
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.rounded.btn.font-regular {
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+}
 .rounded.btn-default {
   background: #b1b1b1;
   background-color: #b1b1b1;
@@ -642,12 +646,33 @@ body {
   vertical-align: middle;
   margin-right: 0.5em;
 }
+.partdocument.orange {
+  color: #3e67ae;
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+}
 .partdocument.orange::before {
   content: '';
   height: 1.2em;
   width: 1.2em;
   display: inline-block;
   background-image: url('/img/document_orange.svg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+.remove.orange {
+  color: #3e67ae;
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+}
+.remove.orange::before {
+  content: '';
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+  background-image: url('/img/remove_orange.svg');
   background-size: 100%;
   background-repeat: no-repeat;
   vertical-align: middle;
