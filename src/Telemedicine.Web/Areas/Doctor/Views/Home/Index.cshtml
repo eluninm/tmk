@@ -144,20 +144,38 @@
             <button class="btn btn-default rounded">В историю</button>
         </div>
     </div>
-    <div class="grid">
+    <div class="grid" style="font-size: 12px;">
         <div class="page-header" style="border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4; padding-left: 0;">
             <table style="width: 100%">
-                <tr>
-                    <td class="col-md-3 uppercase font-bold">Время</td>
-                    <td class="col-md-9 uppercase font-bold">Пациент</td>
+                <tr class=" font-bold">
+                    <td class="col-md-2 font-bold">
+                        Время
+                    </td>
+                    <td class="col-md-3">Пациент</td>
+                    <td class="col-md-3"></td>
+                    <td class="col-md-2">Стоимость</td>
+                    <td class="col-md-2"></td>
                 </tr>
             </table>
         </div>
         <div class="grid-content">
-            <table style="width: 100%; ">
+            <table style="width: 100%; font-size: 14px;">
+                <tr>
+                    <td class="col-md-2">
+                        <div class="timeicon">18:00</div>
+                    </td>
+                    <td class="col-md-3">Евгения Олеговна</td>
+                    <td class="col-md-3">
+                        <div class="partdocument orange">Карта пациента</div>
+                    </td>
+                    <td class="col-md-2">1000 <span class="font-rouble">i</span></td>
+                    <td class="col-md-2"></td>
+                </tr>
                 @foreach (var appointment in Model)
                 {
                     <tr>
+
+
                         <td class="col-md-3">@appointment.Date.ToString("dd.MM.yyyy в HH:mm")</td>
                         <td class="col-md-9">@appointment.PatientFio</td>
                     </tr>
@@ -198,7 +216,7 @@
         }).on('dp.change', function (e) {
             $('#currentdate').html(e.date.format('DD MMM, dd'));
         });
-        $('#currentdate').html(moment().format('DD MMM, dd'));
+        $('#currentdate').html(moment().format('DD MMMM, dd'));
         $('.timeline').on('click', '.hour .info:not(.selected)', function () {
             $(this).toggleClass('selected', true);
             $(this).popover({

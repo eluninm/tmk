@@ -415,3 +415,36 @@ body {
     border:none;
     background-color:@color-accent1-light;
 }
+.timeicon{
+    &::before{
+        content:'';
+        height:1.2em;
+        width:1.2em;
+        display:inline-block;
+        background-image:url('/img/clock_blue.svg');
+        background-size:100%;
+        background-repeat:no-repeat;
+        vertical-align:middle;
+        margin-right:.5em;
+    }
+}
+.partdocument{
+    
+    &.orange{
+        color:@color-accent1-light;
+    .font-regular;
+
+
+        &::before{
+        content:'';
+        height:1.2em;
+        width:1.2em;
+        display:inline-block;
+        background-image:url('/img/document_orange.svg');
+        background-size:100%;
+        background-repeat:no-repeat;
+        vertical-align:middle;
+        margin-right:.5em;
+    }
+    }
+}

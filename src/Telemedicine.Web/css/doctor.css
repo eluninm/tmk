@@ -631,6 +631,28 @@ body {
   border: none;
   background-color: #3e67ae;
 }
+.timeicon::before {
+  content: '';
+  height: 1.2em;
+  width: 1.2em;
+  display: inline-block;
+  background-image: url('/img/clock_blue.svg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+.partdocument.orange::before {
+  content: '';
+  height: 1.2em;
+  width: 1.2em;
+  display: inline-block;
+  background-image: url('/img/document_orange.svg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
 .grid .page-header {
   margin: 0px;
   padding-top: 20px;
