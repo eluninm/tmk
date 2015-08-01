@@ -15,7 +15,7 @@ body {
     .font-regular;
     height: 100%;
     overflow: auto;
-    position:relative;
+    position: relative;
 }
 
 .fullheight {
@@ -154,7 +154,6 @@ body {
         /*padding: 12px 25px 25px 25px;*/
         color: white;
         .font-bold;
-
     }
 
 
@@ -168,14 +167,15 @@ body {
     &.btn-white {
         background: @color-background;
         background-color: @color-background;
-        color:@color-text;
-        border-style:solid;
-        border-width:1px;
-        border-color:@color-btn-default-background;
+        color: @color-text;
+        border-style: solid;
+        border-width: 1px;
+        border-color: @color-btn-default-background;
         text-shadow: none;
         box-shadow: none;
-        &:active{
-            background-color:@color-background1;
+
+        &:active {
+            background-color: @color-background1;
         }
     }
 
@@ -294,7 +294,7 @@ body {
             color: black;
         }
 
-        textarea{
+        textarea {
             border-radius: 21px;
             padding: 6px 21px;
             color: black;
@@ -332,25 +332,26 @@ body {
 
 /*стили датапикера*/
 .bootstrap-datetimepicker-widget {
-    .datepicker{
-        .datepicker-days{
+    .datepicker {
+        .datepicker-days {
             table {
                 .day {
                     border-radius: 21px;
                     line-height: 26px;
-                    &.active{
+
+                    &.active {
                         border-radius: 21px;
                     }
                 }
             }
         }
 
-        .glyphicon-triangle-right{
-            color:@color-accent1-light;
+        .glyphicon-triangle-right {
+            color: @color-accent1-light;
         }
 
-        .glyphicon-triangle-left{
-            color:@color-accent1-light;
+        .glyphicon-triangle-left {
+            color: @color-accent1-light;
         }
     }
 }
@@ -379,10 +380,12 @@ body {
             background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
+
             &.white {
                 background-image: url('/img/arrow_right_white.svg');
             }
         }
+
         &.arrow-up {
             height: 1em;
             width: 1em;
@@ -391,10 +394,12 @@ body {
             background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
+
             &.white {
                 background-image: url('/img/arrow_right_white.svg');
             }
         }
+
         &.arrow-down {
             height: 1em;
             width: 1em;
@@ -403,48 +408,71 @@ body {
             background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
+
             &.white {
                 background-image: url('/img/arrow_right_white.svg');
             }
         }
     }
 }
-.btn.btn-primary{
-    box-shadow:none;
-    background-image:none;
-    border:none;
-    background-color:@color-accent1-light;
+
+.btn.btn-primary {
+    box-shadow: none;
+    background-image: none;
+    border: none;
+    background-color: @color-accent1-light;
 }
-.timeicon{
-    &::before{
-        content:'';
-        height:1.2em;
-        width:1.2em;
-        display:inline-block;
-        background-image:url('/img/clock_blue.svg');
-        background-size:100%;
-        background-repeat:no-repeat;
-        vertical-align:middle;
-        margin-right:.5em;
+
+.timeicon {
+    &::before {
+        content: '';
+        height: 1.2em;
+        width: 1.2em;
+        display: inline-block;
+        background-image: url('/img/clock_blue.svg');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        vertical-align: middle;
+        margin-right: .5em;
     }
 }
-.partdocument{
-    
-    &.orange{
-        color:@color-accent1-light;
-    .font-regular;
+
+.partdocument {
+
+    &.orange {
+        color: @color-accent1-light;
+        .font-regular;
 
 
-        &::before{
-        content:'';
-        height:1.2em;
-        width:1.2em;
-        display:inline-block;
-        background-image:url('/img/document_orange.svg');
-        background-size:100%;
-        background-repeat:no-repeat;
-        vertical-align:middle;
-        margin-right:.5em;
+        &::before {
+            content: '';
+            height: 1.2em;
+            width: 1.2em;
+            display: inline-block;
+            background-image: url('/img/document_orange.svg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            vertical-align: middle;
+            margin-right: .5em;
+        }
     }
+}
+
+.remove {
+    &.orange {
+        color: @color-accent1-light;
+        .font-regular;
+
+        &::before {
+            content: '';
+            height: 1em;
+            width: 1em;
+            display: inline-block;
+            background-image: url('/img/pacient_my_records.svg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            vertical-align: middle;
+            margin-right: .5em;
+        }
     }
 }

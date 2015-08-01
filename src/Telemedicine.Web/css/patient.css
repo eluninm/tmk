@@ -661,6 +661,22 @@ body {
   vertical-align: middle;
   margin-right: 0.5em;
 }
+.remove.orange {
+  color: #3e67ae;
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+}
+.remove.orange::before {
+  content: '';
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+  background-image: url('/img/pacient_my_records.svg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
 .chat-message {
   position: relative;
   min-height: 45px;
