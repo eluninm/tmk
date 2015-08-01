@@ -388,16 +388,30 @@ body {
   height: 2em;
   border-radius: 2em;
   text-transform: uppercase;
-  font-size: 11px;
-  padding: 0.9em 1em 2.1em;
+  font-size: 10px;
+  padding: 0.9em 2em 2.1em;
   /*padding: 12px 25px 25px 25px;*/
   color: white;
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .rounded.btn-default {
   background: #b1b1b1;
   background-color: #b1b1b1;
   text-shadow: none;
   box-shadow: none;
+}
+.rounded.btn-white {
+  background: white;
+  background-color: white;
+  color: black;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #b1b1b1;
+  text-shadow: none;
+  box-shadow: none;
+}
+.rounded.btn-white:active {
+  background-color: #e4e4e4;
 }
 .rounded.pagination > li:first-child > a,
 .rounded.pagination > li:last-child > a,
@@ -1535,7 +1549,7 @@ th.fc-day-header i2 {
   display: inline-block;
 }
 .timeline .hour .time {
-  height: 2.6em;
+  height: 42.5px;
   position: relative;
   padding: 1em 0 3em;
 }
@@ -1545,7 +1559,7 @@ th.fc-day-header i2 {
   left: 50%;
   height: 8px;
   top: 0;
-  border-left: 1px solid #cccccc;
+  border-left: 1px solid #aeaeae;
 }
 .timeline .hour .info.selected {
   border: 3px solid #3e67ae;
@@ -1557,9 +1571,9 @@ th.fc-day-header i2 {
   background: #fee7e7;
 }
 .timeline .hour .info {
-  height: 5.2em;
-  width: 5.2em;
-  border: 1px solid #cccccc;
+  height: 85px;
+  width: 85px;
+  border: 1px solid #aeaeae;
   box-sizing: border-box;
   display: flex;
   border-collapse: collapse;
@@ -1571,7 +1585,7 @@ th.fc-day-header i2 {
   flex: 1;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100%;
+  background-size: 20px;
 }
 .actions button {
   display: block;
@@ -1580,33 +1594,111 @@ th.fc-day-header i2 {
   border: none;
   background: none;
 }
-#calendar {
-  padding: 0 1em;
-}
-#calendar .bootstrap-datetimepicker-widget .datepicker .datepicker-days table .day {
-  border-radius: 50%;
-  width: 2em;
-  height: 2em;
-  padding: 0;
-}
-#currentdate {
-  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: normal;
-  color: #3e67ae;
-  font-size: 20px;
-}
 .popover.timeline-item .popover-title {
   font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-transform: uppercase;
 }
 .doctormainpage .balance-info {
   text-align: center;
+  margin-bottom: 0;
+  border: none;
+}
+.doctormainpage .balance-info .text {
+  font-family: GothaProLight, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  padding: 0;
+  margin: 0;
 }
 .doctormainpage .balance-info .summa {
+  font-family: GothaProMedium, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  font-size: 28px;
   color: #3e67ae;
 }
 .doctormainpage .balance-info .summa::after {
   content: 'i';
   font-family: 'ALS Rubl';
   text-transform: none;
+}
+.doctormainpage #calendar {
+  font-size: 12px;
+  padding: 0 1em;
+  display: inline-block;
+}
+.doctormainpage #calendar .bootstrap-datetimepicker-widget .datepicker .datepicker-days table .day {
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+  padding: 0;
+}
+.doctormainpage #calendar .old,
+.doctormainpage #calendar .new {
+  visibility: hidden;
+}
+.doctormainpage #calendar .weekend {
+  color: #aeaeae;
+}
+.status-select {
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #cbcbcb;
+}
+.status-select .status-selector {
+  vertical-align: middle;
+  height: 3em;
+}
+.status-select .status-selector input {
+  display: none;
+}
+.status-select .status-selector input:checked + label::before {
+  left: 4em;
+}
+.status-select .status-selector label {
+  width: 7em;
+  height: 3em;
+  vertical-align: middle;
+  position: relative;
+  box-sizing: border-box;
+}
+.status-select .status-selector label::before {
+  content: '';
+  height: 3em;
+  width: 3em;
+  border: 1px solid #cfb082;
+  border-radius: 50%;
+  background: #cfb082;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all 200ms ease-in-out;
+}
+.status-select .status-selector label::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  border: 1px solid silver;
+  border-radius: 1.5em;
+  position: absolute;
+}
+.status-select .status {
+  vertical-align: middle;
+  color: #adbcda;
+  display: inline-block;
+  max-width: 120px;
+  transition: all 200ms ease-in-out;
+}
+.status-select .status.active {
+  color: #cfb082;
+}
+.currenttime {
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+}
+.currenttime span {
+  font-family: GothaProLight, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  font-size: 24px;
+  color: silver;
 }

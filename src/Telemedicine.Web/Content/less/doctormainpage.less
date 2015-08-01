@@ -1,13 +1,123 @@
-﻿.doctormainpage{
-    .balance-info{
-        text-align:center;
-        .summa{
-            color:@color-accent1-light;
-            &::after{
+﻿@gray: #c0c0c0;
+
+.doctormainpage {
+    .balance-info {
+        text-align: center;
+        margin-bottom: 0;
+        border: none;
+
+        .text {
+            .font-light;
+            font-size: 18px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .summa {
+            .font-medium;
+            font-size: 28px;
+            color: @color-accent1-light;
+
+            &::after {
                 content: 'i';
                 .font-rouble;
-                text-transform:none;
+                text-transform: none;
             }
         }
+    }
+
+    #calendar {
+        font-size: 12px;
+        padding: 0 1em;
+        display: inline-block;
+
+        .bootstrap-datetimepicker-widget .datepicker .datepicker-days table .day {
+            border-radius: 50%;
+            width: 2em;
+            height: 2em;
+            padding: 0;
+        }
+
+        .old, .new {
+            visibility: hidden;
+        }
+
+        .weekend {
+            color: @color-accent8;
+        }
+    }
+}
+
+.status-select {
+    .font-bold;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #cbcbcb;
+
+    .status-selector {
+        vertical-align: middle;
+        height: 3em;
+
+        input {
+            display: none;
+        }
+        input:checked+label{
+             &::before {
+                 left:4em;
+            }
+        }
+
+        label {
+            width: 7em;
+            height: 3em;
+            vertical-align: middle;
+            position: relative;
+            box-sizing: border-box;
+
+            &::before {
+                content: '';
+                height: 3em;
+                width: 3em;
+                border: 1px solid #cfb082;
+                border-radius: 50%;
+                background: #cfb082;
+                position: absolute;
+                left:0;
+                top: 0;
+                transition:all 200ms ease-in-out;
+            }
+
+            &::after {
+                content:'';
+                width: 100%;
+                height: 100%;
+                border: 1px solid @gray;
+                border-radius: 1.5em;
+                position:absolute;
+            }
+        }
+    }
+
+    .status {
+        vertical-align: middle;
+        color: #adbcda;
+        display: inline-block;
+        max-width: 120px;
+        transition:all 200ms ease-in-out;
+
+        &.active {
+            color: #cfb082;
+        }
+    }
+}
+
+.currenttime {
+    .font-bold;
+    font-size: 20px;
+
+    span {
+        .font-light;
+        font-size: 24px;
+        color: @gray;
     }
 }
