@@ -284,6 +284,7 @@ body {
   font-weight: normal;
   height: 100%;
   overflow: auto;
+  position: relative;
 }
 .fullheight {
   height: 100%;
@@ -1438,9 +1439,6 @@ th.fc-day-header i2 {
 .fc-axis {
   width: 100px !important;
 }
-#calendar {
-  font-size: 16px;
-}
 .fc td,
 .fc th {
   border-left: none;
@@ -1532,4 +1530,83 @@ th.fc-day-header i2 {
 .addTimeSpanEventDialog .modal-body .days-list a .glyphicon-remove {
   color: #8c8c8c;
   margin-left: 4px;
+}
+.timeline .hour {
+  display: inline-block;
+}
+.timeline .hour .time {
+  height: 2.6em;
+  position: relative;
+  padding: 1em 0 3em;
+}
+.timeline .hour .time::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  height: 8px;
+  top: 0;
+  border-left: 1px solid #cccccc;
+}
+.timeline .hour .info.selected {
+  border: 3px solid #3e67ae;
+}
+.timeline .hour .info.plan {
+  background: #e7fef5;
+}
+.timeline .hour .info.unworked {
+  background: #fee7e7;
+}
+.timeline .hour .info {
+  height: 5.2em;
+  width: 5.2em;
+  border: 1px solid #cccccc;
+  box-sizing: border-box;
+  display: flex;
+  border-collapse: collapse;
+  border-radius: 0;
+  margin: 0;
+}
+.timeline .hour .info .human {
+  background-image: url('/img/no_avatar.png');
+  flex: 1;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+.actions button {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  background: none;
+}
+#calendar {
+  padding: 0 1em;
+}
+#calendar .bootstrap-datetimepicker-widget .datepicker .datepicker-days table .day {
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+  padding: 0;
+}
+#currentdate {
+  font-family: GothaProReg, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+  color: #3e67ae;
+  font-size: 20px;
+}
+.popover.timeline-item .popover-title {
+  font-family: GothaProBold, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+}
+.doctormainpage .balance-info {
+  text-align: center;
+}
+.doctormainpage .balance-info .summa {
+  color: #3e67ae;
+}
+.doctormainpage .balance-info .summa::after {
+  content: 'i';
+  font-family: 'ALS Rubl';
+  text-transform: none;
 }

@@ -1,0 +1,87 @@
+﻿@infosize: 5.2em;
+
+.timeline {
+
+    .hour {
+        display: inline-block;
+
+        .time {
+            height: @infosize/2;
+            position: relative;
+            padding:1em 0  3em ;
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 50%;
+                height: 8px;
+                top:0;
+                border-left: 1px solid @color-text3;
+            }
+        }
+
+        .info.selected {
+            border: 3px solid @color-accent1-light;
+        }
+
+        .info.plan {
+            background: @color-accent6;
+        }
+
+        .info.unworked {
+            background: @color-accent7;
+        }
+
+        .info {
+            height: @infosize;
+            width: @infosize;
+            border: 1px solid @color-text3;
+            box-sizing: border-box;
+            display: flex;
+            border-collapse: collapse;
+            border-radius: 0;
+            margin: 0;
+
+            .human {
+                background-image: url('/img/no_avatar.png');
+                flex: 1;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 100%;
+            }
+        }
+    }
+}
+
+.actions {
+    button {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        border: none;
+        background: none;
+    }
+}
+
+#calendar {
+    padding: 0 1em;
+
+    .bootstrap-datetimepicker-widget .datepicker .datepicker-days table .day {
+        border-radius: 50%;
+        width: 2em;
+        height: 2em;
+        padding: 0;
+    }
+}
+
+#currentdate {
+    .font-regular;
+    color: @color-accent1-light;
+    font-size: 20px;
+}
+.popover.timeline-item{
+    .popover-title{
+        .font-bold;
+        text-transform:uppercase;
+    }
+}

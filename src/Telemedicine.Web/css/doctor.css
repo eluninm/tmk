@@ -281,6 +281,7 @@ body {
   font-weight: normal;
   height: 100%;
   overflow: auto;
+  position: relative;
 }
 .fullheight {
   height: 100%;

@@ -221,7 +221,9 @@
     <Content Include="Content\less\OwlCarousel\owl.theme.css" />
     <Content Include="Content\less\OwlCarousel\owl.transitions.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\style.css" />
+    <Content Include="Content\style.css">
+      <DependentUpon>style.less</DependentUpon>
+    </Content>
     <Content Include="Content\style.min.css">
       <DependentUpon>style.css</DependentUpon>
     </Content>
@@ -414,6 +416,8 @@
     <Content Include="Content\less\usercalldialog.less" />
     <Content Include="Content\less\fullcalendar.less" />
     <Content Include="Content\less\addTimeSpanEventDialog.less" />
+    <Content Include="Content\less\timeline.less" />
+    <Content Include="Content\less\doctormainpage.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
