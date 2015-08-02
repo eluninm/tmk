@@ -542,6 +542,7 @@
     <Compile Include="Areas\Doctor\Models\AddEventViewModel.cs" />
     <Compile Include="Areas\Doctor\Models\AppointmentViewModel.cs" />
     <Compile Include="Areas\Doctor\Models\EventViewModel.cs" />
+    <Compile Include="Areas\Doctor\Models\Timetable\TimetableDateViewModel.cs" />
     <Compile Include="Areas\Patient\Models\PaymentMethodViewModel.cs" />
     <Compile Include="Areas\Patient\Controllers\ConversationController.cs" />
     <Compile Include="Areas\Patient\Controllers\HistoryController.cs" />

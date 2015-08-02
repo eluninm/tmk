@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.UI;
 using AutoMapper;
-using Microsoft.AspNet.Identity;
 using Telemedicine.Core.Consts;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Web.Api.Dto;
+using Telemedicine.Web.Areas.Doctor.Models.Timetable;
 
 namespace Telemedicine.Web.Api.Controllers
 {
@@ -21,19 +18,19 @@ namespace Telemedicine.Web.Api.Controllers
         private readonly IDoctorService _doctorService;
         private readonly IAppointmentEventService _appointmentService;
         private readonly ITimeSpanEventService _timeSpanService;
-        private readonly IPaymentHistoryService _paymentHistoryService;
         private readonly IDoctorPaymentService _doctorPaymentService;
+        private readonly IDoctorTimetableService _doctorTimetableService;
         public DoctorController(
             IDoctorService doctorService, 
             IAppointmentEventService appointmentService, 
             ITimeSpanEventService timeSpanService,
-            IPaymentHistoryService paymentHistoryService, IDoctorPaymentService doctorPaymentService)
+            IDoctorPaymentService doctorPaymentService, IDoctorTimetableService doctorTimetableService)
         {
             _doctorService = doctorService;
             _appointmentService = appointmentService;
             _timeSpanService = timeSpanService;
-            _paymentHistoryService = paymentHistoryService;
             _doctorPaymentService = doctorPaymentService;
+            _doctorTimetableService = doctorTimetableService;
         }
 
         [HttpGet]
@@ -53,7 +50,7 @@ namespace Telemedicine.Web.Api.Controllers
                 });
                 return Ok(pagedList);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return NotFound();
             }
@@ -123,6 +120,42 @@ namespace Telemedicine.Web.Api.Controllers
             });
 
             return Ok(pagedList);
+        }
+
+        [HttpGet]
+        [Route("{doctorId}/timetable/{year}/{month}")]
+        public async Task<IHttpActionResult> GetMonthTimetable(int doctorId, int year, int month)
+        {
+            var timetableViewModel = new List<TimetableDateViewModel>();
+            var timetable = await _doctorTimetableService.GetDoctorTimetableByMonthAsync(doctorId, year, month);
+
+            foreach (var time in timetable)
+            {
+                var timeViewModel = timetableViewModel.FirstOrDefault(t => t.Date == time.DateTime.Date);
+                if (timeViewModel == null)
+                {
+                    timeViewModel = new TimetableDateViewModel { Date = time.DateTime.Date };
+                    timetableViewModel.Add(timeViewModel);
+                }
+
+                //проверка есть ли хотя бы один пациент на дату
+                timeViewModel.HasConsultations = timeViewModel.HasConsultations || (time.AppointmentEvents != null && time.AppointmentEvents.Any());
+                timeViewModel.Hours = timeViewModel.Hours ?? new List<TimetableHourViewModel>();
+
+                var hour = time.DateTime.Hour;
+                var hourViewModel = timeViewModel.Hours.FirstOrDefault(t => t.Hour == hour);
+                if (hourViewModel == null)
+                {
+                    hourViewModel = new TimetableHourViewModel {Hour = hour, HourType = time.HourType};
+                    timeViewModel.Hours.Add(hourViewModel);
+                }
+
+                //подсчет пациентов
+                if (time.AppointmentEvents != null)
+                    hourViewModel.PatientsCount = time.AppointmentEvents.Count;
+            }
+
+            return Ok(timetableViewModel);
         }
     }
 }

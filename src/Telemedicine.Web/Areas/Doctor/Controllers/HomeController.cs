@@ -87,7 +87,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             var doctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
-                TimeSpanEvent timeSpanEvent = new TimeSpanEvent()
+                TimeSpanEvent timeSpanEvent = new TimeSpanEvent
                 {
                     BeginDate = viewModel.Begin,
                     EndDate = viewModel.End,

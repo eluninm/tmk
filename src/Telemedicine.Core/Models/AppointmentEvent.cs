@@ -23,5 +23,9 @@ namespace Telemedicine.Core.Models
         public AppointmentStatus Status { get; set; }
 
         public int? ConsultationId { get; set; }
+
+        public DoctorTimetable DoctorTimetable { get; set; }
+
+        public int DoctorTimetableId { get; set; }
     }
 }
