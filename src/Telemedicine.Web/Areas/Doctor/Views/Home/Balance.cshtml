@@ -5,7 +5,15 @@
 }
 
 <div class="fullheight sub-container row container-fluid" ng-controller="DoctorPaymentController as viewModel" data-id="@ViewBag.DoctorId">
-    <h1 class="page-header row">@ViewBag.Title</h1>
+    <h1 class="page-header row">
+        <div class="pull-left currenttime">
+            @ViewBag.Title:
+            <span style="vertical-align: middle;font-size: 36px">
+                <b style="font-weight: 400" id="currentbalance">100500</b>
+                <b class="font-rouble" style="font-weight: 400">o</b>
+            </span>
+        </div>
+    </h1>
     <div class="container-fluid unscrollable row" style="display: flex;flex-direction: column">
         <div class="grid" style="font-size: 12px;">
             <div style="padding:8px;">
