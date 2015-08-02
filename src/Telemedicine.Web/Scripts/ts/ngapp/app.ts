@@ -11,6 +11,7 @@
 ///<reference path="Controllers/Doctor/DoctorPaymentController.ts" />
 ///<reference path="Controllers/PatientPaymentController.ts" /> 
 ///<reference path="Controllers/Doctor/DoctorTimelineController.ts" /> 
+///<reference path="Controllers/Doctor/DoctorStatusController.ts" /> 
 ///<reference path="Filters/ToDate.ts" /> 
 
 module Telemedicine {
@@ -24,6 +25,7 @@ module Telemedicine {
         .controller("PatientPaymentController", PatientPaymentController)
         .controller("DoctorPaymentController", DoctorPaymentController)
         .controller("DoctorTimelineController", DoctorTimelineController)
+        .controller("DoctorStatusController", DoctorStatusController)
         .controller("HistoryController", HistoryController)
         .controller("ConsultationController", ConsultationController)
         .controller("RecommendationDetailsController", RecommendationDetailsController)

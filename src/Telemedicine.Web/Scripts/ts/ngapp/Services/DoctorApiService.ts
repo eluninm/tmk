@@ -112,5 +112,11 @@ module Telemedicine {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/timeline/" + year + "/" + month);
             return this.$http.get(url).then(result => result.data);
         }
+
+        changeDoctorStatus(isAvailable: boolean){
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + isAvailable + "/changeStatus");
+            return this.$http.post(url, { "isAvailable": isAvailable}).then(result => result.data);
+        }
+        
     }
 }

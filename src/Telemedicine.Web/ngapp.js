@@ -335,6 +335,10 @@ var Telemedicine;
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/timeline/" + year + "/" + month);
             return this.$http.get(url).then(function (result) { return result.data; });
         };
+        DoctorApiService.prototype.changeDoctorStatus = function (isAvailable) {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + isAvailable + "/changeStatus");
+            return this.$http.post(url, { "isAvailable": isAvailable }).then(function (result) { return result.data; });
+        };
         return DoctorApiService;
     })();
     Telemedicine.DoctorApiService = DoctorApiService;
@@ -841,6 +845,22 @@ var Telemedicine;
     })();
     Telemedicine.DoctorTimelineController = DoctorTimelineController;
 })(Telemedicine || (Telemedicine = {}));
+///<reference path="../../Services/DoctorApiService.ts"/>
+///<reference path="../../Services/BalanceApiService.ts"/>
+var Telemedicine;
+(function (Telemedicine) {
+    var DoctorStatusController = (function () {
+        function DoctorStatusController(doctorApiService) {
+            this.doctorApiService = doctorApiService;
+        }
+        DoctorStatusController.prototype.changeStatus = function (doctorIsAvailable) {
+            this.doctorApiService.changeDoctorStatus(doctorIsAvailable);
+        };
+        DoctorStatusController.$inject = ["doctorApiService"];
+        return DoctorStatusController;
+    })();
+    Telemedicine.DoctorStatusController = DoctorStatusController;
+})(Telemedicine || (Telemedicine = {}));
 var Telemedicine;
 (function (Telemedicine) {
     function ToDate() {
@@ -863,6 +883,7 @@ var Telemedicine;
 ///<reference path="Controllers/Doctor/DoctorPaymentController.ts" />
 ///<reference path="Controllers/PatientPaymentController.ts" /> 
 ///<reference path="Controllers/Doctor/DoctorTimelineController.ts" /> 
+///<reference path="Controllers/Doctor/DoctorStatusController.ts" /> 
 ///<reference path="Filters/ToDate.ts" /> 
 var Telemedicine;
 (function (Telemedicine) {
@@ -875,6 +896,7 @@ var Telemedicine;
         .controller("PatientPaymentController", Telemedicine.PatientPaymentController)
         .controller("DoctorPaymentController", Telemedicine.DoctorPaymentController)
         .controller("DoctorTimelineController", Telemedicine.DoctorTimelineController)
+        .controller("DoctorStatusController", Telemedicine.DoctorStatusController)
         .controller("HistoryController", Telemedicine.HistoryController)
         .controller("ConsultationController", Telemedicine.ConsultationController)
         .controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController)

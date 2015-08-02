@@ -3,7 +3,7 @@
     ViewBag.Title = "Главная";
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
-<div class="row page-header container-fluid">
+<div class="row page-header container-fluid" ng-controller="DoctorStatusController as viewModel">
     <div class="pull-left currenttime">
         Время: <span id="currenttime"></span>
     </div>
@@ -11,7 +11,7 @@
         Текущий статус
         <span class="status active" style="margin-left: 15px">Занят</span>
         <span class="status-selector">
-            <input type="checkbox" value="" onchange="$(this).parent().prev().toggleClass('active', !this.checked); $(this).parent().next().toggleClass('active', this.checked)" />
+            <input type="checkbox" value="" ng-model="doctorIsAvailable" ng-change="viewModel.changeStatus(doctorIsAvailable)" onchange="$(this).parent().prev().toggleClass('active', !this.checked); $(this).parent().next().toggleClass('active', this.checked)" />
             <label onclick="$(this).prev().click()"></label>
         </span>
         <span class="status">Готов консультировать</span>

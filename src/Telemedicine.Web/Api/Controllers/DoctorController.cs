@@ -4,15 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.SignalR;
 using Telemedicine.Core.Consts;
+using Telemedicine.Core.Domain.Models;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Web.Api.Dto;
 using Telemedicine.Web.Areas.Doctor.Models.Timetable;
+using Telemedicine.Web.Hubs;
 
 namespace Telemedicine.Web.Api.Controllers
 {
     [RoutePrefix("api/v1/doctor")]
-    [Authorize]
+    [System.Web.Http.Authorize]
     public class DoctorController : ApiController
     {
         private readonly IDoctorService _doctorService;
@@ -156,6 +160,41 @@ namespace Telemedicine.Web.Api.Controllers
             }
 
             return Ok(timetableViewModel);
+        }
+
+
+        [HttpPost]
+        [Route("{isAvailable}/changeStatus")]
+        public async Task<IHttpActionResult> ChangeStatus(bool isAvailable)
+        {
+            var currentUserId = User.Identity.GetUserId();
+
+            DoctorStatus status = null;
+
+            if (isAvailable)
+            {
+                status = await _doctorService.GetStatusByNameAsync("Available");
+            }
+            else
+            {
+                status = await _doctorService.GetStatusByNameAsync("Busy");
+            }
+
+            status =  _doctorService.SetStatusByUserId(currentUserId, status.Id); 
+
+            var doctor = await _doctorService.GetByUserIdAsync(currentUserId);
+            var doctorDto = Mapper.Map<DoctorListItemDto>(doctor);
+            doctorDto.StatusText = doctorDto.StatusName == DoctorStatusNames.Busy ? "занят" : "доступен";
+            doctorDto.IsChatAvailable = doctor.DoctorStatus.Name != DoctorStatusNames.Busy;
+            doctorDto.IsAudioAvailable = doctor.DoctorStatus.Name == DoctorStatusNames.VideoChat;
+            doctorDto.IsVideoAvailable = doctor.DoctorStatus.Name == DoctorStatusNames.VideoChat;
+
+
+
+            GlobalHost.ConnectionManager.GetHubContext<SignalHub>()
+                .Clients.All.OnDoctorUpdated(doctorDto);
+
+            return Ok(true);
         }
     }
 }

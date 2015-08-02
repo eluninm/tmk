@@ -175,6 +175,11 @@ namespace Telemedicine.Core.Domain.Services
             return _doctorStatusRepository.GetAvailableStatuses();
         }
 
+        public async Task<DoctorStatus> GetStatusByNameAsync(string statusName)
+        {
+            return await _doctorStatusRepository.GetByNameAsync(statusName);
+        }
+
         public Doctor GetById(int id)
         {
             return _doctorRepository.GetById(id);
