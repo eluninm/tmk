@@ -41,11 +41,7 @@ module Telemedicine {
                     this.loadBalance();
                     this.loadPage();
                     this.paymentValue = null;
-                    
                 });
-
-
-                
             }
         }
 

@@ -17,18 +17,18 @@
         <span class="status">Готов консультировать</span>
     </div>
 </div>
-<div style="display: flex;" class="doctormainpage">
+<div style="display: flex;" class="doctormainpage" ng-controller="DoctorTimelineController as viewModel" data-id="@ViewBag.DoctorId">
     <div class="panel panel-default text-center" style="width: 292px;">
         <div id="calendar" class="panel-body"></div>
         <div id="currentdate" class="text-center"></div>
-        <hr />
+        <hr/>
         <div class="balance-info">
             <div class="text">Ваш баланс</div>
             <div class="summa">1486</div>
             <button class="btn btn-primary rounded">Подробнее</button>
         </div>
     </div>
-    <div class="container-fluid" style="flex:1">
+    <div class="container-fluid" style="flex: 1">
         <div style="flex: 1; flex-wrap: wrap" class="timeline">
             <div class="hour">
                 <div class="info plan panel-default panel"></div>
@@ -243,30 +243,30 @@
         var timeline = $('.timeline');
         var str = '';
         var hours = [
-            { type: 'plan', humans: 0 },
-            { type: 'plan', humans: 2 },
-            { type: 'plan', humans: 3 },
-            { type: 'plan', humans: 4 },
-            { type: 'plan', humans: 1 },
-            { type: 'plan', humans: 0 },
-            { type: 'plan', humans: 0 },
+            { type: 'working', humans: 0 },
+            { type: 'working', humans: 2 },
+            { type: 'working', humans: 3 },
+            { type: 'working', humans: 4 },
+            { type: 'working', humans: 1 },
+            { type: 'working', humans: 0 },
+            { type: 'working', humans: 0 },
             { type: '', humans: 0 },
             { type: '', humans: 0 },
             { type: '', humans: 0 },
             { type: '', humans: 0 },
             { type: '', humans: 0 },
             { type: '', humans: 0 },
-            { type: '', humans: 6 },
             { type: '', humans: 0 },
             { type: '', humans: 0 },
             { type: '', humans: 0 },
             { type: '', humans: 0 },
             { type: '', humans: 0 },
-            { type: 'unworked', humans: 0 },
-            { type: 'unworked', humans: 0 },
-            { type: 'unworked', humans: 0 },
-            { type: 'unworked', humans: 0 },
-            { type: 'unworked', humans: 0 },
+            { type: '', humans: 0 },
+            { type: 'notworking', humans: 0 },
+            { type: 'notworking', humans: 0 },
+            { type: 'notworking', humans: 0 },
+            { type: 'notworking', humans: 0 },
+            { type: 'notworking', humans: 0 },
         ];
         hours.forEach(function (hour, i) {
             var humans = '';
@@ -279,10 +279,12 @@
             </div>';
         });
         timeline.html(str);
+
         $('#currenttime').text(moment().format('HH:mm:ss'));
-        setInterval(function () {
+            setInterval(function () {
             $('#currenttime').text(moment().format('HH:mm:ss'));
-        }, 100);
+            }, 100);
+
         $('body').on('click', function (e) {
             $('.hour .info').each(function () {
                 //the 'is' for buttons that trigger popups
@@ -292,6 +294,7 @@
                 }
             });
         });
+
         $(function () {
             $(".dropdown-menu li a").click(function () {
                 $("#selectedMonth").text($(this).text());

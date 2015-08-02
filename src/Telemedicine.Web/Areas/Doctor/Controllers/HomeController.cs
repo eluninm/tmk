@@ -39,7 +39,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
                     Date = i.Date,
                     PatientFio = i.Patient.User.DisplayName
                 });
-
+            ViewBag.DoctorId = currentDoctor.Id;
             return View(appointmentViewModels);
         }
 

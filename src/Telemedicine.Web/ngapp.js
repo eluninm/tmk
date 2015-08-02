@@ -331,6 +331,10 @@ var Telemedicine;
             }
             return this.$http.get(url).then(function (result) { return result.data; });
         };
+        DoctorApiService.prototype.getDoctorTimelineByMonth = function (doctorId, year, month) {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/timeline/" + year + "/" + month);
+            return this.$http.get(url).then(function (result) { return result.data; });
+        };
         return DoctorApiService;
     })();
     Telemedicine.DoctorApiService = DoctorApiService;
@@ -805,6 +809,38 @@ var Telemedicine;
     })();
     Telemedicine.PatientPaymentController = PatientPaymentController;
 })(Telemedicine || (Telemedicine = {}));
+///<reference path="../../Services/DoctorApiService.ts"/>
+///<reference path="../../Services/BalanceApiService.ts"/>
+var Telemedicine;
+(function (Telemedicine) {
+    var DoctorTimelineController = (function () {
+        function DoctorTimelineController(doctorApiService, balanceApiService, $element) {
+            this.doctorApiService = doctorApiService;
+            this.balanceApiService = balanceApiService;
+            this.$element = $element;
+            this.doctorId = parseInt($element.data("id"));
+            this.loadTimeline();
+            this.loadBalance();
+        }
+        DoctorTimelineController.prototype.loadTimeline = function () {
+            var _this = this;
+            this.year = 2015;
+            this.month = 8;
+            this.doctorApiService.getDoctorTimelineByMonth(this.doctorId, this.year, this.month).then(function (result) {
+                _this.timeLineDates = result;
+            });
+        };
+        DoctorTimelineController.prototype.loadBalance = function () {
+            var _this = this;
+            this.balanceApiService.balance().then(function (result) {
+                _this.balance = result;
+            });
+        };
+        DoctorTimelineController.$inject = ["doctorApiService", "balanceApiService", "$element"];
+        return DoctorTimelineController;
+    })();
+    Telemedicine.DoctorTimelineController = DoctorTimelineController;
+})(Telemedicine || (Telemedicine = {}));
 var Telemedicine;
 (function (Telemedicine) {
     function ToDate() {
@@ -826,6 +862,7 @@ var Telemedicine;
 ///<reference path="Controllers/Patient/PatientAppointmentController.ts" /> 
 ///<reference path="Controllers/Doctor/DoctorPaymentController.ts" />
 ///<reference path="Controllers/PatientPaymentController.ts" /> 
+///<reference path="Controllers/Doctor/DoctorTimelineController.ts" /> 
 ///<reference path="Filters/ToDate.ts" /> 
 var Telemedicine;
 (function (Telemedicine) {
@@ -837,6 +874,7 @@ var Telemedicine;
     angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration)
         .controller("PatientPaymentController", Telemedicine.PatientPaymentController)
         .controller("DoctorPaymentController", Telemedicine.DoctorPaymentController)
+        .controller("DoctorTimelineController", Telemedicine.DoctorTimelineController)
         .controller("HistoryController", Telemedicine.HistoryController)
         .controller("ConsultationController", Telemedicine.ConsultationController)
         .controller("RecommendationDetailsController", Telemedicine.RecommendationDetailsController)
@@ -873,6 +911,14 @@ var Telemedicine;
         AppointmentStatus[AppointmentStatus["Ready"] = 2] = "Ready";
     })(Telemedicine.AppointmentStatus || (Telemedicine.AppointmentStatus = {}));
     var AppointmentStatus = Telemedicine.AppointmentStatus;
+})(Telemedicine || (Telemedicine = {}));
+var Telemedicine;
+(function (Telemedicine) {
+    (function (TimelineHourType) {
+        TimelineHourType[TimelineHourType["Working"] = 0] = "Working";
+        TimelineHourType[TimelineHourType["NotWorking"] = 1] = "NotWorking";
+    })(Telemedicine.TimelineHourType || (Telemedicine.TimelineHourType = {}));
+    var TimelineHourType = Telemedicine.TimelineHourType;
 })(Telemedicine || (Telemedicine = {}));
 ///// <reference path="SignalR.ts" />
 //module RtcChat {

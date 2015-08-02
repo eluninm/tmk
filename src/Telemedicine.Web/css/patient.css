@@ -1626,10 +1626,10 @@ th.fc-day-header i2 {
 .timeline .hour .info.selected {
   border: 3px solid #3e67ae;
 }
-.timeline .hour .info.plan {
+.timeline .hour .info.working {
   background: #e7fef5;
 }
-.timeline .hour .info.unworked {
+.timeline .hour .info.notworking {
   background: #fee7e7;
 }
 .timeline .hour .info {

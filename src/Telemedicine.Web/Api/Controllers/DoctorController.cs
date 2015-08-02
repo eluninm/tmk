@@ -123,10 +123,10 @@ namespace Telemedicine.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("{doctorId}/timetable/{year}/{month}")]
-        public async Task<IHttpActionResult> GetMonthTimetable(int doctorId, int year, int month)
+        [Route("{doctorId}/timeline/{year}/{month}")]
+        public async Task<IHttpActionResult> GetDoctorTimetableByMonth(int doctorId, int year, int month)
         {
-            var timetableViewModel = new List<TimetableDateViewModel>();
+            var timetableViewModel = new List<TimelineDateViewModel>();
             var timetable = await _doctorTimetableService.GetDoctorTimetableByMonthAsync(doctorId, year, month);
 
             foreach (var time in timetable)
@@ -134,19 +134,19 @@ namespace Telemedicine.Web.Api.Controllers
                 var timeViewModel = timetableViewModel.FirstOrDefault(t => t.Date == time.DateTime.Date);
                 if (timeViewModel == null)
                 {
-                    timeViewModel = new TimetableDateViewModel { Date = time.DateTime.Date };
+                    timeViewModel = new TimelineDateViewModel { Date = time.DateTime.Date };
                     timetableViewModel.Add(timeViewModel);
                 }
 
                 //проверка есть ли хотя бы один пациент на дату
                 timeViewModel.HasConsultations = timeViewModel.HasConsultations || (time.AppointmentEvents != null && time.AppointmentEvents.Any());
-                timeViewModel.Hours = timeViewModel.Hours ?? new List<TimetableHourViewModel>();
+                timeViewModel.Hours = timeViewModel.Hours ?? new List<TimelineHourViewModel>();
 
                 var hour = time.DateTime.Hour;
                 var hourViewModel = timeViewModel.Hours.FirstOrDefault(t => t.Hour == hour);
                 if (hourViewModel == null)
                 {
-                    hourViewModel = new TimetableHourViewModel {Hour = hour, HourType = time.HourType};
+                    hourViewModel = new TimelineHourViewModel {Hour = hour, HourType = time.HourType};
                     timeViewModel.Hours.Add(hourViewModel);
                 }
 
