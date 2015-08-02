@@ -311,7 +311,10 @@
     <Content Include="img\voice_green.svg" />
     <Content Include="lib\adapter\js\adapter.js" />
     <Content Include="lib\bootstrap-calendar\css\bootstrap-datetimepicker.min.css" />
-    <Content Include="lib\bootstrap-calendar\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="lib\bootstrap-calendar\js\bootstrap-datetimepicker.js" />
+    <Content Include="lib\bootstrap-calendar\js\bootstrap-datetimepicker.min.js">
+      <DependentUpon>bootstrap-datetimepicker.js</DependentUpon>
+    </Content>
     <Content Include="lib\bootstrap-calendar\locale\ru.js" />
     <Content Include="lib\bootstrap\css\2\bootstrap-theme.min.css" />
     <Content Include="lib\bootstrap\css\2\bootstrap.min.css" />

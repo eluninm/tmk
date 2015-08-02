@@ -11,7 +11,7 @@
         Текущий статус
         <span class="status active" style="margin-left: 15px">Занят</span>
         <span class="status-selector">
-            <input type="checkbox" value="" onchange="$(this).parent().prev().toggleClass('active', !this.checked); $(this).parent().next().toggleClass('active', this.checked)"/>
+            <input type="checkbox" value="" onchange="$(this).parent().prev().toggleClass('active', !this.checked); $(this).parent().next().toggleClass('active', this.checked)" />
             <label onclick="$(this).prev().click()"></label>
         </span>
         <span class="status">Готов консультировать</span>
@@ -209,10 +209,18 @@
     <script type="text/javascript">
         var EventStartDate;
         var EventDurationVal;
+        var dates = [
+            { "Class": "planned", "Date": "1995-06-23" },
+            { "Class": "planned", "Date": "2014-05-01" },
+            { "Class": "fault", "Date": "2015-06-17" },
+            { "Class": "planned", "Date": "2015-08-03" }
+        ];
+
         $('#calendar').datetimepicker({
             format: 'YYYY-MM-dd',
             inline: true,
-            locale: 'ru'
+            locale: 'ru',
+            highlights: dates
         }).on('dp.change', function (e) {
             $('#currentdate').html(e.date.format('DD MMM, dd'));
         });
