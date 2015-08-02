@@ -545,6 +545,8 @@
     <Compile Include="Areas\Doctor\Models\AddEventViewModel.cs" />
     <Compile Include="Areas\Doctor\Models\AppointmentViewModel.cs" />
     <Compile Include="Areas\Doctor\Models\EventViewModel.cs" />
+    <Compile Include="Areas\Doctor\Models\Timetable\TimelineDateViewModel.cs" />
+    <Compile Include="Areas\Doctor\Models\Timetable\TimelineHourViewModel.cs" />
     <Compile Include="Areas\Patient\Models\PaymentMethodViewModel.cs" />
     <Compile Include="Areas\Patient\Controllers\ConversationController.cs" />
     <Compile Include="Areas\Patient\Controllers\HistoryController.cs" />
@@ -626,6 +628,7 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\BalanceController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\ConsultationController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\Doctor\DoctorPaymentController.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\Doctor\DoctorTimelineController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\Patient\PatientAppointmentController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorAppointmentController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorDetailsController.ts" />
@@ -644,6 +647,7 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IPatientAppointment.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IPaymentHistory.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\ISpecialization.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Models\ITimeline.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\AppointmentApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\BalanceApiService.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\ConsultationApiService.ts" />

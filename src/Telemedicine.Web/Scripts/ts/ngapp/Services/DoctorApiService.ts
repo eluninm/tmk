@@ -8,6 +8,8 @@ module Telemedicine {
         getDoctorAppointments(doctorId: number, page?: number, pageSize?: number, patientTitleFilter?: string): ng.IPromise<IPagedList<IDoctorAppointment>>;
         getDoctorTimeWindows(doctorId: number): ng.IPromise<IDoctorTimeWindows>;
         getPaymentHistory(doctorId: number, page?: number, pageSize?: number): ng.IPromise<IPagedList<IPaymentHistory>>;
+        getPaymentHistory(doctorId: number, page?: number, pageSize?: number): ng.IPromise<IPagedList<IPaymentHistory>>;
+        getDoctorTimelineByMonth(doctorId: number, year: number, month: number): ng.IPromise<Array<ITimelineDate>> ;
     }
 
     export class DoctorApiService implements IDoctorApiService {
@@ -103,6 +105,11 @@ module Telemedicine {
                 }
             }
 
+            return this.$http.get(url).then(result => result.data);
+        }
+
+        getDoctorTimelineByMonth(doctorId: number, year: number, month: number): angular.IPromise<ITimelineDate[]> {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/timeline/" + year + "/" + month);
             return this.$http.get(url).then(result => result.data);
         }
     }

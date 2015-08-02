@@ -12,6 +12,7 @@ using Owin;
 using Telemedicine.Core.Data;
 using Telemedicine.Core.Data.EntityFramework;
 using Telemedicine.Core.Domain.Repositories;
+using Telemedicine.Core.Domain.Repositories.DoctorWorkHours;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Core.Domain.Uow;
 using Telemedicine.Core.Identity;
@@ -101,6 +102,7 @@ namespace Telemedicine.Web
             builder.RegisterType<AppointmentEventRepository>().As<IAppointmentEventRepository>(); 
             builder.RegisterType<PaymentHistoryRepository>().As<IPaymentHistoryRepository>(); 
             builder.RegisterType<DoctorPaymentRepository>().As<IDoctorPaymentRepository>(); 
+            builder.RegisterType<DoctorTimetableRepository>().As<IDoctorTimetableRepository>(); 
 
             builder.RegisterType<DoctorService>().As<IDoctorService>();
             builder.RegisterType<PatientService>().As<IPatientService>();
@@ -117,6 +119,7 @@ namespace Telemedicine.Web
             builder.RegisterType<AppointmentEventService>().As<IAppointmentEventService>();
             builder.RegisterType<PaymentHistoryService>().As<IPaymentHistoryService>();
             builder.RegisterType<DoctorPaymentService>().As<IDoctorPaymentService>();
+            builder.RegisterType<DoctorTimetableService>().As<IDoctorTimetableService>();
         }
     }
 }

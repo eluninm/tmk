@@ -101,8 +101,9 @@ namespace Telemedicine.Core.Data
                 .Property(f => f.Created)
                 .HasColumnType("datetime2");
 
-
             builder.Entity<DoctorPaymentHistory>().ToTable("DoctorPaymentsHistory");
+
+            builder.Entity<DoctorTimetable>().ToTable("DoctorTimetable");
         }
     }
 }

@@ -80,6 +80,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             return JsonConvert.SerializeObject(eventList);
         }
 
+        
 
         private List<DateTime> GetDate(DayOfWeek dayOfWeek, TimeSpanEvent timeSpanEvent)
         {

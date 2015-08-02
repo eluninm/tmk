@@ -10,6 +10,7 @@
 ///<reference path="Controllers/Patient/PatientAppointmentController.ts" /> 
 ///<reference path="Controllers/Doctor/DoctorPaymentController.ts" />
 ///<reference path="Controllers/PatientPaymentController.ts" /> 
+///<reference path="Controllers/Doctor/DoctorTimelineController.ts" /> 
 ///<reference path="Filters/ToDate.ts" /> 
 
 module Telemedicine {
@@ -22,6 +23,7 @@ module Telemedicine {
     angular.module("Telemedicine", ["ui.bootstrap"]).config(moduleConfiguration)
         .controller("PatientPaymentController", PatientPaymentController)
         .controller("DoctorPaymentController", DoctorPaymentController)
+        .controller("DoctorTimelineController", DoctorTimelineController)
         .controller("HistoryController", HistoryController)
         .controller("ConsultationController", ConsultationController)
         .controller("RecommendationDetailsController", RecommendationDetailsController)
