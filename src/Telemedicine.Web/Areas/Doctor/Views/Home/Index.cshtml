@@ -174,10 +174,13 @@
                 @foreach (var appointment in Model)
                 {
                     <tr>
-
-
                         <td class="col-md-3">@appointment.Date.ToString("dd.MM.yyyy в HH:mm")</td>
-                        <td class="col-md-9">@appointment.PatientFio</td>
+                        <td class="col-md-3">@appointment.PatientFio</td>
+                        <td class="col-md-3">
+                            <div class="partdocument orange">Карта пациента</div>
+                        </td>
+                        <td class="col-md-2">1000 <span class="font-rouble">i</span></td>
+                        <td class="col-md-2"><a class="remove orange">Отменить</a></td>
                     </tr>
                 }
             </table>
