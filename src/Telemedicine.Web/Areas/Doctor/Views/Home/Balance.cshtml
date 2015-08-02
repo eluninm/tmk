@@ -3,82 +3,126 @@
     ViewBag.Title = "Баланс";
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
- 
-     
-    <!--<div class="col-md-6 fullheight sub-container">
-        <h3 class="page-header row">@ViewBag.Title</h3>
-        <div class="unscrollable row container-fluid balance-container">
-            <p class="balance-info page-header">
-                <span class="text">Баланс</span> <span style="color: #3e67ae" class="summa"> {{viewModel.balance}} ₽</span><span></span>
-            </p>
-            <p class="debit-text">Снять со счета</p>
-            <div class="balance-refill">
-                <div class="dropdown rounded form-line" style="width: 100%">
-                    <button class="btn btn-default dropdown-toggle left" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width: 100%">
-                        Счет для снятия
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Яндекс.Деньги</a></li>
-                        <li><a href="#">Qiwi.Кошелек</a></li>
-                        <li><a href="#">Paypal</a></li>
-                    </ul>
+
+<div class="fullheight sub-container row container-fluid" ng-controller="DoctorPaymentController as viewModel" data-id="@ViewBag.DoctorId">
+    <h1 class="page-header row">
+        <div class="pull-left currenttime">
+            @ViewBag.Title:
+            <span style="vertical-align: middle;font-size: 36px">
+                <b style="font-weight: 400" id="currentbalance">100500</b>
+                <b class="font-rouble" style="font-weight: 400">o</b>
+            </span>
+        </div>
+    </h1>
+    <div class="container-fluid unscrollable row" style="display: flex;flex-direction: column">
+        <div class="grid" style="font-size: 12px;">
+            <div style="padding:8px;">
+                <div class="font-regular" style="display: inline-block; vertical-align: middle; color: #c0c0c0; text-transform: uppercase;font-size: 10px">
+                    Отображать<br />за период
                 </div>
-                <div class="row form-line">
-                    <div class="col-md-7">
-                        <input type="text" class="form-control rounded" ng-model="viewModel.debitValue" placeholder="Сумма платежа">
+                <div style="display: inline-block; vertical-align: middle">
+                    <div class="dropdown">
+                        <a class="btn btn-white dropdown-toggle rounded " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="width: 180px; text-align: left">
+                            Выбрать <span class="caret pull-right" style="position: absolute; right: 2em; top: 1.5em;"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Первый период</a>
+                            </li>
+                            <li>
+                                <a href="#">Первый период</a>
+                            </li>
+                            <li>
+                                <a href="#">Первый период</a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="col-md-5">
-                        <button class="btn btn-primary rounded" ng-disabled="(viewModel.balance < viewModel.debitValue || !viewModel.balance || !viewModel.debitValue)" ng-click="viewModel.debit()" style="width: 100%">Снять</button>
+                </div>
+                <button class="reverticon"></button>
+                <div class="pull-right">
+                    <div style="vertical-align: middle; font-size: 14px; position: relative; top: 4px;display: inline-block">
+                        <span class="font-bold" style="display: inline-block;vertical-align: middle;">Итого за период:</span> <span style="display: inline-block; width: 140px; margin-left: 1em;vertical-align: middle;font-size: 16px">100500 <span class="font-rouble">i</span></span>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>-->
-    <div class="fullheight sub-container row container-fluid" ng-controller="DoctorPaymentController as viewModel" data-id="@ViewBag.DoctorId">
-        <h3 style="padding-bottom: 30px;" class="page-header">@ViewBag.Title</h3> 
-        <div class="container-fluid row unscrollable" style="display: flex; flex-direction: column;">
-            <div class="grid unscrollable payments-grid">
-                <div class="grid-header">
-                    <div class="grid-header-columns">
-                        <div class="grid-col grid-col-33">Дата</div>
-                        <div class="grid-col grid-col-33">Сумма</div>
-                        <div class="grid-col grid-col-33">Описание</div>
-                    </div>
-                </div>
-                <div class="grid-content">
-                    <div class="grid-body" ng-repeat="payment in viewModel.payments">
-                        <div class="grid-col grid-col-33">
+            <div class="page-header" style="border-top: 1px solid #e4e4e4; border-bottom: 1px solid #e4e4e4; padding-left: 0;">
+                <table style="width: 100%">
+                    <tr class="font-bold">
+                        <td class="col-md-2 font-bold">Дата</td>
+                        <td class="col-md-3">Пациент</td>
+                        <td class="col-md-5"></td>
+                        <td class="col-md-2">Стоимость</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="grid-content">
+                <table style="width: 100%; font-size: 14px;">
+                    <tr>
+                        <td class="col-md-2">
                             <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-calendar"></div> {{payment.Date | toDate | date:'yyyy-MM-dd'}}
+                                <div class="glyphicon glyphicon-calendar"></div> @DateTime.Now.ToShortDateString()
                             </div>
                             <div class="payment-calendar">
-                                <div class="glyphicon glyphicon-time"></div> {{payment.Date | toDate | date:'HH:mm'}}
+                                <div class="glyphicon glyphicon-time"></div> @DateTime.Now.ToShortTimeString()
                             </div>
-                        </div>
-                        <div class="grid-col grid-col-33">
-                            <div class="font-medium font12px">{{payment.Value}}</div>
-                        </div>
-                        <div class="grid-col grid-col-33">
-                            <div class="font-bold payment-type">{{payment.PaymentType}}</div>
-                        </div>
-                    </div>
+                        </td>
+                        <td class="col-md-3">Евгения Олеговна</td>
+                        <td class="col-md-5">
+                            <div class="partdocument orange">Карта пациента</div>
+                        </td>
+                        <td class="col-md-2">1000 <span class="font-rouble">i</span></td>
+                    </tr>
+                    <tr class="myevent" ng-repeat="item in viewModel.payments">
+                        <td class="col-md-2">
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-calendar"></div> {{item.Date | toDate | date:'dd.MM.yyyy'}}
+                            </div>
+                            <div class="payment-calendar">
+                                <div class="glyphicon glyphicon-time"></div> {{item.Date | toDate | date:'HH:mm'}}
+                            </div>
+                        </td>
+                        <td class="col-md-3">{{item.PatientTitle}}</td>
+                        <td class="col-md-5">
+                            <div class="partdocument orange">Карта пациента</div>
+                        </td>
+                        <td class="col-md-2">{{payment.Value}} <span class="font-rouble">i</span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="grid-pager row">
+                <div class="col-md-4">Всего записей: {{viewModel.totalCount}}</div>
+                <div class="col-md-4">
+                    <nav>
+                        <pagination class="pagination rounded" ng-change="viewModel.loadPage()"
+                                    ng-model="viewModel.currentPage"
+                                    page="viewModel.currentPage" items-per-page="viewModel.pageSize"
+                                    total-items="viewModel.totalCount" max-size="6"
+                                    rotate="false" boundary-links="false" previous-text="&laquo;"
+                                    next-text="&raquo;">
+                        </pagination>
+                    </nav>
                 </div>
-                <div class="grid-pager row">
-                    <div class="col-md-6">Всего записей: {{viewModel.totalCount}}</div>
+                <div class="col-md-4 row">
                     <div class="col-md-6">
-                        <nav>
-                            <pagination class="pagination rounded" ng-change="viewModel.loadPage()"
-                                        ng-model="viewModel.currentPage"
-                                        page="viewModel.currentPage" items-per-page="viewModel.pageSize"
-                                        total-items="viewModel.totalCount" max-size="6"
-                                        rotate="false" boundary-links="false" previous-text="&laquo;"
-                                        next-text="&raquo;">
-                            </pagination>
-                        </nav>
+                        <div class="pull-right">
+                            Показывать:
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="dropdown rounded dropup">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                {{viewModel.pageSize}} записей
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#" ng-click="viewModel.changePageSize(10)">10 записей</a></li>
+                                <li><a href="#" ng-click="viewModel.changePageSize(50)">50 записей</a></li>
+                                <li><a href="#" ng-click="viewModel.changePageSize(100)">100 записей</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
- 
+</div>
