@@ -55,9 +55,10 @@
         .day.active {
             color: @color-background;
         }
-        .day.planned{
-            background-color:@color-accent6;
-        }
+
+        /*.day.planned {
+            background-color: @color-accent6;
+        }*/
     }
 }
 
@@ -137,4 +138,8 @@
         font-size: 24px;
         color: @gray;
     }
+}
+
+.bootstrap-datetimepicker-widget td.planned, .bootstrap-datetimepicker-widget td.planned {
+    background-color: @color-accent6;
 }
