@@ -136,6 +136,21 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<ActionResult> PatientListOnCurrentDay()
+        {
+            var currentDoctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
+            IEnumerable<AppointmentEvent> appointments = await _appointmentEventService.GetDoctorAppointmentsByDateAsync(currentDoctor.Id, DateTime.Now);
+            IEnumerable<AppointmentViewModel> appointmentViewModels = appointments.Where(item => item.Status != AppointmentStatus.Declined).OrderBy(a => a.Date).Select(
+                i => new AppointmentViewModel
+                {
+                    Date = i.Date,
+                    PatientFio = i.Patient.User.DisplayName,
+                    Id = i.Id
+                }); 
+            return PartialView("_PatientListOnCurrentDay",appointmentViewModels);
+        }
+
         public async Task<ActionResult> Balance()
         {
             var doctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());

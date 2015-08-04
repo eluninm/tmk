@@ -62,6 +62,7 @@ module Telemedicine {
         public clearHour() {
             this.doctorApiService.changeHourStatus(this.curentDate, this.selectedHour, TimelineHourType.Clear).then(result => {
                 this.loadTimeline();
+                document.getElementById("patientListOnCurrentDayLink").click();
             });
         }
 

@@ -389,6 +389,7 @@
     <Content Include="Areas\Doctor\Views\Home\Index2.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\_AddTimeSpanEventDialog.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\_CreateDoctorCalendarEventDialog.cshtml" />
+    <Content Include="Areas\Doctor\Views\Shared\_PatientListOnCurrentDay.cshtml" />
     <None Include="compilerconfig.json" />
     <Content Include="Content\less\carousel_doctor.less" />
     <Content Include="Content\patient.less" />
@@ -427,6 +428,7 @@
     <Content Include="Content\less\addTimeSpanEventDialog.less" />
     <Content Include="Content\less\timeline.less" />
     <Content Include="Content\less\doctormainpage.less" />
+    <Content Include="Content\less\filterdates.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
