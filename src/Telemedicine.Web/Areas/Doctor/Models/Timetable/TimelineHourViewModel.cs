@@ -5,13 +5,13 @@ namespace Telemedicine.Web.Areas.Doctor.Models.Timetable
 {
     public class TimelineHourViewModel
     {
-        [JsonProperty("hour")]
+        //[JsonProperty("hour")]
         public int Hour { get; set; }
 
-        [JsonProperty("hourType")]
+        //[JsonProperty("hourType")]
         public DoctorTimetableHourType HourType { get; set; }
 
-        [JsonProperty("patientsCount")]
+        //[JsonProperty("patientsCount")]
         public int PatientsCount { get; set; }
     }
 }

@@ -9,6 +9,8 @@ using Microsoft.AspNet.SignalR;
 using Telemedicine.Core.Consts;
 using Telemedicine.Core.Domain.Models;
 using Telemedicine.Core.Domain.Services;
+using Telemedicine.Core.Models;
+using Telemedicine.Core.Models.Enums;
 using Telemedicine.Web.Api.Dto;
 using Telemedicine.Web.Areas.Doctor.Models.Timetable;
 using Telemedicine.Web.Hubs;
@@ -24,9 +26,10 @@ namespace Telemedicine.Web.Api.Controllers
         private readonly ITimeSpanEventService _timeSpanService;
         private readonly IDoctorPaymentService _doctorPaymentService;
         private readonly IDoctorTimetableService _doctorTimetableService;
+
         public DoctorController(
-            IDoctorService doctorService, 
-            IAppointmentEventService appointmentService, 
+            IDoctorService doctorService,
+            IAppointmentEventService appointmentService,
             ITimeSpanEventService timeSpanService,
             IDoctorPaymentService doctorPaymentService, IDoctorTimetableService doctorTimetableService)
         {
@@ -38,7 +41,8 @@ namespace Telemedicine.Web.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> GetDoctors(int page = 1, int pageSize = 50, string titleFilter = null, int specializationIdFilter = 0)
+        public async Task<IHttpActionResult> GetDoctors(int page = 1, int pageSize = 50, string titleFilter = null,
+            int specializationIdFilter = 0)
         {
             try
             {
@@ -58,7 +62,6 @@ namespace Telemedicine.Web.Api.Controllers
             {
                 return NotFound();
             }
-            
         }
 
         [HttpGet]
@@ -76,9 +79,11 @@ namespace Telemedicine.Web.Api.Controllers
 
         [HttpGet]
         [Route("{id}/appointments")]
-        public async Task<IHttpActionResult> Appointments(int id, int page = 1, int pageSize = 10, string patientTitleFilter = null)
+        public async Task<IHttpActionResult> Appointments(int id, int page = 1, int pageSize = 10,
+            string patientTitleFilter = null)
         {
-            var doctorAppointments = await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFilter);
+            var doctorAppointments =
+                await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFilter);
             var pagedList = doctorAppointments.Map(t =>
             {
                 var doctorAppointmentDto = Mapper.Map<DoctorAppointmentDto>(t);
@@ -133,33 +138,66 @@ namespace Telemedicine.Web.Api.Controllers
             var timetableViewModel = new List<TimelineDateViewModel>();
             var timetable = await _doctorTimetableService.GetDoctorTimetableByMonthAsync(doctorId, year, month);
 
-            foreach (var time in timetable)
+            int days = DateTime.DaysInMonth(year, month);
+            for (int day = 1; day <= days; day++)
             {
-                var timeViewModel = timetableViewModel.FirstOrDefault(t => t.Date == time.DateTime.Date);
-                if (timeViewModel == null)
+                List<DoctorTimetable> listDoctorTimetablesOnCurrentDay =
+                    timetable.Where(item => item.DateTime.Day == day).ToList();
+
+                //Создаем день Timeline
+                TimelineDateViewModel dayOnTimeLine = new TimelineDateViewModel()
                 {
-                    timeViewModel = new TimelineDateViewModel { Date = time.DateTime.Date };
-                    timetableViewModel.Add(timeViewModel);
-                }
+                    Date = new DateTime(year, month, day),
+                    Hours = new List<TimelineHourViewModel>()
+                };
 
-                //проверка есть ли хотя бы один пациент на дату
-                timeViewModel.HasConsultations = timeViewModel.HasConsultations || (time.AppointmentEvents != null && time.AppointmentEvents.Any());
-                timeViewModel.Hours = timeViewModel.Hours ?? new List<TimelineHourViewModel>();
-
-                var hour = time.DateTime.Hour;
-                var hourViewModel = timeViewModel.Hours.FirstOrDefault(t => t.Hour == hour);
-                if (hourViewModel == null)
+                for (int hour = 1; hour < 25; hour++)
                 {
-                    hourViewModel = new TimelineHourViewModel {Hour = hour, HourType = time.HourType};
-                    timeViewModel.Hours.Add(hourViewModel);
-                }
+                    //Берем DoctorTimetable на текущий час
+                    DoctorTimetable onCurrentHour =
+                        listDoctorTimetablesOnCurrentDay.FirstOrDefault(item => item.DateTime.Hour == hour);
 
-                //подсчет пациентов
-                if (time.AppointmentEvents != null)
-                    hourViewModel.PatientsCount = time.AppointmentEvents.Count;
+                    if (onCurrentHour == null)
+                    {
+                        TimelineHourViewModel emptyHour = new TimelineHourViewModel()
+                        {
+                            Hour = hour,
+                            HourType = DoctorTimetableHourType.Clear,
+                            PatientsCount = 0
+                        };
+                        dayOnTimeLine.Hours.Add(emptyHour);
+                    }
+                    else
+                    {
+                        TimelineHourViewModel notEmptyHour = new TimelineHourViewModel()
+                        {
+                            Hour = hour,
+                            HourType = onCurrentHour.HourType,
+                            PatientsCount = onCurrentHour?.AppointmentEvents?.Count(item => item.Status != AppointmentStatus.Declined)??0
+                        };
+                        dayOnTimeLine.Hours.Add(notEmptyHour);
+                    }
+                }
+                timetableViewModel.Add(dayOnTimeLine);
             }
 
             return Ok(timetableViewModel);
+        }
+
+        private List<TimelineHourViewModel> GetEmptyHours()
+        {
+            List<TimelineHourViewModel> hour = new List<TimelineHourViewModel>();
+            for (int i = 1; i < 25; i++)
+            {
+                hour.Add(new TimelineHourViewModel()
+                {
+                    Hour = i,
+                    HourType = DoctorTimetableHourType.Clear,
+                    PatientsCount = 0
+                });
+            }
+
+            return hour;
         }
 
 
@@ -180,7 +218,7 @@ namespace Telemedicine.Web.Api.Controllers
                 status = await _doctorService.GetStatusByNameAsync("Busy");
             }
 
-            status =  _doctorService.SetStatusByUserId(currentUserId, status.Id); 
+            status = _doctorService.SetStatusByUserId(currentUserId, status.Id);
 
             var doctor = await _doctorService.GetByUserIdAsync(currentUserId);
             var doctorDto = Mapper.Map<DoctorListItemDto>(doctor);
@@ -190,11 +228,57 @@ namespace Telemedicine.Web.Api.Controllers
             doctorDto.IsVideoAvailable = doctor.DoctorStatus.Name == DoctorStatusNames.VideoChat;
 
 
-
             GlobalHost.ConnectionManager.GetHubContext<SignalHub>()
                 .Clients.All.OnDoctorUpdated(doctorDto);
 
             return Ok(true);
+        }
+
+
+        [HttpPost]
+        [Route("changeHourStatus/{year}/{month}/{day}/{selectedHour}/{status}")]
+        public async Task<IHttpActionResult> ChangeHourStatus(int year, int month, int day, int selectedHour,
+            DoctorTimetableHourType status)
+        {
+            var currentUserId = User.Identity.GetUserId();
+            var doctor = await _doctorService.GetByUserIdAsync(currentUserId);
+            var timetable =
+                await
+                    _doctorTimetableService.GetTimetableByDate(doctor.Id,
+                        new DateTime(year, month, day, selectedHour, 0, 0));
+            if (timetable == null)
+            {
+                timetable = new DoctorTimetable()
+                {
+                    DateTime = new DateTime(year, month, day, selectedHour, 0, 0),
+                    DoctorId = doctor.Id,
+                    HourType = status
+                };
+
+                await _doctorTimetableService.CreateAsync(timetable);
+            }
+            else
+            {
+                if (status == DoctorTimetableHourType.Clear)
+                {
+                    if (timetable.AppointmentEvents.Count(item => item.Status != AppointmentStatus.Declined) == 0)
+                    {
+                        timetable.HourType = DoctorTimetableHourType.Clear; 
+                    }
+                    foreach (AppointmentEvent appointment in timetable.AppointmentEvents)
+                    {
+                        appointment.Status = AppointmentStatus.Declined;
+                    } 
+                }
+                else
+                {
+                    timetable.HourType = status; 
+                }
+
+                await _doctorTimetableService.UpdateAsync(timetable);
+            }
+
+            return Ok();
         }
     }
 }

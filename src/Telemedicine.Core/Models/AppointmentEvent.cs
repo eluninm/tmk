@@ -18,8 +18,7 @@ namespace Telemedicine.Core.Models
         public Doctor Doctor { get; set; }
 
         public int DoctorId { get; set; }
-
-        [NotMapped]
+         
         public AppointmentStatus Status { get; set; }
 
         public int? ConsultationId { get; set; }

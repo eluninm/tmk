@@ -10,5 +10,7 @@ namespace Telemedicine.Core.Domain.Repositories.DoctorWorkHours
     public interface IDoctorTimetableRepository : IRepository<DoctorTimetable>
     {
         Task<IEnumerable<DoctorTimetable>> GetDoctorTimetableByMonthAsync(int doctorId, int year, int month);
+
+        Task<DoctorTimetable> GetTimetableByDate(int doctorId,DateTime dateTime); 
     }
 }

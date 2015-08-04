@@ -25,5 +25,18 @@ namespace Telemedicine.Core.Domain.Repositories.DoctorWorkHours
                         .Where(w => w.DateTime >= start && w.DateTime < end)
                         .ToListAsync();
         }
+
+        public async Task<DoctorTimetable> GetTimetableByDate(int doctorId, DateTime dateTime)
+        {
+            return
+                await
+                    Set.Include(s => s.AppointmentEvents)
+                        .Where(
+                            w =>
+                                w.DateTime.Year == dateTime.Year && w.DateTime.Month == dateTime.Month &&
+                                w.DateTime.Day == dateTime.Day && w.DateTime.Hour == dateTime.Hour &&
+                                w.DoctorId == doctorId)
+                        .FirstOrDefaultAsync();
+        }
     }
 }

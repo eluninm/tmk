@@ -9,7 +9,7 @@ module Telemedicine {
         getDoctorTimeWindows(doctorId: number): ng.IPromise<IDoctorTimeWindows>;
         getPaymentHistory(doctorId: number, page?: number, pageSize?: number): ng.IPromise<IPagedList<IPaymentHistory>>;
         getPaymentHistory(doctorId: number, page?: number, pageSize?: number): ng.IPromise<IPagedList<IPaymentHistory>>;
-        getDoctorTimelineByMonth(doctorId: number, year: number, month: number): ng.IPromise<Array<ITimelineDate>> ;
+        getDoctorTimelineByMonth(doctorId: number, year: number, month: number): ng.IPromise<Array<ITimelineDate>>;
     }
 
     export class DoctorApiService implements IDoctorApiService {
@@ -44,7 +44,7 @@ module Telemedicine {
                     }
                 }
             }
-            
+
             return this.$http.get(url).then(result => result.data);
         }
 
@@ -54,7 +54,7 @@ module Telemedicine {
         }
 
         getDoctorAppointments(doctorId: number, page?: number, pageSize?: number, patientTitleFilter?: string): angular.IPromise<IPagedList<any>> {
-            var url = this.urlResolverService.resolveUrl(this.baseUrl +"/" +doctorId+ "/appointments");
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/appointments");
             var query: any = {}, querySeparator = "?";
 
             if (page) {
@@ -81,7 +81,7 @@ module Telemedicine {
 
         getDoctorTimeWindows(doctorId: number): ng.IPromise<IDoctorTimeWindows> {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/timeWindows");
-            return this.$http.get(url).then(result => result.data); 
+            return this.$http.get(url).then(result => result.data);
         }
 
         getPaymentHistory(doctorId: number, page?: number, pageSize?: number): angular.IPromise<IPagedList<IPaymentHistory>> {
@@ -113,10 +113,25 @@ module Telemedicine {
             return this.$http.get(url).then(result => result.data);
         }
 
-        changeDoctorStatus(isAvailable: boolean){
+        changeDoctorStatus(isAvailable: boolean) {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + isAvailable + "/changeStatus");
-            return this.$http.post(url, { "isAvailable": isAvailable}).then(result => result.data);
+            return this.$http.post(url, { "isAvailable": isAvailable }).then(result => result.data);
         }
-        
+
+        changeHourStatus(date: Date, selectedHour: number, status: TimelineHourType) {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/changeHourStatus/" + date.getFullYear() + "/" +
+                (date.getMonth() + 1) + "/" +
+                date.getDate() + "/" +
+                selectedHour + "/" +
+                status);
+            return this.$http.post(url, {
+                "year": date.getFullYear(),
+                "month": (date.getMonth() + 1),
+                "day": date.getDate(),
+                "selectedHour": selectedHour,
+                "status": status
+            }).then(result => result.data);
+        }
+
     }
 }

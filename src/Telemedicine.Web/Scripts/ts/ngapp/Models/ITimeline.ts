@@ -13,6 +13,7 @@
 
     export enum TimelineHourType {
         Working,
-        NotWorking
+        NotWorking,
+        Clear
     } 
 }
