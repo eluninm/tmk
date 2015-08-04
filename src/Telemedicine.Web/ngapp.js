@@ -878,6 +878,7 @@ var Telemedicine;
             var _this = this;
             this.doctorApiService.changeHourStatus(this.curentDate, this.selectedHour, Telemedicine.TimelineHourType.Clear).then(function (result) {
                 _this.loadTimeline();
+                document.getElementById("patientListOnCurrentDayLink").click();
             });
         };
         DoctorTimelineController.prototype.updateTimeLine = function () {

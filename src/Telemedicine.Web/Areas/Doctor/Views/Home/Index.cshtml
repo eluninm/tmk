@@ -23,6 +23,7 @@
         <div id="calendar" class="panel-body"></div>
         <div id="currentdate" class="text-center"></div>
         <hr/>
+
         <div class="balance-info">
             <div class="text">Ваш баланс</div>
             <div class="summa">1486</div>
@@ -51,8 +52,12 @@
     <div class="col-md-4">
         @*        @Html.Action("GetStatus", "Status")*@
     </div>
-</div>
-<div style="height: calc(100% - 600px);min-height:200px">
+</div> 
+
+
+@Ajax.ActionLink("dsdsd", "PatientListOnCurrentDay","Home", new AjaxOptions() { UpdateTargetId = "patientListOnCurrentDay", HttpMethod = "Get" },
+    new {id= "patientListOnCurrentDayLink", style="display: none;" }) 
+<div style="height: calc(100% - 600px);min-height:200px" id="patientListOnCurrentDay">
     <div class="page-header currenttime" style="border:none;">
         Список пациентов на @DateTime.Now.ToShortDateString()
         <div class="pull-right">
@@ -77,16 +82,16 @@
         <div class="grid-content">
             <table style="width: 100%; font-size: 14px;">
                 @*<tr>
-                    <td class="col-md-2">
-                        <div class="timeicon">18:00</div>
-                    </td>
-                    <td class="col-md-3">Евгения Олеговна</td>
-                    <td class="col-md-3">
-                        <div class="partdocument orange">Карта пациента</div>
-                    </td>
-                    <td class="col-md-2">1000 <span class="font-rouble">i</span></td>
-                    <td class="col-md-2"><a class="remove orange">Отменить</a></td>
-                </tr>*@
+                        <td class="col-md-2">
+                            <div class="timeicon">18:00</div>
+                        </td>
+                        <td class="col-md-3">Евгения Олеговна</td>
+                        <td class="col-md-3">
+                            <div class="partdocument orange">Карта пациента</div>
+                        </td>
+                        <td class="col-md-2">1000 <span class="font-rouble">i</span></td>
+                        <td class="col-md-2"><a class="remove orange">Отменить</a></td>
+                    </tr>*@
                 @foreach (var appointment in Model)
                 {
                     <tr>
@@ -117,8 +122,7 @@
 
         </div>
     </div>
-</div>
-
+</div> 
 
 <a style="display: none;" class="btn btn-primary rounded" data-toggle="modal" id="createEventLink" data-target="#CreateEvent" href="@Url.Action("AddCalendarEvent")">
 </a>
@@ -168,6 +172,9 @@
                     $(this).popover('destroy');
                 }
             });
+             
+
+           
         }
 
         $('#calendar').datetimepicker({
@@ -192,6 +199,7 @@
                     placement: 'bottom',
                     html: true
                 });
+
             }
 
             if ($(this).hasClass("working") && !$(this).children().hasClass('human')) {

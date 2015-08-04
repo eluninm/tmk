@@ -151,7 +151,7 @@ namespace Telemedicine.Web.Api.Controllers
                     Hours = new List<TimelineHourViewModel>()
                 };
 
-                for (int hour = 1; hour < 25; hour++)
+                for (int hour = 0; hour < 24; hour++)
                 {
                     //Берем DoctorTimetable на текущий час
                     DoctorTimetable onCurrentHour =
@@ -240,6 +240,7 @@ namespace Telemedicine.Web.Api.Controllers
         public async Task<IHttpActionResult> ChangeHourStatus(int year, int month, int day, int selectedHour,
             DoctorTimetableHourType status)
         {
+            selectedHour = selectedHour == 24 ? 0 : selectedHour;
             var currentUserId = User.Identity.GetUserId();
             var doctor = await _doctorService.GetByUserIdAsync(currentUserId);
             var timetable =
