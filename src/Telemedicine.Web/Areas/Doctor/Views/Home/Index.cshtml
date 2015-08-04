@@ -3,7 +3,8 @@
     ViewBag.Title = "Главная";
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
-<div class="row page-header container-fluid" ng-controller="DoctorStatusController as viewModel">
+ 
+<div class="row page-header container-fluid"  ng-controller="DoctorStatusController as viewModel">
     <div class="pull-left currenttime">
         Время: <span id="currenttime"></span>
     </div>
@@ -17,7 +18,7 @@
         <span class="status">Готов консультировать</span>
     </div>
 </div>
-<div style="display: flex;" class="doctormainpage" ng-controller="DoctorTimelineController as viewModel" data-id="@ViewBag.DoctorId">
+<div style="display: flex;" class="doctormainpage"  ng-controller="DoctorTimelineController as viewModel" data-id="@ViewBag.DoctorId">
     <div class="panel panel-default text-center" style="width: 292px;">
         <div id="calendar" class="panel-body"></div>
         <div id="currentdate" class="text-center"></div>
@@ -30,98 +31,13 @@
     </div>
     <div class="container-fluid" style="flex: 1">
         <div style="flex: 1; flex-wrap: wrap" class="timeline">
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">2:00</div>
+            <div class="hour" ng-repeat="hour in viewModel.currentTimeLine.Hours" ng-click="viewModel.selectHour(hour.Hour)" data-hourtype="">
+                <div class="info plan panel-default panel " ng-class="{'notworking':(hour.HourType==1), 'working':(hour.HourType==0) }"  >
+                    <div class="human" ng-repeat="item in viewModel.range(hour.PatientsCount) track by $index"></div> 
+                </div>
+                <div class="time font-bold text-center">{{hour.Hour}}</div> 
             </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">3:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">4:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">5:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">6:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">7:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">8:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">9:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">10:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">1:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">1:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">1:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">1:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">1:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">1:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">1:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">1:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">1:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">1:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">1:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">1:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">1:00</div>
-            </div>
-            <div class="hour">
-                <div class="info plan panel-default panel"></div>
-                <div class="time font-bold text-center">1:00</div>
-            </div>
+            
         </div>
         <div>
             <button type="button" class="btn btn-default rounded">Редактировать расписание</button>
@@ -160,7 +76,7 @@
         </div>
         <div class="grid-content">
             <table style="width: 100%; font-size: 14px;">
-                <tr>
+                @*<tr>
                     <td class="col-md-2">
                         <div class="timeicon">18:00</div>
                     </td>
@@ -170,24 +86,24 @@
                     </td>
                     <td class="col-md-2">1000 <span class="font-rouble">i</span></td>
                     <td class="col-md-2"><a class="remove orange">Отменить</a></td>
-                </tr>
+                </tr>*@
                 @foreach (var appointment in Model)
                 {
                     <tr>
-                        <td class="col-md-3">@appointment.Date.ToString("dd.MM.yyyy в HH:mm")</td>
+                        <td class="col-md-2"><div class="timeicon">@appointment.Date.ToString("HH:mm")</div></td>
                         <td class="col-md-3">@appointment.PatientFio</td>
                         <td class="col-md-3">
                             <div class="partdocument orange">Карта пациента</div>
                         </td>
                         <td class="col-md-2">1000 <span class="font-rouble">i</span></td>
-                        <td class="col-md-2"><a class="remove orange">Отменить</a></td>
+                        <td class="col-md-2">@Html.ActionLink("Отменить", "Decline", new { id = appointment.Id }, new { @class = "remove orange" })</td>
                     </tr>
                 }
             </table>
         </div>
     </div>
 </div>
-<div class="modal fade" id="CreateEvent" role="dialog" aria-labelledby="CreateEventLabel">
+<div class="modal fade" id="CreateEvent"  role="dialog" aria-labelledby="CreateEventLabel">
     <div class="modal-dialog  modal-sm" role="document">
         <div class="modal-content">
 
@@ -197,7 +113,7 @@
 
 <div class="modal fade" id="addEventDialog">
     <div class="modal-dialog addTimeSpanEventDialog">
-        <div class="modal-content">
+        <div  class="modal-content">
 
         </div>
     </div>
@@ -219,6 +135,41 @@
             { "Class": "planned", "Date": "2015-08-03" }
         ];
 
+        function availableHour() {
+            var controller = angular.element(document.getElementsByClassName("doctormainpage")).controller();
+            controller.availableHour();
+            $('.hour .info').each(function () {  
+                var e = $("body");
+                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                    $(this).popover('destroy');
+                }
+            });
+        }
+
+        function unavailableHour() {
+            var controller = angular.element(document.getElementsByClassName("doctormainpage")).controller();
+            controller.unavailableHour();
+
+            $('.hour .info').each(function () { 
+                var e = $("body");
+                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                    $(this).popover('destroy');
+                }
+            });
+        }
+
+        function clearHour() {
+            var controller = angular.element(document.getElementsByClassName("doctormainpage")).controller();
+            controller.clearHour();
+
+            $('.hour .info').each(function () {
+                var e = $("body");
+                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                    $(this).popover('destroy');
+                }
+            });
+        }
+
         $('#calendar').datetimepicker({
             format: 'YYYY-MM-dd',
             inline: true,
@@ -226,17 +177,54 @@
             highlights: dates
         }).on('dp.change', function (e) {
             $('#currentdate').html(e.date.format('DD MMM, dd'));
+            var controller = angular.element(document.getElementsByClassName("doctormainpage")).controller();
+            controller.changeDate(new Date(e.date));
         });
         $('#currentdate').html(moment().format('DD MMMM, dd'));
         $('.timeline').on('click', '.hour .info:not(.selected)', function () {
             $(this).toggleClass('selected', true);
-            $(this).popover({
-                container: '.main-container',
-                title: 'Назначен прием',
-                content: '<div class=actions><button>Назначить прием</button></div>',
-                placement: 'bottom',
-                html: true,
-            });
+
+            if ($(this).hasClass("working") && $(this).children().hasClass('human')) {
+                $(this).popover({
+                    container: '.main-container',
+                    title: 'Назначена запись на прием',
+                    content: '<div><div class=actions><button>Просмотреть подробнее</button></div><div class=actions><button onclick="clearHour()">Отменить все</button></div></div>',
+                    placement: 'bottom',
+                    html: true
+                });
+            }
+
+            if ($(this).hasClass("working") && !$(this).children().hasClass('human')) {
+                $(this).popover({
+                    container: '.main-container',
+                    title: 'Отмечено как приемные часы',
+                    content: '<div><div class=actions><button onclick="clearHour()">Изменить</button></div></div>',
+                    placement: 'bottom',
+                    html: true
+                });
+            }
+
+            if ($(this).hasClass("notworking")) {
+                $(this).popover({
+                    container: '.main-container',
+                    title: 'Отмечено как нерабочее время',
+                    content: '<div><div class=actions><button onclick="clearHour()">Изменить</button></div></div>',
+                    placement: 'bottom',
+                    html: true
+                });
+            }
+
+            if (!$(this).hasClass("working") && !$(this).hasClass("notworking")) {
+
+                $(this).popover({
+                    container: '.main-container',
+                    title: 'Отметить как',
+                    content: '<div><div class=actions><button onclick="availableHour()">Приемные часы</button></div><div class=actions><button onclick="unavailableHour()">Нерабочее время</button></div></div>',
+                    placement: 'bottom',
+                    html: true
+                });
+            }
+
             $(this).data('bs.popover').tip().addClass('timeline-item').attr('data-hourtype', $(this).closest('.info').attr('data-hourtype'));
             $(this).popover('show');
             $(this).on('hidden.bs.popover', function () {
@@ -245,7 +233,7 @@
             });
 
         });
-        var timeline = $('.timeline');
+        /*var timeline = $('.timeline');
         var str = '';
         var hours = [
             { type: 'working', humans: 0 },
@@ -282,8 +270,8 @@
                 <div class="info ' + (hour.type || '') + ' panel-default panel" data-hourtype="' + hour.type + '">' + humans + '</div>\
                 <div class="time font-bold text-center">' + (i + 1) + ':00</div>\
             </div>';
-        });
-        timeline.html(str);
+        });*/
+        //timeline.html(str);
 
         $('#currenttime').text(moment().format('HH:mm:ss'));
             setInterval(function () {
@@ -395,6 +383,8 @@
                 $('#EventDuration').val(EventDurationVal);
                 $('#EventDuration').change();
             });
+
+           
         });
 
 

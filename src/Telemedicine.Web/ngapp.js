@@ -339,6 +339,20 @@ var Telemedicine;
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + isAvailable + "/changeStatus");
             return this.$http.post(url, { "isAvailable": isAvailable }).then(function (result) { return result.data; });
         };
+        DoctorApiService.prototype.changeHourStatus = function (date, selectedHour, status) {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/changeHourStatus/" + date.getFullYear() + "/" +
+                (date.getMonth() + 1) + "/" +
+                date.getDate() + "/" +
+                selectedHour + "/" +
+                status);
+            return this.$http.post(url, {
+                "year": date.getFullYear(),
+                "month": (date.getMonth() + 1),
+                "day": date.getDate(),
+                "selectedHour": selectedHour,
+                "status": status
+            }).then(function (result) { return result.data; });
+        };
         return DoctorApiService;
     })();
     Telemedicine.DoctorApiService = DoctorApiService;
@@ -818,10 +832,14 @@ var Telemedicine;
 var Telemedicine;
 (function (Telemedicine) {
     var DoctorTimelineController = (function () {
-        function DoctorTimelineController(doctorApiService, balanceApiService, $element) {
+        function DoctorTimelineController(doctorApiService, balanceApiService, $element, $scope) {
             this.doctorApiService = doctorApiService;
             this.balanceApiService = balanceApiService;
             this.$element = $element;
+            this.$scope = $scope;
+            this.year = 2015;
+            this.month = 8;
+            this.curentDate = new Date();
             this.doctorId = parseInt($element.data("id"));
             this.loadTimeline();
             this.loadBalance();
@@ -832,6 +850,7 @@ var Telemedicine;
             this.month = 8;
             this.doctorApiService.getDoctorTimelineByMonth(this.doctorId, this.year, this.month).then(function (result) {
                 _this.timeLineDates = result;
+                _this.updateTimeLine();
             });
         };
         DoctorTimelineController.prototype.loadBalance = function () {
@@ -840,7 +859,56 @@ var Telemedicine;
                 _this.balance = result;
             });
         };
-        DoctorTimelineController.$inject = ["doctorApiService", "balanceApiService", "$element"];
+        DoctorTimelineController.prototype.selectHour = function (hour) {
+            this.selectedHour = hour;
+        };
+        DoctorTimelineController.prototype.availableHour = function () {
+            var _this = this;
+            this.doctorApiService.changeHourStatus(this.curentDate, this.selectedHour, Telemedicine.TimelineHourType.Working).then(function (result) {
+                _this.loadTimeline();
+            });
+        };
+        DoctorTimelineController.prototype.unavailableHour = function () {
+            var _this = this;
+            this.doctorApiService.changeHourStatus(this.curentDate, this.selectedHour, Telemedicine.TimelineHourType.NotWorking).then(function (result) {
+                _this.loadTimeline();
+            });
+        };
+        DoctorTimelineController.prototype.clearHour = function () {
+            var _this = this;
+            this.doctorApiService.changeHourStatus(this.curentDate, this.selectedHour, Telemedicine.TimelineHourType.Clear).then(function (result) {
+                _this.loadTimeline();
+            });
+        };
+        DoctorTimelineController.prototype.updateTimeLine = function () {
+            console.log("updateTimeLine");
+            for (var i = 0; i < this.timeLineDates.length; i++) {
+                var date = Number(this.timeLineDates[i].Date.toString().substr(8, 2));
+                if (date == this.curentDate.getDate()) {
+                    this.currentTimeLine = this.timeLineDates[i];
+                    if (!this.$scope.$$phase) {
+                        this.$scope.$apply();
+                    }
+                }
+            }
+        };
+        DoctorTimelineController.prototype.range = function (n) {
+            return new Array(n);
+        };
+        DoctorTimelineController.prototype.changeDate = function (date) {
+            this.curentDate = date;
+            console.log("changeDate");
+            if ((date.getMonth() + 1) != this.month || date.getFullYear() != this.year) {
+                this.month = date.getMonth();
+                this.year = date.getFullYear();
+                this.loadTimeline();
+                console.log("month is changed");
+            }
+            else {
+                this.updateTimeLine();
+            }
+        };
+        DoctorTimelineController.$inject = ["doctorApiService", "balanceApiService", "$element", "$scope"];
         return DoctorTimelineController;
     })();
     Telemedicine.DoctorTimelineController = DoctorTimelineController;
@@ -925,6 +993,21 @@ var Telemedicine;
     })();
     Telemedicine.ItemRouteParams = ItemRouteParams;
 })(Telemedicine || (Telemedicine = {}));
+///<reference path="../../Services/DoctorApiService.ts"/>
+var Telemedicine;
+(function (Telemedicine) {
+    var DoctorHourStatusController = (function () {
+        function DoctorHourStatusController(doctorApiService) {
+            this.doctorApiService = doctorApiService;
+        }
+        DoctorHourStatusController.prototype.changeStatus = function (doctorIsAvailable) {
+            this.doctorApiService.changeDoctorStatus(doctorIsAvailable);
+        };
+        DoctorHourStatusController.$inject = ["doctorApiService"];
+        return DoctorHourStatusController;
+    })();
+    Telemedicine.DoctorHourStatusController = DoctorHourStatusController;
+})(Telemedicine || (Telemedicine = {}));
 var Telemedicine;
 (function (Telemedicine) {
     (function (AppointmentStatus) {
@@ -939,6 +1022,7 @@ var Telemedicine;
     (function (TimelineHourType) {
         TimelineHourType[TimelineHourType["Working"] = 0] = "Working";
         TimelineHourType[TimelineHourType["NotWorking"] = 1] = "NotWorking";
+        TimelineHourType[TimelineHourType["Clear"] = 2] = "Clear";
     })(Telemedicine.TimelineHourType || (Telemedicine.TimelineHourType = {}));
     var TimelineHourType = Telemedicine.TimelineHourType;
 })(Telemedicine || (Telemedicine = {}));

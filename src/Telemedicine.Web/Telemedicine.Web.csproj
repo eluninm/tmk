@@ -630,6 +630,7 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\Doctor\DoctorStatusController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\Doctor\DoctorPaymentController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\Doctor\DoctorTimelineController.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\Doctor\DoctorHourStatusController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\Patient\PatientAppointmentController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorAppointmentController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\DoctorDetailsController.ts" />

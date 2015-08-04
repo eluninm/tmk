@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -8,6 +9,7 @@ using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Core.Models;
+using Telemedicine.Core.Models.Enums;
 using Telemedicine.Web.Api.Dto;
 
 namespace Telemedicine.Web.Api.Controllers
@@ -18,12 +20,15 @@ namespace Telemedicine.Web.Api.Controllers
         private readonly IAppointmentEventService _appointmentEventService;
         private readonly IDoctorService _doctorService;
         private readonly IPatientService _patientService;
+        private readonly IDoctorTimetableService _doctorTimetableService;
 
-        public AppointmentController(IAppointmentEventService appointmentEventService, IDoctorService doctorService, IPatientService patientService)
+        public AppointmentController(IAppointmentEventService appointmentEventService, IDoctorService doctorService,
+            IPatientService patientService, IDoctorTimetableService doctorTimetableService)
         {
             _appointmentEventService = appointmentEventService;
             _doctorService = doctorService;
             _patientService = patientService;
+            _doctorTimetableService = doctorTimetableService;
         }
 
         [HttpPost]
@@ -37,9 +42,46 @@ namespace Telemedicine.Web.Api.Controllers
                     Date = dto.AppointmentDate,
                     Doctor = await _doctorService.GetByIdAsync(dto.DoctorId),
                     Patient = currentPatient,
-                    Created = DateTime.Now
+                    Created = DateTime.Now ,
+                    Status = AppointmentStatus.Ready
                 };
-                await _appointmentEventService.CreateAsync(appointmentEvent);
+                try
+                {
+                //await _appointmentEventService.CreateAsync(appointmentEvent);
+
+                    DoctorTimetable timetable =
+                       await _doctorTimetableService.GetTimetableByDate(dto.DoctorId, dto.AppointmentDate);
+                    if (timetable == null)
+                    {
+                        timetable = new DoctorTimetable()
+                        {
+                            DateTime = dto.AppointmentDate,
+                            HourType = DoctorTimetableHourType.Working,
+                            DoctorId = dto.DoctorId,
+                            AppointmentEvents = new List<AppointmentEvent>()
+                           
+                        };
+                        timetable.AppointmentEvents.Add(appointmentEvent);
+                        timetable = await _doctorTimetableService.CreateAsync(timetable);
+                        Debug.WriteLine("Create");
+                    }
+                    else
+                    {
+                        if (timetable.HourType != DoctorTimetableHourType.NotWorking)
+                        {
+                            timetable.AppointmentEvents.Add(appointmentEvent);
+                            timetable = await _doctorTimetableService.UpdateAsync(timetable);
+                            Debug.WriteLine("Update");
+                        } 
+                    }
+                }
+                catch (Exception exp)
+                {
+                   Debug.WriteLine(exp.Message);
+                   Debug.WriteLine(exp.InnerException.Message);
+                   Debug.WriteLine(exp.InnerException.Data);
+                }
+
                 return Ok();
             }
             return NotFound();

@@ -20,6 +20,7 @@ namespace Telemedicine.Core.Models
     public enum DoctorTimetableHourType
     {
         Working,
-        NotWorking
+        NotWorking,
+        Clear
     }
 }
