@@ -427,6 +427,7 @@
     <Content Include="Content\less\addTimeSpanEventDialog.less" />
     <Content Include="Content\less\timeline.less" />
     <Content Include="Content\less\doctormainpage.less" />
+    <Content Include="Content\less\filterdates.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

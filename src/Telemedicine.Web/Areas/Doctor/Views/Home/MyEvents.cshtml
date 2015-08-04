@@ -5,28 +5,17 @@
 
 <div class="fullheight sub-container row container-fluid" ng-controller="DoctorAppointmentController as viewModel" data-id="@ViewBag.DoctorId">
     <h1 class="page-header row">@ViewBag.Title</h1>
-    <div class="container-fluid unscrollable row" style="display: flex;flex-direction: column">
+    <div class="container-fluid unscrollable row" style="display: flex; flex-direction: column">
         <div class="grid" style="font-size: 12px;">
-            <div style="padding:8px;">
-                <div class="font-regular" style="display: inline-block; vertical-align: middle; color: #c0c0c0; text-transform: uppercase;font-size: 10px">
-                    Отображать<br/>за период
+            <div style="padding: 8px;">
+                <div class="font-regular" style="display: inline-block; vertical-align: middle; color: #c0c0c0; text-transform: uppercase; font-size: 10px">
+                    Отображать<br />за период
                 </div>
                 <div style="display: inline-block; vertical-align: middle">
                     <div class="dropdown">
-                        <a class="btn btn-white dropdown-toggle rounded " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="width: 180px; text-align: left">
+                        <a class="btn btn-white dropdown-toggle rounded" href="#" role="button" id="filter" aria-haspopup="true" aria-expanded="false" style="width: 180px; text-align: left">
                             Выбрать <span class="caret pull-right" style="position: absolute; right: 2em; top: 1.5em;"></span>
                         </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="#">Первый период</a>
-                            </li>
-                            <li>
-                                <a href="#">Первый период</a>
-                            </li>
-                            <li>
-                                <a href="#">Первый период</a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
                 <button class="reverticon"></button>
@@ -120,3 +109,67 @@
         </div>
     </div>
 </div>
+<script id="filtertemplate" type="t">
+    <ul class="filterdates">
+        <li>
+            <a id="today">
+                Сегодня
+            </a>
+        </li>
+        <li>
+            <a id="today">
+                1 неделя
+            </a>
+        </li>
+        <li>
+            <div><a id="range">Указать диапазон</a></div>
+            <table>
+                <tr>
+                    <td>
+                        <input type="button" id="from" class="btn btn-white rounded" value="01.07.2015"></input>
+                    </td>
+                    <td style="color:#e4e4e4">&nbsp;&mdash;&nbsp;</td>
+                    <td>
+                        <input type="button" id="to" class="btn btn-white rounded" value="01.07.2015"></input>
+                    </td>
+                </tr>
+            </table>
+        </li>
+    </ul>
+</script>
+@section scripts
+{
+    <script>
+        var popoverelem = $('#filter');
+
+        popoverelem.on('show.bs.popover', function () {
+            var popover = $(popoverelem).data('bs.popover');
+            popover.$tip.addClass('filterdates');
+        });
+        popoverelem.on('shown.bs.popover', function() {
+            var popover = $(popoverelem).data('bs.popover');
+            popover.$tip.find('#from').datetimepicker({
+                format: 'DD.MM.YYYY',
+                locale:'ru'
+            }).on('click', function() {
+                $(this).datetimepicker('show');
+            });
+
+            popover.$tip.find('#to').datetimepicker({
+                format: 'DD.MM.YYYY',
+                locale: 'ru'
+            }).on('click', function() {
+                $(this).datetimepicker('show');
+            });
+
+        });
+        popoverelem.popover({
+            container: '.main-container',
+            content: $('#filtertemplate').html(),
+            placement: 'bottom',
+            html: true
+        });
+
+
+    </script>
+}
