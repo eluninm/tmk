@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Telemedicine.Core.Domain.Repositories;
 using Telemedicine.Core.Domain.Uow;
@@ -42,9 +43,9 @@ namespace Telemedicine.Core.Domain.Services
             return newEntity;
         }
 
-        public async Task<IPagedList<DoctorPaymentHistory>> PagedAsync(int id, int page, int pageSize)
+        public async Task<IPagedList<DoctorPaymentHistory>> PagedAsync(int id, int page, int pageSize, DateTime? start, DateTime? end)
         {
-            return await _doctorPaymentRepository.PagedAsync(id, page, pageSize);
+            return await _doctorPaymentRepository.PagedAsync(id, page, pageSize, start, end);
         }
     }
 }

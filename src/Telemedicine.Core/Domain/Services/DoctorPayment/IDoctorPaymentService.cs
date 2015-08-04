@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Telemedicine.Core.Models;
 using Telemedicine.Core.PagedList;
@@ -15,6 +16,6 @@ namespace Telemedicine.Core.Domain.Services
 
         Task<DoctorPaymentHistory> UpdateAsync(DoctorPaymentHistory doctorPaymentHistory);
 
-        Task<IPagedList<DoctorPaymentHistory>> PagedAsync(int id, int page, int pageSize);
+        Task<IPagedList<DoctorPaymentHistory>> PagedAsync(int id, int page, int pageSize, DateTime? start, DateTime? end);
     }
 }

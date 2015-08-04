@@ -17,11 +17,13 @@ module Telemedicine {
 
         public totalCount: number;
         public currentPage: number = 1;
-        public pageSize: number = 1;
+        public pageSize: number = 10;
+        public start: Date;
+        public end: Date;
 
         public loadPage(pageToLoad?: number) {
             var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter).then(result => {
+            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter, this.start, this.end).then(result => {
                 this.appointments = result.Data;
                 this.totalCount = result.TotalCount;
                 this.currentPage = result.Page;

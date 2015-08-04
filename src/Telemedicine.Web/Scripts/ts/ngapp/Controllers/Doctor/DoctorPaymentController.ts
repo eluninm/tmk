@@ -24,10 +24,12 @@ module Telemedicine {
         public totalCount: number;
         public currentPage: number;
         public pageSize: number;
+        public start: Date;
+        public end: Date;
 
         public loadPage(pageToLoad?: number) {
             var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getPaymentHistory(this.doctorId, page, this.pageSize).then(result => {
+            this.doctorApiService.getPaymentHistory(this.doctorId, page, this.pageSize, this.start, this.end).then(result => {
                 this.payments = result.Data;
                 this.totalCount = result.TotalCount;
                 this.currentPage = result.Page;

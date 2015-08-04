@@ -53,7 +53,7 @@ module Telemedicine {
             return this.$http.get(url).then(result => result.data);
         }
 
-        getDoctorAppointments(doctorId: number, page?: number, pageSize?: number, patientTitleFilter?: string): angular.IPromise<IPagedList<any>> {
+        getDoctorAppointments(doctorId: number, page?: number, pageSize?: number, patientTitleFilter?: string, start?: Date, end?: Date): angular.IPromise<IPagedList<any>> {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/appointments");
             var query: any = {}, querySeparator = "?";
 
@@ -65,6 +65,11 @@ module Telemedicine {
             }
             if (patientTitleFilter) {
                 query.patientTitleFilter = patientTitleFilter;
+            }
+
+            if (start && end) {
+                query.start = start.toLocaleString();
+                query.end = end.toLocaleString();
             }
 
             for (var key in query) {
@@ -84,7 +89,7 @@ module Telemedicine {
             return this.$http.get(url).then(result => result.data);
         }
 
-        getPaymentHistory(doctorId: number, page?: number, pageSize?: number): angular.IPromise<IPagedList<IPaymentHistory>> {
+        getPaymentHistory(doctorId: number, page?: number, pageSize?: number, start?: Date, end?:Date): angular.IPromise<IPagedList<IPaymentHistory>> {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/paymentHistory");
 
             var query: any = {}, querySeparator = "?";
@@ -94,6 +99,11 @@ module Telemedicine {
             }
             if (pageSize) {
                 query.pageSize = pageSize;
+            }
+
+            if (start && end) {
+                query.start = start.toLocaleString();
+                query.end = end.toLocaleString();
             }
 
             for (var key in query) {

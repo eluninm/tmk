@@ -286,7 +286,7 @@ var Telemedicine;
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/details");
             return this.$http.get(url).then(function (result) { return result.data; });
         };
-        DoctorApiService.prototype.getDoctorAppointments = function (doctorId, page, pageSize, patientTitleFilter) {
+        DoctorApiService.prototype.getDoctorAppointments = function (doctorId, page, pageSize, patientTitleFilter, start, end) {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/appointments");
             var query = {}, querySeparator = "?";
             if (page) {
@@ -297,6 +297,10 @@ var Telemedicine;
             }
             if (patientTitleFilter) {
                 query.patientTitleFilter = patientTitleFilter;
+            }
+            if (start && end) {
+                query.start = start.toLocaleString();
+                query.end = end.toLocaleString();
             }
             for (var key in query) {
                 if (query.hasOwnProperty(key)) {
@@ -312,7 +316,7 @@ var Telemedicine;
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/timeWindows");
             return this.$http.get(url).then(function (result) { return result.data; });
         };
-        DoctorApiService.prototype.getPaymentHistory = function (doctorId, page, pageSize) {
+        DoctorApiService.prototype.getPaymentHistory = function (doctorId, page, pageSize, start, end) {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/paymentHistory");
             var query = {}, querySeparator = "?";
             if (page) {
@@ -320,6 +324,10 @@ var Telemedicine;
             }
             if (pageSize) {
                 query.pageSize = pageSize;
+            }
+            if (start && end) {
+                query.start = start.toLocaleString();
+                query.end = end.toLocaleString();
             }
             for (var key in query) {
                 if (query.hasOwnProperty(key)) {
@@ -683,14 +691,14 @@ var Telemedicine;
             this.$modal = $modal;
             this.$element = $element;
             this.currentPage = 1;
-            this.pageSize = 1;
+            this.pageSize = 10;
             this.doctorId = parseInt($element.attr("data-id"));
             this.loadPage();
         }
         DoctorAppointmentController.prototype.loadPage = function (pageToLoad) {
             var _this = this;
             var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter).then(function (result) {
+            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter, this.start, this.end).then(function (result) {
                 _this.appointments = result.Data;
                 _this.totalCount = result.TotalCount;
                 _this.currentPage = result.Page;
@@ -754,7 +762,7 @@ var Telemedicine;
         DoctorPaymentController.prototype.loadPage = function (pageToLoad) {
             var _this = this;
             var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getPaymentHistory(this.doctorId, page, this.pageSize).then(function (result) {
+            this.doctorApiService.getPaymentHistory(this.doctorId, page, this.pageSize, this.start, this.end).then(function (result) {
                 _this.payments = result.Data;
                 _this.totalCount = result.TotalCount;
                 _this.currentPage = result.Page;

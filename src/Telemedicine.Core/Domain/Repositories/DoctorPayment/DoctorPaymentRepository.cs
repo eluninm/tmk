@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Telemedicine.Core.Data;
 using Telemedicine.Core.Data.EntityFramework;
@@ -13,9 +14,14 @@ namespace Telemedicine.Core.Domain.Repositories
         {
         }
 
-        public async Task<IPagedList<DoctorPaymentHistory>> PagedAsync(int id, int page, int pageSize)
+        public async Task<IPagedList<DoctorPaymentHistory>> PagedAsync(int id, int page, int pageSize, DateTime? start, DateTime? end)
         {
-            return await Set.Where(item => item.DoctorId == id).OrderBy(t => t.Id).ToPagedListAsync(page, pageSize);
+            var query = Set.Where(item => item.DoctorId == id);
+            if (start.HasValue  && end.HasValue)
+            {
+                query = query.Where(item => item.Date >= start && item.Date < end);
+            }
+            return await query.OrderBy(t => t.Id).ToPagedListAsync(page, pageSize);
         }
     }
 }
