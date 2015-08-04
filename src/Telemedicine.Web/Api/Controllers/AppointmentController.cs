@@ -69,6 +69,7 @@ namespace Telemedicine.Web.Api.Controllers
                     {
                         if (timetable.HourType != DoctorTimetableHourType.NotWorking)
                         {
+                            timetable.HourType = DoctorTimetableHourType.Working;
                             timetable.AppointmentEvents.Add(appointmentEvent);
                             timetable = await _doctorTimetableService.UpdateAsync(timetable);
                             Debug.WriteLine("Update");
