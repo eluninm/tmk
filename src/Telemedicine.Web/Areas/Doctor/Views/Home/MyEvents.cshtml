@@ -195,7 +195,12 @@
 
 
         function updateFilter() {
-            updateDateContainer(moment(startDate), moment(endDate), false);
+            if (moment(startDate).toDate().getDate() == moment(endDate).toDate().getDate()) {
+                updateDateContainer(moment(startDate), moment(endDate), true);
+            } else {
+                updateDateContainer(moment(startDate), moment(endDate), false);
+            }
+            
         }
 
 
