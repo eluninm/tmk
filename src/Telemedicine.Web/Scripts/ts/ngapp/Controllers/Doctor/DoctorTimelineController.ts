@@ -98,5 +98,11 @@ module Telemedicine {
                 this.updateTimeLine();
             }
         }
+
+        public showMyEvents() {
+            var start = new Date(this.curentDate.setHours(this.selectedHour));
+            var end = new Date(this.curentDate.setHours(this.selectedHour + 1));
+            window.location.href = "/Doctor/Home/MyEvents#start=" + start.toLocaleString() + "&end=" + end.toLocaleString();
+        }
     }
 }

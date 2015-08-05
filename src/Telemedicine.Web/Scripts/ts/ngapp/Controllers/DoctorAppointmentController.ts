@@ -9,8 +9,26 @@ module Telemedicine {
             private $modal: ng.ui.bootstrap.IModalService,
             private $element: ng.IAugmentedJQuery) {
             this.doctorId = parseInt($element.attr("data-id"));
-            this.loadPage();
+
+            if (location.hash) {
+                var parameters = this.parseUrlQuery();
+                this.start = new Date(parameters["start"]);
+                this.end = new Date(parameters["end"]);
+            }
         }
+
+        public parseUrlQuery(): Array<Object> {
+            var data = new Array();
+            if (location.hash) {
+                var pair = (location.hash.substr(1)).split('&');
+                for (var i = 0; i < pair.length; i++) {
+                    var param = pair[i].split('=');
+                    data[param[0]] = param[1];
+                }
+            }
+            return data;
+        }
+
 
         public appointments: Array<IDoctorAppointment>;
         public patientTitleFilter: string;

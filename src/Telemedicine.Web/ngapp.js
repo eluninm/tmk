@@ -693,8 +693,23 @@ var Telemedicine;
             this.currentPage = 1;
             this.pageSize = 10;
             this.doctorId = parseInt($element.attr("data-id"));
-            this.loadPage();
+            if (location.hash) {
+                var parameters = this.parseUrlQuery();
+                this.start = new Date(parameters["start"]);
+                this.end = new Date(parameters["end"]);
+            }
         }
+        DoctorAppointmentController.prototype.parseUrlQuery = function () {
+            var data = new Array();
+            if (location.hash) {
+                var pair = (location.hash.substr(1)).split('&');
+                for (var i = 0; i < pair.length; i++) {
+                    var param = pair[i].split('=');
+                    data[param[0]] = param[1];
+                }
+            }
+            return data;
+        };
         DoctorAppointmentController.prototype.setStart = function (start) {
             this.start = start;
         };
@@ -928,6 +943,11 @@ var Telemedicine;
             else {
                 this.updateTimeLine();
             }
+        };
+        DoctorTimelineController.prototype.showMyEvents = function () {
+            var start = new Date(this.curentDate.setHours(this.selectedHour));
+            var end = new Date(this.curentDate.setHours(this.selectedHour + 1));
+            window.location.href = "/Doctor/Home/MyEvents#start=" + start.toLocaleString() + "&end=" + end.toLocaleString();
         };
         DoctorTimelineController.$inject = ["doctorApiService", "balanceApiService", "$element", "$scope"];
         return DoctorTimelineController;
