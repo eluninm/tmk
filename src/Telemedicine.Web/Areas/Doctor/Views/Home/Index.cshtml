@@ -132,17 +132,20 @@
     <script type="text/javascript">
         var EventStartDate;
         var EventDurationVal;
-        var dates = [
+        var currentYear = null, currentMonth = null;
+
+       /* var dates = [
             { "Class": "planned", "Date": "1995-06-23" },
             { "Class": "planned", "Date": "2014-05-01" },
-            { "Class": "fault", "Date": "2015-06-17" },
+            { "Class": "fault", "Date": "2015-08-16" },
+            { "Class": "planned", "Date": "2015-08-08" },
             { "Class": "planned", "Date": "2015-08-03" }
         ];
-
+        */
         function availableHour() {
             var controller = angular.element(document.getElementsByClassName("doctormainpage")).controller();
             controller.availableHour();
-            $('.hour .info').each(function () {  
+            $('.hour .info').each(function() {
                 var e = $("body");
                 if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
                     $(this).popover('destroy');
@@ -154,7 +157,7 @@
             var controller = angular.element(document.getElementsByClassName("doctormainpage")).controller();
             controller.unavailableHour();
 
-            $('.hour .info').each(function () { 
+            $('.hour .info').each(function() {
                 var e = $("body");
                 if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
                     $(this).popover('destroy');
@@ -166,29 +169,38 @@
             var controller = angular.element(document.getElementsByClassName("doctormainpage")).controller();
             controller.clearHour();
 
-            $('.hour .info').each(function () {
+            $('.hour .info').each(function() {
                 var e = $("body");
                 if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
                     $(this).popover('destroy');
                 }
             });
-             
 
-           
+
         }
 
-        $('#calendar').datetimepicker({
-            format: 'YYYY-MM-dd',
-            inline: true,
-            locale: 'ru',
-            highlights: dates
-        }).on('dp.change', function (e) {
-            $('#currentdate').html(e.date.format('DD MMM, dd'));
-            var controller = angular.element(document.getElementsByClassName("doctormainpage")).controller();
-            controller.changeDate(new Date(e.date));
-        });
+        function updateDatetimepickerMarkers() {
+            if (currentYear == null) {
+                var currentDate = $('#calendar').data("DateTimePicker").date();
+                currentYear = new Date(currentDate).getFullYear();
+                currentMonth = new Date(currentDate).getMonth() + 1;
+            }
+            console.log("updateDatetimepickerMarkers");
+
+            $.get("@Url.Action("GetCalendarMarkers", "Home")", { year: currentYear, month: currentMonth }).done(function (data) {  
+                $('#calendar').data("DateTimePicker").options({ highlights: JSON.parse(data) });
+                //$('#calendar').data("DateTimePicker").options({ viewDate: new Date(currentYear, currentMonth, 1) });
+               // $('#calendar').data("DateTimePicker").update();
+                //createDatetimepicker(JSON.parse(data));
+                // $('#calendar').data("DateTimePicker").viewDate(new Date(currentYear, currentMonth,1));
+            });
+        };
+
+       
+
+        
         $('#currentdate').html(moment().format('DD MMMM, dd'));
-        $('.timeline').on('click', '.hour .info:not(.selected)', function () {
+        $('.timeline').on('click', '.hour .info:not(.selected)', function() {
             $(this).toggleClass('selected', true);
 
             if ($(this).hasClass("working") && $(this).children().hasClass('human')) {
@@ -235,59 +247,20 @@
 
             $(this).data('bs.popover').tip().addClass('timeline-item').attr('data-hourtype', $(this).closest('.info').attr('data-hourtype'));
             $(this).popover('show');
-            $(this).on('hidden.bs.popover', function () {
+            $(this).on('hidden.bs.popover', function() {
                 $(this).toggleClass('selected', false);
                 $(this).popover('destroy');
             });
 
         });
-        /*var timeline = $('.timeline');
-        var str = '';
-        var hours = [
-            { type: 'working', humans: 0 },
-            { type: 'working', humans: 2 },
-            { type: 'working', humans: 3 },
-            { type: 'working', humans: 4 },
-            { type: 'working', humans: 1 },
-            { type: 'working', humans: 0 },
-            { type: 'working', humans: 0 },
-            { type: '', humans: 0 },
-            { type: '', humans: 0 },
-            { type: '', humans: 0 },
-            { type: '', humans: 0 },
-            { type: '', humans: 0 },
-            { type: '', humans: 0 },
-            { type: '', humans: 0 },
-            { type: '', humans: 0 },
-            { type: '', humans: 0 },
-            { type: '', humans: 0 },
-            { type: '', humans: 0 },
-            { type: '', humans: 0 },
-            { type: 'notworking', humans: 0 },
-            { type: 'notworking', humans: 0 },
-            { type: 'notworking', humans: 0 },
-            { type: 'notworking', humans: 0 },
-            { type: 'notworking', humans: 0 },
-        ];
-        hours.forEach(function (hour, i) {
-            var humans = '';
-            for (var j = 0; j < hour.humans; j++) {
-                humans += '<div class=human></div>';
-            }
-            str += '<div class="hour">\
-                <div class="info ' + (hour.type || '') + ' panel-default panel" data-hourtype="' + hour.type + '">' + humans + '</div>\
-                <div class="time font-bold text-center">' + (i + 1) + ':00</div>\
-            </div>';
-        });*/
-        //timeline.html(str);
 
         $('#currenttime').text(moment().format('HH:mm:ss'));
-            setInterval(function () {
+        setInterval(function() {
             $('#currenttime').text(moment().format('HH:mm:ss'));
-            }, 100);
+        }, 100);
 
-        $('body').on('click', function (e) {
-            $('.hour .info').each(function () {
+        $('body').on('click', function(e) {
+            $('.hour .info').each(function() {
                 //the 'is' for buttons that trigger popups
                 //the 'has' for icons within a button that triggers a popup
                 if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
@@ -297,7 +270,37 @@
         });
 
         $(function () {
-            $(".dropdown-menu li a").click(function () {
+
+            $('#calendar').datetimepicker({
+                format: 'YYYY-MM-dd',
+                inline: true,
+                locale: 'ru' 
+            }).on('dp.change', function (e) {
+                $('#currentdate').html(e.date.format('DD MMM, dd'));
+                var controller = angular.element(document.getElementsByClassName("doctormainpage")).controller();
+                controller.changeDate(new Date(e.date));
+            }).on('dp.error', function (e) {
+                console.log(e);
+            }).on('dp.update', function (e) {
+                console.log("dp.update");
+                currentMonth = e.viewDate.format('M');
+                updateDatetimepickerMarkers();
+            });
+
+     /*       $('[data-action="previous"]').click(function () {
+                currentMonth--;
+                updateDatetimepickerMarkers();
+            });
+
+
+            $(".next").click(function () {
+                currentMonth++;
+                updateDatetimepickerMarkers();
+            });*/
+
+            updateDatetimepickerMarkers();
+
+            $(".dropdown-menu li a").click(function() {
                 $("#selectedMonth").text($(this).text());
 
             });
@@ -309,14 +312,14 @@
 
             $("#selectedMonth").text(months[(new Date()).getMonth()]);
 
-            $("#selectedMonth").bind('DOMSubtreeModified', function () {
+            $("#selectedMonth").bind('DOMSubtreeModified', function() {
                 if ($.inArray($("#selectedMonth").text(), months) == -1)
                     $("#selectedMonth").text(months[(new Date()).getMonth()]);
             });
             /* $('#EventStart').datetimepicker({
                 locale:'ru'
             });*/
-            $.getJSON('@Url.Action("GetEvents", "Events")', "json", function (data) {
+            $.getJSON('@Url.Action("GetEvents", "Events")', "json", function(data) {
                 /* $('#calendar').fullCalendar({
                     firstDay: moment().format('d'),
                     header: false,
@@ -370,14 +373,14 @@
             $("#endDateDatetimePicker").datetimepicker({
                 locale: 'ru'
             });
-            $(".glyphicon-calendar").click(function () {
+            $(".glyphicon-calendar").click(function() {
                 $(this).parent().parent().find(".form-control").focus();
             });
-            $('.dropdown-menu input, .dropdown-menu label').click(function (e) {
+            $('.dropdown-menu input, .dropdown-menu label').click(function(e) {
                 e.stopPropagation();
             });
 
-            $('#CreateEvent').on('shown.bs.modal', function () {
+            $('#CreateEvent').on('shown.bs.modal', function() {
                 var pickerTime = shiftTime(new Date(EventStartDate));
 
                 $('#EventStart').datetimepicker({
@@ -392,9 +395,11 @@
                 $('#EventDuration').change();
             });
 
-           
+            
+
         });
 
+       
 
         function onAddSuccess() {
             $("#addEventDialog").modal('hide');
