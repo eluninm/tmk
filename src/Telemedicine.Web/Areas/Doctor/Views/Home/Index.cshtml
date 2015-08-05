@@ -27,7 +27,7 @@
         <div class="balance-info">
             <div class="text">Ваш баланс</div>
             <div class="summa">1486</div>
-            <button class="btn btn-primary rounded">Подробнее</button>
+            <a href="@Url.Action("Balance")" class="btn btn-primary rounded">Подробнее</a>
         </div>
     </div>
     <div class="container-fluid" style="flex: 1">
@@ -175,7 +175,7 @@
                     $(this).popover('destroy');
                 }
             });
-
+             
 
         }
 
@@ -188,11 +188,9 @@
             console.log("updateDatetimepickerMarkers");
 
             $.get("@Url.Action("GetCalendarMarkers", "Home")", { year: currentYear, month: currentMonth }).done(function (data) {  
+                
                 $('#calendar').data("DateTimePicker").options({ highlights: JSON.parse(data) });
-                //$('#calendar').data("DateTimePicker").options({ viewDate: new Date(currentYear, currentMonth, 1) });
-               // $('#calendar').data("DateTimePicker").update();
-                //createDatetimepicker(JSON.parse(data));
-                // $('#calendar').data("DateTimePicker").viewDate(new Date(currentYear, currentMonth,1));
+                $('#calendar').data("DateTimePicker").options({ defaultDate: new Date(currentYear, currentMonth-1, 1) }); 
             });
         };
 
@@ -281,8 +279,7 @@
                 controller.changeDate(new Date(e.date));
             }).on('dp.error', function (e) {
                 console.log(e);
-            }).on('dp.update', function (e) {
-                console.log("dp.update");
+            }).on('dp.update', function (e) { 
                 currentMonth = e.viewDate.format('M');
                 updateDatetimepickerMarkers();
             });

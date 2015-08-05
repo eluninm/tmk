@@ -854,8 +854,8 @@ var Telemedicine;
         }
         DoctorTimelineController.prototype.loadTimeline = function () {
             var _this = this;
-            this.year = 2015;
-            this.month = 8;
+            //this.year = 2015;
+            //this.month = 8;
             this.doctorApiService.getDoctorTimelineByMonth(this.doctorId, this.year, this.month).then(function (result) {
                 _this.timeLineDates = result;
                 _this.updateTimeLine();
@@ -908,7 +908,7 @@ var Telemedicine;
             this.curentDate = date;
             console.log("changeDate");
             if ((date.getMonth() + 1) != this.month || date.getFullYear() != this.year) {
-                this.month = date.getMonth();
+                this.month = date.getMonth() + 1;
                 this.year = date.getFullYear();
                 this.loadTimeline();
                 console.log("month is changed");
