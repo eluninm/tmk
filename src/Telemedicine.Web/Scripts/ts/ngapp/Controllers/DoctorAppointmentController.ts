@@ -21,15 +21,23 @@ module Telemedicine {
         public start: Date;
         public end: Date;
 
+        public setStart(start: Date) {
+            this.start = start;
+        }
+
+        public setEnd(end: Date) {
+            this.end = end;
+        }
+
         public loadPage(pageToLoad?: number) {
             var page = pageToLoad || this.currentPage;
             this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter, this.start, this.end).then(result => {
                 this.appointments = result.Data;
                 this.totalCount = result.TotalCount;
                 this.currentPage = result.Page;
-                this.pageSize = result.PageSize;
+                this.pageSize = result.PageSize; 
             });
-        }
+        } 
 
         public changePageSize(size: number) {
             this.pageSize = size;

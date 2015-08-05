@@ -695,6 +695,12 @@ var Telemedicine;
             this.doctorId = parseInt($element.attr("data-id"));
             this.loadPage();
         }
+        DoctorAppointmentController.prototype.setStart = function (start) {
+            this.start = start;
+        };
+        DoctorAppointmentController.prototype.setEnd = function (end) {
+            this.end = end;
+        };
         DoctorAppointmentController.prototype.loadPage = function (pageToLoad) {
             var _this = this;
             var page = pageToLoad || this.currentPage;
