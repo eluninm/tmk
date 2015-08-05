@@ -47,6 +47,16 @@ module Telemedicine {
             }
         }
 
+
+        public setStart(start: Date) {
+            this.start = start;
+        }
+
+        public setEnd(end: Date) {
+            this.end = end;
+        }
+
+
         public loadBalance() {
             this.balanceApiService.balance().then(result => {
                 this.balance = result;

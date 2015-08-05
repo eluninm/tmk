@@ -4,44 +4,33 @@
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
 
-<div class="fullheight sub-container row container-fluid" ng-controller="DoctorPaymentController as viewModel" data-id="@ViewBag.DoctorId">
+<div class="fullheight sub-container row container-fluid" id="doctorPaymentController" ng-controller="DoctorPaymentController as viewModel" data-id="@ViewBag.DoctorId">
     <h1 class="page-header row">
         <div class="pull-left currenttime">
             @ViewBag.Title:
-            <span style="vertical-align: middle;font-size: 36px">
+            <span style="vertical-align: middle; font-size: 36px">
                 <b style="font-weight: 400" id="currentbalance">100500</b>
                 <b class="font-rouble" style="font-weight: 400">o</b>
             </span>
         </div>
     </h1>
-    <div class="container-fluid unscrollable row" style="display: flex;flex-direction: column">
+    <div class="container-fluid unscrollable row" style="display: flex; flex-direction: column">
         <div class="grid" style="font-size: 12px;">
-            <div style="padding:8px;">
-                <div class="font-regular" style="display: inline-block; vertical-align: middle; color: #c0c0c0; text-transform: uppercase;font-size: 10px">
-                    Отображать<br />за период
+            <div style="padding: 8px;">
+                <div class="font-regular" style="display: inline-block; vertical-align: middle; color: #c0c0c0; text-transform: uppercase; font-size: 10px">
+                    Отображать<br/>за период
                 </div>
                 <div style="display: inline-block; vertical-align: middle">
                     <div class="dropdown">
-                        <a class="btn btn-white dropdown-toggle rounded " data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="width: 180px; text-align: left">
-                            Выбрать <span class="caret pull-right" style="position: absolute; right: 2em; top: 1.5em;"></span>
+                        <a class="btn btn-white dropdown-toggle rounded" href="#" role="button" id="filter" aria-haspopup="true" aria-expanded="false" style="width: 180px; text-align: left">
+                            <span id="dateContainer">Выбрать</span> <span class="caret pull-right" style="position: absolute; right: 2em; top: 1.5em;"></span>
                         </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="#">Первый период</a>
-                            </li>
-                            <li>
-                                <a href="#">Первый период</a>
-                            </li>
-                            <li>
-                                <a href="#">Первый период</a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
-                <button class="reverticon"></button>
+                <button class="reverticon"  onclick="updateFilter()"></button>
                 <div class="pull-right">
-                    <div style="vertical-align: middle; font-size: 14px; position: relative; top: 4px;display: inline-block">
-                        <span class="font-bold" style="display: inline-block;vertical-align: middle;">Итого за период:</span> <span style="display: inline-block; width: 140px; margin-left: 1em;vertical-align: middle;font-size: 16px">100500 <span class="font-rouble">i</span></span>
+                    <div style="vertical-align: middle; font-size: 14px; position: relative; top: 4px; display: inline-block">
+                        <span class="font-bold" style="display: inline-block; vertical-align: middle;">Итого за период:</span> <span style="display: inline-block; width: 140px; margin-left: 1em; vertical-align: middle; font-size: 16px">100500 <span class="font-rouble">i</span></span>
                     </div>
                 </div>
             </div>
@@ -111,3 +100,134 @@
         </div>
     </div>
 </div>
+
+
+
+
+<script id="filtertemplate" type="t">
+    <ul class="filterdates">
+        <li>
+            <a onclick="today()" id="today">
+                Сегодня
+            </a>
+        </li>
+        <li>
+            <a id="today" onclick="oneWeek()">
+                1 неделя
+            </a>
+        </li>
+        <li>
+            <div><a id="range">Указать диапазон</a></div>
+            <table>
+                <tr>
+                    <td>
+                        <input type="button" id="from" class="btn btn-white rounded" value="01.07.2015"></input>
+                    </td>
+                    <td style="color:#e4e4e4">&nbsp;&mdash;&nbsp;</td>
+                    <td>
+                        <input type="button" id="to" class="btn btn-white rounded" value="01.07.2015"></input>
+                    </td>
+                </tr>
+            </table>
+        </li>
+    </ul>
+</script>
+
+
+@section scripts
+{
+    <script>
+        var popoverelem = $('#filter');
+
+        popoverelem.on('show.bs.popover', function() {
+            var popover = $(popoverelem).data('bs.popover');
+            popover.$tip.addClass('filterdates');
+        });
+        popoverelem.on('shown.bs.popover', function() {
+            var popover = $(popoverelem).data('bs.popover');
+
+            popover.$tip.find('#from').datetimepicker({
+                format: 'DD.MM.YYYY',
+                locale: 'ru'
+            }).on('click', function() {
+                $(this).datetimepicker('show');
+            }).on('dp.change', function(e) {
+                range();
+            });
+
+            popover.$tip.find('#to').datetimepicker({
+                format: 'DD.MM.YYYY',
+                locale: 'ru'
+            }).on('click', function() {
+                $(this).datetimepicker('show');
+            }).on('dp.change', function(e) {
+                range();
+                $('#filter').popover('hide');
+            });
+
+        });
+        popoverelem.popover({
+            container: '.main-container',
+            content: $('#filtertemplate').html(),
+            placement: 'bottom',
+            html: true
+        });
+
+
+        var controller;
+        var startDate;
+        var endDate;
+        $(function() {
+            controller = angular.element(document.getElementById("doctorPaymentController")).controller();
+        });
+
+
+        function today() {
+            startDate = moment().startOf('day');
+            endDate = moment().endOf('day');
+            updateDateContainer(moment().startOf('day').toDate(), moment().endOf('day').toDate(), true);
+            $('#filter').popover('hide');
+        }
+
+        function oneWeek() {
+            console.log("oneWeek");
+            startDate = moment().startOf('week');
+            endDate = moment().endOf('week');
+            updateDateContainer(startDate, endDate, false);
+            $('#filter').popover('hide');
+        }
+
+
+        function range() {
+            startDate = $(popoverelem).data('bs.popover').$tip.find('#from').data("DateTimePicker").date();
+            endDate = $(popoverelem).data('bs.popover').$tip.find('#to').data("DateTimePicker").date();
+            updateDateContainer(moment(startDate), moment(endDate), false);
+        }
+
+
+        function updateFilter() {
+            if (moment(startDate).toDate().getDate() == moment(endDate).toDate().getDate()) {
+                updateDateContainer(moment(startDate), moment(endDate), true);
+            } else {
+                updateDateContainer(moment(startDate), moment(endDate), false);
+            }
+
+        }
+
+
+        function updateDateContainer(first, second, isToday) {
+            if (isToday) {
+                $("#dateContainer").text("Сегодня");
+            } else {
+                $("#dateContainer").text(moment(first).format("DD.MM.YYYY") + " - " + moment(second).format("DD.MM.YYYY"));
+            }
+
+            controller.setStart(moment(first).toDate().toISOString());
+            controller.setEnd(moment(second).toDate().toISOString());
+            controller.loadPage();
+
+        }
+
+
+    </script>
+}

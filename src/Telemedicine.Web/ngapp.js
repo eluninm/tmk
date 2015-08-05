@@ -785,6 +785,12 @@ var Telemedicine;
                 });
             }
         };
+        DoctorPaymentController.prototype.setStart = function (start) {
+            this.start = start;
+        };
+        DoctorPaymentController.prototype.setEnd = function (end) {
+            this.end = end;
+        };
         DoctorPaymentController.prototype.loadBalance = function () {
             var _this = this;
             this.balanceApiService.balance().then(function (result) {
