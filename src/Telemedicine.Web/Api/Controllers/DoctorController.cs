@@ -79,11 +79,10 @@ namespace Telemedicine.Web.Api.Controllers
 
         [HttpGet]
         [Route("{id}/appointments")]
-        public async Task<IHttpActionResult> Appointments(int id, int page = 1, int pageSize = 10,
-            string patientTitleFilter = null)
+        public async Task<IHttpActionResult> Appointments(int id, int page = 1, int pageSize = 10, string patientTitleFilter = null, DateTime? start = null, DateTime? end = null)
         {
             var doctorAppointments =
-                await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFilter);
+                await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFilter, start, end);
             var pagedList = doctorAppointments.Map(t =>
             {
                 var doctorAppointmentDto = Mapper.Map<DoctorAppointmentDto>(t);
@@ -112,7 +111,7 @@ namespace Telemedicine.Web.Api.Controllers
 
         [HttpGet]
         [Route("{doctorId}/paymentHistory")]
-        public async Task<IHttpActionResult> PaymentPage(int doctorId, int page = 1, int pageSize = 10)
+        public async Task<IHttpActionResult> PaymentPage(int doctorId, int page = 1, int pageSize = 10, DateTime? start = null, DateTime? end = null)
         {
             var doctor = await _doctorService.GetByIdAsync(doctorId);
 
@@ -120,7 +119,7 @@ namespace Telemedicine.Web.Api.Controllers
             {
                 return NotFound();
             }
-            var payments = await _doctorPaymentService.PagedAsync(doctorId, page, pageSize);
+            var payments = await _doctorPaymentService.PagedAsync(doctorId, page, pageSize, start, end);
             // var payments = await _paymentHistoryService.PagedAsync(User.Identity.GetUserId(), page, pageSize);
             var pagedList = payments.Map(t =>
             {
@@ -151,7 +150,7 @@ namespace Telemedicine.Web.Api.Controllers
                     Hours = new List<TimelineHourViewModel>()
                 };
 
-                for (int hour = 1; hour < 25; hour++)
+                for (int hour = 0; hour < 24; hour++)
                 {
                     //Берем DoctorTimetable на текущий час
                     DoctorTimetable onCurrentHour =
@@ -240,6 +239,7 @@ namespace Telemedicine.Web.Api.Controllers
         public async Task<IHttpActionResult> ChangeHourStatus(int year, int month, int day, int selectedHour,
             DoctorTimetableHourType status)
         {
+            selectedHour = selectedHour == 24 ? 0 : selectedHour;
             var currentUserId = User.Identity.GetUserId();
             var doctor = await _doctorService.GetByUserIdAsync(currentUserId);
             var timetable =

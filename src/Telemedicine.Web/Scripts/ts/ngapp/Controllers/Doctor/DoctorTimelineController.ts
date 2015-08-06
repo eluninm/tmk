@@ -27,8 +27,8 @@ module Telemedicine {
         private curentDate: Date = new Date();
 
         public loadTimeline() {
-            this.year = 2015;
-            this.month = 8;
+            //this.year = 2015;
+            //this.month = 8;
             this.doctorApiService.getDoctorTimelineByMonth(this.doctorId, this.year, this.month).then(result => {
                 this.timeLineDates = result;
                 this.updateTimeLine(); 
@@ -62,6 +62,7 @@ module Telemedicine {
         public clearHour() {
             this.doctorApiService.changeHourStatus(this.curentDate, this.selectedHour, TimelineHourType.Clear).then(result => {
                 this.loadTimeline();
+                document.getElementById("patientListOnCurrentDayLink").click();
             });
         }
 
@@ -89,13 +90,19 @@ module Telemedicine {
             this.curentDate = date;
             console.log("changeDate");
             if ((date.getMonth()+1) != this.month || date.getFullYear() != this.year) {
-                this.month = date.getMonth();
+                this.month = date.getMonth()+1;
                 this.year = date.getFullYear();
                 this.loadTimeline();
                 console.log("month is changed");
             } else {
                 this.updateTimeLine();
             }
+        }
+
+        public showMyEvents() {
+            var start = new Date(this.curentDate.setHours(this.selectedHour));
+            var end = new Date(this.curentDate.setHours(this.selectedHour + 1));
+            window.location.href = "/Doctor/Home/MyEvents#start=" + start.toLocaleString() + "&end=" + end.toLocaleString();
         }
     }
 }

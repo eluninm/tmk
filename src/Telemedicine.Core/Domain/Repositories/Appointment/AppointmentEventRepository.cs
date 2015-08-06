@@ -23,13 +23,21 @@ namespace Telemedicine.Core.Domain.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page, int pageSize, string patientTitleFilter)
+        public async Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page, int pageSize, string patientTitleFilter, DateTime? start, DateTime? end)
         {
             var query = Set
                 .Include(t => t.Patient)
                 .Include(t => t.Patient.User)
-                .Where(t => t.DoctorId == doctorId)
-                .Where(t => t.Date >= DateTime.Now);
+                .Where(t => t.DoctorId == doctorId);
+
+            if (start.HasValue && end.HasValue)
+            {
+                query = query.Where(t => t.Date >= start && t.Date < end);
+            }
+            else
+            {
+                query = query.Where(t => t.Date >= DateTime.Now);
+            }
 
             if (!string.IsNullOrWhiteSpace(patientTitleFilter))
             {

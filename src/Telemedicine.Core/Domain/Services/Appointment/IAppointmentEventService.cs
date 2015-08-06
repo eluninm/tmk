@@ -16,7 +16,7 @@ namespace Telemedicine.Core.Domain.Services
 
         Task<AppointmentEvent> UpdateAsync(AppointmentEvent appointmentEvent);
 
-        Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page = 1, int pageSize = 10, string patientTitleFilter = null);
+        Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page = 1, int pageSize = 10, string patientTitleFilter = null, DateTime? start = null, DateTime? end = null);
 
         Task<IEnumerable<AppointmentEvent>> GetDoctorAppointmentsByDateAsync(int doctorId, DateTime date);
 

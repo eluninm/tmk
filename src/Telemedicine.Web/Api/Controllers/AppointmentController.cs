@@ -61,8 +61,9 @@ namespace Telemedicine.Web.Api.Controllers
                             AppointmentEvents = new List<AppointmentEvent>()
                            
                         };
-                        timetable.AppointmentEvents.Add(appointmentEvent);
                         timetable = await _doctorTimetableService.CreateAsync(timetable);
+                        timetable.AppointmentEvents.Add(appointmentEvent);
+                        timetable = await _doctorTimetableService.UpdateAsync(timetable);
                         Debug.WriteLine("Create");
                     }
                     else
