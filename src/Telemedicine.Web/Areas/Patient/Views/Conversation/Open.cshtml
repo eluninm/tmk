@@ -198,10 +198,11 @@
                 addMessage(message);
             };
 
-            $('#currenttime').text(moment().format('HH:mm'));
+            var startTime = moment();
             setInterval(function () {
-                $('#currenttime').text(moment().format('HH:mm'));
-            }, 100);
+                var past = moment() - startTime;
+                $('#currenttime').text(moment(past).format('mm:ss'));
+            }, 1000);
         });
     </script>
 }
