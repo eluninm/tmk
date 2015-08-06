@@ -198,9 +198,9 @@
                 addMessage(message);
             };
 
-            var startTime = moment();
+            var startTime = moment().add(15, "m");
             setInterval(function () {
-                var past = moment() - startTime;
+                var past = startTime - moment();
                 $('#currenttime').text(moment(past).format('mm:ss'));
             }, 1000);
         });
