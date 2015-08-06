@@ -194,7 +194,11 @@
             });
         };
 
-       
+        function showMyEvents(that) {
+            that = $(that);
+            var controller = angular.element($(".doctormainpage")).controller();
+            controller.showMyEvents();
+        }
 
         
         $('#currentdate').html(moment().format('DD MMMM, dd'));
@@ -205,7 +209,7 @@
                 $(this).popover({
                     container: '.main-container',
                     title: 'Назначена запись на прием',
-                    content: '<div><div class=actions><button>Просмотреть подробнее</button></div><div class=actions><button onclick="clearHour()">Отменить все</button></div></div>',
+                    content: '<div><div class=actions><button onclick="showMyEvents(this)">Просмотреть подробнее</button></div><div class=actions><button onclick="clearHour()">Отменить все</button></div></div>',
                     placement: 'bottom',
                     html: true
                 });
