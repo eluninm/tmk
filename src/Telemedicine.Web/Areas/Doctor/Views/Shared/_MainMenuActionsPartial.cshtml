@@ -5,7 +5,7 @@
 </li>
 <li role="separator" class="nav-divider tm-deeper-bg"></li>
 <li class="text-center text-uppercase @Html.MenuItemClass("MyEvents", "Home")">
-    @Html.ActionLink("Моя запись", "MyEvents", "Home", null, new {@class = "myeventslink text-left" })
+    <a class=" myeventslink text-left" href="@Url.Action("MyEvents", "Home")">Моя запись<span class="neweventscounter">22</span></a>
 </li>
 <li role="separator" class="nav-divider tm-deeper-bg"></li>
 <li class="text-center text-uppercase @Html.MenuItemClass("Balance", "Home")">    
