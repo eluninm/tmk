@@ -61,6 +61,7 @@
 
     <script>
         var groupId;
+        var newAppointmentsCounter = 0;
         var signalHub = $.connection.signalHub; 
         var appointmentHub = $.connection.appointmentHub;
         $(function () {
@@ -82,9 +83,11 @@
             }).fail(function (error) {
                 console.error('Cannot connect to SignalR: ' + error);
             });
-             
+            $(".neweventscounter").hide();
+
             $.connection.appointmentHub.client.onNewAppointment = function () {
                 console.info('onNewAppointment');
+                newAppointmentsCounter++;
 
                 var angularTag = document.getElementsByClassName("doctormainpage");
                 if (angularTag != undefined) {
@@ -92,7 +95,11 @@
                     controller.loadTimeline();
                     //updateDatetimepickerMarkers();
                 }
-               
+                 
+                    $(".neweventscounter").show();
+                    $(".neweventscounter").html(newAppointmentsCounter);
+                
+
             };
             
         });
