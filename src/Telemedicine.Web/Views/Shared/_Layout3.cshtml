@@ -90,15 +90,16 @@
                 newAppointmentsCounter++;
 
                 var angularTag = document.getElementsByClassName("doctormainpage");
-                if (angularTag != undefined) {
+                if (angularTag.length != 0) {
                     var controller = angular.element(document.getElementsByClassName("doctormainpage")).controller();
                     controller.loadTimeline();
+                    document.getElementById("patientListOnCurrentDayLink").click();
                     //updateDatetimepickerMarkers();
                 }
                  
                     $(".neweventscounter").show();
                     $(".neweventscounter").html(newAppointmentsCounter);
-                
+                    
 
             };
             

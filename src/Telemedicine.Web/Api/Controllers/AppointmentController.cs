@@ -78,10 +78,12 @@ namespace Telemedicine.Web.Api.Controllers
                             Debug.WriteLine("Update");
                         } 
                     }
-
-                    GlobalHost.ConnectionManager.GetHubContext<AppointmentHub>()
-                        .Clients.Client(
-                            SignalHub._connections.GetConnections(appointmentEvent.Doctor.UserId).FirstOrDefault()).OnNewAppointment();
+                    foreach (string id in SignalHub._connections.GetConnections(appointmentEvent.Doctor.UserId))
+                    {
+                        GlobalHost.ConnectionManager.GetHubContext<AppointmentHub>()
+                        .Clients.Client(id).OnNewAppointment();
+                    }
+                     
                 }
                 catch (Exception exp)
                 {

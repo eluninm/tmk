@@ -31,7 +31,8 @@ module Telemedicine {
             //this.month = 8;
             this.doctorApiService.getDoctorTimelineByMonth(this.doctorId, this.year, this.month).then(result => {
                 this.timeLineDates = result;
-                this.updateTimeLine(); 
+                this.updateTimeLine();
+                document.getElementById("patientListOnCurrentDayLink").click(); 
             });
         }
 
@@ -62,7 +63,7 @@ module Telemedicine {
         public clearHour() {
             this.doctorApiService.changeHourStatus(this.curentDate, this.selectedHour, TimelineHourType.Clear).then(result => {
                 this.loadTimeline();
-                document.getElementById("patientListOnCurrentDayLink").click();
+                 
             });
         }
 
