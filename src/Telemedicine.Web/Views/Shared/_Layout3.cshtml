@@ -61,7 +61,8 @@
 
     <script>
         var groupId;
-        var signalHub = $.connection.signalHub;
+        var signalHub = $.connection.signalHub; 
+        var appointmentHub = $.connection.appointmentHub;
         $(function () {
             signalHub.client.onCall = function (callInfo) {
                 console.info('Incoming call from userId: ' + callInfo.CallerId);
@@ -77,10 +78,23 @@
             };
 
             $.connection.hub.start().done(function () {
-                console.info('Connected to signaling channel, connectionId = ' + $.connection.hub.id);
+                console.info('Connected to signaling channel, connectionId = ' + $.connection.hub.id); 
             }).fail(function (error) {
                 console.error('Cannot connect to SignalR: ' + error);
             });
+             
+            $.connection.appointmentHub.client.onNewAppointment = function () {
+                console.info('onNewAppointment');
+
+                var angularTag = document.getElementsByClassName("doctormainpage");
+                if (angularTag != undefined) {
+                    var controller = angular.element(document.getElementsByClassName("doctormainpage")).controller();
+                    controller.loadTimeline();
+                    //updateDatetimepickerMarkers();
+                }
+               
+            };
+            
         });
 
         function declineCall() {

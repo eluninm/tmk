@@ -7,10 +7,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.SignalR;
 using Telemedicine.Core.Domain.Services;
 using Telemedicine.Core.Models;
 using Telemedicine.Core.Models.Enums;
 using Telemedicine.Web.Api.Dto;
+using Telemedicine.Web.Hubs;
 
 namespace Telemedicine.Web.Api.Controllers
 {
@@ -76,6 +78,10 @@ namespace Telemedicine.Web.Api.Controllers
                             Debug.WriteLine("Update");
                         } 
                     }
+
+                    GlobalHost.ConnectionManager.GetHubContext<AppointmentHub>()
+                        .Clients.Client(
+                            SignalHub._connections.GetConnections(appointmentEvent.Doctor.UserId).FirstOrDefault()).OnNewAppointment();
                 }
                 catch (Exception exp)
                 {

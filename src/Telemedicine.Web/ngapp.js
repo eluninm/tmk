@@ -400,6 +400,8 @@ var Telemedicine;
 })(Telemedicine || (Telemedicine = {}));
 ///<reference path="ISignalClient.ts"/>
 ///<reference path="ISignalServer.ts"/>
+///<reference path="Appointment/IAppointmentClient.ts"/>
+///<reference path="Appointment/IAppointmentServer.ts"/>
 ///<reference path="../Services/DoctorApiService.ts"/>
 ///<reference path="../Services/SpecializationApiService.ts"/>
 ///<reference path="../Services/AppointmentApiService.ts"/>
@@ -420,6 +422,8 @@ var Telemedicine;
             this.loadPage();
             this.loadSpecializations();
             this.initialize();
+            //this.appointmentHub.client = $.connection.appointmentHub.client;
+            //this.appointmentHub.server = $.connection.appointmentHub.server;
         }
         DoctorListController.prototype.loadPage = function (pageToLoad) {
             var _this = this;

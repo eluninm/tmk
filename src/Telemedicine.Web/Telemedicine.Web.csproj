@@ -590,6 +590,7 @@
     <Compile Include="Controllers\TempController.cs" />
     <Compile Include="Helpers\EnumExtensions.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Hubs\AppointmentHub.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Hubs\ConnectionMapping.cs" />
     <Compile Include="Hubs\SignalHub.cs" />
@@ -661,6 +662,8 @@
     <TypeScriptCompile Include="Scripts\ts\ngapp\Controllers\HistoryController.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Models\IRecommendation.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\Services\SpecializationApiService.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\SignalR\Appointment\IAppointmentClient.ts" />
+    <TypeScriptCompile Include="Scripts\ts\ngapp\SignalR\Appointment\IAppointmentServer.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\SignalR\ISignalClient.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\SignalR\ISignalServer.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\SignalR\SignalR.ts" />

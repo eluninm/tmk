@@ -17,7 +17,11 @@ module Telemedicine {
             this.loadPage();
             this.loadSpecializations();
             this.initialize();
+
+            //this.appointmentHub.client = $.connection.appointmentHub.client;
+            //this.appointmentHub.server = $.connection.appointmentHub.server;
         }
+        public appointmentHub: IAppointmentProxy;
 
         public doctors: Array<IDoctor>;
         public specializations: Array<ISpecialization>;
@@ -85,7 +89,8 @@ module Telemedicine {
                         this.appointmentApiService.createItem(appointment);
                         appointmentDialog.close();
                         this.openPaymentDialog(doctor);
-                        console.log("Send doctor id:" + doctor.Id);
+                        console.log("Send doctor id:" + doctor.Id); 
+                        //$.connection.appointmentHub.server.newAppointment(doctor.UserId);
                     }
                 });
             });

@@ -23,7 +23,7 @@ namespace Telemedicine.Web.Hubs
     [Microsoft.AspNet.SignalR.Authorize]
     public class SignalHub : Hub<ISignalClient>
     {
-        private readonly static ConnectionMapping<string> _connections = new ConnectionMapping<string>();
+        public readonly static ConnectionMapping<string> _connections = new ConnectionMapping<string>();
 
         private readonly ILifetimeScope _hubLifetimeScope;
 

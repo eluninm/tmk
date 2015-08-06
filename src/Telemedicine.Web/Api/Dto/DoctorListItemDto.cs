@@ -11,6 +11,8 @@ namespace Telemedicine.Web.Api.Dto
 
         public string Title { get; set; }
 
+        public string UserId { get; set; }
+
         public string Specialization { get; set; }
 
         public string AvatarUrl { get; set; }

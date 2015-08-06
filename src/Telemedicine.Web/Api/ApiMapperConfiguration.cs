@@ -32,7 +32,8 @@ namespace Telemedicine.Web.Api
                 .ForMember(t => t.Specialization, e => e.MapFrom(s => s.Specialization.DisplayName))
                 .ForMember(t => t.AvatarUrl, e => e.MapFrom(s => s.User.AvatarUrl))
                 .ForMember(t => t.StatusText, e => e.MapFrom(s => s.DoctorStatus.DisplayName))
-                .ForMember(t => t.StatusName, e => e.MapFrom(s => s.DoctorStatus.Name));
+                .ForMember(t => t.StatusName, e => e.MapFrom(s => s.DoctorStatus.Name))
+                .ForMember(t => t.UserId, e => e.MapFrom(s => s.UserId));
 
             Mapper.CreateMap<Specialization, SpecializationDto>();
 
