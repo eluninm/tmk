@@ -14,7 +14,7 @@
             </div>
             <div class="col-md-4 flex chat-time">
                 <div class="time">
-                    11:45
+                    <span id="currenttime"></span>
                 </div>
                 <div class="title">Время<br />консультации</div>
             </div>
@@ -210,6 +210,11 @@
             messageHub.client.onMessage = function (message) {
                 addMessage(message);
             };
+
+            $('#currenttime').text(moment().format('HH:mm'));
+            setInterval(function () {
+                $('#currenttime').text(moment().format('HH:mm'));
+            }, 100);
         });
     </script>
 }
