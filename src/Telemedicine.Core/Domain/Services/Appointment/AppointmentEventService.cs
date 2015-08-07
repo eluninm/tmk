@@ -44,9 +44,10 @@ namespace Telemedicine.Core.Domain.Services
             return newAppointment;
         }
 
-        public Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page = 1, int pageSize = 10, string patientTitleFilter= null, DateTime? start = null, DateTime? end = null, AppointmentStatus? status = null)
+        public Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page = 1, int pageSize = 10, string patientTitleFilter= null, DateTime? start = null, DateTime? end = null,
+            bool? needDeclined = null, bool? needReady = null, bool? needClosed = null)
         {
-            return _appointmentEventRepository.GetDoctorAppointmentsPagedAsync(doctorId, page, pageSize, patientTitleFilter, start, end,status);
+            return _appointmentEventRepository.GetDoctorAppointmentsPagedAsync(doctorId, page, pageSize, patientTitleFilter, start, end, needDeclined, needReady, needClosed);
         }
 
         public Task<IEnumerable<AppointmentEvent>> GetDoctorAppointmentsByDateAsync(int doctorId, DateTime date)

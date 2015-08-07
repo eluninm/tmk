@@ -53,7 +53,8 @@ module Telemedicine {
             return this.$http.get(url).then(result => result.data);
         }
 
-        getDoctorAppointments(doctorId: number, page?: number, pageSize?: number, patientTitleFilter?: string, start?: Date, end?: Date): angular.IPromise<IPagedList<any>> {
+        getDoctorAppointments(doctorId: number, page?: number, pageSize?: number, patientTitleFilter?: string, start?: Date, end?: Date,
+            needDeclined?: boolean, needReady?: boolean, needClosed?: boolean ): angular.IPromise<IPagedList<any>> {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/appointments");
             var query: any = {}, querySeparator = "?";
 
@@ -70,6 +71,18 @@ module Telemedicine {
             if (start && end) {
                 query.start = start.toLocaleString();
                 query.end = end.toLocaleString();
+            }
+
+            if (needDeclined) {
+                query.needDeclined = needDeclined; 
+            }
+
+            if (needReady) {
+                query.needReady = needReady;
+            }
+
+            if (needClosed) {
+                query.needClosed = needClosed;
             }
 
             for (var key in query) {
