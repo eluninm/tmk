@@ -52,7 +52,7 @@
                             <div class="partdocument orange">Карта пациента</div>
                         </td>
                         <td class="col-md-2">1000 <span class="font-rouble">i</span></td>
-                        <td class="col-md-2"><a class="remove orange" data-toggle="modal" data-target="#appointmentModalDialog" ng-href="@Url.Action("Index", "Home")/#consultation/{{item.ConsultationId}}">Отменить</a></td>
+                        <td class="col-md-2"><a class="remove orange"  ng-href="@Url.Action("Decline", "Home")/{{item.Id}}">Отменить</a></td>
                     </tr>
                 </table>
             </div>
