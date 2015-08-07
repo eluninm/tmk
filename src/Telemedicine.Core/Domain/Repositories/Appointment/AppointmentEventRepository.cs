@@ -17,14 +17,16 @@ namespace Telemedicine.Core.Domain.Repositories
         {
         }
 
-        public async override Task<IEnumerable<AppointmentEvent>> GetAllAsync()
+        public override async Task<IEnumerable<AppointmentEvent>> GetAllAsync()
         {
-            return await Set.Include(t => t.Patient).Include(p=>p.Patient.User)
-                .Include(t => t.Doctor).Include(t=>t.Doctor).Include(t => t.Doctor.User)
+            return await Set.Include(t => t.Patient).Include(p => p.Patient.User)
+                .Include(t => t.Doctor).Include(t => t.Doctor).Include(t => t.Doctor.User)
                 .ToListAsync();
         }
 
-        public async Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page, int pageSize, string patientTitleFilter, DateTime? start, DateTime? end, AppointmentStatus? status)
+        public async Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page,
+            int pageSize, string patientTitleFilter,
+            DateTime? start, DateTime? end, bool? needDeclined, bool? needReady, bool? needClosed)
         {
             var query = Set
                 .Include(t => t.Patient)
@@ -40,10 +42,40 @@ namespace Telemedicine.Core.Domain.Repositories
                 query = query.Where(t => t.Date >= DateTime.Now);
             }
 
-            if (status.HasValue)
+
+            if (needDeclined.HasValue && needReady.HasValue && needClosed.HasValue)
             {
-                query = query.Where(t => t.Status != status);
+                query =
+                    query.Where(
+                        t =>
+                            t.Status == AppointmentStatus.Declined || t.Status == AppointmentStatus.Closed ||
+                            t.Status == AppointmentStatus.Ready);
             }
+            else if (needDeclined.HasValue && needReady.HasValue)
+            {
+                query = query.Where(t => t.Status == AppointmentStatus.Declined || t.Status == AppointmentStatus.Ready);
+            }
+            else if (needClosed.HasValue && needReady.HasValue)
+            {
+                query = query.Where(t => t.Status == AppointmentStatus.Closed || t.Status == AppointmentStatus.Ready);
+            }
+            else if (needClosed.HasValue && needDeclined.HasValue)
+            {
+                query = query.Where(t => t.Status == AppointmentStatus.Closed || t.Status == AppointmentStatus.Declined);
+            }
+            else if (needReady.HasValue)
+            {
+                query = query.Where(t => t.Status == AppointmentStatus.Ready);
+            }
+            else if (needDeclined.HasValue)
+            {
+                query = query.Where(t => t.Status == AppointmentStatus.Declined);
+            }
+            else if (needClosed.HasValue)
+            {
+                query = query.Where(t => t.Status == AppointmentStatus.Closed);
+            }
+
 
             if (!string.IsNullOrWhiteSpace(patientTitleFilter))
             {
@@ -79,7 +111,8 @@ namespace Telemedicine.Core.Domain.Repositories
             return appointments;
         }
 
-        public async Task<IPagedList<AppointmentEvent>> GetPatientAppointmentsPagedAsync(int patientId, int page, int pageSize)
+        public async Task<IPagedList<AppointmentEvent>> GetPatientAppointmentsPagedAsync(int patientId, int page,
+            int pageSize)
         {
             var query = Set
                 .Include(t => t.Doctor)

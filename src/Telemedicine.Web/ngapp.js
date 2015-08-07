@@ -286,7 +286,7 @@ var Telemedicine;
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/details");
             return this.$http.get(url).then(function (result) { return result.data; });
         };
-        DoctorApiService.prototype.getDoctorAppointments = function (doctorId, page, pageSize, patientTitleFilter, start, end) {
+        DoctorApiService.prototype.getDoctorAppointments = function (doctorId, page, pageSize, patientTitleFilter, start, end, needDeclined, needReady, needClosed) {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/appointments");
             var query = {}, querySeparator = "?";
             if (page) {
@@ -301,6 +301,15 @@ var Telemedicine;
             if (start && end) {
                 query.start = start.toLocaleString();
                 query.end = end.toLocaleString();
+            }
+            if (needDeclined) {
+                query.needDeclined = needDeclined;
+            }
+            if (needReady) {
+                query.needReady = needReady;
+            }
+            if (needClosed) {
+                query.needClosed = needClosed;
             }
             for (var key in query) {
                 if (query.hasOwnProperty(key)) {
@@ -723,7 +732,27 @@ var Telemedicine;
         DoctorAppointmentController.prototype.loadPage = function (pageToLoad) {
             var _this = this;
             var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter, this.start, this.end).then(function (result) {
+            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter, this.start, this.end, false, true, true).then(function (result) {
+                _this.appointments = result.Data;
+                _this.totalCount = result.TotalCount;
+                _this.currentPage = result.Page;
+                _this.pageSize = result.PageSize;
+            });
+        };
+        DoctorAppointmentController.prototype.loadAppointmentPageWithStatusEqualsReady = function (pageToLoad) {
+            var _this = this;
+            var page = pageToLoad || this.currentPage;
+            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter, this.start, this.end, false, true, false).then(function (result) {
+                _this.appointments = result.Data;
+                _this.totalCount = result.TotalCount;
+                _this.currentPage = result.Page;
+                _this.pageSize = result.PageSize;
+            });
+        };
+        DoctorAppointmentController.prototype.loadAppointmentPageWithStatusEqualsClosed = function (pageToLoad) {
+            var _this = this;
+            var page = pageToLoad || this.currentPage;
+            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter, this.start, this.end, false, false, true).then(function (result) {
                 _this.appointments = result.Data;
                 _this.totalCount = result.TotalCount;
                 _this.currentPage = result.Page;

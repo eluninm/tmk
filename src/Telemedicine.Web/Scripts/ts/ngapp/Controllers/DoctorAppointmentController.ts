@@ -37,7 +37,7 @@ module Telemedicine {
         public currentPage: number = 1;
         public pageSize: number = 10;
         public start: Date;
-        public end: Date;
+        public end: Date; 
 
         public setStart(start: Date) {
             this.start = start;
@@ -49,11 +49,35 @@ module Telemedicine {
 
         public loadPage(pageToLoad?: number) {
             var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter, this.start, this.end).then(result => {
+            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter,
+                this.start, this.end,false,true,true).then(result => {
                 this.appointments = result.Data;
                 this.totalCount = result.TotalCount;
                 this.currentPage = result.Page;
                 this.pageSize = result.PageSize; 
+            });
+        } 
+
+
+        public loadAppointmentPageWithStatusEqualsReady(pageToLoad?: number) {
+            var page = pageToLoad || this.currentPage;
+            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter,
+                this.start, this.end, false, true, false).then(result => {
+                this.appointments = result.Data;
+                this.totalCount = result.TotalCount;
+                this.currentPage = result.Page;
+                this.pageSize = result.PageSize;
+            });
+        } 
+
+        public loadAppointmentPageWithStatusEqualsClosed(pageToLoad?: number) {
+            var page = pageToLoad || this.currentPage;
+            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter,
+                this.start, this.end, false, false, true).then(result => {
+                this.appointments = result.Data;
+                this.totalCount = result.TotalCount;
+                this.currentPage = result.Page;
+                this.pageSize = result.PageSize;
             });
         } 
 

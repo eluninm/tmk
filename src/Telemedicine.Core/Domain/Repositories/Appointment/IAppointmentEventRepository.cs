@@ -9,7 +9,8 @@ namespace Telemedicine.Core.Domain.Repositories
 {
     public interface IAppointmentEventRepository : IRepository<AppointmentEvent>
     {
-        Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page, int pageSize, string patientTitleFilter, DateTime? start, DateTime? end, AppointmentStatus? status);
+        Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page, int pageSize, string patientTitleFilter,
+            DateTime? start, DateTime? end, bool? needDeclined, bool? needReady, bool? needClosed);
 
         Task<IEnumerable<AppointmentEvent>> GetDoctorAppointmentsByDateAsync(int doctorId, DateTime date);
 
