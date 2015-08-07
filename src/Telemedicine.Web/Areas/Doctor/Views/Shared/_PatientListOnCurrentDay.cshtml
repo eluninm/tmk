@@ -5,7 +5,7 @@
     <div class="page-header currenttime" style="border:none;">
         Список пациентов на @DateTime.Now.ToShortDateString()
         <div class="pull-right">
-            <button class="btn btn-white rounded">Ближайшие</button>
+            <a class="btn btn-white rounded" onclick="document.getElementById('patientListOnCurrentDayLink').click();" >Ближайшие</a>
             <a href="@Url.Action("MyEvents","Home")" class="btn btn-default rounded">Моя запись</a>
         </div>
     </div>
@@ -24,19 +24,8 @@
             </table>
         </div>
         <div class="grid-content">
-            <table style="width: 100%; font-size: 14px;">
-                @*<tr>
-                        <td class="col-md-2">
-                            <div class="timeicon">18:00</div>
-                        </td>
-                        <td class="col-md-3">Евгения Олеговна</td>
-                        <td class="col-md-3">
-                            <div class="partdocument orange">Карта пациента</div>
-                        </td>
-                        <td class="col-md-2">1000 <span class="font-rouble">i</span></td>
-                        <td class="col-md-2"><a class="remove orange">Отменить</a></td>
-                    </tr>*@
-                @foreach (var appointment in Model)
+            <table style="width: 100%; font-size: 14px;"> 
+                @foreach (var appointment in Model.OrderBy(item => item.Date))
                 {
                     <tr>
                         <td class="col-md-2"><div class="timeicon">@appointment.Date.ToString("HH:mm")</div></td>
