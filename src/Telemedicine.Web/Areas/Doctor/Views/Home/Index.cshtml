@@ -230,9 +230,20 @@
                 inline: true,
                 locale: 'ru' 
             }).on('dp.change', function (e) {
+
+                $('.hour .info').each(function () {
+                    var bodyItem = $("body");
+                    if (!$(this).is(bodyItem.target) && $(this).has(bodyItem.target).length === 0 && $('.popover').has(bodyItem.target).length === 0) {
+                        $(this).popover('destroy');
+                    }
+                });
+
                 $('#currentdate').html(e.date.format('DD MMM, dd'));
                 var controller = angular.element(document.getElementsByClassName("doctormainpage")).controller();
                 controller.changeDate(new Date(e.date));
+
+
+
             }).on('dp.error', function (e) {
                 console.log(e);
             }).on('dp.update', function (e) { 
