@@ -315,6 +315,10 @@
     <Compile Include="Migrations\201508041004088_EnableAppointmentStatusInAppointmentEvent.Designer.cs">
       <DependentUpon>201508041004088_EnableAppointmentStatusInAppointmentEvent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508070924306_DoctorPaymentHistoryAddPaymentHistory.cs" />
+    <Compile Include="Migrations\201508070924306_DoctorPaymentHistoryAddPaymentHistory.Designer.cs">
+      <DependentUpon>201508070924306_DoctorPaymentHistoryAddPaymentHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AppointmentEvent.cs" />
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\AttachmentContent.cs" />
@@ -500,6 +504,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508041004088_EnableAppointmentStatusInAppointmentEvent.resx">
       <DependentUpon>201508041004088_EnableAppointmentStatusInAppointmentEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508070924306_DoctorPaymentHistoryAddPaymentHistory.resx">
+      <DependentUpon>201508070924306_DoctorPaymentHistoryAddPaymentHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

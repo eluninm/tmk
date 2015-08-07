@@ -121,15 +121,7 @@ namespace Telemedicine.Web.Api.Controllers
             var doctor = await _doctorService.GetByIdAsync(doctorId);
             var patient = await _patientService.GetByUserIdAsync(User.Identity.GetUserId());
             if (doctor != null)
-            {
-                DoctorPaymentHistory doctorPaymentHistory = new DoctorPaymentHistory()
-                {
-                    Date = DateTime.Now,
-                    Value = number,
-                    DoctorId = doctorId
-                };
-
-                await _doctorPaymentService.CreateAsync(doctorPaymentHistory);
+            { 
 
                 PaymentHistory paymentHistory = new PaymentHistory()
                 {
@@ -139,8 +131,18 @@ namespace Telemedicine.Web.Api.Controllers
                     Value = number
                 };
 
-                await _paymentHistoryService.CreateAsync(paymentHistory);
+                paymentHistory = await _paymentHistoryService.CreateAsync(paymentHistory);
 
+
+                DoctorPaymentHistory doctorPaymentHistory = new DoctorPaymentHistory()
+                {
+                    Date = DateTime.Now,
+                    Value = number,
+                    DoctorId = doctorId,
+                    PatientPayment = paymentHistory
+                };
+
+                await _doctorPaymentService.CreateAsync(doctorPaymentHistory);
                 patient.Balance -= number;
                 doctor.Balance += number;
 

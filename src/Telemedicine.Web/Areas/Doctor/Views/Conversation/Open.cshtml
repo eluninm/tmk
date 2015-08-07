@@ -16,9 +16,8 @@
                 <div class="time">
                     <span id="currenttime"></span>
                 </div>
-                <div class="title">Время<br />консультации</div>
             </div>
-            <div class="col-md-2 chat-buttons">
+            <div class="col-md-2 chat-buttons text-center">
                 <a href="#" class="btn chat-phone" data-toggle="modal" data-target="#devDialog"></a>
                 <a href="#" class="btn chat-video" data-toggle="modal" data-target="#devDialog"></a>
             </div>
@@ -40,7 +39,7 @@
                         <div style="display: flex">
                             <input class="chat-message-input" id="message-input" />
                         </div>
-                        <ul class="attachments-list" style="display: flex">
+@*                        <ul class="attachments-list" style="display: flex">*@
 @*                            <li class="attachments-list-item">*@
 @*                                <div>*@
 @*                                    <div class="title">Файл 1</div>*@
@@ -48,7 +47,7 @@
 @*                                </div>*@
 @*                                <div class="btn attachment-remove" data-toggle="modal" data-target="#devDialog"></div>*@
 @*                            </li>*@
-                        </ul>
+@*                        </ul>*@
                     </div>
                     <button class="btn attachment" type="button" style="position: absolute; bottom: 0; right: 0;" data-toggle="modal" data-target="#Attachments"></button>
                 </div>
@@ -211,9 +210,9 @@
                 addMessage(message);
             };
 
-            var startTime = moment();
+            var startTime = moment().add(15,"m");
             setInterval(function () {
-                var past = moment() - startTime;
+                var past = startTime - moment();
                 $('#currenttime').text(moment(past).format('mm:ss'));
             }, 1000);
         });

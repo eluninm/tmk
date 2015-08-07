@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Telemedicine.Core.Data;
 using Telemedicine.Core.Data.EntityFramework;
 using Telemedicine.Core.Models;
+using Telemedicine.Core.Models.Enums;
 using Telemedicine.Core.PagedList;
 
 namespace Telemedicine.Core.Domain.Repositories
@@ -23,7 +24,7 @@ namespace Telemedicine.Core.Domain.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page, int pageSize, string patientTitleFilter, DateTime? start, DateTime? end)
+        public async Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page, int pageSize, string patientTitleFilter, DateTime? start, DateTime? end, AppointmentStatus? status)
         {
             var query = Set
                 .Include(t => t.Patient)
@@ -37,6 +38,11 @@ namespace Telemedicine.Core.Domain.Repositories
             else
             {
                 query = query.Where(t => t.Date >= DateTime.Now);
+            }
+
+            if (status.HasValue)
+            {
+                query = query.Where(t => t.Status != status);
             }
 
             if (!string.IsNullOrWhiteSpace(patientTitleFilter))

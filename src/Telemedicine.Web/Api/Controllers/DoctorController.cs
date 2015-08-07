@@ -82,7 +82,9 @@ namespace Telemedicine.Web.Api.Controllers
         public async Task<IHttpActionResult> Appointments(int id, int page = 1, int pageSize = 10, string patientTitleFilter = null, DateTime? start = null, DateTime? end = null)
         {
             var doctorAppointments =
-                await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFilter, start, end);
+                await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFilter, start, end,AppointmentStatus.Declined);
+
+           
             var pagedList = doctorAppointments.Map(t =>
             {
                 var doctorAppointmentDto = Mapper.Map<DoctorAppointmentDto>(t);
