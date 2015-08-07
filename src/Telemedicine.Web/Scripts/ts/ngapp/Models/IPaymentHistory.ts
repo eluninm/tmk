@@ -3,5 +3,6 @@
         Date: Date;
         PaymentType: string;
         Value: number;
+        PatientTitle:string;
     }
 }

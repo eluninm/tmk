@@ -12,5 +12,6 @@ namespace Telemedicine.Core.Models
         public int DoctorId { get; set; }
         public double Value { get; set; }
         public DateTime Date { get; set; }
+        public PaymentHistory PatientPayment { get; set; }
     }
 }

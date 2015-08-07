@@ -48,11 +48,13 @@ namespace Telemedicine.Web.Api
             Mapper.CreateMap<PaymentHistory, PaymentHistoryDto>()
                 .ForMember(d => d.Date, e => e.MapFrom(s => s.Date))
                 .ForMember(d => d.Value, e => e.MapFrom(s => s.Value))
+                .ForMember(d => d.PatientTitle, e => e.MapFrom(s => s.Patient.User.DisplayName))
                 .ForMember(d => d.PaymentType, e => e.MapFrom(s => s.PaymentType == PaymentType.Replenishment? "Пополнение": "Консультация"));
 
             Mapper.CreateMap<DoctorPaymentHistory, PaymentHistoryDto>()
                 .ForMember(d => d.Date, e => e.MapFrom(s => s.Date))
                 .ForMember(d => d.Value, e => e.MapFrom(s => s.Value))
+                .ForMember(d => d.PatientTitle, e => e.MapFrom(s => s.PatientPayment.Patient.User.DisplayName))
                 .ForMember(d => d.PaymentType, e => e.MapFrom(s =>  "Консультация"));
         }
     }
