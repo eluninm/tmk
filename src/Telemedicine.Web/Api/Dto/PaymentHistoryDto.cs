@@ -11,5 +11,6 @@ namespace Telemedicine.Web.Api.Dto
        public  DateTime Date { get; set; }
        public string PaymentType { get; set; }
        public double Value { get; set; }
+       public string PatientTitle { get; set; }
     }
 }

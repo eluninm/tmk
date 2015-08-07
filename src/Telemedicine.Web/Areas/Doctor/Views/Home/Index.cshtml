@@ -55,58 +55,10 @@
 </div> 
 
 
-@Ajax.ActionLink("dsdsd", "PatientListOnCurrentDay","Home", new AjaxOptions() { UpdateTargetId = "patientListOnCurrentDay", HttpMethod = "Get" },
+@Ajax.ActionLink("Ссылка при нажатии на которую происходит обновление таблицы записей на текущий день", "PatientListOnCurrentDay","Home", new AjaxOptions() { UpdateTargetId = "patientListOnCurrentDay", HttpMethod = "Get" },
     new {id= "patientListOnCurrentDayLink", style="display: none;" }) 
 <div style="height: calc(100% - 600px);min-height:200px" id="patientListOnCurrentDay">
-    <div class="page-header currenttime" style="border:none;">
-        Список пациентов на @DateTime.Now.ToShortDateString()
-        <div class="pull-right">
-            <button class="btn btn-white rounded">Ближайшие</button>
-            <a href="@Url.Action("MyEvents")" class="btn btn-default rounded">Моя запись</a>
-        </div>
-    </div>
-    <div class="grid" style="font-size: 12px;">
-        <div class="page-header" style="border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4; padding-left: 0;">
-            <table style="width: 100%">
-                <tr class=" font-bold">
-                    <td class="col-md-2 font-bold">
-                        Время
-                    </td>
-                    <td class="col-md-3">Пациент</td>
-                    <td class="col-md-3"></td>
-                    <td class="col-md-2">Стоимость</td>
-                    <td class="col-md-2"></td>
-                </tr>
-            </table>
-        </div>
-        <div class="grid-content">
-            <table style="width: 100%; font-size: 14px;">
-                @*<tr>
-                        <td class="col-md-2">
-                            <div class="timeicon">18:00</div>
-                        </td>
-                        <td class="col-md-3">Евгения Олеговна</td>
-                        <td class="col-md-3">
-                            <div class="partdocument orange">Карта пациента</div>
-                        </td>
-                        <td class="col-md-2">1000 <span class="font-rouble">i</span></td>
-                        <td class="col-md-2"><a class="remove orange">Отменить</a></td>
-                    </tr>*@
-                @foreach (var appointment in Model)
-                {
-                    <tr>
-                        <td class="col-md-2"><div class="timeicon">@appointment.Date.ToString("HH:mm")</div></td>
-                        <td class="col-md-3">@appointment.PatientFio</td>
-                        <td class="col-md-3">
-                            <div class="partdocument orange">Карта пациента</div>
-                        </td>
-                        <td class="col-md-2">1000 <span class="font-rouble">i</span></td>
-                        <td class="col-md-2">@Html.ActionLink("Отменить", "Decline", new { id = appointment.Id }, new { @class = "remove orange" })</td>
-                    </tr>
-                }
-            </table>
-        </div>
-    </div>
+    
 </div>
 <div class="modal fade" id="CreateEvent"  role="dialog" aria-labelledby="CreateEventLabel">
     <div class="modal-dialog  modal-sm" role="document">

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Telemedicine.Core.Domain.Repositories;
 using Telemedicine.Core.Domain.Uow;
 using Telemedicine.Core.Models;
+using Telemedicine.Core.Models.Enums;
 using Telemedicine.Core.PagedList;
 
 namespace Telemedicine.Core.Domain.Services
@@ -43,9 +44,9 @@ namespace Telemedicine.Core.Domain.Services
             return newAppointment;
         }
 
-        public Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page = 1, int pageSize = 10, string patientTitleFilter= null, DateTime? start = null, DateTime? end = null)
+        public Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page = 1, int pageSize = 10, string patientTitleFilter= null, DateTime? start = null, DateTime? end = null, AppointmentStatus? status = null)
         {
-            return _appointmentEventRepository.GetDoctorAppointmentsPagedAsync(doctorId, page, pageSize, patientTitleFilter, start, end);
+            return _appointmentEventRepository.GetDoctorAppointmentsPagedAsync(doctorId, page, pageSize, patientTitleFilter, start, end,status);
         }
 
         public Task<IEnumerable<AppointmentEvent>> GetDoctorAppointmentsByDateAsync(int doctorId, DateTime date)
