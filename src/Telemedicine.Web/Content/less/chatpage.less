@@ -8,29 +8,37 @@
         }
 
         &::after {
-            content: ":";
+            content: "";
             display: inline-block;
             width: 5px;
+            background-image: url('/img/line_chat.svg');
+            background-repeat:no-repeat;
         }
     }
 
     .chat-time {
-        padding: 10px 0 10px 25px;
+        padding: 0 0 10px 25px;
 
         &::after {
-            content: ":";
+            content: "";
             display: inline-block;
             width: 5px;
             margin-left: 35px;
+            background-image: url('/img/line_chat.svg');
+            background-repeat:no-repeat;
         }
 
         .time {
+            width:80%;
+            .text-center;
             .font-light;
+            padding-top:10px;
             font-size: 34px;
             color: @color-accent1-light;
         }
 
         .title {
+            padding-top:10px;
             .font-light;
             font-size: 10px;
             padding: 7px;
