@@ -139,7 +139,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             AppointmentEvent appointmentEvent = await _appointmentEventService.GetByIdAsync(id);
             appointmentEvent.Status = AppointmentStatus.Declined;
             await _appointmentEventService.UpdateAsync(appointmentEvent);
-            return RedirectToAction("Index");
+            return RedirectToAction(HttpContext?.Request?.UrlReferrer?.Segments.LastOrDefault() == "MyEvents" ? "MyEvents":"Index");
         }
 
 
