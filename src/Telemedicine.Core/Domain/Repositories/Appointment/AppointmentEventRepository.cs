@@ -42,6 +42,7 @@ namespace Telemedicine.Core.Domain.Repositories
                 query = query.Where(t => t.Date >= DateTime.Now);
             }
 
+            #region StatusFilter
 
             if (needDeclined.HasValue && needReady.HasValue && needClosed.HasValue)
             {
@@ -76,6 +77,7 @@ namespace Telemedicine.Core.Domain.Repositories
                 query = query.Where(t => t.Status == AppointmentStatus.Closed);
             }
 
+            #endregion
 
             if (!string.IsNullOrWhiteSpace(patientTitleFilter))
             {

@@ -1,0 +1,12 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" ng-click="viewModel.cancel()">&times;</span></button>
+    <h3 class="modal-title">Добавление рекомендации</h3>
+</div> <div class="modal-body" style="padding: 0; margin-bottom: 60px;"> 
+    <textarea class="form-control" placeholder="Введите текст" style="resize:none;" rows="10" ng-model="recommendationText"> 
+    </textarea>
+    <!--@Html.TextAreaFor(m => m.RecommendationText, new {  @class = "form-control", rows = 10, style = "resize:none;", @id = "recommendationText", placeholder = "Введите текст"  })-->
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary rounded" ng-click="viewModel.ok(recommendationText)" >добавить</button>
+    <button type="button" class="btn btn-round-rd" ng-click="viewModel.cancel()">отмена</button>
+</div>

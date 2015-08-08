@@ -30,50 +30,8 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             _doctorService = doctorService;
             _recommendationService = recommendationService;
             _patientService = patientService;
-        }
+        } 
 
-        public ActionResult List()
-        {
-            return View();
-        }
-
-
-        public ActionResult AddRecommendationStartDialog(string id)
-        {
-            RecommendationViewModel model = new RecommendationViewModel()
-            {
-                PatientUserId = id
-            };
-
-            return PartialView("_AddRecommendationDialog", model);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> AddRecommendation(RecommendationViewModel viewModel)
-        {
-            var doctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
-            var patient = await _patientService.GetByIdAsync(1);
-            if (ModelState.IsValid)
-            {
-                Recommendation recommendation = new Recommendation()
-                {
-                    CreateDate = DateTime.Now,
-                    RecommendationText = viewModel.RecommendationText,
-                    DoctorId = doctor.Id,
-                    PatientId = patient.Id
-                };
-
-                await _recommendationService.CreateAsync(recommendation);
-                return new EmptyResult();
-            }
-            return PartialView("_AddRecommendationDialog", viewModel);
-        }
-
-        public ActionResult List2(string id)
-        {
-            var recommendations = GetRecommendations(id);
-            return PartialView(recommendations);
-        }
 
         private List<RecommendationViewModel2> GetRecommendations(string id)
         {
@@ -117,19 +75,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             return serialize;
         }
 
-
-        [HttpPost]
-        public async Task<ActionResult> CreateRecommendation(RecommendationViewModel recommendation)
-        {
-            if (ModelState.IsValid)
-            {
-                var doctor = _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
-
-                return PartialView("Recommendations");
-            }
-
-            return new HttpStatusCodeResult(400);
-        }
+ 
 
         public async Task<string> MarkAsDeleted(int recommendaionId)
         {

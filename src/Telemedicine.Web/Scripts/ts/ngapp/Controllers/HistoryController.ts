@@ -1,6 +1,6 @@
 ﻿///<reference path="../Services/RecommendationApiService.ts"/>
 ///<reference path="../Services/PatientApiService.ts"/>
-///<reference path="../Services/ConsultationApiService.ts"/>
+///<reference path="../Services/ConsultationApiService.ts"/> 
 
 module Telemedicine {
     export class HistoryController {
@@ -52,6 +52,23 @@ module Telemedicine {
                 resolve: {
                     item: () => recommendation
                 }
+            });
+
+        } 
+
+        public openAddRecommendation() {
+            var addDialog = this.$modal.open({
+                templateUrl: "/Content/tmpls/dialogs/addRecommendationDialog.html",
+                controller: "RecommendationDetailsController as viewModel",
+                resolve: {
+                    item: () => null
+                }
+            });
+
+            addDialog.result.then((result) => {
+                this.recommendationService.addRecommendation(Number(this.$element.attr("data-id")), result).then(result => {
+                    this.loadRecommendations(this.$element.attr("data-id"));
+                });
             });
         }
     }
