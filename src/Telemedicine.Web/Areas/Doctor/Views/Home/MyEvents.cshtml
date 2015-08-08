@@ -129,6 +129,7 @@
 {
     <script>
         var popoverelem = $('#filter');
+        var firstDateTimePickerChange = false;
 
         popoverelem.on('show.bs.popover', function() {
             var popover = $(popoverelem).data('bs.popover');
@@ -137,23 +138,37 @@
         popoverelem.on('shown.bs.popover', function() {
             var popover = $(popoverelem).data('bs.popover');
 
+          
+            
+
             popover.$tip.find('#from').datetimepicker({
                 format: 'DD.MM.YYYY',
-                locale: 'ru'
+                locale: 'ru',
+                date: startDate
             }).on('click', function() {
                 $(this).datetimepicker('show');
-            }).on('dp.change', function(e) {
-                range();
+            }).on('dp.change', function(e) { 
+                firstDateTimePickerChange = true;
+                startDate = $(popoverelem).data('bs.popover').$tip.find('#from').data("DateTimePicker").date(); 
+                if (endDate.diff(startDate, 'days') < 0) {
+                    $(popoverelem).data('bs.popover').$tip.find('#to').data("DateTimePicker").date(startDate);
+                } 
             });
 
             popover.$tip.find('#to').datetimepicker({
                 format: 'DD.MM.YYYY',
-                locale: 'ru'
+                locale: 'ru',
+                date: endDate
             }).on('click', function() {
                 $(this).datetimepicker('show');
-            }).on('dp.change', function(e) {
+            }).on('dp.change', function (e) { 
                 range();
-                $('#filter').popover('hide');
+                if (firstDateTimePickerChange) {
+                    firstDateTimePickerChange = false; 
+                } else {
+                    $('#filter').popover('hide');
+                }
+                
             });
 
         });
@@ -169,8 +184,12 @@
         var startDate;
         var endDate;
         $(function() {
-            controller = angular.element($("#doctorAppointmentController")).controller();
+            controller = angular.element($("#doctorPaymentController")).controller();
             controller.loadPage();
+
+            startDate = endDate = moment();
+            $(popoverelem).data('bs.popover').$tip.find('#from').data("DateTimePicker").date(startDate);
+            $(popoverelem).data('bs.popover').$tip.find('#to').data("DateTimePicker").date(endDate);
         });
 
         function today() {
