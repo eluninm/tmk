@@ -183,13 +183,12 @@
         var controller;
         var startDate;
         var endDate;
-        $(function() {
-            controller = angular.element($("#doctorPaymentController")).controller();
+        $(function() { 
+            controller = angular.element(document.getElementById("doctorAppointmentController")).controller();
             controller.loadPage();
 
             startDate = endDate = moment();
-            $(popoverelem).data('bs.popover').$tip.find('#from').data("DateTimePicker").date(startDate);
-            $(popoverelem).data('bs.popover').$tip.find('#to').data("DateTimePicker").date(endDate);
+            
         });
 
         function today() {

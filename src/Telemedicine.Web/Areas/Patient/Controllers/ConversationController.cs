@@ -42,6 +42,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             }
 
             ViewBag.UserDisplayName = targetUser.DisplayName;
+            ViewBag.UserAvatarUrl = targetUser.AvatarUrl;
             var doctor = await _doctorService.GetByUserIdAsync(targetUser.Id);
             ViewBag.Specialization = doctor.Specialization.DisplayName;
             ViewBag.Balance = "";
