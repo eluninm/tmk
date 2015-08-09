@@ -389,6 +389,10 @@ var Telemedicine;
                 "status": status
             }).then(function (result) { return result.data; });
         };
+        DoctorApiService.prototype.statusIsAvailable = function () {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/statusIsAvailable");
+            return this.$http.get(url).then(function (result) { return result.data; });
+        };
         return DoctorApiService;
     })();
     Telemedicine.DoctorApiService = DoctorApiService;
@@ -1030,9 +1034,19 @@ var Telemedicine;
     var DoctorStatusController = (function () {
         function DoctorStatusController(doctorApiService) {
             this.doctorApiService = doctorApiService;
+            this.statusIsAvailable();
         }
-        DoctorStatusController.prototype.changeStatus = function (doctorIsAvailable) {
-            this.doctorApiService.changeDoctorStatus(doctorIsAvailable);
+        DoctorStatusController.prototype.statusIsAvailable = function () {
+            var _this = this;
+            this.doctorApiService.statusIsAvailable().then(function (result) {
+                _this.doctorIsAvailable = result;
+            });
+        };
+        DoctorStatusController.prototype.changeStatus = function () {
+            var _this = this;
+            this.doctorApiService.changeDoctorStatus(!this.doctorIsAvailable).then(function (result) {
+                _this.statusIsAvailable();
+            });
         };
         DoctorStatusController.$inject = ["doctorApiService"];
         return DoctorStatusController;

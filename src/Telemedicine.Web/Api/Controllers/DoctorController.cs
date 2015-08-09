@@ -236,7 +236,16 @@ namespace Telemedicine.Web.Api.Controllers
             return Ok(true);
         }
 
+        [HttpGet]
+        [Route("statusIsAvailable")]
+        public async Task<IHttpActionResult> StatusIsAvailable()
+        {
+            var currentUserId = User.Identity.GetUserId();
 
+            DoctorStatus status = _doctorService.GetStatusByUserId(currentUserId);
+             
+            return Ok(status.Name != "Busy");
+        }
         [HttpPost]
         [Route("changeHourStatus/{year}/{month}/{day}/{selectedHour}/{status}")]
         public async Task<IHttpActionResult> ChangeHourStatus(int year, int month, int day, int selectedHour,
