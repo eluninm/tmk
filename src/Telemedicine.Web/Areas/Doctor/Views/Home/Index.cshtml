@@ -10,12 +10,12 @@
     </div>
     <div class="pull-right status-select">
         Текущий статус
-        <span class="status active" style="margin-left: 15px">Занят</span>
+        <span class="status" ng-class="{'active':(!viewModel.doctorIsAvailable)}" style="margin-left: 15px">Занят</span>
         <span class="status-selector">
-            <input type="checkbox" value="" ng-model="doctorIsAvailable" ng-change="viewModel.changeStatus(doctorIsAvailable)" onchange="$(this).parent().prev().toggleClass('active', !this.checked); $(this).parent().next().toggleClass('active', this.checked)" />
-            <label onclick="$(this).prev().click()"></label>
+            <input type="checkbox" ng-checked="viewModel.doctorIsAvailable" />
+            <label ng-click="viewModel.changeStatus()"></label>
         </span>
-        <span class="status">Готов консультировать</span>
+        <span class="status"  ng-class="{'active':viewModel.doctorIsAvailable}">Готов консультировать</span>
     </div>
 </div>
 <div style="display: flex;" class="doctormainpage"  ng-controller="DoctorTimelineController as viewModel" data-id="@ViewBag.DoctorId">

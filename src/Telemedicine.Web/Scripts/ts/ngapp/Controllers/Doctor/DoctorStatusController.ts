@@ -5,14 +5,24 @@ module Telemedicine {
     export class DoctorStatusController {
         static $inject = ["doctorApiService"];
         private doctorId: number;
+        public doctorIsAvailable: boolean;
 
         constructor(private doctorApiService: DoctorApiService) {
-            
+            this.statusIsAvailable();
         }
         
 
-        public changeStatus(doctorIsAvailable:boolean) {
-            this.doctorApiService.changeDoctorStatus(doctorIsAvailable);
+        public statusIsAvailable() {
+            this.doctorApiService.statusIsAvailable().then(result => {
+                this.doctorIsAvailable = result;
+                console.log("statusIsAvailable");
+            });    
+        }
+
+        public changeStatus( ) {
+            this.doctorApiService.changeDoctorStatus(!this.doctorIsAvailable).then(result => {
+                this.statusIsAvailable();
+            });
         }
     }
 }

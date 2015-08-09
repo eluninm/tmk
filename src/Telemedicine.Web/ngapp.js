@@ -389,6 +389,10 @@ var Telemedicine;
                 "status": status
             }).then(function (result) { return result.data; });
         };
+        DoctorApiService.prototype.statusIsAvailable = function () {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/statusIsAvailable");
+            return this.$http.get(url).then(function (result) { return result.data; });
+        };
         return DoctorApiService;
     })();
     Telemedicine.DoctorApiService = DoctorApiService;
@@ -834,26 +838,16 @@ var Telemedicine;
             this.loadPage();
             this.loadBalance();
         }
+        ;
         DoctorPaymentController.prototype.loadPage = function (pageToLoad) {
             var _this = this;
             var page = pageToLoad || this.currentPage;
-            var currentPageSize = this.pageSize;
-            if (typeof (this.allPayments) == 'undefined') {
-                this.doctorApiService.getPaymentHistory(this.doctorId, null, null, this.start, this.end).then(function (result) {
-                    _this.allPayments = result.Data;
-                    _this.payments = _this.allPayments.slice((page - 1) * currentPageSize, page * currentPageSize);
-                    _this.totalCount = result.TotalCount;
-                    _this.currentPage = page;
-                    _this.totalBalance = 0;
-                    for (var i in _this.allPayments) {
-                        _this.totalBalance += _this.allPayments[i].Value;
-                    }
-                });
-            }
-            else {
-                this.payments = this.allPayments.slice((page - 1) * currentPageSize, page * currentPageSize);
-                this.currentPage = page;
-            }
+            this.doctorApiService.getPaymentHistory(this.doctorId, page, this.pageSize, this.start, this.end).then(function (result) {
+                _this.payments = result.Data;
+                _this.totalCount = result.TotalCount;
+                _this.currentPage = result.Page;
+                _this.pageSize = result.PageSize;
+            });
         };
         DoctorPaymentController.prototype.debit = function () {
             var _this = this;
@@ -876,10 +870,6 @@ var Telemedicine;
             this.balanceApiService.balance().then(function (result) {
                 _this.balance = result;
             });
-        };
-        DoctorPaymentController.prototype.changePageSize = function (size) {
-            this.pageSize = size;
-            this.loadPage(1);
         };
         DoctorPaymentController.$inject = ["doctorApiService", "balanceApiService", "$element"];
         return DoctorPaymentController;
@@ -1030,9 +1020,20 @@ var Telemedicine;
     var DoctorStatusController = (function () {
         function DoctorStatusController(doctorApiService) {
             this.doctorApiService = doctorApiService;
+            this.statusIsAvailable();
         }
-        DoctorStatusController.prototype.changeStatus = function (doctorIsAvailable) {
-            this.doctorApiService.changeDoctorStatus(doctorIsAvailable);
+        DoctorStatusController.prototype.statusIsAvailable = function () {
+            var _this = this;
+            this.doctorApiService.statusIsAvailable().then(function (result) {
+                _this.doctorIsAvailable = result;
+                console.log("statusIsAvailable");
+            });
+        };
+        DoctorStatusController.prototype.changeStatus = function () {
+            var _this = this;
+            this.doctorApiService.changeDoctorStatus(!this.doctorIsAvailable).then(function (result) {
+                _this.statusIsAvailable();
+            });
         };
         DoctorStatusController.$inject = ["doctorApiService"];
         return DoctorStatusController;
@@ -1117,6 +1118,14 @@ var Telemedicine;
         return DoctorHourStatusController;
     })();
     Telemedicine.DoctorHourStatusController = DoctorHourStatusController;
+})(Telemedicine || (Telemedicine = {}));
+var Telemedicine;
+(function (Telemedicine) {
+    (function (DoctorStatus) {
+        DoctorStatus[DoctorStatus["Available"] = 0] = "Available";
+        DoctorStatus[DoctorStatus["NotAvailable"] = 1] = "NotAvailable";
+    })(Telemedicine.DoctorStatus || (Telemedicine.DoctorStatus = {}));
+    var DoctorStatus = Telemedicine.DoctorStatus;
 })(Telemedicine || (Telemedicine = {}));
 var Telemedicine;
 (function (Telemedicine) {
