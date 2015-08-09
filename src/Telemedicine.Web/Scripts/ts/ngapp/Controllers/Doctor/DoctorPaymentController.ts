@@ -11,7 +11,6 @@ module Telemedicine {
             private $element: ng.IAugmentedJQuery) {
 
             this.doctorId = parseInt($element.data("id"));
-            this.pageSize = 10;
 
             this.loadPage();
             this.loadBalance();

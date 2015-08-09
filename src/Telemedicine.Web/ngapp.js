@@ -831,7 +831,6 @@ var Telemedicine;
             this.currentPage = 1;
             this.pageSize = 10;
             this.doctorId = parseInt($element.data("id"));
-            this.pageSize = 10;
             this.loadPage();
             this.loadBalance();
         }
