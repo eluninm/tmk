@@ -7,6 +7,6 @@ namespace Telemedicine.Core.Domain.Repositories
 {
     public interface IDoctorPaymentRepository:IRepository<DoctorPaymentHistory>
     {
-        Task<IPagedList< DoctorPaymentHistory>> PagedAsync(int id, int page, int pageSize, DateTime? start, DateTime? end);
+        Task<IPagedList< DoctorPaymentHistory>> PagedAsync(int id, int? page, int? pageSize, DateTime? start, DateTime? end);
     }
 }

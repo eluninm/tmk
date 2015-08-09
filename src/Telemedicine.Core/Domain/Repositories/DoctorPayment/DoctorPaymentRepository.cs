@@ -15,14 +15,28 @@ namespace Telemedicine.Core.Domain.Repositories
         {
         }
 
-        public async Task<IPagedList<DoctorPaymentHistory>> PagedAsync(int id, int page, int pageSize, DateTime? start, DateTime? end)
+        public async Task<IPagedList<DoctorPaymentHistory>> PagedAsync(int id, int? page, int? pageSize, DateTime? start, DateTime? end)
         {
             var query = Set.Where(item => item.DoctorId == id).Include(item => item.PatientPayment).Include(item => item.PatientPayment.Patient).Include(item => item.PatientPayment.Patient.User);
             if (start.HasValue  && end.HasValue)
             {
                 query = query.Where(item => item.Date >= start && item.Date < end);
             }
-            return await query.OrderBy(t => t.Id).ToPagedListAsync(page, pageSize);
+
+            // Если запрашиваем постранично
+            if (page.HasValue && pageSize.HasValue)
+            {
+                return await query.OrderBy(t => t.Id).ToPagedListAsync(page.Value, pageSize.Value);
+            }
+            // если нет, то возвращаем все
+            else
+            {
+                var data = await query.OrderBy(t => t.Id).ToListAsync();
+
+                var count = data.Count();
+
+                return new PagedList<DoctorPaymentHistory>(data, 1, count, count);
+            }
         }
     }
 }

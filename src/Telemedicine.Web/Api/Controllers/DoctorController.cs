@@ -114,7 +114,7 @@ namespace Telemedicine.Web.Api.Controllers
 
         [HttpGet]
         [Route("{doctorId}/paymentHistory")]
-        public async Task<IHttpActionResult> PaymentPage(int doctorId, int page = 1, int pageSize = 10, DateTime? start = null, DateTime? end = null)
+        public async Task<IHttpActionResult> PaymentPage(int doctorId, int? page = null, int? pageSize = null, DateTime? start = null, DateTime? end = null)
         {
             var doctor = await _doctorService.GetByIdAsync(doctorId);
 

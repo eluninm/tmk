@@ -43,7 +43,7 @@ namespace Telemedicine.Core.Domain.Services
             return newEntity;
         }
 
-        public async Task<IPagedList<DoctorPaymentHistory>> PagedAsync(int id, int page, int pageSize, DateTime? start, DateTime? end)
+        public async Task<IPagedList<DoctorPaymentHistory>> PagedAsync(int id, int? page, int? pageSize, DateTime? start, DateTime? end)
         {
             return await _doctorPaymentRepository.PagedAsync(id, page, pageSize, start, end);
         }

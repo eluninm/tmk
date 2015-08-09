@@ -809,19 +809,33 @@ var Telemedicine;
             this.doctorApiService = doctorApiService;
             this.balanceApiService = balanceApiService;
             this.$element = $element;
+            this.currentPage = 1;
+            this.pageSize = 10;
             this.doctorId = parseInt($element.data("id"));
+            this.pageSize = 10;
             this.loadPage();
             this.loadBalance();
         }
         DoctorPaymentController.prototype.loadPage = function (pageToLoad) {
             var _this = this;
             var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getPaymentHistory(this.doctorId, page, this.pageSize, this.start, this.end).then(function (result) {
-                _this.payments = result.Data;
-                _this.totalCount = result.TotalCount;
-                _this.currentPage = result.Page;
-                _this.pageSize = result.PageSize;
-            });
+            var currentPageSize = this.pageSize;
+            if (typeof (this.allPayments) == 'undefined') {
+                this.doctorApiService.getPaymentHistory(this.doctorId, null, null, this.start, this.end).then(function (result) {
+                    _this.allPayments = result.Data;
+                    _this.payments = _this.allPayments.slice((page - 1) * currentPageSize, page * currentPageSize);
+                    _this.totalCount = result.TotalCount;
+                    _this.currentPage = page;
+                    _this.totalBalance = 0;
+                    for (var i in _this.allPayments) {
+                        _this.totalBalance += _this.allPayments[i].Value;
+                    }
+                });
+            }
+            else {
+                this.payments = this.allPayments.slice((page - 1) * currentPageSize, page * currentPageSize);
+                this.currentPage = page;
+            }
         };
         DoctorPaymentController.prototype.debit = function () {
             var _this = this;
@@ -844,6 +858,10 @@ var Telemedicine;
             this.balanceApiService.balance().then(function (result) {
                 _this.balance = result;
             });
+        };
+        DoctorPaymentController.prototype.changePageSize = function (size) {
+            this.pageSize = size;
+            this.loadPage(1);
         };
         DoctorPaymentController.$inject = ["doctorApiService", "balanceApiService", "$element"];
         return DoctorPaymentController;

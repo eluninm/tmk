@@ -11,30 +11,47 @@ module Telemedicine {
             private $element: ng.IAugmentedJQuery) {
 
             this.doctorId = parseInt($element.data("id"));
+            this.pageSize = 10;
 
             this.loadPage();
             this.loadBalance();
         }
 
+        public allPayments: Array<IPaymentHistory>;
         public payments: Array<IPaymentHistory>;
         public debitValue: number;
 
         public balance: number;
 
+        public totalBalance: number;
         public totalCount: number;
-        public currentPage: number;
-        public pageSize: number;
+        public currentPage: number = 1;
+        public pageSize: number = 10;
         public start: Date;
         public end: Date;
 
         public loadPage(pageToLoad?: number) {
             var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getPaymentHistory(this.doctorId, page, this.pageSize, this.start, this.end).then(result => {
-                this.payments = result.Data;
-                this.totalCount = result.TotalCount;
-                this.currentPage = result.Page;
-                this.pageSize = result.PageSize;
-            });
+            var currentPageSize = this.pageSize;
+
+            if (typeof(this.allPayments) == 'undefined') {
+                this.doctorApiService.getPaymentHistory(this.doctorId, null, null, this.start, this.end).then(result => {
+                    this.allPayments = result.Data;
+                    this.payments = this.allPayments.slice((page - 1) * currentPageSize, page * currentPageSize);
+                    this.totalCount = result.TotalCount;
+                    this.currentPage = page;
+
+                    this.totalBalance = 0;
+
+                    for (var i in this.allPayments)
+                    {
+                        this.totalBalance += this.allPayments[i].Value;
+                    }
+                });
+            } else {
+                this.payments = this.allPayments.slice((page - 1) * currentPageSize, page * currentPageSize);
+                this.currentPage = page;
+            }
         }
 
         public debit() {
@@ -61,6 +78,11 @@ module Telemedicine {
             this.balanceApiService.balance().then(result => {
                 this.balance = result;
             });
+        }
+
+        public changePageSize(size: number) {
+            this.pageSize = size;
+            this.loadPage(1);
         }
     }
 }
