@@ -14,8 +14,7 @@ module Telemedicine {
 
         public statusIsAvailable() {
             this.doctorApiService.statusIsAvailable().then(result => {
-                this.doctorIsAvailable = result;
-                console.log("statusIsAvailable");
+                this.doctorIsAvailable = result; 
             });    
         }
 

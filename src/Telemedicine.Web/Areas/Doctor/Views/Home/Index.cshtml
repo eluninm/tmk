@@ -142,7 +142,14 @@
             $.get("@Url.Action("GetCalendarMarkers", "Home")", { year: currentYear, month: currentMonth }).done(function (data) {  
                 
                 $('#calendar').data("DateTimePicker").options({ highlights: JSON.parse(data) });
-                $('#calendar').data("DateTimePicker").options({ defaultDate: new Date(currentYear, currentMonth-1, 1) }); 
+
+                var now = moment();
+                if (now.get('year') == currentYear && (now.month()+1) == currentMonth) {
+                    $('#calendar').data("DateTimePicker").options({ defaultDate: new Date() });
+                } else {
+                    $('#calendar').data("DateTimePicker").options({ defaultDate: new Date(currentYear, currentMonth - 1, 1) });
+                }
+                 
             });
         };
 
