@@ -9,7 +9,7 @@
         <div class="pull-left currenttime">
             @ViewBag.Title:
             <span style="vertical-align: middle; font-size: 36px">
-                <b style="font-weight: 400" id="currentbalance">100500</b>
+                <b style="font-weight: 400" id="currentbalance">{{viewModel.balance}}</b>
                 <b class="font-rouble" style="font-weight: 400">o</b>
             </span>
         </div>
@@ -241,7 +241,7 @@
 
             controller.setStart(moment(first).toDate().toISOString());
             controller.setEnd(moment(second).toDate().toISOString());
-            controller.loadPage();
+            controller.loadPage(1, true);
 
         }
 

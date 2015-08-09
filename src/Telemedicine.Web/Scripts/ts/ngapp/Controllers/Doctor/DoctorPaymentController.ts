@@ -29,11 +29,11 @@ module Telemedicine {
         public start: Date;
         public end: Date;
 
-        public loadPage(pageToLoad?: number) {
+        public loadPage(pageToLoad?: number, isReload?: boolean) {
             var page = pageToLoad || this.currentPage;
             var currentPageSize = this.pageSize;
 
-            if (typeof(this.allPayments) == 'undefined') {
+            if (isReload || typeof (this.allPayments) == 'undefined') {
                 this.doctorApiService.getPaymentHistory(this.doctorId, null, null, this.start, this.end).then(result => {
                     this.allPayments = result.Data;
                     this.payments = this.allPayments.slice((page - 1) * currentPageSize, page * currentPageSize);
@@ -42,8 +42,7 @@ module Telemedicine {
 
                     this.totalBalance = 0;
 
-                    for (var i in this.allPayments)
-                    {
+                    for (var i in this.allPayments) {
                         this.totalBalance += this.allPayments[i].Value;
                     }
                 });

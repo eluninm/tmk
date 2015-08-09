@@ -35,7 +35,7 @@ namespace Telemedicine.Core.Domain.Repositories
 
                 var count = data.Count();
 
-                return new PagedList<DoctorPaymentHistory>(data, 1, count, count);
+                return new PagedList<DoctorPaymentHistory>(data, 1, count > 0 ? count : 1, count);
             }
         }
     }

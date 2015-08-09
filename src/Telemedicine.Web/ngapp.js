@@ -834,11 +834,11 @@ var Telemedicine;
             this.loadPage();
             this.loadBalance();
         }
-        DoctorPaymentController.prototype.loadPage = function (pageToLoad) {
+        DoctorPaymentController.prototype.loadPage = function (pageToLoad, isReload) {
             var _this = this;
             var page = pageToLoad || this.currentPage;
             var currentPageSize = this.pageSize;
-            if (typeof (this.allPayments) == 'undefined') {
+            if (isReload || typeof (this.allPayments) == 'undefined') {
                 this.doctorApiService.getPaymentHistory(this.doctorId, null, null, this.start, this.end).then(function (result) {
                     _this.allPayments = result.Data;
                     _this.payments = _this.allPayments.slice((page - 1) * currentPageSize, page * currentPageSize);
