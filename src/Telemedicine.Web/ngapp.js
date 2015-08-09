@@ -65,6 +65,10 @@ var Telemedicine;
         function RecommendationApiService($http, urlResolverService) {
             _super.call(this, "~/api/v1/recommendation", urlResolverService, $http);
         }
+        RecommendationApiService.prototype.addRecommendation = function (patientId, recommendationText) {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/addRecommendation/" + patientId + "/" + recommendationText);
+            return this.$http.post(url, { patientId: patientId, recommendationText: recommendationText }).then(function (result) { return result.data; });
+        };
         RecommendationApiService.$inject = ["$http", "urlResolverService"];
         return RecommendationApiService;
     })(Telemedicine.ApiServiceBase);
@@ -156,7 +160,7 @@ var Telemedicine;
 })(Telemedicine || (Telemedicine = {}));
 ///<reference path="../Services/RecommendationApiService.ts"/>
 ///<reference path="../Services/PatientApiService.ts"/>
-///<reference path="../Services/ConsultationApiService.ts"/>
+///<reference path="../Services/ConsultationApiService.ts"/> 
 var Telemedicine;
 (function (Telemedicine) {
     var HistoryController = (function () {
@@ -199,6 +203,21 @@ var Telemedicine;
                 resolve: {
                     item: function () { return recommendation; }
                 }
+            });
+        };
+        HistoryController.prototype.openAddRecommendation = function () {
+            var _this = this;
+            var addDialog = this.$modal.open({
+                templateUrl: "/Content/tmpls/dialogs/addRecommendationDialog.html",
+                controller: "RecommendationDetailsController as viewModel",
+                resolve: {
+                    item: function () { return null; }
+                }
+            });
+            addDialog.result.then(function (result) {
+                _this.recommendationService.addRecommendation(Number(_this.$element.attr("data-id")), result).then(function (result) {
+                    _this.loadRecommendations(_this.$element.attr("data-id"));
+                });
             });
         };
         HistoryController.$inject = ["patientApiService", "consultationApiService", "recommendationService", "$element", "$modal"];

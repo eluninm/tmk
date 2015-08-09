@@ -5,9 +5,9 @@
     }
 
     export class ApiServiceBase<TModel> implements IApiServiceBase<TModel> {
-        constructor(private baseUrl: string,
-                    private urlResolverService: IUrlResolverService,
-                    private $http: ng.IHttpService){}
+        constructor(protected  baseUrl: string,
+                    protected  urlResolverService: IUrlResolverService,
+                    protected  $http: ng.IHttpService){}
 
         public getItems(): ng.IPromise<TModel[]> {
             var url = this.urlResolverService.resolveUrl(this.baseUrl);

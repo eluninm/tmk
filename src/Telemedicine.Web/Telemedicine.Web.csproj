@@ -201,6 +201,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\tmpls\dialogs\addRecommendationDialog.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\tmpls\dialogs\appointmentDialog.html" />
     <Content Include="Content\tmpls\dialogs\doctorDetails.html" />
     <Content Include="Content\tmpls\dialogs\paymentDialog.html">
@@ -362,7 +365,6 @@
     <Content Include="Areas\Patient\Views\Shared\CalendarModalWindow.cshtml" />
     <Content Include="Areas\Doctor\Views\Conversation\Open.cshtml" />
     <Content Include="Views\Shared\Chat.cshtml" />
-    <Content Include="Areas\Doctor\Views\Recommendations\List2.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Shared\NavProfileBox.cshtml" />
     <Content Include="Views\Shared\MyEvents.cshtml" />
@@ -375,7 +377,6 @@
     <Content Include="Areas\Administrator\Views\Shared\_PreShared.cshtml" />
     <Content Include="Areas\Patient\Views\Conversation\Profile.cshtml" />
     <Content Include="Areas\Doctor\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Doctor\Views\Recommendations\_AddRecommendationDialog.cshtml" />
     <Content Include="Areas\Patient\Views\Recommendations\List2.cshtml" />
     <Content Include="Areas\Patient\Views\History\Index.cshtml" />
     <Content Include="Content\style.less" />
@@ -611,6 +612,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Doctor\Views\Recommendations\" />
     <Folder Include="Areas\Doctor\Views\Recommendation\" />
     <Folder Include="Views\Calendar\" />
   </ItemGroup>

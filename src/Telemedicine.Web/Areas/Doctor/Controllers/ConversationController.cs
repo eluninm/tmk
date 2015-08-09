@@ -63,6 +63,7 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             }
 
             ViewBag.UserDisplayName = targetUser.DisplayName;
+            ViewBag.UserAvatarUrl = targetUser.AvatarUrl;
             ViewBag.TargetUserId = targetUser.Id;
             ViewBag.ConversationId = conversation.Id;
 

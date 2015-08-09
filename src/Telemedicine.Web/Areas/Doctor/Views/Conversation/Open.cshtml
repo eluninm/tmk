@@ -7,9 +7,9 @@
     <div class="col-md-9 fullheight sub-container">
         <h1 class="page-header row chat-page-header">
             <div class="col-md-6 flex chat-interlocutor">
-                <img class="img-circle doctor-panel-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs-y62_LeI-lJ7kHcTp3ir74IWFXXUiNj04BCPzm2aK-dcdo2W" height="60" width="60" />
+                <img class="img-circle doctor-panel-img" src="@ViewBag.UserAvatarUrl" height="60" width="60" />
                 <span class="title">
-                    Ежов Игорь Николаевич
+                    @ViewBag.UserDisplayName
                 </span>
             </div>
             <div class="col-md-4 flex chat-time">
@@ -59,14 +59,29 @@
         <h1 class="page-header row small-bottom-padding">
             История болезни пациента
             <div style="margin-top: 15px;">
-                <a class="btn btn-primary rounded" data-toggle="modal" data-target="#addRecommendationDialog" href="@Url.Action("AddRecommendationStartDialog", "Recommendations")">
+                <a class="btn btn-primary rounded" ng-click="viewModel.openAddRecommendation()">
                     Добавить рекомендацию
                 </a>
             </div>
             <after style="background: red"></after>
         </h1>
         <div class="content row">
-            @Html.Action("List2", "Recommendations", new { id = @ViewBag.TargetUserId })
+            <div class="recomendation-message-container">
+                <div class="recomendation-message ng-scope" ng-repeat="recommendation in viewModel.recommendations">
+                    <div class="timestamp ng-binding">{{recommendation.Created | date:'dd.MM.yyyy'}}</div>
+                    <div class="author">
+                        <div class="title ng-binding">{{recommendation.DoctorTitle}}</div>
+                        <div class="speciality ng-binding">{{recommendation.DoctorSpecialization}}</div>
+                    </div>
+                    <div class="message ng-binding recommendation-text">
+                        {{recommendation.RecommendationText}}
+                    </div>
+                    <div class="details">
+                        <a href="#" ng-click="viewModel.openRecommendationDetails(recommendation)">Подробнее</a> &gt;
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -150,7 +165,8 @@
         </div>
     </div>
 </div>
-
+ 
+ 
 @section styles{
 }
 
@@ -161,7 +177,7 @@
 
         function onaddRecommendationSuccess() {
             $("#addRecommendationDialog").modal("hide");
-            window.location.href = '@Url.Action("Open", "Conversation")/'//ViewBag.ConversationId;
+            ///window.location.href = '@Url.Action("Open", "Conversation")/'//ViewBag.ConversationId;
         }
         function sendMessage(messageText) {
             messageHub.server.sendMessage(conversationId, messageText).done(function () {
