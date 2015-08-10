@@ -30,11 +30,17 @@ namespace Telemedicine.Web.Hubs
         {
             return Clients.All.StatusChanged(statusName);
         }
+
+        public Task CloseChat()
+        {
+             return Clients.All.OnChatClosed();
+        }
     }
 
     public interface IChatServer
     {
         Task UserStatusChanged(string statusName);
+        Task CloseChat();
     }
 
     public interface IChatClient
@@ -43,6 +49,8 @@ namespace Telemedicine.Web.Hubs
 
         Task Disconnected(string userName);
 
-        Task StatusChanged(string statusName);
+        Task StatusChanged(string statusName); 
+
+        Task OnChatClosed();
     }
 }

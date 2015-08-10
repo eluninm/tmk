@@ -134,7 +134,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default rounded col-md-3 pull-right" data-dismiss="modal" style="margin-left: 15px">Нет</button>
-                <button type="button" class="btn btn-primary rounded col-md-3 pull-right" data-dismiss="modal" data-toggle="modal" data-target="#devDialog">Ок</button>
+                <button type="button" class="btn btn-primary rounded col-md-3 pull-right" @*data-dismiss="modal" data-toggle="modal" data-target="#devDialog"*@ onclick="closeChat();">Ок</button>
             </div>
         </div>
     </div>
@@ -144,11 +144,12 @@
     <script>
         var conversationId = '@ViewContext.RouteData.Values["id"]';
         var messageHub = $.connection.messageHub;
+        var chatHub = $.connection.chatHub;
 
         function sendMessage(messageText) {
-            messageHub.server.sendMessage(conversationId, messageText).done(function () {
+            messageHub.server.sendMessage(conversationId, messageText).done(function() {
                 console.info('Message sent to the server');
-            }).fail(function (error) {
+            }).fail(function(error) {
                 console.error('Invocation of sendMessage failed: ' + error);
             });
         }
@@ -162,6 +163,12 @@
 
             $(".chat-panel .panel-body").scrollTop($(".chat-panel .panel-body")[0].scrollHeight);
         }
+
+        function closeChat() {
+            chatHub.server.closeChat();
+            window.location.href = '@Url.Action("Index", "Home")';
+        }
+
 
         $(function () {
             //var mbLeft = $('.sidebar').width() + 40;
@@ -195,6 +202,9 @@
             messageHub.client.onMessage = function (message) {
                 addMessage(message);
             };
+
+
+
 
             var startTime = moment().add(15, "m");
             setInterval(function () {
