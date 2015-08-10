@@ -108,7 +108,7 @@ namespace Telemedicine.Core.Domain.Repositories
             var begin = date.Date;
             var end = date.AddDays(1).Date;
             var appointments = await Set.Include(t => t.Patient).Include(p => p.Patient.User)
-                .Where(a => a.Date >= begin && a.Date < end)
+                .Where(a => a.Date >= begin && a.Date < end).Where(t => t.DoctorId == doctorId)
                 .ToListAsync();
             return appointments;
         }
