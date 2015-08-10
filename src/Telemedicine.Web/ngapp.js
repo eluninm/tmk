@@ -529,7 +529,7 @@ var Telemedicine;
             });
             paymentDialog.result.then(function (result) {
                 console.log(result);
-                _this.patientApiService.payConsultation(doctor.Id, 500);
+                _this.patientApiService.payConsultation(doctor.Id, 1000);
             });
         };
         DoctorListController.prototype.initialize = function () {

@@ -109,7 +109,7 @@ module Telemedicine {
 
             paymentDialog.result.then((result) => {
                 console.log(result);
-                this.patientApiService.payConsultation(doctor.Id, 500);
+                this.patientApiService.payConsultation(doctor.Id, 1000);
             });
         }
 
