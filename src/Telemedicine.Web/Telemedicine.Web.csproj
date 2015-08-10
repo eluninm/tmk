@@ -625,6 +625,8 @@
     <TypeScriptCompile Include="Scripts\ts\dts\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\bootstrap.v3.datetimepicker.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\dts\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\ts\dts\moment-node.d.ts" />
+    <TypeScriptCompile Include="Scripts\ts\dts\moment.d.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\app.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\ApiServiceBase.ts" />
     <TypeScriptCompile Include="Scripts\ts\ngapp\common\IPagedList.ts" />

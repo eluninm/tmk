@@ -1,4 +1,5 @@
 ﻿///<reference path="../Services/DoctorApiService.ts"/>
+///<reference path="../../dts/moment.d.ts"/>
 
 module Telemedicine {
     export class DoctorAppointmentController {
@@ -12,8 +13,8 @@ module Telemedicine {
 
             if (location.hash) {
                 var parameters = this.parseUrlQuery();
-                this.start = new Date(parameters["start"]);
-                this.end = new Date(parameters["end"]);
+                this.start = moment(parameters["start"]).toDate();
+                this.end = moment(parameters["end"]).toDate();
             }
         }
 

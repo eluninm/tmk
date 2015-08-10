@@ -1,5 +1,6 @@
 ﻿///<reference path="../common/ApiServiceBase.ts"/>
-///<reference path="../common/UrlResolverService.ts"/>
+///<reference path="../common/UrlResolverService.ts"/> 
+///<reference path="../../dts/moment.d.ts"/>
 
 module Telemedicine {
     export interface IDoctorApiService {
@@ -70,8 +71,8 @@ module Telemedicine {
             }
 
             if (start && end) {
-                query.start = start.toLocaleString();
-                query.end = end.toLocaleString();
+                query.start = moment(start).toISOString();
+                query.end = moment(end).toISOString();
             }
 
             if (needDeclined) {

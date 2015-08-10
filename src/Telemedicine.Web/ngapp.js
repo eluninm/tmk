@@ -267,7 +267,8 @@ var Telemedicine;
     Telemedicine.ConsultationController = ConsultationController;
 })(Telemedicine || (Telemedicine = {}));
 ///<reference path="../common/ApiServiceBase.ts"/>
-///<reference path="../common/UrlResolverService.ts"/>
+///<reference path="../common/UrlResolverService.ts"/> 
+///<reference path="../../dts/moment.d.ts"/>
 var Telemedicine;
 (function (Telemedicine) {
     var DoctorApiService = (function () {
@@ -318,8 +319,8 @@ var Telemedicine;
                 query.patientTitleFilter = patientTitleFilter;
             }
             if (start && end) {
-                query.start = start.toLocaleString();
-                query.end = end.toLocaleString();
+                query.start = moment(start).toISOString();
+                query.end = moment(end).toISOString();
             }
             if (needDeclined) {
                 query.needDeclined = needDeclined;
@@ -719,6 +720,7 @@ var Telemedicine;
     Telemedicine.BalanceController = BalanceController;
 })(Telemedicine || (Telemedicine = {}));
 ///<reference path="../Services/DoctorApiService.ts"/>
+///<reference path="../../dts/moment.d.ts"/>
 var Telemedicine;
 (function (Telemedicine) {
     var DoctorAppointmentController = (function () {
@@ -731,8 +733,8 @@ var Telemedicine;
             this.doctorId = parseInt($element.attr("data-id"));
             if (location.hash) {
                 var parameters = this.parseUrlQuery();
-                this.start = new Date(parameters["start"]);
-                this.end = new Date(parameters["end"]);
+                this.start = moment(parameters["start"]).toDate();
+                this.end = moment(parameters["end"]).toDate();
             }
         }
         DoctorAppointmentController.prototype.parseUrlQuery = function () {
@@ -936,7 +938,8 @@ var Telemedicine;
     Telemedicine.PatientPaymentController = PatientPaymentController;
 })(Telemedicine || (Telemedicine = {}));
 ///<reference path="../../Services/DoctorApiService.ts"/>
-///<reference path="../../Services/BalanceApiService.ts"/>
+///<reference path="../../Services/BalanceApiService.ts"/> 
+///<reference path="../../../dts/moment.d.ts"/>
 var Telemedicine;
 (function (Telemedicine) {
     var DoctorTimelineController = (function () {
@@ -1018,8 +1021,8 @@ var Telemedicine;
             }
         };
         DoctorTimelineController.prototype.showMyEvents = function () {
-            var start = new Date(this.curentDate.setHours(this.selectedHour));
-            var end = new Date(this.curentDate.setHours(this.selectedHour + 1));
+            var start = moment(new Date(this.curentDate.setHours(this.selectedHour))).startOf('hour');
+            var end = moment(new Date(this.curentDate.setHours(this.selectedHour))).endOf('hour');
             window.location.href = "/Doctor/Home/MyEvents#start=" + start.toLocaleString() + "&end=" + end.toLocaleString();
         };
         DoctorTimelineController.$inject = ["doctorApiService", "balanceApiService", "$element", "$scope"];

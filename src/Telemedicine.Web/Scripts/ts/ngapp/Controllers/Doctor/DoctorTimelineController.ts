@@ -1,6 +1,6 @@
 ﻿///<reference path="../../Services/DoctorApiService.ts"/>
-///<reference path="../../Services/BalanceApiService.ts"/>
-
+///<reference path="../../Services/BalanceApiService.ts"/> 
+///<reference path="../../../dts/moment.d.ts"/>
 module Telemedicine {
     export class DoctorTimelineController {
         static $inject = ["doctorApiService", "balanceApiService", "$element", "$scope"];
@@ -101,8 +101,8 @@ module Telemedicine {
         }
 
         public showMyEvents() {
-            var start = new Date(this.curentDate.setHours(this.selectedHour));
-            var end = new Date(this.curentDate.setHours(this.selectedHour + 1));
+            var start = moment(new Date(this.curentDate.setHours(this.selectedHour))).startOf('hour');
+            var end = moment(new Date(this.curentDate.setHours(this.selectedHour))).endOf('hour');
             window.location.href = "/Doctor/Home/MyEvents#start=" + start.toLocaleString() + "&end=" + end.toLocaleString();
         }
     }
