@@ -167,10 +167,14 @@
         function closeChat() {
             chatHub.server.closeChat();
             window.location.href = '@Url.Action("Index", "Home")';
+            return false;
         }
 
 
         $(function () {
+            $("a").click(function (e) {
+                  e.preventDefault();
+            });
             //var mbLeft = $('.sidebar').width() + 40;
             //var mbRight = $('#recommendationColumn').width() + 40;
             //$('#messageBox').show();

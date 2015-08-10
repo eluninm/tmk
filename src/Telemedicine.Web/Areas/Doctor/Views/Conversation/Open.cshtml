@@ -217,7 +217,7 @@
 
 
             $("a").click(function (e) {
-                if (chatIsСontinues) e.preventDefault(); 
+                if (chatIsСontinues) e.preventDefault();
             });
 
 
@@ -238,6 +238,8 @@
                 console.log("OnChatClosed");
                 chatIsСontinues = false;
                 window.location.href = '@Url.Action("Index", "Home")';
+                window.location = '@Url.Action("Index", "Home")';
+                return false;
             }
 
             var startTime = moment().add(15,"m");
