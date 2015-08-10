@@ -162,12 +162,18 @@
             }).on('click', function() {
                 $(this).datetimepicker('show');
             }).on('dp.change', function (e) { 
-                range();
+                
                 if (firstDateTimePickerChange) {
                     firstDateTimePickerChange = false; 
                 } else {
-                    $('#filter').popover('hide');
+                    $('#filter').popover('hide'); 
                 }
+
+                endDate = $(popoverelem).data('bs.popover').$tip.find('#to').data("DateTimePicker").date();
+                if (endDate.diff(startDate, 'days') <= 0) {
+                    $(popoverelem).data('bs.popover').$tip.find('#from').data("DateTimePicker").date(endDate);
+                }
+                range();
                 
             });
 
