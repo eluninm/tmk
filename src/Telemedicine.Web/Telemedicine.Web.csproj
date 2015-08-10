@@ -512,6 +512,7 @@
     <Compile Include="Api\Dto\BeginConsultationDto.cs" />
     <Compile Include="Api\Dto\ConsultationDto.cs" />
     <Compile Include="Api\Dto\ConsultationMessageDto.cs" />
+    <Compile Include="Api\CustomJsonConverters\CustomDateTimeConverter.cs" />
     <Compile Include="Api\Dto\DoctorAppointmentDto.cs" />
     <Compile Include="Api\Dto\DoctorListItemDto.cs" />
     <Compile Include="Api\Dto\PatientAppointmentDto.cs" />
