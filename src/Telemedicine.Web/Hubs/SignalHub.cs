@@ -72,7 +72,7 @@ namespace Telemedicine.Web.Hubs
                 string userId = Context.User.Identity.GetUserId();
                 var peerUser = _connections.GetUserIds().FirstOrDefault(t => t != Context.User.Identity.GetUserId());
 
-                var conversationService = DependencyResolver.Current.GetService<IConversationService>();
+                var conversationService = AppBuilderExtensions.Container.Resolve<IConversationService>();
                 var conversation = await conversationService.BeginConversation(peerUser, userId);
 
                 Clients.OthersInGroup(groupId).OnAcceptCall(conversation.Id);

@@ -72,20 +72,20 @@ namespace Telemedicine.Web
 
         private static void RegisterFrameworks(ContainerBuilder builder)
         {
-            builder.RegisterType<SiteUserManager>().InstancePerRequest();
-            builder.RegisterType<SiteSignInManager>().InstancePerRequest();
+            builder.RegisterType<SiteUserManager>().InstancePerLifetimeScope();
+            builder.RegisterType<SiteSignInManager>().InstancePerLifetimeScope();
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).As<IAuthenticationManager>();
             builder.Register(c => new IdentityFactoryOptions<SiteUserManager>
             {
                 DataProtectionProvider = new Microsoft.Owin.Security.DataProtection.DpapiDataProtectionProvider("Application​")
             });
-            builder.RegisterType<SiteUserStore>().As<IUserStore<SiteUser>>().InstancePerRequest();
+            builder.RegisterType<SiteUserStore>().As<IUserStore<SiteUser>>().InstancePerLifetimeScope();
         }
 
         private static void RegisterTypes(ContainerBuilder builder)
         {
-            builder.RegisterType<SimpleDbContextProvider>().As<IDbContextProvider>().InstancePerRequest();
-            builder.RegisterType<EfSimpleUnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
+            builder.RegisterType<SimpleDbContextProvider>().As<IDbContextProvider>().InstancePerLifetimeScope();
+            builder.RegisterType<EfSimpleUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
             builder.RegisterType<DoctorStatusRepository>().As<IDoctorStatusRepository>();
             builder.RegisterType<DoctorRepository>().As<IDoctorRepository>();
