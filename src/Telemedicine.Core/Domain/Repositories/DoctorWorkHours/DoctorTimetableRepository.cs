@@ -22,7 +22,7 @@ namespace Telemedicine.Core.Domain.Repositories.DoctorWorkHours
             return
                 await
                     Set.Include(s => s.AppointmentEvents)
-                        .Where(w => w.DateTime >= start && w.DateTime < end && w.DoctorId == doctorId)
+                        .Where(w => w.DateTime >= start && w.DateTime <= end && w.DoctorId == doctorId)
                         .ToListAsync();
         }
 

@@ -185,6 +185,8 @@
         var endDate;
         $(function() { 
             controller = angular.element(document.getElementById("doctorAppointmentController")).controller();
+            controller.start=null;
+            controller.end = null;
             controller.loadPage();
 
             startDate = endDate = moment();
