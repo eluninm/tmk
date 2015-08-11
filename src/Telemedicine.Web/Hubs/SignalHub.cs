@@ -67,20 +67,16 @@ namespace Telemedicine.Web.Hubs
 
         public async Task<string> AcceptCall(string groupId)
         {
-            try
+            string userId = Context.User.Identity.GetUserId();
+            var peerUser = _connections.GetUserIds().FirstOrDefault(t => t != Context.User.Identity.GetUserId());
+
+            var globalScope = AppBuilderExtensions.Container.Resolve<ILifetimeScope>();
+            using (var signalScope = globalScope.BeginLifetimeScope("signalHubScope"))
             {
-                string userId = Context.User.Identity.GetUserId();
-                var peerUser = _connections.GetUserIds().FirstOrDefault(t => t != Context.User.Identity.GetUserId());
-
-                var conversationService = AppBuilderExtensions.Container.Resolve<IConversationService>();
+                var conversationService = signalScope.Resolve<IConversationService>();
                 var conversation = await conversationService.BeginConversation(peerUser, userId);
-
                 Clients.OthersInGroup(groupId).OnAcceptCall(conversation.Id);
                 return conversation.Id;
-            }
-            catch (Exception ex)
-            {
-                return null;
             }
         }
 
