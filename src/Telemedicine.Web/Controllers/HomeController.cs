@@ -34,7 +34,7 @@ namespace Telemedicine.Web.Controllers
 
         public ActionResult Avatar()
         {
-            var user =  _userManager.FindById(HttpContext.User.Identity.GetUserId());
+            var user = _userManager.FindById(HttpContext.User.Identity.GetUserId());
 
             return PartialView("_Avatar", user?.AvatarUrl);
         }
@@ -50,6 +50,32 @@ namespace Telemedicine.Web.Controllers
             ViewBag.UserDisplayName = user.DisplayName;
 
             return PartialView("_UserCallDialog");
+        }
+
+        public async Task<ActionResult> UserVideoCallDialog(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return HttpNotFound("Пользователь не найден в базе данных.");
+            }
+
+            ViewBag.UserDisplayName = user.DisplayName;
+
+            return PartialView("_UserVideoCallDialog");
+        }
+
+        public async Task<ActionResult> UserAudioCallDialog(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return HttpNotFound("Пользователь не найден в базе данных.");
+            }
+
+            ViewBag.UserDisplayName = user.DisplayName;
+
+            return PartialView("_UserAudioCallDialog");
         }
     }
 }

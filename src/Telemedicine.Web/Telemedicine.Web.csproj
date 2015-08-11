@@ -482,6 +482,8 @@
     <Content Include="Views\Shared\_Layout3.cshtml" />
     <Content Include="tsconfig.json" />
     <Content Include="Views\Shared\_Avatar.cshtml" />
+    <Content Include="Views\Home\_UserAudioCallDialog.cshtml" />
+    <Content Include="Views\Home\_UserVideoCallDialog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

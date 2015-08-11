@@ -17,11 +17,19 @@
                     <span id="currenttime"></span>
                 </div>
             </div>
-            <div class="col-md-2 chat-buttons text-center">
-                <a href="#" class="btn chat-phone" data-toggle="modal" data-target="#devDialog"></a>
-                <a href="#" class="btn chat-video" data-toggle="modal" data-target="#devDialog"></a>
+            <div class="col-md-3 chat-buttons text-center">
+                <a href="#" class="btn chat-phone" data-toggle="modal" onclick="initiateAudioCall();" id="audioCallBtn"></a>
+                <a href="#" class="btn chat-video" data-toggle="modal" onclick="initiateVideoCall();" id="videoCallBtn"></a>
             </div>
         </h1>
+
+        <div>
+            <table>
+                <tr><td><span>Remote:</span><video id="remote-video"></video></td></tr>
+                <tr><td><span>Local:</span><video id="client-video" muted></video></td></tr>
+            </table>
+        </div>
+
         <div class="content row unscrollable" style="display: flex; flex-direction: column">
             <div class="chat-nocontent" ng-hide="viewModel.selectedConsultationId" style="display: none;">
                 <img src="/img/no_chat.png" />
@@ -39,17 +47,17 @@
                         <div style="display: flex">
                             <input class="chat-message-input" id="message-input" />
                         </div>
-@*                        <ul class="attachments-list" style="display: flex">*@
-@*                            <li class="attachments-list-item">*@
-@*                                <div>*@
-@*                                    <div class="title">Файл 1</div>*@
-@*                                    <div class="info">15 Кб</div>*@
-@*                                </div>*@
-@*                                <div class="btn attachment-remove" data-toggle="modal" data-target="#devDialog"></div>*@
-@*                            </li>*@
-@*                        </ul>*@
+                        @*                        <ul class="attachments-list" style="display: flex">*@
+                        @*                            <li class="attachments-list-item">*@
+                        @*                                <div>*@
+                        @*                                    <div class="title">Файл 1</div>*@
+                        @*                                    <div class="info">15 Кб</div>*@
+                        @*                                </div>*@
+                        @*                                <div class="btn attachment-remove" data-toggle="modal" data-target="#devDialog"></div>*@
+                        @*                            </li>*@
+                        @*                        </ul>*@
                     </div>
-                    </div>
+                </div>
             </div>
 
         </div>
@@ -91,6 +99,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="Attachments" role="dialog" aria-labelledby="AttachmentsLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -155,17 +164,52 @@
                 </div>
                 <br />
                 <div class="doctor text-center">
-                    <div class="font-bold" style="font-size: 1.1em">@ViewBag.UserDisplayName</div>
+                    <div class="font-bold" style="font-size: 1.1em">Баранов Александр Александрович</div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary rounded col-md-3 pull-right" data-dismiss="modal"   data-toggle="modal"  >Ок</button>
+                <button type="button" class="btn btn-primary rounded col-md-3 pull-right" data-dismiss="modal" data-toggle="modal" data-target="#devDialog">Ок</button>
             </div>
         </div>
     </div>
 </div>
- 
- 
+
+<div class="modal fade" id="initiateMediaDialog">
+    <div class="modal-dialog modal-sm incomingCallDialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
+
+            <div class="modal-body">
+                <div class="sub-title text-center text-uppercase">
+                    Выполняется вызов
+                </div>
+                <p class="text-center">
+                    ожидайте ответа пациента...
+                </p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-round-rd rounded" data-dismiss="modal" id="declineCallBtn" onclick="cancelMediaCall();">отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="incomingVideoDialog">
+    <div class="modal-dialog modal-sm incomingCallDialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="incomingAudioDialog">
+    <div class="modal-dialog modal-sm incomingCallDialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
 @section styles{
 }
 
@@ -175,12 +219,268 @@
         var messageHub = $.connection.messageHub;
         var chatHub = $.connection.chatHub;
 
+        var lastMediaRequestAllowVideo;
+
+        var localStream;
+        var remoteStream;
+        var needPeerConnection = true;
+        var isInitiator = false;
+        var peerConnection;
+        var peerConnectionConfig = { 'iceServers': [{ 'url': 'stun:stun.services.mozilla.com' }, { 'url': 'stun:stun.l.google.com:19302' }] };
+
+        window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+        window.RTCIceCandidate = window.RTCIceCandidate || window.mozRTCIceCandidate || window.webkitRTCIceCandidate;
+        window.RTCSessionDescription = window.RTCSessionDescription || window.mozRTCSessionDescription || window.webkitRTCSessionDescription;
+        navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.getUserMedia;
+
+        function lockCallControls() {
+            console.info('call controls are locked');
+            $('#audioCallBtn').removeAttr('onclick').off("click");
+            $('#videoCallBtn').removeAttr('onclick').off("click");
+        }
+
+        function unlockCallControls() {
+            console.info('call controls are unlocked');
+            $('#audioCallBtn').click(function () { initiateAudioCall(); });
+            $('#videoCallBtn').click(function () { initiateVideoCall(); });
+        }
+
+        // Caller user methods
+
+        function initiateAudioCall() {
+            console.info("initiateAudioCall");
+            $('#initiateMediaDialog').modal();
+            lockCallControls();
+            lastMediaRequestAllowVideo = false;
+            chatHub.server.initiateMediaChat(false);
+        }
+
+        function initiateVideoCall() {
+            console.info("initiateVideoCall");
+            $('#initiateMediaDialog').modal();
+            lockCallControls();
+            lastMediaRequestAllowVideo = true;
+            chatHub.server.initiateMediaChat(true);
+        }
+
+        chatHub.client.onMediaChatAccepted = function (withVideo) {
+            console.info("OnMediaChatAccepted, withVideo=" + withVideo);
+            lockCallControls();
+            $('#initiateMediaDialog').modal('hide');
+            needPeerConnection = true;
+            startMediaTranslation(true, withVideo, function () { });
+        }
+
+        chatHub.client.onMediaChatDeclined = function () {
+            console.info("onMediaChatDeclined");
+            $('#initiateMediaDialog').modal('hide');
+            if (lastMediaRequestAllowVideo === true)
+                toastr.info('Пациент отклонил запрос видеосвязи');
+            else
+                toastr.info('Пациент отклонил запрос аудиосвязи');
+            unlockCallControls();
+        }
+
+        function cancelMediaCall() {
+            console.info("cancelAudioCall");
+            $('#initiateMediaDialog').modal('hide');
+            chatHub.server.cancelMediaChatRequest();
+            unlockCallControls();
+        }
+
+
+        // Callee user methods
+
+        chatHub.client.onMediaChatRequest = function (initiatorId, withVideo) {
+            console.info("onMediaChatRequest, withVideo=" + withVideo);
+            lockCallControls();
+            lastMediaRequestAllowVideo = withVideo;
+            if (withVideo === true) {
+                $('#incomingVideoDialog').modal({ remote: '@Url.Action("UserVideoCallDialog", "Home", new
+                                                           {
+                                                               area = ""
+                                                           })' + '/' + initiatorId });
+            } else {
+                $('#incomingAudioDialog').modal({ remote: '@Url.Action("UserAudioCallDialog", "Home", new
+                                                           {
+                                                               area = ""
+                                                           })' + '/' + initiatorId });
+            }
+        }
+
+        chatHub.client.onCancelMediaChatRequest = function () {
+            console.debug('onCancelMediaChatRequest');
+            if (lastMediaRequestAllowVideo === true) {
+                $('#incomingVideoDialog').modal('hide');
+                toastr.info('Пациент отменил запрос видеосвязи');
+            } else {
+                $('#incomingAudioDialog').modal('hide');
+                toastr.info('Пациент отменил запрос аудиосвязи');
+            }
+            unlockCallControls();
+        }
+
+        function acceptAudioCall() {
+            console.info("acceptAudioCall");
+            lockCallControls();
+            needPeerConnection = true;
+            chatHub.server.acceptMediaChat(false);
+            $('#incomingAudioDialog').modal('hide');
+        }
+
+        function declineAudioCall() {
+            console.info("declineAudioCall");
+            chatHub.server.declineMediaChat();
+            $('#incomingAudioDialog').modal('hide');
+            unlockCallControls();
+        }
+
+        function acceptVideoCall() {
+            console.info("acceptVideoCall");
+            lockCallControls();
+            needPeerConnection = true;
+            chatHub.server.acceptMediaChat(true);
+            $('#incomingVideoDialog').modal('hide');
+        }
+
+        function declineVideoCall() {
+            console.info("declineVideoCall");
+            chatHub.server.declineMediaChat();
+            $('#incomingVideoDialog').modal('hide');
+            unlockCallControls();
+        }
+
+        // Common methods
+
+        function errorHandler(error) {
+            console.error(error);
+        }
+
+        function startMediaTranslation(isCaller, allowVideo, endsWith) {
+            console.info('startMediaTranslation, isCaller=' + isCaller + ' allowVideo=' + allowVideo);
+            isInitiator = isCaller;
+            needPeerConnection = false;
+            navigator.getUserMedia({ audio: true, video: allowVideo },
+                function (stream) {
+
+                    visualizeLocalStream(stream, allowVideo);
+
+                    localStream = stream;
+
+                    peerConnection = new RTCPeerConnection(peerConnectionConfig);
+                    peerConnection.onicecandidate = gotIceCandidate;
+                    peerConnection.onaddstream = gotRemoteStream;
+                    peerConnection.addStream(localStream);
+
+                    if (isCaller) {
+                        peerConnection.createOffer(gotDescription, errorHandler);
+                    }
+                    endsWith();
+                },
+                function () {
+                    needPeerConnection = true;
+                    console.error('getUserMedia failed :(');
+                    errorHandler(error);
+                });
+
+        }
+
+        function visualizeLocalStream(stream, withVideo) {
+            console.info('visualizeLocalStream called, video=' + withVideo);
+            var videoObj = $('#client-video');
+            var videoEl = videoObj.get(0);
+
+            if (videoObj) {
+                if (withVideo) {
+                    videoObj.show();
+                } else {
+                    videoObj.hide();
+                }
+            }
+
+            if (videoEl) {
+                if (!navigator.mozGetUserMedia) {
+                    videoEl.src = window.URL.createObjectURL(stream);
+                } else {
+                    videoEl.mozSrcObject = stream;
+                }
+                videoEl.play();
+            }
+        }
+
+        function gotDescription(description) {
+            console.info("gotDescription called");
+            peerConnection.setLocalDescription(description, function () {
+                chatHub.server.sendRTCMessage(JSON.stringify({ 'sdp': description }));
+            }, function () { console.log('set description error') });
+        }
+
+        function gotIceCandidate(event) {
+            chatHub.server.sendRTCMessage(JSON.stringify({ 'ice': event.candidate }));
+        }
+
+        function gotRemoteStream(event) {
+            console.info("gotRemoteStream");
+            visualizeRemoteStream(event.stream, lastMediaRequestAllowVideo);
+        }
+
+        function visualizeRemoteStream(stream, withVideo) {
+            console.info('visualizeRemoteStream called, video=' + withVideo);
+            var videoObj = $('#remote-video');
+            var videoEl = videoObj.get(0);
+
+            if (videoObj) {
+                if (withVideo) {
+                    videoObj.show();
+                } else {
+                    videoObj.hide();
+                }
+            }
+
+            if (videoEl) {
+                if (!navigator.mozGetUserMedia) {
+                    videoEl.src = window.URL.createObjectURL(stream);
+                } else {
+                    videoEl.mozSrcObject = stream;
+                }
+                videoEl.play();
+            }
+        }
+
+        chatHub.client.onRTCMessage = function (message) {
+            if (needPeerConnection === true) {
+                startMediaTranslation(false, lastMediaRequestAllowVideo, function () { processRTCMessage(message); });
+            } else {
+                processRTCMessage(message);
+            }
+        }
+
+        function processRTCMessage(message) {
+            var signal = JSON.parse(message);
+            if (signal.sdp) {
+                console.info("got SDP");
+                peerConnection.setRemoteDescription(new RTCSessionDescription(signal.sdp), function () {
+                    if (isInitiator === false) {
+                        peerConnection.createAnswer(gotDescription, errorHandler);
+                    }
+                }, errorHandler);
+            } else if (signal.ice) {
+                peerConnection.addIceCandidate(new RTCIceCandidate(signal.ice));
+            }
+        }
+
+        //======================================================================================================================//
+        //======================================================================================================================//
+        //======================================================================================================================//
+
+
         var chatIsСontinues = true;
 
         function onaddRecommendationSuccess() {
             $("#addRecommendationDialog").modal("hide");
             ///window.location.href = '@Url.Action("Open", "Conversation")/'//ViewBag.ConversationId;
         }
+
         function sendMessage(messageText) {
             messageHub.server.sendMessage(conversationId, messageText).done(function () {
                 console.info('Message sent to the server');
@@ -197,14 +497,6 @@
                 + '<div class="chat-details small">' + moment(created).format('DD.MM.YYYY') + " в " + created.format("HH:mm") + '</div></div></div>');
             $(".chat-panel .panel-body").scrollTop($(".chat-panel .panel-body")[0].scrollHeight);
         }
-
-
-        function redirect() {
-            window.location.href = '@Url.Action("Index", "Home")';
-            window.location = '@Url.Action("Index", "Home")';
-            return false;
-        }
-
 
         $(function () {
             $('#message-input').keyup(function (e) {
@@ -242,17 +534,14 @@
 
 
             chatHub.client.OnChatClosed = function () {
-
-                $('#CloseChat').on('hidden.bs.modal', function() {
-                    redirect();
-                });
-
-                $("#CloseChat").modal('show');
                 console.log("OnChatClosed");
-                chatIsСontinues = false; 
+                chatIsСontinues = false;
+                window.location.href = '@Url.Action("Index", "Home")';
+                window.location = '@Url.Action("Index", "Home")';
+                return false;
             }
 
-            var startTime = moment().add(15,"m");
+            var startTime = moment().add(15, "m");
             setInterval(function () {
                 var past = startTime - moment();
                 $('#currenttime').text(moment(past).format('mm:ss'));

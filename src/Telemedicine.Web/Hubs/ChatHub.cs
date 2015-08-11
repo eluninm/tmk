@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.SignalR;
 
 namespace Telemedicine.Web.Hubs
@@ -14,7 +15,7 @@ namespace Telemedicine.Web.Hubs
         {
             var userName = Context.User.Identity.Name;
             Clients.All.Connected(userName);
-            
+
             return base.OnConnected();
         }
 
@@ -22,7 +23,7 @@ namespace Telemedicine.Web.Hubs
         {
             var userName = Context.User.Identity.Name;
             Clients.All.Disconnected(userName);
-            
+
             return base.OnDisconnected(stopCalled);
         }
 
@@ -33,8 +34,35 @@ namespace Telemedicine.Web.Hubs
 
         public Task CloseChat()
         {
-             return Clients.All.OnChatClosed();
+            return Clients.All.OnChatClosed();
         }
+
+        public Task SendRTCMessage(object e)
+        {
+            return Clients.Others.OnRTCMessage(e);
+        }
+
+        public Task InitiateMediaChat(bool withVideo)
+        {
+            var callerUserId = Context.User.Identity.GetUserId();
+            return Clients.Others.OnMediaChatRequest(callerUserId, withVideo);
+        }
+
+        public Task CancelMediaChatRequest()
+        {
+            return Clients.Others.OnCancelMediaChatRequest();
+        }
+
+        public Task AcceptMediaChat(bool withVideo)
+        {
+            return Clients.Others.OnMediaChatAccepted(withVideo);
+        }
+
+        public Task DeclineMediaChat()
+        {
+            return Clients.Others.OnMediaChatDeclined();
+        }
+
     }
 
     public interface IChatServer
@@ -49,8 +77,18 @@ namespace Telemedicine.Web.Hubs
 
         Task Disconnected(string userName);
 
-        Task StatusChanged(string statusName); 
+        Task StatusChanged(string statusName);
 
         Task OnChatClosed();
+
+        Task OnRTCMessage(object e);
+
+        Task OnMediaChatRequest(string initiatorId, bool withVideo);
+
+        Task OnMediaChatAccepted(bool withVideo);
+
+        Task OnMediaChatDeclined();
+
+        Task OnCancelMediaChatRequest();
     }
 }
