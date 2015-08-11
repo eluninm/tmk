@@ -10,8 +10,7 @@ namespace Telemedicine.Web.Api.Dto
     public class AppointmentDto
     {
         public int DoctorId { get; set; }
-
-        [JsonConverter(typeof(CustomDateTimeConverter))]
+         
         public DateTime AppointmentDate { get; set; }
     }
 }

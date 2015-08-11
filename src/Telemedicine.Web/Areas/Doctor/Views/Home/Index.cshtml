@@ -36,7 +36,7 @@
                 <div class="info plan panel-default panel " ng-class="{'notworking':(hour.HourType==1), 'working':(hour.HourType==0) }"  >
                     <div class="human" ng-repeat="item in viewModel.range(hour.PatientsCount) track by $index"></div> 
                 </div>
-                <div class="time font-bold text-center">{{hour.Hour}}</div> 
+                <div class="time font-bold text-center">{{hour.Hour + ":00"}}</div> 
             </div>
             
         </div>
