@@ -65,10 +65,10 @@ namespace Telemedicine.Web.Hubs
             Clients.OthersInGroup(groupId).OnCancelCall();
         }
 
-        public async Task<string> AcceptCall(string groupId)
+        public async Task<string> AcceptCall(string groupId, string callerId)
         {
             string userId = Context.User.Identity.GetUserId();
-            var peerUser = _connections.GetUserIds().FirstOrDefault(t => t != Context.User.Identity.GetUserId());
+            var peerUser = callerId;//_connections.GetUserIds().FirstOrDefault(t => t != Context.User.Identity.GetUserId());
 
             var globalScope = AppBuilderExtensions.Container.Resolve<ILifetimeScope>();
             using (var signalScope = globalScope.BeginLifetimeScope("signalHubScope"))
