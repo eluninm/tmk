@@ -37,19 +37,23 @@ namespace Telemedicine.Core.Domain.Services
         private readonly IDoctorService _doctorService;
         private readonly IPatientService _patientService;
         private readonly IPaymentHistoryService _paymentService;
+        private readonly IAppointmentEventService _appointmentEventService;
+        private readonly IDoctorTimetableService _doctorTimetableService;
 
         public ConversationService(
             IDbContextProvider dbContextProvider, 
             SiteUserManager userManager, 
             IDoctorService doctorService, 
             IPatientService patientService, 
-            IPaymentHistoryService paymentService)
+            IPaymentHistoryService paymentService, IAppointmentEventService appointmentEventService, IDoctorTimetableService doctorTimetableService)
         {
             _dbContext = dbContextProvider.Context;
             _userManager = userManager;
             _doctorService = doctorService;
             _patientService = patientService;
             _paymentService = paymentService;
+            _appointmentEventService = appointmentEventService;
+            _doctorTimetableService = doctorTimetableService;
         }
 
         public async Task<Conversation> BeginConversation(string creatorId, params string[] memberIds)
@@ -67,7 +71,8 @@ namespace Telemedicine.Core.Domain.Services
                 Created = DateTime.Now,
                 Creator = creator,
                 Members = members,
-                Id = Guid.NewGuid().ToString()
+                Id = Guid.NewGuid().ToString(),
+                CreatorId = creator.Id
             };
 
             conversation.Members.Add(creator);
@@ -77,6 +82,41 @@ namespace Telemedicine.Core.Domain.Services
 
 
 
+            AppointmentEvent appointmentEvent = new AppointmentEvent()
+            {
+                Date = DateTime.Now,
+                Doctor = await _doctorService.GetByIdAsync(doctor.Id),
+                Patient = patient,
+                Created = DateTime.Now,
+                Status = AppointmentStatus.Closed
+            };
+
+            DoctorTimetable timetable =
+                       await _doctorTimetableService.GetTimetableByDate(doctor.Id, DateTime.Now);
+            if (timetable == null)
+            {
+                timetable = new DoctorTimetable()
+                {
+                    DateTime = DateTime.Now,
+                    HourType = DoctorTimetableHourType.Working,
+                    DoctorId = doctor.Id,
+                    AppointmentEvents = new List<AppointmentEvent>()
+
+                };
+                timetable = await _doctorTimetableService.CreateAsync(timetable);
+                timetable.AppointmentEvents.Add(appointmentEvent);
+                timetable = await _doctorTimetableService.UpdateAsync(timetable); 
+            }
+            else
+            {
+                if (timetable.HourType != DoctorTimetableHourType.NotWorking)
+                {
+                    timetable.HourType = DoctorTimetableHourType.Working;
+                    timetable.AppointmentEvents.Add(appointmentEvent);
+                    timetable = await _doctorTimetableService.UpdateAsync(timetable); 
+                }
+            }
+
             await _paymentService.CreateAsync(new PaymentHistory
             {
                 ConversationId = conversation.Id,
@@ -85,6 +125,7 @@ namespace Telemedicine.Core.Domain.Services
                 PaymentType = PaymentType.Consultation,
                 Value = -500
             });
+
 
             return conversation;
         }

@@ -175,7 +175,7 @@ namespace Telemedicine.Web.Api.Controllers
                         {
                             Hour = hour,
                             HourType = onCurrentHour.HourType,
-                            PatientsCount = onCurrentHour?.AppointmentEvents?.Count(item => item.Status != AppointmentStatus.Declined)??0
+                            PatientsCount = onCurrentHour?.AppointmentEvents?.Count(item => item.Status == AppointmentStatus.Ready)??0
                         };
                         dayOnTimeLine.Hours.Add(notEmptyHour);
                     }
