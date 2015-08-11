@@ -147,19 +147,19 @@
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="CloseChatLabel"></h4>
+                <h4 class="modal-title" id="CloseChatLabel">Оповещение</h4>
             </div>
             <div class="modal-body">
                 <div class="uppercase text-center small">
-                    Завершение консультации:
+                    Консультация завершена
                 </div>
-                <br />
-                <div class="doctor text-center">
-                    <div class="font-bold" style="font-size: 1.1em">Баранов Александр Александрович</div>
-                </div>
+                @*<br />
+    <div class="doctor text-center">
+        <div class="font-bold" style="font-size: 1.1em">Консультация завершена</div>
+    </div>*@
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary rounded col-md-3 pull-right" data-dismiss="modal" data-toggle="modal" data-target="#devDialog">Ок</button>
+                <button type="button" class="btn btn-primary rounded col-md-3 pull-right" data-dismiss="modal"   data-toggle="modal" >Ок</button>
             </div>
         </div>
     </div>
@@ -198,6 +198,14 @@
             $(".chat-panel .panel-body").scrollTop($(".chat-panel .panel-body")[0].scrollHeight);
         }
 
+
+        function redirect() {
+            window.location.href = '@Url.Action("Index", "Home")';
+            window.location = '@Url.Action("Index", "Home")';
+            return false;
+        }
+
+
         $(function () {
             $('#message-input').keyup(function (e) {
                 if (e.which === 13) {
@@ -234,11 +242,14 @@
 
 
             chatHub.client.OnChatClosed = function () {
+
+                $('#CloseChat').on('hidden.bs.modal', function() {
+                    redirect();
+                });
+
+                $("#CloseChat").modal('show');
                 console.log("OnChatClosed");
-                chatIsСontinues = false;
-                window.location.href = '@Url.Action("Index", "Home")';
-                window.location = '@Url.Action("Index", "Home")';
-                return false;
+                chatIsСontinues = false; 
             }
 
             var startTime = moment().add(15,"m");
