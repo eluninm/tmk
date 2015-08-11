@@ -67,6 +67,8 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             ViewBag.TargetUserId = targetUser.Id;
             ViewBag.ConversationId = conversation.Id;
 
+
+
             return View();
         }
     }

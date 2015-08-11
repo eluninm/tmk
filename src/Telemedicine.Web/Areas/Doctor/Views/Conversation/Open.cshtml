@@ -147,19 +147,19 @@
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="CloseChatLabel">Оповещение</h4>
+                <h4 class="modal-title" id="CloseChatLabel"></h4>
             </div>
             <div class="modal-body">
                 <div class="uppercase text-center small">
-                    Консультация завершена
+                    Завершение консультации:
                 </div>
-                @*<br />
-    <div class="doctor text-center">
-        <div class="font-bold" style="font-size: 1.1em">Консультация завершена</div>
-    </div>*@
+                <br />
+                <div class="doctor text-center">
+                    <div class="font-bold" style="font-size: 1.1em">@ViewBag.UserDisplayName</div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary rounded col-md-3 pull-right" data-dismiss="modal"   data-toggle="modal" >Ок</button>
+                <button type="button" class="btn btn-primary rounded col-md-3 pull-right" data-dismiss="modal"   data-toggle="modal"  >Ок</button>
             </div>
         </div>
     </div>
