@@ -101,9 +101,9 @@ module Telemedicine {
         }
 
         public showMyEvents() {
-            var start = moment(new Date(this.curentDate.setHours(this.selectedHour))).startOf('hour');
-            var end = moment(new Date(this.curentDate.setHours(this.selectedHour))).endOf('hour');
-            window.location.href = "/Doctor/Home/MyEvents#start=" + start.toLocaleString() + "&end=" + end.toLocaleString();
+            var start = moment(new Date(this.curentDate.setHours(this.selectedHour))).startOf('day');
+            var end = moment(new Date(this.curentDate.setHours(this.selectedHour))).endOf('day');
+            window.location.href = "/Doctor/Home/MyEvents#start=" + moment(start).toLocaleString() + "&end=" + moment(end).toLocaleString();
         }
     }
 }

@@ -245,8 +245,8 @@
                 $("#dateContainer").text(moment(first).format("DD.MM.YYYY") + " - " + moment(second).format("DD.MM.YYYY"));
             }
 
-            controller.setStart(moment(first).toDate().toISOString());
-            controller.setEnd(moment(second).toDate().toISOString());
+            controller.setStart(moment(first).startOf('day').toDate().toISOString());
+            controller.setEnd(moment(second).endOf('day').toDate().toISOString());
             controller.loadPage(1, true);
 
         }
