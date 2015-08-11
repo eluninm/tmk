@@ -431,6 +431,8 @@
     <Content Include="Content\less\timeline.less" />
     <Content Include="Content\less\doctormainpage.less" />
     <Content Include="Content\less\filterdates.less" />
+    <None Include="Properties\PublishProfiles\kirsanv43 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\kirsanv43 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -686,7 +688,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptOutFile>C:\Repository\Axbit\TMK\src\Telemedicine.Web\ngapp.js</TypeScriptOutFile>
-    <TypeScriptOutDir>C:\Repository\Axbit\TMK\src\Telemedicine.Web\Scripts</TypeScriptOutDir>
+    <TypeScriptOutDir>C:\Repository\Axbit\TMK\src\Telemedicine.Web\Scripts\</TypeScriptOutDir>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>

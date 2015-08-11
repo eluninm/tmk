@@ -237,8 +237,11 @@
                 $("#dateContainer").text(moment(first).format("DD.MM.YYYY") + " - " + moment(second).format("DD.MM.YYYY"));
             }
 
-            controller.setStart(moment(first).startOf('day').toDate().toISOString());
-            controller.setEnd(moment(second).endOf('day').toDate().toISOString());
+            controller.setStart(moment.utc([moment(first).startOf('day').year(), moment(first).startOf('day').month(), moment(first).startOf('day').date(), 0, 0, 0, 0]));
+            controller.setEnd(moment.utc([moment(second).endOf('day').year(), moment(second).endOf('day').month(), moment(second).endOf('day').date(), 23, 59, 59, 0]));
+
+            //controller.setStart(moment(first).utc().startOf('day'));
+            //controller.setEnd(moment(second).utc().startOf('day'));
             controller.loadPage();
 
         }

@@ -71,8 +71,8 @@ module Telemedicine {
             }
 
             if (start && end) {
-                query.start = moment(start).toISOString();
-                query.end = moment(end).toISOString();
+                query.start = moment(start).utc().toISOString();
+                query.end = moment(end).utc().toISOString();
             }
 
             if (needDeclined) {
@@ -117,8 +117,8 @@ module Telemedicine {
             }
 
             if (start && end) {
-                query.start = start.toLocaleString();
-                query.end = end.toLocaleString();
+                query.start = start.toISOString();
+                query.end = end.toISOString();
             }
 
             for (var key in query) {

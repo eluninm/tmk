@@ -334,8 +334,8 @@ var Telemedicine;
                 query.patientTitleFilter = patientTitleFilter;
             }
             if (start && end) {
-                query.start = moment(start).toISOString();
-                query.end = moment(end).toISOString();
+                query.start = moment(start).utc().toISOString();
+                query.end = moment(end).utc().toISOString();
             }
             if (needDeclined) {
                 query.needDeclined = needDeclined;
@@ -370,8 +370,8 @@ var Telemedicine;
                 query.pageSize = pageSize;
             }
             if (start && end) {
-                query.start = start.toLocaleString();
-                query.end = end.toLocaleString();
+                query.start = start.toISOString();
+                query.end = end.toISOString();
             }
             for (var key in query) {
                 if (query.hasOwnProperty(key)) {
@@ -1036,9 +1036,9 @@ var Telemedicine;
             }
         };
         DoctorTimelineController.prototype.showMyEvents = function () {
-            var start = moment(new Date(this.curentDate.setHours(this.selectedHour))).startOf('day');
-            var end = moment(new Date(this.curentDate.setHours(this.selectedHour))).endOf('day');
-            window.location.href = "/Doctor/Home/MyEvents#start=" + moment(start).toLocaleString() + "&end=" + moment(end).toLocaleString();
+            var start = moment(new Date(this.curentDate.setHours(this.selectedHour))).utc().startOf('day');
+            var end = moment(new Date(this.curentDate.setHours(this.selectedHour))).utc().endOf('day');
+            window.location.href = "/Doctor/Home/MyEvents#start=" + start.toISOString() + "&end=" + end.toISOString();
         };
         DoctorTimelineController.$inject = ["doctorApiService", "balanceApiService", "$element", "$scope"];
         return DoctorTimelineController;
