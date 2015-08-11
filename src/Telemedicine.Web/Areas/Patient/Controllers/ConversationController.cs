@@ -41,9 +41,16 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
                 return HttpNotFound("Conversation doesnt contain target member");
             }
 
+
+            var patient = await _patientService.GetByUserIdAsync(currentUserId);
+            var doctor = await _doctorService.GetByUserIdAsync(targetUser.Id);
+            ViewBag.TargetId = patient.Id;
+            ViewBag.DoctorId = doctor.Id;
+
+
             ViewBag.UserDisplayName = targetUser.DisplayName;
             ViewBag.UserAvatarUrl = targetUser.AvatarUrl;
-            var doctor = await _doctorService.GetByUserIdAsync(targetUser.Id);
+            
             ViewBag.Specialization = doctor.Specialization.DisplayName;
             ViewBag.Balance = "";
 

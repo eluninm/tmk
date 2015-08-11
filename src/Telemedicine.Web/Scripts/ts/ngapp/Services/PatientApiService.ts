@@ -20,8 +20,25 @@ module Telemedicine {
 
         public paymentsHistory: Array<IPaymentHistory>;
 
-        public patientRecommendations(patientId: string): ng.IPromise<IRecommendation[]> {
-            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + patientId + "/recommendations");
+        public patientRecommendations(patientId: string, doctorId?: number): ng.IPromise<IRecommendation[]> {
+            var query: any = {}, querySeparator = "?";
+            var url = this.baseUrl + "/" + patientId + "/recommendations";
+            query.patientId = patientId;
+            if (doctorId) {
+                query.doctorId = doctorId;
+            }
+             
+
+            for (var key in query) {
+                if (query.hasOwnProperty(key)) {
+                    url += querySeparator + key + "=" + encodeURIComponent(query[key]);
+                    if (querySeparator === "?") {
+                        querySeparator = "&";
+                    }
+                }
+            }
+
+            //var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + patientId + "/recommendations");
             return this.$http.get(url).then(result => result.data);
         }
 

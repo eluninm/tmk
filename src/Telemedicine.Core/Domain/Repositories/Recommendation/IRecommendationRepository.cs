@@ -7,6 +7,6 @@ namespace Telemedicine.Core.Domain.Repositories
     public interface IRecommendationRepository:IRepository<Recommendation>
     {
         IEnumerable<Recommendation> GetAll();
-        Task<IEnumerable<Recommendation>> GetPatientRecommendations(int patientId);
+        Task<IEnumerable<Recommendation>> GetPatientRecommendations(int patientId, int? doctorId = null);
     }
 }

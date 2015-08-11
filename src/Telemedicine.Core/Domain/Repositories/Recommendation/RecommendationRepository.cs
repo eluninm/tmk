@@ -20,13 +20,18 @@ namespace Telemedicine.Core.Domain.Repositories
             return Set;
         }
 
-        public async Task<IEnumerable<Recommendation>> GetPatientRecommendations(int patientId)
+        public async Task<IEnumerable<Recommendation>> GetPatientRecommendations(int patientId, int? doctorId = null)
         {
-            return await Set.Where(t => t.PatientId == patientId)
+            var query = Set.Where(t => t.PatientId == patientId)
                 .Include(t => t.Doctor)
                 .Include(t => t.Doctor.Specialization)
-                .Include(t => t.Doctor.User)
-                .ToListAsync();
+                .Include(t => t.Doctor.User);
+
+            if (doctorId.HasValue)
+            {
+                query = query.Where(item => item.DoctorId == doctorId.Value);
+            }
+            return await query.ToListAsync();
         }
     }
 }

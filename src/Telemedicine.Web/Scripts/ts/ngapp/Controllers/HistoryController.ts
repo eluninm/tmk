@@ -12,7 +12,8 @@ module Telemedicine {
             private $element: ng.IAugmentedJQuery,
             private $modal: ng.ui.bootstrap.IModalService) {
             var patientId = $element.attr("data-id");
-            this.loadRecommendations(patientId);
+            var doctorId = $element.attr("data-doctor-id");
+            this.loadRecommendations(patientId, doctorId);
             this.loadConsultations(patientId);
         }
 
@@ -22,8 +23,8 @@ module Telemedicine {
 
         public selectedConsultationId: string;
 
-        public loadRecommendations(patientId: string) {
-            this.patientApiService.patientRecommendations(patientId).then(result => {
+        public loadRecommendations(patientId: string, doctorId?: string) {
+            this.patientApiService.patientRecommendations(patientId, Number(doctorId)).then(result => {
                 this.recommendations = result;
             });
         }
@@ -67,7 +68,7 @@ module Telemedicine {
 
             addDialog.result.then((result) => {
                 this.recommendationService.addRecommendation(Number(this.$element.attr("data-id")), result).then(result => {
-                    this.loadRecommendations(this.$element.attr("data-id"));
+                    this.loadRecommendations(this.$element.attr("data-id"), this.$element.attr("data-doctor-id"));
                 });
             });
         }

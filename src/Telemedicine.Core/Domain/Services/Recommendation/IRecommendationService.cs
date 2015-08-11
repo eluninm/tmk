@@ -20,6 +20,6 @@ namespace Telemedicine.Core.Domain.Services
 
         IEnumerable<Recommendation> GetAll();
 
-        Task<IEnumerable<Recommendation>> GetPatientRecommendations(int patientId);
+        Task<IEnumerable<Recommendation>> GetPatientRecommendations(int patientId, int? doctorId = null);
     }
 }

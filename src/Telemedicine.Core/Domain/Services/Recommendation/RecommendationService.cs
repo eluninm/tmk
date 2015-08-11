@@ -62,9 +62,9 @@ namespace Telemedicine.Core.Domain.Services
             return _recommendationRepository.GetAll();
         }
 
-        public Task<IEnumerable<Recommendation>> GetPatientRecommendations(int patientId)
+        public Task<IEnumerable<Recommendation>> GetPatientRecommendations(int patientId, int? doctorId = null)
         {
-            return _recommendationRepository.GetPatientRecommendations(patientId);
+            return _recommendationRepository.GetPatientRecommendations(patientId,doctorId);
         }
     }
 }

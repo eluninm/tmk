@@ -85,8 +85,22 @@ var Telemedicine;
             this.$rootScope = $rootScope;
             this.baseUrl = "/api/v1/patient";
         }
-        PatientApiService.prototype.patientRecommendations = function (patientId) {
-            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + patientId + "/recommendations");
+        PatientApiService.prototype.patientRecommendations = function (patientId, doctorId) {
+            var query = {}, querySeparator = "?";
+            var url = this.baseUrl + "/" + patientId + "/recommendations";
+            query.patientId = patientId;
+            if (doctorId) {
+                query.doctorId = doctorId;
+            }
+            for (var key in query) {
+                if (query.hasOwnProperty(key)) {
+                    url += querySeparator + key + "=" + encodeURIComponent(query[key]);
+                    if (querySeparator === "?") {
+                        querySeparator = "&";
+                    }
+                }
+            }
+            //var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + patientId + "/recommendations");
             return this.$http.get(url).then(function (result) { return result.data; });
         };
         PatientApiService.prototype.patientConsultations = function (patientId) {
@@ -171,12 +185,13 @@ var Telemedicine;
             this.$element = $element;
             this.$modal = $modal;
             var patientId = $element.attr("data-id");
-            this.loadRecommendations(patientId);
+            var doctorId = $element.attr("data-doctor-id");
+            this.loadRecommendations(patientId, doctorId);
             this.loadConsultations(patientId);
         }
-        HistoryController.prototype.loadRecommendations = function (patientId) {
+        HistoryController.prototype.loadRecommendations = function (patientId, doctorId) {
             var _this = this;
-            this.patientApiService.patientRecommendations(patientId).then(function (result) {
+            this.patientApiService.patientRecommendations(patientId, Number(doctorId)).then(function (result) {
                 _this.recommendations = result;
             });
         };
@@ -216,7 +231,7 @@ var Telemedicine;
             });
             addDialog.result.then(function (result) {
                 _this.recommendationService.addRecommendation(Number(_this.$element.attr("data-id")), result).then(function (result) {
-                    _this.loadRecommendations(_this.$element.attr("data-id"));
+                    _this.loadRecommendations(_this.$element.attr("data-id"), _this.$element.attr("data-doctor-id"));
                 });
             });
         };

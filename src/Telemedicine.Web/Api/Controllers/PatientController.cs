@@ -42,9 +42,9 @@ namespace Telemedicine.Web.Api.Controllers
 
         [HttpGet]
         [Route("{patientId}/recommendations")]
-        public async Task<IHttpActionResult> PatientRecommendations(int patientId)
+        public async Task<IHttpActionResult> PatientRecommendations(int patientId,int? doctorId = null)
         {
-            var recommendations = await _recommendationService.GetPatientRecommendations(patientId);
+            var recommendations = await _recommendationService.GetPatientRecommendations(patientId, doctorId);
             recommendations = recommendations.OrderByDescending(item => item.CreateDate);
             return Ok(recommendations.Select(Mapper.Map<RecommendationDto>));
         }

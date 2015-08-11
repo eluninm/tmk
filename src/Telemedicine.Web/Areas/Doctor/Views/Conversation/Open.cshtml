@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout3.cshtml";
 }
 
-<div class="row fullheight" style="position: relative" ng-controller="HistoryController as viewModel" data-id="1">
+<div class="row fullheight" style="position: relative" ng-controller="HistoryController as viewModel" data-id="@ViewBag.TargetId" data-doctor-id="@ViewBag.DoctorId">
     <div class="col-md-9 fullheight sub-container">
         <h1 class="page-header row chat-page-header">
             <div class="col-md-6 flex chat-interlocutor">
