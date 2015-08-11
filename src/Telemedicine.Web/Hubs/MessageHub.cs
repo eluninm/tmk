@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using Autofac;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.SignalR;
+using Microsoft.Practices.Unity;
 using Telemedicine.Core.Domain.Services;
-using Telemedicine.Core.Identity;
-using Telemedicine.Core.Models;
 using Telemedicine.Web.Api.Dto;
 
 namespace Telemedicine.Web.Hubs
@@ -22,19 +19,23 @@ namespace Telemedicine.Web.Hubs
     [Microsoft.AspNet.SignalR.Authorize]
     public class MessageHub : Hub<IMessageClient>
     {
-        private readonly static ConnectionMapping<string> _connections = new ConnectionMapping<string>();
+        #region Private
+
+        private static readonly ConnectionMapping<string> _connections = new ConnectionMapping<string>();
+
+        #endregion
 
         public async Task SendMessage(string conversationId, string messageText)
         {
             if (!string.IsNullOrWhiteSpace(messageText))
             {
-                var conversationService = DependencyResolver.Current.GetService<IConversationService>();
-                var doctorServoce = DependencyResolver.Current.GetService<IDoctorService>();
-                var patientServcie = DependencyResolver.Current.GetService<IPatientService>();
+                IConversationService conversationService = DependencyResolver.Current.GetService<IConversationService>();
+                IDoctorService doctorServoce = DependencyResolver.Current.GetService<IDoctorService>();
+                IPatientService patientServcie = DependencyResolver.Current.GetService<IPatientService>();
 
                 string userId = Context.User.Identity.GetUserId();
                 var message = await conversationService.SendMessage(conversationId, userId, messageText);
-                var textChatMessage = new ConsultationMessageDto
+                ConsultationMessageDto textChatMessage = new ConsultationMessageDto
                 {
                     Message = message.Message,
                     UserDisplayName = message.Creator.DisplayName,
@@ -45,8 +46,8 @@ namespace Telemedicine.Web.Hubs
                 var conversation = await conversationService.OpenConversation(conversationId);
                 foreach (var member in conversation.Members)
                 {
-                    var memberConnections = _connections.GetConnections(member.Id);
-                    foreach (var memberConnectionId in memberConnections)
+                    IEnumerable<string> memberConnections = _connections.GetConnections(member.Id);
+                    foreach (string memberConnectionId in memberConnections)
                     {
                         textChatMessage.Direction = memberConnectionId == Context.ConnectionId ? "me" : "target";
                         await Clients.Client(memberConnectionId).OnMessage(textChatMessage);

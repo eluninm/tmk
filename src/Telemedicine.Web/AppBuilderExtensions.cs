@@ -1,13 +1,12 @@
-﻿using System.Reflection;
-using System.Web;
+﻿using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
-using Autofac;
-using Autofac.Integration.Mvc;
-using Autofac.Integration.WebApi;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.DataProtection;
+using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.Mvc;
 using Owin;
 using Telemedicine.Core.Data;
 using Telemedicine.Core.Data.EntityFramework;
@@ -23,103 +22,78 @@ namespace Telemedicine.Web
 {
     public static class AppBuilderExtensions
     {
-        public static IContainer Container;
-
         public static IAppBuilder UseContainer(this IAppBuilder app)
         {
-            var container = CreateContainer();
-            Container = container;
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            IUnityContainer container = CreateContainer();
+            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
 
-            app.UseAutofacMiddleware(container);
-            app.UseAutofacMvc();
-            app.UseAutofacWebApi(GlobalConfiguration.Configuration);
-
-            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
             ApiMapperConfiguration.Configure();
             return app;
         }
 
-        private static IContainer CreateContainer()
+        private static IUnityContainer CreateContainer()
         {
-            var builder = new ContainerBuilder();
+            IUnityContainer container = new UnityContainer();
 
-            RegisterInfrastructure(builder);
-            RegisterFrameworks(builder);
-            RegisterTypes(builder);
-            RegisterWebApi(builder, GlobalConfiguration.Configuration);
+            RegisterFrameworks(container);
+            RegisterTypes(container);
 
-            builder.RegisterType<SignalHub>().ExternallyOwned();
+            container.RegisterType<SignalHub>(new ExternallyControlledLifetimeManager());
 
-            return builder.Build();
+            return container;
         }
 
-        private static void RegisterWebApi(ContainerBuilder builder, HttpConfiguration config)
+        private static void RegisterFrameworks(IUnityContainer container)
         {
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            builder.RegisterWebApiFilterProvider(config);
-        }
+            container.RegisterType<SiteUserManager>(new PerRequestLifetimeManager());
+            container.RegisterType<SiteSignInManager>(new PerRequestLifetimeManager());
+            container.RegisterType<IAuthenticationManager>(new InjectionFactory(o => HttpContext.Current.GetOwinContext().Authentication));
 
-        private static void RegisterInfrastructure(ContainerBuilder builder)
-        {
-            builder.RegisterControllers(Assembly.GetExecutingAssembly());
-            builder.RegisterModelBinders(Assembly.GetExecutingAssembly());
-            builder.RegisterModelBinderProvider();
-            builder.RegisterModule<AutofacWebTypesModule>();
-            builder.RegisterSource(new ViewRegistrationSource());
-            builder.RegisterFilterProvider();
-        }
-
-        private static void RegisterFrameworks(ContainerBuilder builder)
-        {
-            builder.RegisterType<SiteUserManager>().InstancePerLifetimeScope();
-            builder.RegisterType<SiteSignInManager>().InstancePerLifetimeScope();
-            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).As<IAuthenticationManager>();
-            builder.Register(c => new IdentityFactoryOptions<SiteUserManager>
+            container.RegisterInstance(new IdentityFactoryOptions<SiteUserManager>
             {
-                DataProtectionProvider = new Microsoft.Owin.Security.DataProtection.DpapiDataProtectionProvider("Application​")
+                DataProtectionProvider = new DpapiDataProtectionProvider("Application​")
             });
-            builder.RegisterType<SiteUserStore>().As<IUserStore<SiteUser>>().InstancePerLifetimeScope();
+
+            container.RegisterType(typeof(IUserStore<SiteUser>), typeof(SiteUserStore), new PerRequestLifetimeManager());
         }
 
-        private static void RegisterTypes(ContainerBuilder builder)
+        private static void RegisterTypes(IUnityContainer container)
         {
-            builder.RegisterType<SimpleDbContextProvider>().As<IDbContextProvider>().InstancePerLifetimeScope();
-            builder.RegisterType<EfSimpleUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
-
-            builder.RegisterType<DoctorStatusRepository>().As<IDoctorStatusRepository>();
-            builder.RegisterType<DoctorRepository>().As<IDoctorRepository>();
-            builder.RegisterType<SpecializationRepository>().As<ISpecializationRepository>();
-            builder.RegisterType<PatientRepository>().As<IPatientRepository>();
-            builder.RegisterType<TimeSpanEventRepository>().As<ITimeSpanEventRepository>();
-            builder.RegisterType<AttachmentContentRepository>().As<IAttachmentContentRepository>();
-            builder.RegisterType<AttachmentRepository>().As<IAttachmentRepository>();
-            builder.RegisterType<RecommendationRepository>().As<IRecommendationRepository>();
-            builder.RegisterType<PaymentMethodRepository>().As<IPaymentMethodRepository>();
-            builder.RegisterType<TariffRepository>().As<ITariffRepository>();
-            builder.RegisterType<PaymentRepository>().As<IPaymentRepository>();
-            builder.RegisterType<UserEventRepository>().As<IUserEventRepository>(); 
-            builder.RegisterType<AppointmentEventRepository>().As<IAppointmentEventRepository>(); 
-            builder.RegisterType<PaymentHistoryRepository>().As<IPaymentHistoryRepository>(); 
-            builder.RegisterType<DoctorPaymentRepository>().As<IDoctorPaymentRepository>(); 
-            builder.RegisterType<DoctorTimetableRepository>().As<IDoctorTimetableRepository>(); 
-
-            builder.RegisterType<DoctorService>().As<IDoctorService>();
-            builder.RegisterType<PatientService>().As<IPatientService>();
-            builder.RegisterType<SpecializationService>().As<ISpecializationService>();
-            builder.RegisterType<TimeSpanEventService>().As<ITimeSpanEventService>();
-            builder.RegisterType<Core.Domain.Services.RecommendationService>().As<Core.Domain.Services.IRecommendationService>();
-            builder.RegisterType<AttachmentContentService>().As<IAttachmentContentService>();
-            builder.RegisterType<AttachmentService>().As<IAttachmentService>(); 
-            builder.RegisterType<PaymentMethodService>().As<IPaymentMethodService>(); 
-            builder.RegisterType<TariffService>().As<ITariffService>(); 
-            builder.RegisterType<PaymentService>().As<IPaymentService>(); 
-            builder.RegisterType<ConversationService>().As<IConversationService>();
-            builder.RegisterType<UserEventsService>().As<IUserEventsService>();
-            builder.RegisterType<AppointmentEventService>().As<IAppointmentEventService>();
-            builder.RegisterType<PaymentHistoryService>().As<IPaymentHistoryService>();
-            builder.RegisterType<DoctorPaymentService>().As<IDoctorPaymentService>();
-            builder.RegisterType<DoctorTimetableService>().As<IDoctorTimetableService>();
+            container.RegisterType(typeof(IDbContextProvider), typeof(SimpleDbContextProvider), new PerRequestLifetimeManager());
+            container.RegisterType(typeof(IUnitOfWork), typeof(EfSimpleUnitOfWork), new PerRequestLifetimeManager());
+            container.RegisterType(typeof(IDoctorStatusRepository), typeof(DoctorStatusRepository));
+            container.RegisterType(typeof(IDoctorRepository), typeof(DoctorRepository));
+            container.RegisterType(typeof(ISpecializationRepository), typeof(SpecializationRepository));
+            container.RegisterType(typeof(IPatientRepository), typeof(PatientRepository));
+            container.RegisterType(typeof(ITimeSpanEventRepository), typeof(TimeSpanEventRepository));
+            container.RegisterType(typeof(IAttachmentContentRepository), typeof(AttachmentContentRepository));
+            container.RegisterType(typeof(IAttachmentRepository), typeof(AttachmentRepository));
+            container.RegisterType(typeof(IRecommendationRepository), typeof(RecommendationRepository));
+            container.RegisterType(typeof(IPaymentMethodRepository), typeof(PaymentMethodRepository));
+            container.RegisterType(typeof(ITariffRepository), typeof(TariffRepository));
+            container.RegisterType(typeof(IPaymentRepository), typeof(PaymentRepository));
+            container.RegisterType(typeof(IUserEventRepository), typeof(UserEventRepository));
+            container.RegisterType(typeof(IAppointmentEventRepository), typeof(AppointmentEventRepository));
+            container.RegisterType(typeof(IPaymentHistoryRepository), typeof(PaymentHistoryRepository));
+            container.RegisterType(typeof(IDoctorPaymentRepository), typeof(DoctorPaymentRepository));
+            container.RegisterType(typeof(IDoctorTimetableRepository), typeof(DoctorTimetableRepository));
+            container.RegisterType(typeof(IDoctorService), typeof(DoctorService));
+            container.RegisterType(typeof(IPatientService), typeof(PatientService));
+            container.RegisterType(typeof(ISpecializationService), typeof(SpecializationService));
+            container.RegisterType(typeof(ITimeSpanEventService), typeof(TimeSpanEventService));
+            container.RegisterType(typeof(IRecommendationService), typeof(RecommendationService));
+            container.RegisterType(typeof(IAttachmentContentService), typeof(AttachmentContentService));
+            container.RegisterType(typeof(IAttachmentService), typeof(AttachmentService));
+            container.RegisterType(typeof(IPaymentMethodService), typeof(PaymentMethodService));
+            container.RegisterType(typeof(ITariffService), typeof(TariffService));
+            container.RegisterType(typeof(IPaymentService), typeof(PaymentService));
+            container.RegisterType(typeof(IConversationService), typeof(ConversationService));
+            container.RegisterType(typeof(IUserEventsService), typeof(UserEventsService));
+            container.RegisterType(typeof(IAppointmentEventService), typeof(AppointmentEventService));
+            container.RegisterType(typeof(IPaymentHistoryService), typeof(PaymentHistoryService));
+            container.RegisterType(typeof(IDoctorPaymentService), typeof(DoctorPaymentService));
+            container.RegisterType(typeof(IDoctorTimetableService), typeof(DoctorTimetableService));
         }
     }
 }

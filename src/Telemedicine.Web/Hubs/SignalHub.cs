@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Autofac;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.SignalR;
 using Telemedicine.Core.Domain.Services;
@@ -25,7 +24,7 @@ namespace Telemedicine.Web.Hubs
     {
         public readonly static ConnectionMapping<string> _connections = new ConnectionMapping<string>();
 
-        private readonly ILifetimeScope _hubLifetimeScope;
+        //private readonly ILifetimeScope _hubLifetimeScope;
 
         public SignalHub()
         {
@@ -72,7 +71,7 @@ namespace Telemedicine.Web.Hubs
                 string userId = Context.User.Identity.GetUserId();
                 var peerUser = _connections.GetUserIds().FirstOrDefault(t => t != Context.User.Identity.GetUserId());
 
-                var conversationService = AppBuilderExtensions.Container.Resolve<IConversationService>();
+                var conversationService = DependencyResolver.Current.GetService<IConversationService>();
                 var conversation = await conversationService.BeginConversation(peerUser, userId);
 
                 Clients.OthersInGroup(groupId).OnAcceptCall(conversation.Id);
@@ -120,7 +119,7 @@ namespace Telemedicine.Web.Hubs
         {
             if (disposing)
             {
-                _hubLifetimeScope?.Dispose();
+                //_hubLifetimeScope?.Dispose();
             }
 
             base.Dispose(disposing);
