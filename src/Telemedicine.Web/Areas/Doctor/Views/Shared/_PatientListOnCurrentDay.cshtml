@@ -5,8 +5,8 @@
     <div class="page-header currenttime" style="border:none;">
         <spana id="currentDateText">Список пациентов на </spana>
         <div class="pull-right">
-            <a class="btn btn-white rounded" onclick="document.getElementById('patientListOnCurrentDayLink').click();">Ближайшие</a>
-            <a href="@Url.Action("MyEvents","Home")" class="btn btn-default rounded">Моя запись</a>
+            @*<a class="btn btn-white rounded" onclick="document.getElementById('patientListOnCurrentDayLink').click();">Ближайшие</a>*@
+            <a href="@Url.Action("MyEvents","Home")" class="btn btn-default rounded">Все записи</a>
         </div>
     </div>
     <div class="grid" style="font-size: 12px;">

@@ -201,6 +201,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-WebApplication1-20150601101709.mdf" />
+    <Content Include="App_Data\aspnet-WebApplication1-20150601101709_log.ldf">
+      <DependentUpon>aspnet-WebApplication1-20150601101709.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\tmpls\dialogs\addRecommendationDialog.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -614,7 +618,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Doctor\Views\Recommendations\" />
     <Folder Include="Areas\Doctor\Views\Recommendation\" />
     <Folder Include="Views\Calendar\" />
