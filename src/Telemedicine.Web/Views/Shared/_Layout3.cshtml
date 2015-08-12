@@ -64,11 +64,13 @@
         var newAppointmentsCounter = 0;
         var signalHub = $.connection.signalHub; 
         var appointmentHub = $.connection.appointmentHub;
+        var callerId;
         $(function () {
             signalHub.client.onCall = function (callInfo) {
                 console.info('Incoming call from userId: ' + callInfo.CallerId);
                 $('#incomingCallDialog').modal({ remote: '@Url.Action("UserCallDialog", "Home", new {area = ""})' + '/' + callInfo.CallerId });
                 groupId = callInfo.GroupId;
+                callerId = callInfo.CallerId;
             };
 
             signalHub.client.onCancelCall = function () {
@@ -116,7 +118,7 @@
 
         function acceptCall() {
             if (groupId) {
-                signalHub.server.acceptCall(groupId).done(function (conversationId) {
+                signalHub.server.acceptCall(groupId, callerId).done(function (conversationId) {
                     window.location.href = '@Url.Action("Open", "Conversation", new {area = "Doctor"})/' + conversationId;
                 }).fail(function (error) {
                     console.error('Invocation of AcceptCall failed: ' + error);

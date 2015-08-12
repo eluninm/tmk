@@ -28,28 +28,29 @@ namespace Telemedicine.Web.Hubs
         {
             if (!string.IsNullOrWhiteSpace(messageText))
             {
-                var conversationService = DependencyResolver.Current.GetService<IConversationService>();
-                var doctorServoce = DependencyResolver.Current.GetService<IDoctorService>();
-                var patientServcie = DependencyResolver.Current.GetService<IPatientService>();
-
-                string userId = Context.User.Identity.GetUserId();
-                var message = await conversationService.SendMessage(conversationId, userId, messageText);
-                var textChatMessage = new ConsultationMessageDto
+                var globalScope = AppBuilderExtensions.Container.Resolve<ILifetimeScope>();
+                using (var messageScope = globalScope.BeginLifetimeScope("messageHubScope"))
                 {
-                    Message = message.Message,
-                    UserDisplayName = message.Creator.DisplayName,
-                    UserName = message.Creator.UserName,
-                    Created = DateTime.Now
-                };
-
-                var conversation = await conversationService.OpenConversation(conversationId);
-                foreach (var member in conversation.Members)
-                {
-                    var memberConnections = _connections.GetConnections(member.Id);
-                    foreach (var memberConnectionId in memberConnections)
+                    var conversationService = messageScope.Resolve<IConversationService>();
+                    string userId = Context.User.Identity.GetUserId();
+                    var message = await conversationService.SendMessage(conversationId, userId, messageText);
+                    var textChatMessage = new ConsultationMessageDto
                     {
-                        textChatMessage.Direction = memberConnectionId == Context.ConnectionId ? "me" : "target";
-                        await Clients.Client(memberConnectionId).OnMessage(textChatMessage);
+                        Message = message.Message,
+                        UserDisplayName = message.Creator.DisplayName,
+                        UserName = message.Creator.UserName,
+                        Created = DateTime.Now
+                    };
+
+                    var conversation = await conversationService.OpenConversation(conversationId);
+                    foreach (var member in conversation.Members)
+                    {
+                        var memberConnections = _connections.GetConnections(member.Id);
+                        foreach (var memberConnectionId in memberConnections)
+                        {
+                            textChatMessage.Direction = memberConnectionId == Context.ConnectionId ? "me" : "target";
+                            await Clients.Client(memberConnectionId).OnMessage(textChatMessage);
+                        }
                     }
                 }
             }
