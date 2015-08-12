@@ -3,7 +3,7 @@
 
 <div style="height: calc(100% - 600px);min-height:200px" id="patientListOnCurrentDay">
     <div class="page-header currenttime" style="border:none;">
-        Список пациентов на @DateTime.Now.ToShortDateString()
+        <spana id="currentDateText">Список пациентов на </spana>
         <div class="pull-right">
             <a class="btn btn-white rounded" onclick="document.getElementById('patientListOnCurrentDayLink').click();" >Ближайшие</a>
             <a href="@Url.Action("MyEvents","Home")" class="btn btn-default rounded">Моя запись</a>
@@ -42,4 +42,8 @@
     </div>
 </div>
 
- 
+<script>
+    $(function() {
+        $('#currentDateText').text('Список пациентов на ' + moment().format('DD.MM.YYYY'));
+    });
+</script>
