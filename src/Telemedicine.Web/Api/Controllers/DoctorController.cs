@@ -80,10 +80,10 @@ namespace Telemedicine.Web.Api.Controllers
         [HttpGet]
         [Route("{id}/appointments")]
         public async Task<IHttpActionResult> Appointments(int id, int page = 1, int pageSize = 10, string patientTitleFilter = null,
-            DateTime? start = null, DateTime? end = null, bool? needDeclined = null, bool? needReady = null, bool? needClosed = null)
+            DateTime? start = null, DateTime? end = null, bool? needDeclined = null, bool? needReady = null, bool? needClosed = null, string filter = null)
         {
             var doctorAppointments =
-                await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFilter, start, end, needDeclined, needReady, needClosed);
+                await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFilter, start, end, needDeclined, needReady, needClosed, filter);
 
            
             var pagedList = doctorAppointments.Map(t =>

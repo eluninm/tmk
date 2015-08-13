@@ -321,7 +321,7 @@ var Telemedicine;
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/details");
             return this.$http.get(url).then(function (result) { return result.data; });
         };
-        DoctorApiService.prototype.getDoctorAppointments = function (doctorId, page, pageSize, patientTitleFilter, start, end, needDeclined, needReady, needClosed) {
+        DoctorApiService.prototype.getDoctorAppointments = function (doctorId, page, pageSize, patientTitleFilter, start, end, needDeclined, needReady, needClosed, filter) {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/appointments");
             var query = {}, querySeparator = "?";
             if (page) {
@@ -333,8 +333,10 @@ var Telemedicine;
             if (patientTitleFilter) {
                 query.patientTitleFilter = patientTitleFilter;
             }
-            if (start && end) {
+            if (start) {
                 query.start = moment(start).utc().toISOString();
+            }
+            if (end) {
                 query.end = moment(end).utc().toISOString();
             }
             if (needDeclined) {
@@ -345,6 +347,9 @@ var Telemedicine;
             }
             if (needClosed) {
                 query.needClosed = needClosed;
+            }
+            if (filter) {
+                query.filter = filter;
             }
             for (var key in query) {
                 if (query.hasOwnProperty(key)) {
@@ -746,6 +751,7 @@ var Telemedicine;
             this.currentPage = 1;
             this.pageSize = 10;
             this.doctorId = parseInt($element.attr("data-id"));
+            this.filter = "All";
             if (location.hash) {
                 var parameters = this.parseUrlQuery();
                 this.start = moment(parameters["start"]).toDate();
@@ -769,30 +775,13 @@ var Telemedicine;
         DoctorAppointmentController.prototype.setEnd = function (end) {
             this.end = end;
         };
+        DoctorAppointmentController.prototype.setFilter = function (filter) {
+            this.filter = filter;
+        };
         DoctorAppointmentController.prototype.loadPage = function (pageToLoad) {
             var _this = this;
             var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter, this.start, this.end, false, true, true).then(function (result) {
-                _this.appointments = result.Data;
-                _this.totalCount = result.TotalCount;
-                _this.currentPage = result.Page;
-                _this.pageSize = result.PageSize;
-            });
-        };
-        DoctorAppointmentController.prototype.loadAppointmentPageWithStatusEqualsReady = function (pageToLoad) {
-            var _this = this;
-            var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter, this.start, this.end, false, true, false).then(function (result) {
-                _this.appointments = result.Data;
-                _this.totalCount = result.TotalCount;
-                _this.currentPage = result.Page;
-                _this.pageSize = result.PageSize;
-            });
-        };
-        DoctorAppointmentController.prototype.loadAppointmentPageWithStatusEqualsClosed = function (pageToLoad) {
-            var _this = this;
-            var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter, this.start, this.end, false, false, true).then(function (result) {
+            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter, this.start, this.end, null, null, null, this.filter).then(function (result) {
                 _this.appointments = result.Data;
                 _this.totalCount = result.TotalCount;
                 _this.currentPage = result.Page;

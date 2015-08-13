@@ -24,9 +24,7 @@ namespace Telemedicine.Core.Domain.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page,
-            int pageSize, string patientTitleFilter,
-            DateTime? start, DateTime? end, bool? needDeclined, bool? needReady, bool? needClosed)
+        public async Task<IPagedList<AppointmentEvent>> GetDoctorAppointmentsPagedAsync(int doctorId, int page, int pageSize, string patientTitleFilter, DateTime? start, DateTime? end, bool? needDeclined, bool? needReady, bool? needClosed, string filter)
         {
             var query = Set
                 .Include(t => t.Patient)
@@ -102,6 +100,18 @@ namespace Telemedicine.Core.Domain.Repositories
                     var ss = groups[2];
                     query = query.Where(t => t.Patient.User.MiddleName.ToUpper().Contains(ss.ToUpper()));
                 }
+            }
+
+            switch (filter)
+            {
+                case "All":
+                    break;
+                case "New":
+                    query = query.Where(t => t.Date >= DateTime.Now);
+                    break;
+                case "Completed":
+                    query = query.Where(t => t.Date <= DateTime.Now);
+                    break;
             }
 
             return await query.OrderBy(t => t.Date).ToPagedListAsync(page, pageSize);

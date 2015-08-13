@@ -10,7 +10,7 @@ module Telemedicine {
             private $modal: ng.ui.bootstrap.IModalService,
             private $element: ng.IAugmentedJQuery) {
             this.doctorId = parseInt($element.attr("data-id"));
-
+            this.filter = "All";
             if (location.hash) {
                 var parameters = this.parseUrlQuery();
                 this.start = moment(parameters["start"]).toDate();
@@ -39,6 +39,7 @@ module Telemedicine {
         public pageSize: number = 10;
         public start: Date;
         public end: Date; 
+        public filter: string; 
 
         public setStart(start: Date) {
             this.start = start;
@@ -48,37 +49,18 @@ module Telemedicine {
             this.end = end;
         }
 
+        public setFilter(filter: string) {
+            this.filter = filter;
+        }
+
         public loadPage(pageToLoad?: number) {
             var page = pageToLoad || this.currentPage;
             this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter,
-                this.start, this.end,false,true,true).then(result => {
+                this.start, this.end, null, null, null, this.filter).then(result => {
                 this.appointments = result.Data;
                 this.totalCount = result.TotalCount;
                 this.currentPage = result.Page;
                 this.pageSize = result.PageSize; 
-            });
-        } 
-
-
-        public loadAppointmentPageWithStatusEqualsReady(pageToLoad?: number) {
-            var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter,
-                this.start, this.end, false, true, false).then(result => {
-                this.appointments = result.Data;
-                this.totalCount = result.TotalCount;
-                this.currentPage = result.Page;
-                this.pageSize = result.PageSize;
-            });
-        } 
-
-        public loadAppointmentPageWithStatusEqualsClosed(pageToLoad?: number) {
-            var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter,
-                this.start, this.end, false, false, true).then(result => {
-                this.appointments = result.Data;
-                this.totalCount = result.TotalCount;
-                this.currentPage = result.Page;
-                this.pageSize = result.PageSize;
             });
         } 
 
