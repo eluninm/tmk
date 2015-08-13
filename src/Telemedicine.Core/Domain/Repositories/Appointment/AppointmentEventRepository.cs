@@ -107,7 +107,7 @@ namespace Telemedicine.Core.Domain.Repositories
                 case "All":
                     break;
                 case "New":
-                    query = query.Where(t => t.Date >= DateTime.Now);
+                    query = query.Where(t => t.Date >= DateTime.Now && t.Status == AppointmentStatus.Ready);
                     break;
                 case "Completed":
                     query = query.Where(t => t.Date <= DateTime.Now);

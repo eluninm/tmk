@@ -85,6 +85,11 @@ namespace Telemedicine.Web.Api.Controllers
             var doctorAppointments =
                 await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFilter, start, end, needDeclined, needReady, needClosed, filter);
 
+            //изменение статуса заявки на лету. костыль.
+            foreach (var a in doctorAppointments.Data.Where(t => t.Date <= DateTime.Now && t.Status != AppointmentStatus.Declined))
+            {
+                a.Status = AppointmentStatus.Closed;
+            }
 
             var pagedList = doctorAppointments.Map(t =>
             {
