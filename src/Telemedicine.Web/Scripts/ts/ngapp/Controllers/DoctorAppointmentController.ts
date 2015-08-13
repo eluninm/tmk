@@ -91,11 +91,11 @@ module Telemedicine {
                 }
                 case AppointmentStatus.Closed:
                 {
-                    return "«Консультация завершена»";
+                    return "Консультация завершена";
                 }
                 case AppointmentStatus.Declined:
                 {
-                    return "«Консультация отмена»";
+                    return "Консультация отмена";
                 }
             }
         }
