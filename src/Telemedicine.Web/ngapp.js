@@ -810,11 +810,11 @@ var Telemedicine;
                     }
                 case Telemedicine.AppointmentStatus.Closed:
                     {
-                        return "«Консультация завершена»";
+                        return "Консультация завершена";
                     }
                 case Telemedicine.AppointmentStatus.Declined:
                     {
-                        return "«Консультация отмена»";
+                        return "Консультация отмена";
                     }
             }
         };
