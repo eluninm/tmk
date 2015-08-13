@@ -1,9 +1,11 @@
 ﻿@model IEnumerable<Telemedicine.Web.Areas.Doctor.Models.AppointmentViewModel>
-
+@{
+    bool needNewTable = Model != null && Model.FirstOrDefault() != null && Model.FirstOrDefault().Date.Date != DateTime.Now.Date;
+}
 
 <div style="height: calc(100% - 600px);min-height:200px" id="patientListOnCurrentDay">
     <div class="page-header currenttime" style="border:none;">
-        <spana id="currentDateText">Список пациентов на </spana>
+        Ближайшие консультации
         <div class="pull-right">
             @*<a class="btn btn-white rounded" onclick="document.getElementById('patientListOnCurrentDayLink').click();">Ближайшие</a>*@
             <a href="@Url.Action("MyEvents","Home")" class="btn btn-default rounded">Все записи</a>
@@ -17,9 +19,22 @@
                         Время
                     </td>
                     <td class="col-md-3">Пациент</td>
-                    <td class="col-md-3"></td>
+                    @if (needNewTable)
+                    {
+                        <td class="col-md-2"></td>
+                    }
+                    else
+                    {
+                        <td class="col-md-3"></td>
+                    }
+
+                    
                     <td class="col-md-2">Стоимость</td>
                     <td class="col-md-2"></td>
+                    @if (needNewTable)
+                    {
+                        <td class="col-md-3">Дата</td>
+                    }
                 </tr>
             </table>
         </div>
@@ -30,20 +45,29 @@
                     <tr>
                         <td class="col-md-2"><div class="timeicon">@appointment.Date.ToString("HH:mm")</div></td>
                         <td class="col-md-3">@appointment.PatientFio</td>
-                        <td class="col-md-3">
-                            <div class="partdocument orange">Карта пациента</div>
-                        </td>
+                        @if (needNewTable)
+                        {
+                            <td class="col-md-2">
+                                <div class="partdocument orange">Карта пациента</div>
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="col-md-3">
+                                <div class="partdocument orange">Карта пациента</div>
+                            </td>
+                        }
+                       
                         <td class="col-md-2">1000 <span class="font-rouble">i</span></td>
-                        <td class="col-md-2">@Html.ActionLink("Отменить", "Decline", new { id = appointment.Id }, new { @class = "remove orange" })</td>
+                        <td class="col-md-2">@Html.ActionLink("Отменить", "Decline", new {id = appointment.Id}, new {@class = "remove orange"})</td>
+                        @if (needNewTable)
+                        {
+                            <td class="col-md-3">@appointment.Date.ToShortDateString()</td>
+                        }
                     </tr>
                 }
             </table>
         </div>
     </div>
 </div>
-
-<script>
-    $(function() {
-        $('#currentDateText').text('Список пациентов на ' + moment().format('DD.MM.YYYY'));
-    });
-</script>
+ 

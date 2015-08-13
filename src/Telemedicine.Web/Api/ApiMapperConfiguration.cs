@@ -39,6 +39,7 @@ namespace Telemedicine.Web.Api
 
             Mapper.CreateMap<AppointmentEvent, DoctorAppointmentDto>()
                 .ForMember(d => d.PatientTitle, e => e.MapFrom(s => s.Patient.User.DisplayName))
+                .ForMember(d => d.Status, e => e.MapFrom(s => s.Status))
                 .ForMember(d => d.PatientAvatarUrl, e => e.MapFrom(s => s.Patient.User.AvatarUrl));
 
             Mapper.CreateMap<AppointmentEvent, PatientAppointmentDto>()

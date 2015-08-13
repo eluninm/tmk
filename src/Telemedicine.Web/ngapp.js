@@ -333,8 +333,10 @@ var Telemedicine;
             if (patientTitleFilter) {
                 query.patientTitleFilter = patientTitleFilter;
             }
-            if (start && end) {
+            if (start) {
                 query.start = moment(start).utc().toISOString();
+            }
+            if (end) {
                 query.end = moment(end).utc().toISOString();
             }
             if (needDeclined) {
@@ -798,6 +800,23 @@ var Telemedicine;
                 _this.currentPage = result.Page;
                 _this.pageSize = result.PageSize;
             });
+        };
+        DoctorAppointmentController.prototype.getStatusText = function (status) {
+            console.log(status);
+            switch (status) {
+                case Telemedicine.AppointmentStatus.Ready:
+                    {
+                        return "Отмена";
+                    }
+                case Telemedicine.AppointmentStatus.Closed:
+                    {
+                        return "Консультация завершена";
+                    }
+                case Telemedicine.AppointmentStatus.Declined:
+                    {
+                        return "Консультация отмена";
+                    }
+            }
         };
         DoctorAppointmentController.prototype.changePageSize = function (size) {
             this.pageSize = size;

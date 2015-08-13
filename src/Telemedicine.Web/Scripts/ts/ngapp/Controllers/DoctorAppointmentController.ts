@@ -38,7 +38,7 @@ module Telemedicine {
         public currentPage: number = 1;
         public pageSize: number = 10;
         public start: Date;
-        public end: Date; 
+        public end: Date;
 
         public setStart(start: Date) {
             this.start = start;
@@ -51,13 +51,13 @@ module Telemedicine {
         public loadPage(pageToLoad?: number) {
             var page = pageToLoad || this.currentPage;
             this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter,
-                this.start, this.end,false,true,true).then(result => {
+                this.start, this.end, false, true, true).then(result => {
                 this.appointments = result.Data;
                 this.totalCount = result.TotalCount;
                 this.currentPage = result.Page;
-                this.pageSize = result.PageSize; 
+                this.pageSize = result.PageSize;
             });
-        } 
+        }
 
 
         public loadAppointmentPageWithStatusEqualsReady(pageToLoad?: number) {
@@ -69,7 +69,7 @@ module Telemedicine {
                 this.currentPage = result.Page;
                 this.pageSize = result.PageSize;
             });
-        } 
+        }
 
         public loadAppointmentPageWithStatusEqualsClosed(pageToLoad?: number) {
             var page = pageToLoad || this.currentPage;
@@ -81,6 +81,25 @@ module Telemedicine {
                 this.pageSize = result.PageSize;
             });
         } 
+
+        public getStatusText(status: AppointmentStatus) {
+            console.log(status);
+            switch (status) {
+                case AppointmentStatus.Ready:
+                {
+                    return "Отмена";
+                }
+                case AppointmentStatus.Closed:
+                {
+                    return "Консультация завершена";
+                }
+                case AppointmentStatus.Declined:
+                {
+                    return "Консультация отмена";
+                }
+            }
+        }
+
 
         public changePageSize(size: number) {
             this.pageSize = size;

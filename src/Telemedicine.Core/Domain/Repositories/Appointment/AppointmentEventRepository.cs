@@ -109,7 +109,7 @@ namespace Telemedicine.Core.Domain.Repositories
 
         public async Task<IEnumerable<AppointmentEvent>> GetDoctorAppointmentsByDateAsync(int doctorId, DateTime date)
         {
-            var begin = date.Date;
+            var begin = date;
             var end = date.AddDays(1).Date;
             var appointments = await Set.Include(t => t.Patient).Include(p => p.Patient.User)
                 .Where(a => a.Date >= begin && a.Date < end).Where(t => t.DoctorId == doctorId)

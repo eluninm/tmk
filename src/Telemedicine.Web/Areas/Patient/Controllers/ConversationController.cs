@@ -46,6 +46,7 @@ namespace Telemedicine.Web.Areas.Patient.Controllers
             var doctor = await _doctorService.GetByUserIdAsync(targetUser.Id);
             ViewBag.TargetId = patient.Id;
             ViewBag.DoctorId = doctor.Id;
+            ViewBag.DoctorUserId = doctor.User.Id;
 
 
             ViewBag.UserDisplayName = targetUser.DisplayName;

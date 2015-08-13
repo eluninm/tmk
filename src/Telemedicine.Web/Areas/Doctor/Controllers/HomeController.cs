@@ -40,6 +40,8 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             var currentDoctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
             IEnumerable<AppointmentEvent> appointments =
                 await _appointmentEventService.GetDoctorAppointmentsByDateAsync(currentDoctor.Id, DateTime.Now);
+
+          
             IEnumerable<AppointmentViewModel> appointmentViewModels = appointments.Where(
                 item => item.Status != AppointmentStatus.Declined).OrderBy(a => a.Date).Select(
                     i => new AppointmentViewModel
@@ -149,6 +151,13 @@ namespace Telemedicine.Web.Areas.Doctor.Controllers
             var currentDoctor = await _doctorService.GetByUserIdAsync(User.Identity.GetUserId());
             IEnumerable<AppointmentEvent> appointments =
                 await _appointmentEventService.GetDoctorAppointmentsByDateAsync(currentDoctor.Id, DateTime.Now);
+
+            if (!appointments.Any(item => item.Status == AppointmentStatus.Ready))
+            {
+                appointments =
+                (await _appointmentEventService.GetDoctorAppointmentsPagedAsync(currentDoctor.Id, 1, 10, null, DateTime.Now, null, false, true, false)).Data;
+            }
+
             IEnumerable<AppointmentViewModel> appointmentViewModels = appointments.Where(
                 item => item.Status != AppointmentStatus.Declined).OrderBy(a => a.Date).Select(
                     i => new AppointmentViewModel
