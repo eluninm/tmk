@@ -37,9 +37,13 @@ namespace Telemedicine.Core.Domain.Repositories
             {
                 query = query.Where(t => t.Date>= start.Value && t.Date <= end.Value);
             }
-            else
+            else if(start.HasValue)
             {
-                query = query.Where(t => t.Date >= DateTime.Today);
+                query = query.Where(t => t.Date >= start);
+            }
+            else if(end.HasValue)
+            {
+                query = query.Where(t => t.Date <= end.Value);
             }
 
             #region StatusFilter
