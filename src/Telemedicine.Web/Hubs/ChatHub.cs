@@ -30,17 +30,20 @@ namespace Telemedicine.Web.Hubs
         {
             return Clients.All.StatusChanged(statusName);
         }
-
-        public Task CloseChat()
+  
+        public void CancelChat(string doctorUserId)
         {
-             return Clients.All.OnChatClosed();
+            foreach (var connectionId in SignalHub._connections.GetConnections(doctorUserId))
+            {
+                Clients.Client(connectionId).OnChatClosed();
+            } 
         }
     }
 
     public interface IChatServer
     {
-        Task UserStatusChanged(string statusName);
-        Task CloseChat();
+        Task UserStatusChanged(string statusName); 
+        void CancelChat(string groupId);
     }
 
     public interface IChatClient

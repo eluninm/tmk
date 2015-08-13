@@ -147,9 +147,9 @@
         var chatHub = $.connection.chatHub;
 
         function sendMessage(messageText) {
-            messageHub.server.sendMessage(conversationId, messageText).done(function() {
+            messageHub.server.sendMessage(conversationId, messageText).done(function () {
                 console.info('Message sent to the server');
-            }).fail(function(error) {
+            }).fail(function (error) {
                 console.error('Invocation of sendMessage failed: ' + error);
             });
         }
@@ -165,20 +165,22 @@
         }
 
         function closeChat() {
-            chatHub.server.closeChat();
-            window.location.href = '@Url.Action("Index", "Home")';
-            return false;
+            chatHub.server.cancelChat('@ViewBag.DoctorUserId');
+                window.location.href = '@Url.Action("Index", "Home")';
+                return false;
         }
 
 
         $(function () {
             $("a").click(function (e) {
-                  e.preventDefault();
+                e.preventDefault();
             });
             //var mbLeft = $('.sidebar').width() + 40;
             //var mbRight = $('#recommendationColumn').width() + 40;
             //$('#messageBox').show();
             //$('#messageBox').css({left: mbLeft, right: mbRight});
+
+
 
             $('#message-input').keyup(function (e) {
                 if (e.which === 13) {
