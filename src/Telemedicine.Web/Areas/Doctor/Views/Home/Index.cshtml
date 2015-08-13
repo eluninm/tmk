@@ -33,8 +33,8 @@
     <div class="container-fluid" style="flex: 1">
         <div style="flex: 1; flex-wrap: wrap" class="timeline">
             <div class="hour" ng-repeat="hour in viewModel.currentTimeLine.Hours" ng-click="viewModel.selectHour(hour.Hour)" data-hourtype="">
-                <div class="info plan panel-default panel " ng-class="{'notworking':(hour.HourType==1), 'working':(hour.HourType==0) }"  >
-                    <div class="human" ng-repeat="item in viewModel.range(hour.PatientsCount) track by $index"></div> 
+                <div class="info plan panel-default panel " ng-class="{ 'notworking': (hour.HourType == 1), 'working': (hour.HourType == 0), 'inactive': (!hour.IsFuture) }">
+                    <div class="human" ng-repeat="item in viewModel.range(hour.PatientsCount) track by $index"></div>
                 </div>
                 <div class="time font-bold text-center">{{hour.Hour + ":00"}}</div> 
             </div>
@@ -161,7 +161,11 @@
 
         
         $('#currentdate').html(moment().format('DD MMMM, dd'));
-        $('.timeline').on('click', '.hour .info:not(.selected)', function() {
+        $('.timeline').on('click', '.hour .info:not(.selected)', function () {
+
+            if ($(this).hasClass('inactive'))
+                return false;
+
             $(this).toggleClass('selected', true);
 
             if ($(this).hasClass("working") && $(this).children().hasClass('human')) {
