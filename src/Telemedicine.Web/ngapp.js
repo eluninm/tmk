@@ -750,6 +750,9 @@ var Telemedicine;
             this.$element = $element;
             this.currentPage = 1;
             this.pageSize = 10;
+            this.needDeclined = true;
+            this.needReady = true;
+            this.needClosed = true;
             this.doctorId = parseInt($element.attr("data-id"));
             this.filter = "All";
             if (location.hash) {
@@ -787,6 +790,41 @@ var Telemedicine;
                 _this.currentPage = result.Page;
                 _this.pageSize = result.PageSize;
             });
+        };
+        DoctorAppointmentController.prototype.filterStatusEqualsAll = function () {
+            this.needDeclined = true;
+            this.needReady = true;
+            this.needClosed = true;
+            this.loadPage();
+        };
+        DoctorAppointmentController.prototype.filterStatusEqualsReady = function () {
+            this.needDeclined = false;
+            this.needReady = true;
+            this.needClosed = false;
+            this.loadPage();
+        };
+        DoctorAppointmentController.prototype.filterStatusExcludingReady = function () {
+            this.needDeclined = true;
+            this.needReady = false;
+            this.needClosed = true;
+            this.loadPage();
+        };
+        DoctorAppointmentController.prototype.getStatusText = function (status) {
+            console.log(status);
+            switch (status) {
+                case Telemedicine.AppointmentStatus.Ready:
+                    {
+                        return "Отмена";
+                    }
+                case Telemedicine.AppointmentStatus.Closed:
+                    {
+                        return "Консультация завершена";
+                    }
+                case Telemedicine.AppointmentStatus.Declined:
+                    {
+                        return "Не состоялась";
+                    }
+            }
         };
         DoctorAppointmentController.prototype.changePageSize = function (size) {
             this.pageSize = size;

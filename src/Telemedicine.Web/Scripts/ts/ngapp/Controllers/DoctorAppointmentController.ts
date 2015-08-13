@@ -41,6 +41,10 @@ module Telemedicine {
         public end: Date; 
         public filter: string; 
 
+        needDeclined: boolean = true;
+        needReady: boolean = true;
+        needClosed: boolean = true; 
+
         public setStart(start: Date) {
             this.start = start;
         }
@@ -57,12 +61,51 @@ module Telemedicine {
             var page = pageToLoad || this.currentPage;
             this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter,
                 this.start, this.end, null, null, null, this.filter).then(result => {
-                this.appointments = result.Data;
-                this.totalCount = result.TotalCount;
-                this.currentPage = result.Page;
-                this.pageSize = result.PageSize; 
-            });
+                    this.appointments = result.Data;
+                    this.totalCount = result.TotalCount;
+                    this.currentPage = result.Page;
+                    this.pageSize = result.PageSize;
+                });
         } 
+
+        public filterStatusEqualsAll() {
+            this.needDeclined = true;
+            this.needReady = true;
+            this.needClosed = true;
+            this.loadPage();
+        }
+
+        public filterStatusEqualsReady() {
+            this.needDeclined = false;
+            this.needReady = true;
+            this.needClosed = false; 
+            this.loadPage(); 
+        }
+
+        public filterStatusExcludingReady() {
+            this.needDeclined = true;
+            this.needReady = false;
+            this.needClosed = true;
+            this.loadPage(); 
+        }
+
+        public getStatusText(status: AppointmentStatus) {
+            console.log(status);
+            switch (status) {
+                case AppointmentStatus.Ready:
+                {
+                    return "Отмена";
+                }
+                case AppointmentStatus.Closed:
+                {
+                    return "Консультация завершена";
+                }
+                case AppointmentStatus.Declined:
+                {
+                    return "Не состоялась";
+                }
+            }
+        }
 
         public changePageSize(size: number) {
             this.pageSize = size;

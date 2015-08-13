@@ -13,5 +13,7 @@ namespace Telemedicine.Web.Areas.Doctor.Models.Timetable
 
         //[JsonProperty("patientsCount")]
         public int PatientsCount { get; set; }
+
+        public bool IsFuture { get; set; }
     }
 }

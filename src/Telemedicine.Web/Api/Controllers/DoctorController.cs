@@ -85,7 +85,7 @@ namespace Telemedicine.Web.Api.Controllers
             var doctorAppointments =
                 await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFilter, start, end, needDeclined, needReady, needClosed, filter);
 
-           
+
             var pagedList = doctorAppointments.Map(t =>
             {
                 var doctorAppointmentDto = Mapper.Map<DoctorAppointmentDto>(t);
@@ -165,7 +165,8 @@ namespace Telemedicine.Web.Api.Controllers
                         {
                             Hour = hour,
                             HourType = DoctorTimetableHourType.Clear,
-                            PatientsCount = 0
+                            PatientsCount = 0,
+                            IsFuture = new DateTime(year, month, day, hour, 59, 59) > DateTime.Now
                         };
                         dayOnTimeLine.Hours.Add(emptyHour);
                     }
@@ -175,7 +176,8 @@ namespace Telemedicine.Web.Api.Controllers
                         {
                             Hour = hour,
                             HourType = onCurrentHour.HourType,
-                            PatientsCount = onCurrentHour?.AppointmentEvents?.Count(item => item.Status == AppointmentStatus.Ready)??0
+                            PatientsCount = onCurrentHour?.AppointmentEvents?.Count(item => item.Status == AppointmentStatus.Ready) ?? 0,
+                            IsFuture = new DateTime(year, month, day, hour, 59, 59) > DateTime.Now
                         };
                         dayOnTimeLine.Hours.Add(notEmptyHour);
                     }
@@ -186,21 +188,22 @@ namespace Telemedicine.Web.Api.Controllers
             return Ok(timetableViewModel);
         }
 
-        private List<TimelineHourViewModel> GetEmptyHours()
-        {
-            List<TimelineHourViewModel> hour = new List<TimelineHourViewModel>();
-            for (int i = 1; i < 25; i++)
-            {
-                hour.Add(new TimelineHourViewModel()
-                {
-                    Hour = i,
-                    HourType = DoctorTimetableHourType.Clear,
-                    PatientsCount = 0
-                });
-            }
+        //private List<TimelineHourViewModel> GetEmptyHours()
+        //{
+        //    List<TimelineHourViewModel> hour = new List<TimelineHourViewModel>();
+        //    for (int i = 1; i < 25; i++)
+        //    {
+        //        hour.Add(new TimelineHourViewModel()
+        //        {
+        //            Hour = i,
+        //            HourType = DoctorTimetableHourType.Clear,
+        //            PatientsCount = 0,
+        //            IsFuture = DateTime.Now > new DateTime(year, month, day, hour, 0, 0)
+        //        });
+        //    }
 
-            return hour;
-        }
+        //    return hour;
+        //}
 
 
         [HttpPost]
@@ -243,7 +246,7 @@ namespace Telemedicine.Web.Api.Controllers
             var currentUserId = User.Identity.GetUserId();
 
             DoctorStatus status = _doctorService.GetStatusByUserId(currentUserId);
-             
+
             return Ok(status.Name != "Busy");
         }
         [HttpPost]
@@ -275,16 +278,16 @@ namespace Telemedicine.Web.Api.Controllers
                 {
                     if (timetable.AppointmentEvents.Count(item => item.Status != AppointmentStatus.Declined) == 0)
                     {
-                        timetable.HourType = DoctorTimetableHourType.Clear; 
+                        timetable.HourType = DoctorTimetableHourType.Clear;
                     }
                     foreach (AppointmentEvent appointment in timetable.AppointmentEvents)
                     {
                         appointment.Status = AppointmentStatus.Declined;
-                    } 
+                    }
                 }
                 else
                 {
-                    timetable.HourType = status; 
+                    timetable.HourType = status;
                 }
 
                 await _doctorTimetableService.UpdateAsync(timetable);
