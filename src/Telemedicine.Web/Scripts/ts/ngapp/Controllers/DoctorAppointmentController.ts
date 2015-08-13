@@ -40,6 +40,10 @@ module Telemedicine {
         public start: Date;
         public end: Date;
 
+        needDeclined: boolean = true;
+        needReady: boolean = true;
+        needClosed: boolean = true; 
+
         public setStart(start: Date) {
             this.start = start;
         }
@@ -51,7 +55,7 @@ module Telemedicine {
         public loadPage(pageToLoad?: number) {
             var page = pageToLoad || this.currentPage;
             this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter,
-                this.start, this.end, false, true, true).then(result => {
+                this.start, this.end, this.needDeclined, this.needReady, this.needClosed).then(result => {
                 this.appointments = result.Data;
                 this.totalCount = result.TotalCount;
                 this.currentPage = result.Page;
@@ -59,27 +63,25 @@ module Telemedicine {
             });
         }
 
-
-        public loadAppointmentPageWithStatusEqualsReady(pageToLoad?: number) {
-            var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter,
-                this.start, this.end, false, true, false).then(result => {
-                this.appointments = result.Data;
-                this.totalCount = result.TotalCount;
-                this.currentPage = result.Page;
-                this.pageSize = result.PageSize;
-            });
+        public filterStatusEqualsAll() {
+            this.needDeclined = true;
+            this.needReady = true;
+            this.needClosed = true;
+            this.loadPage();
         }
 
-        public loadAppointmentPageWithStatusEqualsClosed(pageToLoad?: number) {
-            var page = pageToLoad || this.currentPage;
-            this.doctorApiService.getDoctorAppointments(this.doctorId, page, this.pageSize, this.patientTitleFilter,
-                this.start, this.end, false, false, true).then(result => {
-                this.appointments = result.Data;
-                this.totalCount = result.TotalCount;
-                this.currentPage = result.Page;
-                this.pageSize = result.PageSize;
-            });
+        public filterStatusEqualsReady() {
+            this.needDeclined = false;
+            this.needReady = true;
+            this.needClosed = false; 
+            this.loadPage(); 
+        }
+
+        public filterStatusExcludingReady() {
+            this.needDeclined = true;
+            this.needReady = false;
+            this.needClosed = true;
+            this.loadPage(); 
         } 
 
         public getStatusText(status: AppointmentStatus) {

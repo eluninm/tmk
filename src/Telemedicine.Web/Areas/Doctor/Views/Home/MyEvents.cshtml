@@ -20,8 +20,8 @@
                 </div>
                 <button class="reverticon" onclick="updateFilter()"></button>
                 <div class="pull-right">
-                    <button class="btn btn-white rounded" ng-click="viewModel.loadAppointmentPageWithStatusEqualsReady()">Новые</button>
-                    <button class="btn btn-default rounded" ng-click="viewModel.loadAppointmentPageWithStatusEqualsClosed()">Завершенные</button>
+                    <button class="btn btn-white rounded" ng-click="viewModel.filterStatusEqualsReady()">Новые</button>
+                    <button class="btn btn-default rounded" ng-click="viewModel.filterStatusExcludingReady()">Завершенные</button>
                 </div>
             </div>
 
@@ -205,6 +205,7 @@
         function allItems() {
             startDate = moment().startOf('day');
             endDate = moment().endOf('day');
+            controller.filterStatusEqualsAll();
             updateDateContainer(null, null);
             $('#filter').popover('hide');
         }
