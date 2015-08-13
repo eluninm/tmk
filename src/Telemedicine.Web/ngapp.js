@@ -333,8 +333,10 @@ var Telemedicine;
             if (patientTitleFilter) {
                 query.patientTitleFilter = patientTitleFilter;
             }
-            if (start && end) {
+            if (start) {
                 query.start = moment(start).utc().toISOString();
+            }
+            if (end) {
                 query.end = moment(end).utc().toISOString();
             }
             if (needDeclined) {
@@ -799,6 +801,25 @@ var Telemedicine;
                 _this.pageSize = result.PageSize;
             });
         };
+        DoctorAppointmentController.prototype.statusIsReady = function (status) {
+        };
+        DoctorAppointmentController.prototype.getStatusText = function (status) {
+            console.log(status);
+            switch (status) {
+                case Telemedicine.AppointmentStatus.Ready:
+                    {
+                        return "Отмена";
+                    }
+                case Telemedicine.AppointmentStatus.Closed:
+                    {
+                        return "«Консультация завершена»";
+                    }
+                case Telemedicine.AppointmentStatus.Declined:
+                    {
+                        return "«Консультация отмена»";
+                    }
+            }
+        };
         DoctorAppointmentController.prototype.changePageSize = function (size) {
             this.pageSize = size;
             this.loadPage();
@@ -1143,6 +1164,9 @@ var Telemedicine;
             this.doctorApiService = doctorApiService;
         }
         DoctorHourStatusController.prototype.changeStatus = function (doctorIsAvailable) {
+            this.doctorApiService.changeDoctorStatus(doctorIsAvailable);
+        };
+        DoctorHourStatusController.prototype.changeStatus1 = function (doctorIsAvailable) {
             this.doctorApiService.changeDoctorStatus(doctorIsAvailable);
         };
         DoctorHourStatusController.$inject = ["doctorApiService"];
