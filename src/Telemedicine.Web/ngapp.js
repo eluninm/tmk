@@ -815,7 +815,7 @@ var Telemedicine;
                     }
                 case Telemedicine.AppointmentStatus.Declined:
                     {
-                        return "Консультация отмена";
+                        return "Не состоялась";
                     }
             }
         };

@@ -97,7 +97,7 @@ module Telemedicine {
                 }
                 case AppointmentStatus.Declined:
                 {
-                    return "Консультация отмена";
+                        return "Не состоялась";
                 }
             }
         }
