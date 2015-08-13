@@ -98,6 +98,11 @@
 <script id="filtertemplate" type="t">
     <ul class="filterdates">
         <li>
+            <a onclick="allItems()" id="today">
+                Все записи
+            </a>
+        </li>
+        <li>
             <a onclick="today()" id="today">
                 Сегодня
             </a>
@@ -197,6 +202,13 @@
             
         });
 
+        function allItems() {
+            startDate = moment().startOf('day');
+            endDate = moment().endOf('day');
+            updateDateContainer(null, null);
+            $('#filter').popover('hide');
+        }
+
         function today() {
             startDate = moment().startOf('day');
             endDate = moment().endOf('day');
@@ -231,14 +243,28 @@
 
 
         function updateDateContainer(first, second, isToday) {
+            if (typeof (isToday) === 'undefined') {
+                $("#dateContainer").text("Все платежи");
+            } else
             if (isToday) {
                 $("#dateContainer").text("Сегодня");
             } else {
                 $("#dateContainer").text(moment(first).format("DD.MM.YYYY") + " - " + moment(second).format("DD.MM.YYYY"));
             }
 
-            controller.setStart(moment.utc([moment(first).startOf('day').year(), moment(first).startOf('day').month(), moment(first).startOf('day').date(), 0, 0, 0, 0]));
-            controller.setEnd(moment.utc([moment(second).endOf('day').year(), moment(second).endOf('day').month(), moment(second).endOf('day').date(), 23, 59, 59, 0]));
+
+            if (first != null) {
+                controller.setStart(moment.utc([moment(first).startOf('day').year(), moment(first).startOf('day').month(), moment(first).startOf('day').date(), 0, 0, 0, 0]));
+            }
+            else {
+                controller.setStart(null);
+            }
+            if (second != null) {
+                controller.setEnd(moment.utc([moment(second).endOf('day').year(), moment(second).endOf('day').month(), moment(second).endOf('day').date(), 23, 59, 59, 0]));
+            }
+            else {
+                controller.setEnd(null);
+            }
 
             //controller.setStart(moment(first).utc().startOf('day'));
             //controller.setEnd(moment(second).utc().startOf('day'));

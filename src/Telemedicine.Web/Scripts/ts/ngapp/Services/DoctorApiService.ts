@@ -70,8 +70,12 @@ module Telemedicine {
                 query.patientTitleFilter = patientTitleFilter;
             }
 
-            if (start && end) {
+            if (start)
+            {
                 query.start = moment(start).utc().toISOString();
+            }
+            if (end)
+            {
                 query.end = moment(end).utc().toISOString();
             }
 
