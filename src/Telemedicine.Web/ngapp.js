@@ -801,8 +801,6 @@ var Telemedicine;
                 _this.pageSize = result.PageSize;
             });
         };
-        DoctorAppointmentController.prototype.statusIsReady = function (status) {
-        };
         DoctorAppointmentController.prototype.getStatusText = function (status) {
             console.log(status);
             switch (status) {
@@ -1164,9 +1162,6 @@ var Telemedicine;
             this.doctorApiService = doctorApiService;
         }
         DoctorHourStatusController.prototype.changeStatus = function (doctorIsAvailable) {
-            this.doctorApiService.changeDoctorStatus(doctorIsAvailable);
-        };
-        DoctorHourStatusController.prototype.changeStatus1 = function (doctorIsAvailable) {
             this.doctorApiService.changeDoctorStatus(doctorIsAvailable);
         };
         DoctorHourStatusController.$inject = ["doctorApiService"];
