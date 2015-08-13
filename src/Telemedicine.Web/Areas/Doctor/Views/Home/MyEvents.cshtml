@@ -52,8 +52,7 @@
                             <div class="partdocument orange">Карта пациента</div>
                         </td>
                         <td class="col-md-2">1000 <span class="font-rouble">i</span></td>
-                        <td class="col-md-2"><a ng-class="{'aToText':(item.Status != 2), 'remove orange':(item.Status == 2)}" ng-href="@Url.Action("Decline", "Home")/{{item.Id}}">{{viewModel.getStatusText(item.Status)}}</a></td>
-                        <td class="col-md-2">{{item.Status}}</td> 
+                        <td class="col-md-2"><a ng-class="{'aToText':(item.Status != 2), 'remove orange':(item.Status == 2)}" ng-href="@Url.Action("Decline", "Home")/{{item.Id}}">{{viewModel.getStatusText(item.Status)}}</a></td> 
                     </tr>
                 </table>
             </div>
