@@ -59,8 +59,8 @@
                 </table>
             </div>
             <div class="grid-pager row">
-                <div class="col-md-5">Всего записей: {{viewModel.totalCount}}</div>
-                <div class="col-md-4">
+                <div class="col-md-4">Всего записей: {{viewModel.totalCount}}</div>
+                <div class="col-md-5">
                     <nav>
                         <pagination class="pagination rounded" ng-change="viewModel.loadPage()"
                                     ng-model="viewModel.currentPage"
@@ -72,23 +72,19 @@
                     </nav>
                 </div>
                 <div class="col-md-3 row">
-                    <div class="col-md-6">
-                        <div class="pull-right">
-                            Показывать:
-                        </div>
+                    <div class="pull-left">
+                        Показывать:
                     </div>
-                    <div class="col-md-6">
-                        <div class="dropdown rounded dropup">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                {{viewModel.pageSize}} записей
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#" ng-click="viewModel.changePageSize(10)">10 записей</a></li>
-                                <li><a href="#" ng-click="viewModel.changePageSize(50)">50 записей</a></li>
-                                <li><a href="#" ng-click="viewModel.changePageSize(100)">100 записей</a></li>
-                            </ul>
-                        </div>
+                    <div class="dropdown rounded dropup pull-right">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {{viewModel.pageSize}} записей
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#" ng-click="viewModel.changePageSize(10)">10 записей</a></li>
+                            <li><a href="#" ng-click="viewModel.changePageSize(50)">50 записей</a></li>
+                            <li><a href="#" ng-click="viewModel.changePageSize(100)">100 записей</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
