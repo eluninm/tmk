@@ -80,11 +80,16 @@ namespace Telemedicine.Web.Api.Controllers
         [HttpGet]
         [Route("{id}/appointments")]
         public async Task<IHttpActionResult> Appointments(int id, int page = 1, int pageSize = 10, string patientTitleFilter = null,
-            DateTime? start = null, DateTime? end = null, bool? needDeclined = null, bool? needReady = null, bool? needClosed = null)
+            DateTime? start = null, DateTime? end = null, bool? needDeclined = null, bool? needReady = null, bool? needClosed = null, string filter = null)
         {
             var doctorAppointments =
-                await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFilter, start, end, needDeclined, needReady, needClosed);
+                await _appointmentService.GetDoctorAppointmentsPagedAsync(id, page, pageSize, patientTitleFilter, start, end, needDeclined, needReady, needClosed, filter);
 
+            //изменение статуса заявки на лету. костыль.
+            foreach (var a in doctorAppointments.Data.Where(t => t.Date <= DateTime.Now && t.Status == AppointmentStatus.Ready))
+            {
+                a.Status = AppointmentStatus.Closed;
+            }
 
             var pagedList = doctorAppointments.Map(t =>
             {

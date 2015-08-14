@@ -56,7 +56,7 @@ module Telemedicine {
         }
 
         getDoctorAppointments(doctorId: number, page?: number, pageSize?: number, patientTitleFilter?: string, start?: Date, end?: Date,
-            needDeclined?: boolean, needReady?: boolean, needClosed?: boolean ): angular.IPromise<IPagedList<any>> {
+            needDeclined?: boolean, needReady?: boolean, needClosed?: boolean, filter?: string): angular.IPromise<IPagedList<any>> {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/" + doctorId + "/appointments");
             var query: any = {}, querySeparator = "?";
 
@@ -89,6 +89,10 @@ module Telemedicine {
 
             if (needClosed) {
                 query.needClosed = needClosed;
+            }
+
+            if (filter) {
+                query.filter = filter;
             }
 
             for (var key in query) {
