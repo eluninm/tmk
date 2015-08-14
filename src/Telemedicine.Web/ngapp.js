@@ -1019,7 +1019,7 @@ var Telemedicine;
         DoctorTimelineController.prototype.isActiveCellHour = function (date) {
             var today = new Date();
             // ignore local timezone
-            today.setMinutes(today.getMinutes() + today.getTimezoneOffset());
+            //today.setMinutes(today.getMinutes() + today.getTimezoneOffset());
             var cellDate = new Date(date.toString());
             // ignore remote timezone
             cellDate.setMinutes(cellDate.getMinutes() + cellDate.getTimezoneOffset());
