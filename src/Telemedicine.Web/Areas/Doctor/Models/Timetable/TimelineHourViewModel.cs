@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Telemedicine.Core.Models;
 
 namespace Telemedicine.Web.Areas.Doctor.Models.Timetable
@@ -14,6 +15,6 @@ namespace Telemedicine.Web.Areas.Doctor.Models.Timetable
         //[JsonProperty("patientsCount")]
         public int PatientsCount { get; set; }
 
-        public bool IsFuture { get; set; }
+        public string DateTime { get; set; }
     }
 }

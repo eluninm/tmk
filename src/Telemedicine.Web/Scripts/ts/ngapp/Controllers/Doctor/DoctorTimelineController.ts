@@ -9,7 +9,7 @@ module Telemedicine {
         constructor(private doctorApiService: DoctorApiService,
             private balanceApiService: BalanceApiService,
             private $element: ng.IAugmentedJQuery,
-            private $scope:any) {
+            private $scope: any) {
 
             this.doctorId = parseInt($element.data("id"));
 
@@ -22,8 +22,8 @@ module Telemedicine {
         public balance: number;
         public year: number = 2015;
         public month: number = 8;
-            
-        private selectedHour:number; 
+
+        private selectedHour: number;
         private curentDate: Date = new Date();
 
         public loadTimeline() {
@@ -32,7 +32,7 @@ module Telemedicine {
             this.doctorApiService.getDoctorTimelineByMonth(this.doctorId, this.year, this.month).then(result => {
                 this.timeLineDates = result;
                 this.updateTimeLine();
-                document.getElementById("patientListOnCurrentDayLink").click(); 
+                document.getElementById("patientListOnCurrentDayLink").click();
             });
         }
 
@@ -44,7 +44,12 @@ module Telemedicine {
 
 
         public selectHour(hour: number) {
-            this.selectedHour = hour; 
+            this.selectedHour = hour;
+        }
+
+        public isActiveCellHour(date) {
+            var today = new Date();
+            return new Date(date.toString()) > today;
         }
 
         public availableHour() {
@@ -63,7 +68,7 @@ module Telemedicine {
         public clearHour() {
             this.doctorApiService.changeHourStatus(this.curentDate, this.selectedHour, TimelineHourType.Clear).then(result => {
                 this.loadTimeline();
-                 
+
             });
         }
 
@@ -71,27 +76,27 @@ module Telemedicine {
         private updateTimeLine() {
             console.log("updateTimeLine");
             for (var i = 0; i < this.timeLineDates.length; i++) {
-                 
+
                 var date = Number(this.timeLineDates[i].Date.toString().substr(8, 2));
 
-                if (date == this.curentDate.getDate()) { 
-                    this.currentTimeLine = this.timeLineDates[i]; 
-                    if (!this.$scope.$$phase) { 
-                        this.$scope.$apply(); 
+                if (date == this.curentDate.getDate()) {
+                    this.currentTimeLine = this.timeLineDates[i];
+                    if (!this.$scope.$$phase) {
+                        this.$scope.$apply();
                     }
                 }
             }
         }
 
-        public range(n: number) { 
+        public range(n: number) {
             return new Array(n);
         }
 
         public changeDate(date: Date) {
             this.curentDate = date;
             console.log("changeDate");
-            if ((date.getMonth()+1) != this.month || date.getFullYear() != this.year) {
-                this.month = date.getMonth()+1;
+            if ((date.getMonth() + 1) != this.month || date.getFullYear() != this.year) {
+                this.month = date.getMonth() + 1;
                 this.year = date.getFullYear();
                 this.loadTimeline();
                 console.log("month is changed");

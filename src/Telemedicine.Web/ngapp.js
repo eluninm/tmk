@@ -1008,6 +1008,10 @@ var Telemedicine;
         DoctorTimelineController.prototype.selectHour = function (hour) {
             this.selectedHour = hour;
         };
+        DoctorTimelineController.prototype.isActiveCellHour = function (date) {
+            var today = new Date();
+            return new Date(date.toString()) > today;
+        };
         DoctorTimelineController.prototype.availableHour = function () {
             var _this = this;
             this.doctorApiService.changeHourStatus(this.curentDate, this.selectedHour, Telemedicine.TimelineHourType.Working).then(function (result) {
