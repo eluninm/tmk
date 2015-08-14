@@ -1018,7 +1018,12 @@ var Telemedicine;
         };
         DoctorTimelineController.prototype.isActiveCellHour = function (date) {
             var today = new Date();
-            return new Date(date.toString()) > today;
+            // ignore local timezone
+            today.setMinutes(today.getMinutes() + today.getTimezoneOffset());
+            var cellDate = new Date(date.toString());
+            // ignore remote timezone
+            cellDate.setMinutes(cellDate.getMinutes() + cellDate.getTimezoneOffset());
+            return cellDate > today;
         };
         DoctorTimelineController.prototype.availableHour = function () {
             var _this = this;

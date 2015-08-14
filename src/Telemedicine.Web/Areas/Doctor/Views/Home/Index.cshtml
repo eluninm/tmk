@@ -33,7 +33,7 @@
     <div class="container-fluid" style="flex: 1">
         <div style="flex: 1; flex-wrap: wrap" class="timeline">
             <div class="hour" ng-repeat="hour in viewModel.currentTimeLine.Hours" ng-click="viewModel.selectHour(hour.Hour)" data-hourtype="">
-                <div class="info plan panel-default panel " ng-class="{ 'notworking': (hour.HourType == 1), 'working': (hour.HourType == 0), 'inactive': (!viewModel.isActiveCellHour(hour.DateTime.toString('dd.MM.yyyy HH:mm:ss zzz'))) }">
+                <div class="info plan panel-default panel " ng-class="{ 'notworking': (hour.HourType == 1), 'working': (hour.HourType == 0), 'inactive': (!viewModel.isActiveCellHour(hour.DateTime)) }">
                     <div class="human" ng-repeat="item in viewModel.range(hour.PatientsCount) track by $index"></div>
                 </div>
                 <div class="time font-bold text-center">{{hour.Hour + ":00"}}</div> 
