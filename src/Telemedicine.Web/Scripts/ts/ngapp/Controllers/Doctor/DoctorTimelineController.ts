@@ -48,14 +48,11 @@ module Telemedicine {
         }
 
         public isActiveCellHour(date) {
-            var today = new Date();
-            // ignore local timezone
-            //today.setMinutes(today.getMinutes() + today.getTimezoneOffset());
-
+            var now = new Date();
             var cellDate = new Date(date.toString());
             // ignore remote timezone
-            cellDate.setMinutes(cellDate.getMinutes() + cellDate.getTimezoneOffset());
-            return cellDate > today;
+            cellDate.setMinutes(cellDate.getMinutes() + cellDate.getTimezoneOffset() - now.getTimezoneOffset());
+            return cellDate > now;
         }
 
         public availableHour() {

@@ -171,7 +171,7 @@ namespace Telemedicine.Web.Api.Controllers
                             Hour = hour,
                             HourType = DoctorTimetableHourType.Clear,
                             PatientsCount = 0,
-                            DateTime = new DateTime(year, month, day, hour, 0, 0).ToString("yyyy-MM-dd HH:mm:ss zzz")
+                            DateTime = new DateTime(year, month, day, hour, 59, 59).ToString("yyyy-MM-dd HH:mm:ss zzz")
                         };
                         dayOnTimeLine.Hours.Add(emptyHour);
                     }
@@ -182,7 +182,7 @@ namespace Telemedicine.Web.Api.Controllers
                             Hour = hour,
                             HourType = onCurrentHour.HourType,
                             PatientsCount = onCurrentHour?.AppointmentEvents?.Count(item => item.Status == AppointmentStatus.Ready) ?? 0,
-                            DateTime = new DateTime(year, month, day, hour, 0, 0).ToString("yyyy-MM-dd HH:mm:ss zzz")
+                            DateTime = new DateTime(year, month, day, hour, 59, 59).ToString("yyyy-MM-dd HH:mm:ss zzz")
                         };
                         dayOnTimeLine.Hours.Add(notEmptyHour);
                     }
