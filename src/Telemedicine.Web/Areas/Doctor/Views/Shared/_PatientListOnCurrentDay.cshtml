@@ -30,7 +30,7 @@
                 @foreach (var appointment in Model.OrderBy(item => item.Date))
                 {
                     <tr>
-                        <td class="col-md-2">@appointment.Date.ToShortDateString()</td>
+                        <td class="col-md-2">   <div style="color: #385c9d; margin-right: 5px;" class=" glyphicon glyphicon-calendar"></div>@appointment.Date.ToShortDateString() </td>
                         <td class="col-md-2">
                             <div class="timeicon">@appointment.Date.ToString("HH:mm")</div>
                         </td>
