@@ -244,6 +244,16 @@ namespace Telemedicine.Web.Api.Controllers
             return Ok(true);
         }
 
+        [HttpPost]
+        [Route("decline/{id}")]
+        public async Task<IHttpActionResult> Decline(int id)
+        {
+            AppointmentEvent appointmentEvent = await _appointmentService.GetByIdAsync(id);
+            appointmentEvent.Status = AppointmentStatus.Declined;
+            await _appointmentService.UpdateAsync(appointmentEvent);
+            return Ok();
+        }
+
         [HttpGet]
         [Route("statusIsAvailable")]
         public async Task<IHttpActionResult> StatusIsAvailable()

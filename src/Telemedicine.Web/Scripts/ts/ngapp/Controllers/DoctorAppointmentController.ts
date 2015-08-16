@@ -3,12 +3,13 @@
 
 module Telemedicine {
     export class DoctorAppointmentController {
-        static $inject = ["doctorApiService", "$modal", "$element"];
+        static $inject = ["doctorApiService", "$modal", "$element","$scope"];
         private doctorId: number;
 
         constructor(private doctorApiService: DoctorApiService,
             private $modal: ng.ui.bootstrap.IModalService,
-            private $element: ng.IAugmentedJQuery) {
+            private $element: ng.IAugmentedJQuery,
+            private $scope:any) {
             this.doctorId = parseInt($element.attr("data-id"));
             this.filter = "All";
             if (location.hash) {
@@ -65,6 +66,7 @@ module Telemedicine {
                     this.totalCount = result.TotalCount;
                     this.currentPage = result.Page;
                     this.pageSize = result.PageSize;
+                 
                 });
         } 
 
@@ -110,6 +112,12 @@ module Telemedicine {
         public changePageSize(size: number) {
             this.pageSize = size;
             this.loadPage();
+        }
+
+        public decline(id: number) {
+            this.doctorApiService.decline(id).then(result => {
+                this.loadPage();
+            });
         }
     }
 }

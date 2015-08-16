@@ -12,6 +12,7 @@ module Telemedicine {
         getPaymentHistory(doctorId: number, page?: number, pageSize?: number): ng.IPromise<IPagedList<IPaymentHistory>>;
         getDoctorTimelineByMonth(doctorId: number, year: number, month: number): ng.IPromise<Array<ITimelineDate>>;
         statusIsAvailable(): ng.IPromise<boolean>;
+        decline(id: number): ng.IPromise<void>;
     }
 
     export class DoctorApiService implements IDoctorApiService {
@@ -169,6 +170,11 @@ module Telemedicine {
         statusIsAvailable(): ng.IPromise<boolean> {
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/statusIsAvailable");
             return this.$http.get(url).then(result => result.data);
+        }
+
+        decline(id: number): ng.IPromise<void> {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/decline/" + id);
+            return this.$http.post(url, { 'id': id }).then(result => {});
         }
     }
 }

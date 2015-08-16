@@ -414,6 +414,10 @@ var Telemedicine;
             var url = this.urlResolverService.resolveUrl(this.baseUrl + "/statusIsAvailable");
             return this.$http.get(url).then(function (result) { return result.data; });
         };
+        DoctorApiService.prototype.decline = function (id) {
+            var url = this.urlResolverService.resolveUrl(this.baseUrl + "/decline/" + id);
+            return this.$http.post(url, { 'id': id }).then(function (result) { });
+        };
         return DoctorApiService;
     })();
     Telemedicine.DoctorApiService = DoctorApiService;
@@ -744,10 +748,11 @@ var Telemedicine;
 var Telemedicine;
 (function (Telemedicine) {
     var DoctorAppointmentController = (function () {
-        function DoctorAppointmentController(doctorApiService, $modal, $element) {
+        function DoctorAppointmentController(doctorApiService, $modal, $element, $scope) {
             this.doctorApiService = doctorApiService;
             this.$modal = $modal;
             this.$element = $element;
+            this.$scope = $scope;
             this.currentPage = 1;
             this.pageSize = 10;
             this.needDeclined = true;
@@ -830,7 +835,13 @@ var Telemedicine;
             this.pageSize = size;
             this.loadPage();
         };
-        DoctorAppointmentController.$inject = ["doctorApiService", "$modal", "$element"];
+        DoctorAppointmentController.prototype.decline = function (id) {
+            var _this = this;
+            this.doctorApiService.decline(id).then(function (result) {
+                _this.loadPage();
+            });
+        };
+        DoctorAppointmentController.$inject = ["doctorApiService", "$modal", "$element", "$scope"];
         return DoctorAppointmentController;
     })();
     Telemedicine.DoctorAppointmentController = DoctorAppointmentController;
