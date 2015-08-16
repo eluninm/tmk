@@ -50,8 +50,6 @@ module Telemedicine {
         public isActiveCellHour(date) {
             var now = new Date();
             var cellDate = new Date(date.toString());
-            // ignore remote timezone
-            cellDate.setMinutes(cellDate.getMinutes() + cellDate.getTimezoneOffset() - now.getTimezoneOffset());
             return cellDate > now;
         }
 
