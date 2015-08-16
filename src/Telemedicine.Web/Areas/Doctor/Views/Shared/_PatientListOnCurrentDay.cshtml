@@ -1,40 +1,27 @@
 ﻿@model IEnumerable<Telemedicine.Web.Areas.Doctor.Models.AppointmentViewModel>
-@{
-    bool needNewTable = Model != null && Model.FirstOrDefault() != null && Model.FirstOrDefault().Date.Date != DateTime.Now.Date;
-}
-
-<div style="height: calc(100% - 600px);min-height:200px" id="patientListOnCurrentDay">
-    <div class="page-header currenttime" style="border:none;">
+ 
+<div style="height: calc(100% - 600px); min-height: 200px" id="patientListOnCurrentDay">
+    <div class="page-header currenttime" style="border: none;">
         Ближайшие консультации
         <div class="pull-right">
             @*<a class="btn btn-white rounded" onclick="document.getElementById('patientListOnCurrentDayLink').click();">Ближайшие</a>*@
-            <a href="@Url.Action("MyEvents","Home")" class="btn btn-default rounded">Все записи</a>
+            <a href="@Url.Action("MyEvents", "Home")" class="btn btn-default rounded">Все записи</a>
         </div>
     </div>
     <div class="grid" style="font-size: 12px;">
-        <div class="page-header" style="border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4; padding-left: 0;">
+        <div class="page-header" style="border-top: 1px solid #e4e4e4; border-bottom: 1px solid #e4e4e4; padding-left: 0;">
             <table style="width: 100%">
                 <tr class=" font-bold">
+                    <td class="col-md-2">Дата</td>
                     <td class="col-md-2 font-bold">
                         Время
                     </td>
                     <td class="col-md-3">Пациент</td>
-                    @if (needNewTable)
-                    {
-                        <td class="col-md-2"></td>
-                    }
-                    else
-                    {
-                        <td class="col-md-3"></td>
-                    }
 
-                    
+                    <td class="col-md-2"></td>
+
                     <td class="col-md-2">Стоимость</td>
                     <td class="col-md-2"></td>
-                    @if (needNewTable)
-                    {
-                        <td class="col-md-3">Дата</td>
-                    }
                 </tr>
             </table>
         </div>
@@ -43,31 +30,23 @@
                 @foreach (var appointment in Model.OrderBy(item => item.Date))
                 {
                     <tr>
-                        <td class="col-md-2"><div class="timeicon">@appointment.Date.ToString("HH:mm")</div></td>
+                        <td class="col-md-2">@appointment.Date.ToShortDateString()</td>
+                        <td class="col-md-2">
+                            <div class="timeicon">@appointment.Date.ToString("HH:mm")</div>
+                        </td>
                         <td class="col-md-3">@appointment.PatientFio</td>
-                        @if (needNewTable)
-                        {
-                            <td class="col-md-2">
-                                <div class="partdocument orange">Карта пациента</div>
-                            </td>
-                        }
-                        else
-                        {
-                            <td class="col-md-3">
-                                <div class="partdocument orange">Карта пациента</div>
-                            </td>
-                        }
-                       
+
+                        <td class="col-md-2">
+                            <div class="partdocument orange">Карта пациента</div>
+                        </td>
+
+
                         <td class="col-md-2">1000 <span class="font-rouble">i</span></td>
                         <td class="col-md-2">@Html.ActionLink("Отменить", "Decline", new {id = appointment.Id}, new {@class = "remove orange"})</td>
-                        @if (needNewTable)
-                        {
-                            <td class="col-md-3">@appointment.Date.ToShortDateString()</td>
-                        }
+
                     </tr>
                 }
             </table>
         </div>
     </div>
 </div>
- 
